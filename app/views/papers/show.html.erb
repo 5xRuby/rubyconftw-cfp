@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @paper.Title %>
+</p>
+
+<p>
+  <strong>Abstract:</strong>
+  <%= @paper.Abstract %>
+</p>
+
+<p>
+  <strong>Outline:</strong>
+  <%= @paper.Outline %>
+</p>
+
+<p>
+  <strong>FileName:</strong>
+  
+    <%= image_tag(@paper.FileName.url, width: 600) if @paper.FileName.present?  %>
+
+
+
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @paper.Status %>
+</p>
+
+<%= link_to 'Edit', edit_paper_path(@paper) %> |
+<%= link_to 'Back', papers_path %>

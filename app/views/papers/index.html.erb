@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Papers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Abstract</th>
+      <th>Outline</th>
+      <th>Filename</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @papers.each do |paper| %>
+      <tr>
+        <td><%= paper.Title %></td>
+        <td><%= paper.Abstract %></td>
+        <td><%= paper.Outline %></td>
+        <td><%= paper.FileName %></td>
+        <td><%= paper.Status %></td>
+        <td><%= link_to 'Show', paper %></td>
+        <td><%= link_to 'Edit', edit_paper_path(paper) %></td>
+        <td><%= link_to 'Destroy', paper, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Paper', new_paper_path %>
