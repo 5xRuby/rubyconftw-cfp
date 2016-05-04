@@ -45,5 +45,10 @@ group :development do
   gem 'spring'
 
   gem 'carrierwave'
+  
+  gem 'devise'
+  gem 'omniauth'
+  gem 'omniauth-github'
+  gem 'omniauth-twitter'
 end
 
