@@ -35,31 +35,22 @@ ActiveRecord::Schema.define(version: 20160504031653) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "user_name"
-    t.string   "user_firstname"
-    t.string   "user_lastname"
-    t.string   "user_phone"
-    t.string   "user_title"
-    t.string   "user_company"
-    t.string   "user_country"
-    t.string   "user_photo"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "encrypted_password", default: "", null: false
+    t.string   "email",              default: "", null: false
+    t.string   "name"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "phone"
+    t.string   "title"
+    t.string   "company"
+    t.string   "country"
+    t.string   "photo"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "provider"
     t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
