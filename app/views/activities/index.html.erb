@@ -1,0 +1,13 @@
+<div class="text-center"><h1>Activities</h1></div>
+<div>
+	<%= link_to "Create New Activity", new_activity_path %>
+</div>
+<% @activities.each do |activity| %>
+	<div class="well well-lg col-md-8 col-md-offset-2">
+		<h2><%= activity.name %></h2>
+		<h3><%= activity.subtitle %></h3>
+		<h5>Start Time: <%= activity.start_date %></h5>
+		<h5>End Time: <%= activity.end_date %></h5>
+		<%= link_to "Submit A Paper", new_activity_paper_path(activity) %>
+	</div>
+<% end %>

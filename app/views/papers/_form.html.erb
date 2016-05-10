@@ -1,4 +1,4 @@
-<%= form_for(@paper) do |f| %>
+<%= form_for [@activity, @paper] do |f| %>
   <% if @paper.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@paper.errors.count, "error") %> prohibited this paper from being saved:</h2>
