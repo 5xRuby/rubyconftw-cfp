@@ -6,4 +6,5 @@ class Paper < ActiveRecord::Base
 	validates_presence_of:FileName
 	validates_presence_of:Status
 	
+	belongs_to :activity, counter_cache: true
 end

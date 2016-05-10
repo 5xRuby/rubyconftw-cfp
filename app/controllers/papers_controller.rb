@@ -1,4 +1,5 @@
 class PapersController < ApplicationController
+  before_action :set_activity, only: [:new, :create, :show, :edit]
   before_action :set_paper, only: [:show, :edit, :update, :destroy]
 
   # GET /papers
@@ -24,15 +25,13 @@ class PapersController < ApplicationController
   # POST /papers
   # POST /papers.json
   def create
-    @paper = Paper.new(paper_params)
+    @paper = @activity.papers.new(paper_params)
 
     respond_to do |format|
       if @paper.save
-        format.html { redirect_to @paper, notice: 'Paper was successfully created.' }
-        format.json { render :show, status: :created, location: @paper }
+        format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @paper.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,8 +66,12 @@ class PapersController < ApplicationController
       @paper = Paper.find(params[:id])
     end
 
+    def set_activity
+      @activity = Activity.find(params[:activity_id])  
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def paper_params
-      params.require(:paper).permit(:Title, :Abstract, :Outline, :FileName, :Status)
+      params.require(:paper).permit(:Title, :Abstract, :Outline, :FileName, :Status, :activity_id)
     end
 end

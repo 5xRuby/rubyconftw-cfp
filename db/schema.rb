@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504031653) do
+ActiveRecord::Schema.define(version: 20160510063041) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "name"
@@ -20,8 +20,9 @@ ActiveRecord::Schema.define(version: 20160504031653) do
     t.date     "start_date"
     t.date     "end_date"
     t.text     "term"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "papers_count", default: 0
   end
 
   create_table "papers", force: :cascade do |t|
@@ -30,9 +31,12 @@ ActiveRecord::Schema.define(version: 20160504031653) do
     t.string   "Outline"
     t.string   "FileName"
     t.string   "Status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "activity_id"
   end
+
+  add_index "papers", ["activity_id"], name: "index_papers_on_activity_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "encrypted_password", default: "", null: false
