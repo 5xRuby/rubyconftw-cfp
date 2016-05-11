@@ -11,7 +11,24 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require bootstrap-sprockets
+//= require pagedown_bootstrap
+//= require pagedown_init
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$('.btn-create-paper').hide();
+
+$(document).ready(function() {
+	$('.btn-create-paper').hide();
+
+	$('#agree-checkbox').change(function() {
+		if($(this).is(':checked')) {
+			$('.btn-create-paper').fadeIn();
+		} else {
+			$('.btn-create-paper').hide();
+		}
+	});	
+});

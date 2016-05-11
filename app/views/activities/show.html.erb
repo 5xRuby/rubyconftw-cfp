@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="jumbotron">
+	<div class="row">
+		<div class="col-sm-8">
+	  		<h2><%= @activity.name %></h2>
+	  		<h3>Description: </h3>
+	  		<h4><%= @activity.subtitle %></h4>
+		</div>
+		<div class="col-sm-4">
+	  		<img src="https://api.fnkr.net/testimg/350x200/00CED1/FFF/?text=Fake+Logo">
+		</div>    
+	</div>
+	<br>
+  	<h2 class="text-center"><u>Terms</u></h2>
+  	<div class="well">
+  		<div class="markdown-output"><%= @activity.term %></div>
+  	</div>
+  	<div class="text-center">
+  		<input type="checkbox" name="agree" value="1" id="agree-checkbox"> I Agree<br>
+  	</div>  	
+  </div>
+  <%= link_to "Submit A Paper", 
+  	new_activity_paper_path(@activity), class: "btn btn-primary btn-create-paper col-md-8 col-md-offset-2" %>
+</div>
