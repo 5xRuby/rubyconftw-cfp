@@ -11,13 +11,6 @@ class ApplicationController < ActionController::Base
   protected 
    
   def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:account_update) << :name
-      devise_parameter_sanitizer.for(:account_update) << :firstname
-      devise_parameter_sanitizer.for(:account_update) << :lastname
-      devise_parameter_sanitizer.for(:account_update) << :phone
-      devise_parameter_sanitizer.for(:account_update) << :title
-      devise_parameter_sanitizer.for(:account_update) << :company
-      devise_parameter_sanitizer.for(:account_update) << :country
-      devise_parameter_sanitizer.for(:account_update) << :photo
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :firstname, :lastname, :phone, :title, :company, :country, :photo])
   end
 end
