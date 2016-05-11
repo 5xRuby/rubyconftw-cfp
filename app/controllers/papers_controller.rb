@@ -15,6 +15,10 @@ class PapersController < ApplicationController
 
   # GET /papers/new
   def new
+    if URI.parse(request.referrer.to_s).path != "/activities/#{@activity.id}"
+      redirect_to @activity
+    end
+
     @paper = Paper.new
   end
 
