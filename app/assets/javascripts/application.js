@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery.turbolinks
+//= require jquery-ui
 //= require bootstrap-sprockets
 //= require pagedown_bootstrap
 //= require pagedown_init
@@ -31,4 +32,24 @@ $(document).ready(function() {
 			$('.btn-create-paper').hide();
 		}
 	});	
+
+	$("#activity_start_date").attr('type','text');
+	$("#activity_end_date").attr('type','text');
+	
+	$("#activity_start_date").datepicker({
+        numberOfMonths: 2,
+        onSelect: function(selected) {
+          $("#activity_end_date").datepicker("option","minDate", selected)
+        },
+        dateFormat: 'yy-mm-dd'
+    });
+
+    $("#activity_end_date").datepicker({
+        numberOfMonths: 2,
+        onSelect: function(selected) {
+           $("#activity_start_date").datepicker("option","maxDate", selected)
+        },
+        dateFormat: 'yy-mm-dd'
+    }); 
+
 });

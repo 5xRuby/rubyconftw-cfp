@@ -11,10 +11,12 @@
 				<div class="well well-lg col-md-12">
 					<div class="col-md-8">
 						<h2><%= activity.name %></h2>
-						<h3><%= activity.subtitle %></h3>
 					</div>
 					<div class="col-md-4">
 						<h5 class="pull-right"><%= activity.start_date %> ~ <%= activity.end_date %></h5>
+					</div>
+					<div class="col-md-12">
+						<span class="pull-right"><%= pluralize(activity.papers_count, 'paper') %> now</span>
 					</div>
 				</div>
 			<% end %>
