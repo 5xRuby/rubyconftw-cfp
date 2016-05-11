@@ -6,16 +6,21 @@
 		</div>
 
 		<div class="form-group">
-		  <%= f.input  :subtitle, class: "form-control" %>
+		  <%= f.input :start_date, class: "form-control", html5: true %>
 		</div>
 
 		<div class="form-group">
-		  <%= f.input :start_date, class: "form-control" %>
-		</div>
-
-		<div class="form-group">
-		  <%= f.input :end_date, class: "form-control" %>
+		  <%= f.input :end_date, class: "form-control", html5: true %>
 		</div>	
+		
+		<div class="form-group">
+			<%= f.input :logo, as: :file, class: "form-control" %>
+		</div>
+
+		<div class="form-group">
+		  <%= f.input  :description, as: :pagedown, 
+		  	input_html: { preview: true, rows: 10 }, class: "form-control" %>
+		</div>
 
 		<div class="form-group">
 		  <%= f.input :term, as: :pagedown, 
