@@ -1,10 +1,10 @@
 class Paper < ActiveRecord::Base
-	mount_uploader:FileName,PictureUploader
-	validates_presence_of:Title
-	validates_presence_of:Abstract
-	validates_presence_of:Outline
-	validates_presence_of:FileName
-	validates_presence_of:Status
+	mount_uploader:fileName,PictureUploader
+	validates_presence_of:title
+	validates_presence_of:abstract
+	validates_presence_of:outline
+	validates_presence_of:fileName
+	validates_presence_of:status
 	
 	belongs_to :activity, counter_cache: true
 end

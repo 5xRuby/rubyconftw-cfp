@@ -17,11 +17,11 @@
   <tbody>
     <% @papers.each do |paper| %>
       <tr>
-        <td><%= paper.Title %></td>
-        <td><%= paper.Abstract %></td>
-        <td><%= paper.Outline %></td>
-        <td><%= paper.FileName %></td>
-        <td><%= paper.Status %></td>
+        <td><%= paper.title %></td>
+        <td><%= paper.abstract %></td>
+        <td><%= paper.outline %></td>
+        <td><%= paper.fileName %></td>
+        <td><%= paper.status %></td>
         <td><%= link_to 'Show', activity_paper_path(@activity,paper) %></td>
         <td><%= link_to 'Edit', edit_activity_paper_path(@activity, paper) %></td>
         <td><%= link_to 'Destroy', activity_paper_path(@activity,paper), method: :delete, data: { confirm: 'Are you sure?' } %></td>
