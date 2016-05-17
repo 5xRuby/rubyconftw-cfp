@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable
   devise :omniauthable, :omniauth_providers => [:github,:twitter]
+  has_many :user_activity_relationships, dependent: :destroy
+  has_many :activities, through: :user_activity_relationships
+
 
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_create do |user|
