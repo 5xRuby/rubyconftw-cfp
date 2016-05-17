@@ -1,4 +1,5 @@
 class Paper < ActiveRecord::Base
+
 	mount_uploader:fileName,PictureUploader
 	validates_presence_of:title
 	validates_presence_of:abstract

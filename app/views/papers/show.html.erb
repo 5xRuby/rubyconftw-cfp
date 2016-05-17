@@ -16,9 +16,10 @@
 </p>
 
 <p>
-  <strong>FileName:</strong>
+  <strong>Uploaded File:</strong>
   
-    <%= image_tag(@paper.fileName.url, width: 600) if @paper.fileName.present?  %>
+
+    <%= link_to "Here", @paper.fileName.url if @paper.fileName.present?  %>
 
 
 

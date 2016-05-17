@@ -1,4 +1,4 @@
-<%= form_for [@activity, @paper] do |f| %>
+<%= form_for [@activity, @paper], :html => { :multipart => true } do |f| %>
   <% if @paper.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@paper.errors.count, "error") %> prohibited this paper from being saved:</h2>
@@ -26,6 +26,8 @@
   <div class="field">
     <%= f.label :fileName %><br>
     <%= f.file_field :fileName %>
+    <br>
+    Uploaded File: <%= link_to "Here", @paper.fileName.url if @paper.fileName.present? %>
   </div>
   <div class="field">
     <%= f.label :status %><br>
