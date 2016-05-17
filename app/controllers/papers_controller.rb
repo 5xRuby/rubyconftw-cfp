@@ -1,11 +1,11 @@
 class PapersController < ApplicationController
-  before_action :set_activity, only: [:new, :create, :show, :edit]
+  before_action :set_activity, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   before_action :set_paper, only: [:show, :edit, :update, :destroy]
 
   # GET /papers
   # GET /papers.json
   def index
-    @papers = Paper.all
+    @papers = @activity.papers
   end
 
   # GET /papers/1
@@ -45,7 +45,7 @@ class PapersController < ApplicationController
   def update
     respond_to do |format|
       if @paper.update(paper_params)
-        format.html { redirect_to @paper, notice: 'Paper was successfully updated.' }
+        format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully updated.' }
         format.json { render :show, status: :ok, location: @paper }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class PapersController < ApplicationController
   def destroy
     @paper.destroy
     respond_to do |format|
-      format.html { redirect_to papers_url, notice: 'Paper was successfully destroyed.' }
+      format.html { redirect_to activity_papers_path(@activity), notice: 'Paper was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
