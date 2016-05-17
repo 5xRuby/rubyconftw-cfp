@@ -22,9 +22,9 @@
         <td><%= paper.Outline %></td>
         <td><%= paper.FileName %></td>
         <td><%= paper.Status %></td>
-        <td><%= link_to 'Show', paper %></td>
-        <td><%= link_to 'Edit', edit_paper_path(paper) %></td>
-        <td><%= link_to 'Destroy', paper, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', activity_paper_path(@activity,paper) %></td>
+        <td><%= link_to 'Edit', edit_activity_paper_path(@activity, paper) %></td>
+        <td><%= link_to 'Destroy', activity_paper_path(@activity,paper), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Paper', new_paper_path %>
+<%= link_to 'New Paper', new_activity_paper_path(@activity) %>
