@@ -2,21 +2,25 @@
 
 <h1>Listing Papers</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Abstract</th>
-      <th>Outline</th>
-      <th>Filename</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @papers.each do |paper| %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= paper.id %></h3>
+  </div>
+  <table class="table">
+    <thead>
       <tr>
+        <th>Title</th>
+        <th>Abstract</th>
+        <th>Outline</th>
+        <th>Filename</th>
+        <th>Status</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+     <tbody>
+     <tr>
         <td><%= paper.title %></td>
         <td><%= paper.abstract %></td>
         <td><%= paper.outline %></td>
@@ -26,10 +30,12 @@
         <td><%= link_to 'Edit', edit_activity_paper_path(@activity, paper) %></td>
         <td><%= link_to 'Destroy', activity_paper_path(@activity,paper), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      </tbody>
+  </table>
+</div>
+
     <% end %>
-  </tbody>
-</table>
 
 <br>
 
-<%= link_to 'New Paper', new_activity_paper_path(@activity) %>
+<%= link_to 'New Paper', new_activity_paper_path(@activity), class: "btn btn-primary" %>
