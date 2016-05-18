@@ -20,16 +20,13 @@
 //= require turbolinks
 //= require_tree .
 
-$('.btn-create-paper').hide();
-
 $(document).ready(function() {
-	$('.btn-create-paper').hide();
 
 	$('#agree-checkbox').change(function() {
 		if($(this).is(':checked')) {
-			$('.btn-create-paper').fadeIn();
+			$("#btn-create-paper").removeClass('disabled');
 		} else {
-			$('.btn-create-paper').hide();
+			$("#btn-create-paper").addClass('disabled');
 		}
 	});	
 
