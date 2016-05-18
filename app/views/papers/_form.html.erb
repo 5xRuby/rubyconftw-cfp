@@ -28,7 +28,7 @@
     <%= f.file_field :file_name %>
     <br>
     <%= "Uploaded File: " if @paper.file_name.present? %>
-   <%= link_to "Here", @paper.file_name.url if @paper.file_name.present? %>
+    <%= link_to "Here", @paper.file_name.url if @paper.file_name.present? %>
   </div>
   <div class="field">
     <%= f.label :status %><br>
