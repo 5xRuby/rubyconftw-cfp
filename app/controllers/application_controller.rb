@@ -13,4 +13,11 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :firstname, :lastname, :phone, :title, :company, :country, :photo])
   end
+  def after_sign_in_path_for(resource)
+    if current_user.created_at == current_user.updated_at
+      edit_user_registration_path
+    else
+      request.env['omniauth.origin'] || stored_location_for(resource) || activities_path || root_path
+    end
+  end
 end
