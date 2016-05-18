@@ -3,7 +3,6 @@ class RenamePapersColumeName < ActiveRecord::Migration
   	rename_column :papers,:Title,:title
   	rename_column :papers,:Abstract,:abstract
   	rename_column :papers,:Outline,:outline
-  	rename_column :papers,:FileName,:fileName
   	rename_column :papers,:Status,:status
 
   end

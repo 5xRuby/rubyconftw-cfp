@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160517080249) do
 
-
   create_table "activities", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -30,7 +29,7 @@ ActiveRecord::Schema.define(version: 20160517080249) do
     t.string   "title"
     t.string   "abstract"
     t.string   "outline"
-    t.string   "fileName"
+    t.string   "file_name"
     t.string   "status"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

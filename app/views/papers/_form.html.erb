@@ -24,10 +24,11 @@
     <%= f.text_field :outline %>
   </div>
   <div class="field">
-    <%= f.label :fileName %><br>
-    <%= f.file_field :fileName %>
+    <%= f.label :file_name %><br>
+    <%= f.file_field :file_name %>
     <br>
-    Uploaded File: <%= link_to "Here", @paper.fileName.url if @paper.fileName.present? %>
+    <%= "Uploaded File: " if @paper.file_name.present? %>
+   <%= link_to "Here", @paper.file_name.url if @paper.file_name.present? %>
   </div>
   <div class="field">
     <%= f.label :status %><br>

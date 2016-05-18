@@ -17,12 +17,7 @@
 
 <p>
   <strong>Uploaded File:</strong>
-  
-
-    <%= link_to "Here", @paper.fileName.url if @paper.fileName.present?  %>
-
-
-
+    <%= link_to "Here", @paper.file_name.url if @paper.file_name.present?  %>
 </p>
 
 <p>
