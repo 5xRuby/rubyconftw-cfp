@@ -3,13 +3,14 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:github,:twitter]
   has_many :user_activity_relationships, dependent: :destroy
   has_many :activities, through: :user_activity_relationships
-
+  before_update :profile_validation
 
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.password = Devise.friendly_token[0,20]
+      user.email = auth.info.email
       user.name = auth.info.name   # assuming the user model has a name
       user.photo = auth.info.image
     end
@@ -23,6 +24,12 @@ class User < ActiveRecord::Base
       end
     end
   end 
+  def profile_validation
+    validates_presence_of :name
+    validates_presence_of :firstname
+    validates_presence_of :lastname
+    validates_presence_of :phone
+  end
   
   
   
