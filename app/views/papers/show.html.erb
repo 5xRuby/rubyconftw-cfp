@@ -2,31 +2,27 @@
 
 <p>
   <strong>Title:</strong>
-  <%= @paper.Title %>
+  <%= @paper.title %>
 </p>
 
 <p>
   <strong>Abstract:</strong>
-  <%= @paper.Abstract %>
+  <%= @paper.abstract %>
 </p>
 
 <p>
   <strong>Outline:</strong>
-  <%= @paper.Outline %>
+  <%= @paper.outline %>
 </p>
 
 <p>
   <strong>Uploaded File:</strong>
-  
     <%= link_to "Here", @paper.file_name.url if @paper.file_name.present?  %>
-
-
-
 </p>
 
 <p>
   <strong>Status:</strong>
-  <%= @paper.Status %>
+  <%= @paper.status %>
 </p>
 
 <%= link_to 'Edit', edit_activity_paper_path(@activity, @paper) %> |

@@ -1,1 +1,2 @@
-json.extract! @paper, :id, :Title, :Abstract, :Outline, :file_name, :Status, :created_at, :updated_at
+json.extract! @paper, :id, :title, :abstract, :outline, :file_name, :status, :created_at, :updated_at
+
