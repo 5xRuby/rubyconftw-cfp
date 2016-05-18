@@ -1,11 +1,13 @@
 class PapersController < ApplicationController
   before_action :set_activity, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   before_action :set_paper, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!,only: [:index, :new]
+  before_action :require_current_user, only: [:show,:edit]
 
   # GET /papers
   # GET /papers.json
   def index
-    @papers = @activity.papers
+    @papers = @activity.papers.where(user_id: current_user.id)
   end
 
   # GET /papers/1
@@ -30,6 +32,8 @@ class PapersController < ApplicationController
   # POST /papers.json
   def create
     @paper = @activity.papers.new(paper_params)
+    @paper.user_id = current_user.id
+
 
     respond_to do |format|
       if @paper.save
@@ -77,5 +81,10 @@ class PapersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def paper_params
       params.require(:paper).permit(:title, :abstract, :outline, :file_name, :status, :activity_id)
+      
+    end
+    
+    def require_current_user
+      redirect_to activity_papers_path(@activity) if current_user  != Paper.find(params[:id]).user
     end
 end
