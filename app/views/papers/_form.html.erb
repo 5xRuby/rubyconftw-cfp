@@ -10,6 +10,14 @@
       </ul>
     </div>
   <% end %>
+  <h2>Speakers</h2>    
+  <p>Speaker1 Name: <%= current_user.name %> <%= link_to "Edit Speaker Profile", edit_user_registration_path, class: "btn btn-primary" %></p>
+  <p>Speaker2 Name: <%= link_to "Add Another Speaker", "#", class: "btn btn-primary" %></p>
+  
+  </div>
+  
+  <h2>Proposals</h2>    
+  
 
   <div class="field">
     <%= f.input :title %><br>
