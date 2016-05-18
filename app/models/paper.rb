@@ -9,4 +9,7 @@ class Paper < ActiveRecord::Base
 	
 	belongs_to :activity, counter_cache: true
 	belongs_to :user
+  
+  	has_many :user_paper_relationships, dependent: :destroy
+  	has_many :users, through: :user_paper_relationships  	
 end
