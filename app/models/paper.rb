@@ -8,4 +8,5 @@ class Paper < ActiveRecord::Base
 	validates_presence_of:status
 	
 	belongs_to :activity, counter_cache: true
+	belongs_to :user
 end
