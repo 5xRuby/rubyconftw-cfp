@@ -1,18 +1,19 @@
 <%= simple_form_for [@activity, @paper], :html => { :multipart => true } do |f| %>
   <% if @paper.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@paper.errors.count, "error") %> prohibited this paper from being saved:</h2>
+    <div class="alert alert-warning">
+      <h2>Please fill in all columns:</h2>
 
       <ul>
       <% @paper.errors.full_messages.each do |message| %>
+        
         <li><%= message %></li>
+       
+
       <% end %>
       </ul>
     </div>
   <% end %>
   <h2>Speakers</h2>    
-  <!-- <p>Speaker1 Name: <%= current_user.name %> <%= link_to "Edit Speaker Profile", edit_user_registration_path, class: "btn btn-primary" %></p>
-  <p>Speaker2 Name: <%= link_to "Add Another Speaker", "#", class: "btn btn-primary" %></p> -->
   
   </div>
   
@@ -23,10 +24,10 @@
     <%= f.input :title %><br>
   </div>
   <div class="field">
-    <%= f.input :abstract %><br>
+    <%= f.input :abstract,input_html: { preview: true, rows: 10 }, class: "form-control" %><br>
   </div>
   <div class="field">
-    <%= f.input :outline %><br>
+    <%= f.input :outline,input_html: { preview: true, rows: 10 }, class: "form-control" %><br>
   </div>
   <div class="field">
     <%= f.input :file_name %><br>
