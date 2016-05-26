@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:github,:twitter]
   has_many :user_activity_relationships, dependent: :destroy
   has_many :activities, through: :user_activity_relationships
+  has_many :user_paper_relationships, dependent: :destroy
+  has_many :papers, through: :user_paper_relationships  
   before_update :profile_validation
 
   def self.from_omniauth(auth)

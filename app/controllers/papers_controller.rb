@@ -19,6 +19,7 @@ class PapersController < ApplicationController
   def new
     if URI.parse(request.referrer.to_s).path != "/activities/#{@activity.id}"
       redirect_to @activity
+
     end
 
     @paper = Paper.new
@@ -32,8 +33,8 @@ class PapersController < ApplicationController
   # POST /papers.json
   def create
     @paper = @activity.papers.new(paper_params)
-    # @paper.user_id = current_user.id
-
+    @paper.user_id = current_user.id
+    @paper.users << current_user
 
     respond_to do |format|
       if @paper.save

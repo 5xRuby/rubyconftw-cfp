@@ -13,12 +13,12 @@
       </ul>
     </div>
   <% end %>
-  <h2>Speakers</h2>    
+  <h2>Speaker Name：<%= current_user.name %></h2>
   
   </div>
   
   <h2>Proposals</h2>    
-  
+
 
   <div class="field">
     <%= f.input :title %><br>
@@ -35,9 +35,7 @@
     <%= "Uploaded File: " if @paper.file_name.present? %>
     <%= link_to "Here", @paper.file_name.url if @paper.file_name.present? %>
   </div>
-  <div class="field">
-    <%= f.input :status %><br>
-  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
