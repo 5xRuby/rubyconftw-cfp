@@ -17,3 +17,5 @@
 /tmp
 public/uploads/*
 .byebug_history
+config/application.yml
+
