@@ -31,3 +31,4 @@ group :development do
   gem 'omniauth-twitter'
 end
 
+gem 'settingslogic'
