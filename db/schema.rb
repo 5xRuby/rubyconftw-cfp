@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524032057) do
+ActiveRecord::Schema.define(version: 20160531032018) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "name"
@@ -31,10 +31,11 @@ ActiveRecord::Schema.define(version: 20160524032057) do
     t.text     "outline"
     t.string   "file_name"
     t.string   "status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "activity_id"
     t.integer  "user_id"
+    t.string   "inviting_email"
   end
 
   add_index "papers", ["activity_id"], name: "index_papers_on_activity_id"
