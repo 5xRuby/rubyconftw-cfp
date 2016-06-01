@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "activities#index"
   resources :activities do
     resources :papers
+    resources :categories
   end
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
