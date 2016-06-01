@@ -1,18 +1,5 @@
 <%= simple_form_for [@activity, @paper], :html => { :multipart => true } do |f| %>
-  <% if @paper.errors.any? %>
-    <div class="alert alert-warning">
-      <h2>Please fill in all columns:</h2>
-
-      <ul>
-      <% @paper.errors.full_messages.each do |message| %>
-        
-        <li><%= message %></li>
-       
-
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+ 
   <h2>Speaker Name：<%= current_user.name %></h2>
   <h3>Add co-presenter:
       <%=  f.input :inviting_email,size: "60x12" %>

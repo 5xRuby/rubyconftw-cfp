@@ -40,14 +40,8 @@ class PapersController < ApplicationController
 
     respond_to do |format|
       if @paper.save
-        # if User.exists?(@paper.inviting_email)
           format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
-        # else
-        #   # debugger
-        #   # format.html { notice: '共同作者尚未註冊本系統'}
-        # end
       else
-        
         format.html { render :new }
       end
     end
