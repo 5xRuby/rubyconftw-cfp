@@ -36,6 +36,12 @@ class PapersController < ApplicationController
     @paper.user_id = current_user.id
     @paper.users << current_user
 
+    # if @paper.inviting_email find @user
+    #   debugger
+    # else
+    #   debugger
+    # end
+
     respond_to do |format|
       if @paper.save
         format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
