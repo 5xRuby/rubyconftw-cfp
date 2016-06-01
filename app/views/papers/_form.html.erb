@@ -14,8 +14,10 @@
     </div>
   <% end %>
   <h2>Speaker Name：<%= current_user.name %></h2>
-  <h3>Add co-presenter:<%=  f.input :inviting_email %></h3>
-  
+  <h3>Add co-presenter:
+      <%=  f.input :inviting_email,size: "60x12" %>
+  </h3>
+   
   <hr>
   <h2>Proposals</h2>    
 

@@ -36,16 +36,18 @@ class PapersController < ApplicationController
     @paper.user_id = current_user.id
     @paper.users << current_user
 
-    # if @paper.inviting_email find @user
-    #   debugger
-    # else
-    #   debugger
-    # end
+   
 
     respond_to do |format|
       if @paper.save
-        format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
+        # if User.exists?(@paper.inviting_email)
+          format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
+        # else
+        #   # debugger
+        #   # format.html { notice: '共同作者尚未註冊本系統'}
+        # end
       else
+        
         format.html { render :new }
       end
     end
@@ -87,7 +89,7 @@ class PapersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def paper_params
-      params.require(:paper).permit(:title, :abstract, :outline, :file_name, :status, :activity_id)
+      params.require(:paper).permit(:title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email)
       
     end
     
