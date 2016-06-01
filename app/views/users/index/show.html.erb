@@ -4,21 +4,29 @@
     </div>
     <div class="panel panel-default">
         <table class="table">
-            <thead><tr>
+            <thead>
+              <tr>
                 <th>Title</th>
                 <th>Abstract</th>
-                <th>Ouline</th>
-                <th>File</th>
+                <th>Outline</th>
+                <th>Filename</th>
                 <th>Status</th>
-            </tr></thead>
+                <th>Activity</th>
+                <th colspan="3"></th>
+              </tr>
+        </thead>
             <tbody>
                 <% @submits.each do |submit|%>
                 <tr>
                     <td><%=submit.title %></td>
                     <td><%=submit.abstract%></td>
-                    <td><%=submit.ouline%></td>
-                    <td><%=submit.file%></td>
+                    <td><%=submit.outline%></td>
+                    <td><%=image_tag(submit.file_name)%></td>
                     <td><%=submit.status%></td>
+                    <td><%= submit.activity.name%></td>
+                    <td><%= link_to 'Show', activity_paper_path(submit.activity,submit) %></td>
+                    <td><%= link_to 'Edit', edit_activity_paper_path(submit.activity, submit) %></td>
+                    <td><%= link_to 'Destroy', activity_paper_path(submit.activity,submit), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                 </tr>
                 <%end%>
             </tbody>
