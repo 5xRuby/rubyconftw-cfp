@@ -1,0 +1,27 @@
+<div class="col-md-10 col-md-offset-1">
+    <div class="page-header">
+      <h1>My submits</h1>
+    </div>
+    <div class="panel panel-default">
+        <table class="table">
+            <thead><tr>
+                <th>Title</th>
+                <th>Abstract</th>
+                <th>Ouline</th>
+                <th>File</th>
+                <th>Status</th>
+            </tr></thead>
+            <tbody>
+                <% @submits.each do |submit|%>
+                <tr>
+                    <td><%=submit.title %></td>
+                    <td><%=submit.abstract%></td>
+                    <td><%=submit.ouline%></td>
+                    <td><%=submit.file%></td>
+                    <td><%=submit.status%></td>
+                </tr>
+                <%end%>
+            </tbody>
+        </table>
+    </div>
+</div>
