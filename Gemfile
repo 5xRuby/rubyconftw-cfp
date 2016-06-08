@@ -32,3 +32,4 @@ group :development do
 end
 
 gem 'settingslogic'
+gem 'country_select'
