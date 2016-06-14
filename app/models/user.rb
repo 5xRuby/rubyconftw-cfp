@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  mount_uploader :photo, PhotoUploader
   devise :database_authenticatable
   devise :omniauthable, :omniauth_providers => [:github,:twitter]
   has_many :user_activity_relationships, dependent: :destroy
