@@ -2,11 +2,11 @@ class Paper < ActiveRecord::Base
 
 	before_create :update_status
 	mount_uploader:file_name,PictureUploader
-	validates_presence_of:title
+	validates_presence_of:title 
 	validates_presence_of:abstract
 	validates_presence_of:outline
 	validates_presence_of:file_name
-	before_save:has_inviting_email
+	before_save :has_inviting_email
 	
 	belongs_to :activity, counter_cache: true
 	belongs_to :user
@@ -24,8 +24,11 @@ class Paper < ActiveRecord::Base
         	if User.exists?(email: self.inviting_email)
         		true
         	else
+        		
         		false
         	end
+
+
 
 		end
 		

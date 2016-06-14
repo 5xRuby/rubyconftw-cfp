@@ -4,6 +4,7 @@ class PapersController < ApplicationController
   # before_action :authenticate_user!,only: [:index, :new]
   # before_action :require_current_user, only: [:show,:edit]
 
+
   # GET /papers
   # GET /papers.json
   def index
@@ -41,8 +42,13 @@ class PapersController < ApplicationController
     respond_to do |format|
       if @paper.save
           format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
+          flash[:success] = "Welcome to the Sample App!"
+
       else
-        format.html { render :new }
+        format.html { render :new}
+        # unless @paper.exist?(@paper.inviting_email)
+        #   flash[:notice]
+        # end
       end
     end
   end
