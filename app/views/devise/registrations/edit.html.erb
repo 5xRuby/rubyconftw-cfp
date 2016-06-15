@@ -10,7 +10,7 @@
     <%= f.input :phone %>
     <%= f.input :title %>
     <%= f.input :company %>
-    <%= f.input :country %>
+    <%= f.input :country, as: :country %>
     <%= image_tag(resource.photo) if resource.photo.present? %>
     <%= f.input :photo, as: :file %>
     <%= f.button :submit%>

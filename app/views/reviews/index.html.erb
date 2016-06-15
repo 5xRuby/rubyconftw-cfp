@@ -1,0 +1,26 @@
+<div class="col-md-8 col-md-offset-2">
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Abstract</th>
+        <th>Outline</th>
+        <th>File</th>
+        <th>Status</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @papers.each do |paper| %>
+        <tr>
+            <td><%= paper.title %></td>
+            <td><%= paper.abstract %></td>
+            <td><%= paper.outline %></td>
+            <td><%= link_to '檔案連結', paper.file_name.url %></td>
+            <td><%= paper.status %></td>
+            <td><%= link_to '審稿', review_path(paper), class: 'btn btn-default' %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    </table>
+</div>
