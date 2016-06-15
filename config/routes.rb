@@ -12,4 +12,9 @@ Rails.application.routes.draw do
     get 'users/edit' => 'users/registrations#edit', :as => 'edit_user_registration'
     put 'users' => 'users/registrations#update', :as => 'user_registration'
   end
+  
+  get '/reviews' => 'reviews#index', as: 'reviews' 
+  get '/reviews/:id' => 'reviews#review', as: 'review'
+  get '/reviews/:id/reviewed' => 'reviews#reviewed', as: 'reviewed'
+    
 end
