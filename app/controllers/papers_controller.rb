@@ -42,8 +42,7 @@ class PapersController < ApplicationController
     respond_to do |format|
       if @paper.save
           format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
-          flash[:success] = "Welcome to the Sample App!"
-
+          PapersMailer.sent_cfp_email.deliver_now!
       else
         format.html { render :new}
         # unless @paper.exist?(@paper.inviting_email)

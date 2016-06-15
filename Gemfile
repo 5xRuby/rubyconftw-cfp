@@ -16,6 +16,8 @@ gem 'simple_form'
 gem 'jquery-turbolinks'
 gem 'mini_magick'
 gem 'jquery-ui-rails'
+gem 'devise'
+
 
 group :development, :test do
   gem 'byebug'
