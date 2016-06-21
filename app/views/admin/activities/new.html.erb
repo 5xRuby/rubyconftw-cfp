@@ -5,7 +5,7 @@
 	<h2 class="text-center">2. Add Categories</h2>
 	<br>
 	<br>
-	<%= simple_form_for [@activity, @category], remote: true do |f| %>
+	<%= simple_form_for [:admin, @activity, @category], remote: true do |f| %>
 		<div class="col-md-6 col-md-offset-2">
 			<div class="form-group">
 				<%= f.input :name, label: false, class: "form-control" %>
