@@ -17,6 +17,9 @@ gem 'jquery-turbolinks'
 gem 'mini_magick'
 gem 'jquery-ui-rails'
 gem 'devise'
+gem 'ratyrate'
+gem 'cancancan', '~> 1.10'
+
 
 
 group :development, :test do

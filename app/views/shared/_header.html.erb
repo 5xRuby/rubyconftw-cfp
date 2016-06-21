@@ -10,6 +10,8 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Proposal Review", root_path %></li>
+
         <li><%= link_to "Activities", root_path %></li>
         <% if user_signed_in? %>
           <li class="dropdown">
@@ -38,7 +40,8 @@
           </li>        
         <% else %>
           <li><%= link_to "Sign in", new_user_session_path %></li>
-        <% end %>   
+        <% end %>
+
       </ul>
     </div>
   </div>

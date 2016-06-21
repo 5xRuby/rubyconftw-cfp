@@ -86,11 +86,15 @@ class PapersController < ApplicationController
       @activity = Activity.find(params[:activity_id])  
     end
 
+
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def paper_params
       params.require(:paper).permit(:title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email)
       
     end
+
+
     
     def require_current_user
       # redirect_to activity_papers_path(@activity) if current_user  != Paper.find(params[:id]).user
