@@ -1,4 +1,4 @@
-class Admin::ActivitiesController < ApplicationController
+class Admin::ActivitiesController < Admin::ApplicationController
   def index
     @activities = Activity.all
   end
@@ -15,27 +15,31 @@ class Admin::ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(activity_params)
     @category = Category.new
-    if @activity.create
-      redirect_to  admin_activities_path
+    if @activity.save
+      render :new
     else
       render :new
     end
     
   end
   
-  def edit
-  end
+  # def edit
+  #   @activity = Activity.find(params[:id])
+  # end
   
-  def update
-    if @activity.update
-      redirect_to admin_activities_path
-    else
-      render :edit
-    end
-  end
+  # def update
+  #   @activity = Activity.find(params[:id])
+  #   if @activity.update(activity_params)
+  #     redirect_to admin_activities_path
+  #   else
+  #     render :edit
+  #   end
+  # end
   
   def destroy
+    @activity = Activity.find(params[:id])
     @activity.destroy
+    redirect_to admin_activities_path
   end
 
   private

@@ -1,4 +1,4 @@
-<div class="text-center"><h1>Activities</h1></div>
+<div class="text-center"><h1>Activities Management</h1></div>
 <br>
 <% if @activities.empty? %>
 	<div class="col-md-10">
@@ -6,21 +6,36 @@
 	</div>
 <% else %>
 	<div class="col-md-10">
-		<% @activities.each do |activity| %>
-			<%= link_to activity do %>
-				<div class="well well-lg col-md-12">
-					<div class="col-md-8">
-						<h2><%= activity.name %></h2>
-					</div>
-					<div class="col-md-4">
-						<h5 class="pull-right"><%= activity.start_date %> ~ <%= activity.end_date %></h5>
-					</div>
-					<div class="col-md-12">
-						<span class="pull-right"><%= pluralize(activity.papers_count, 'paper') %> now</span>
-					</div>
-				</div>
+		
+		<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>name</th>
+				<th>logo</th>
+				<th>start date</th>
+				<th>end date</th>
+				<th>papers count</th>
+				<th>management</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @activities.each do |activity| %>
+			<tr>
+				<td><%= activity.id %></td>
+				<td><%= activity.name %></td>
+				<td><%= image_tag(activity.logo, height: 100, width: 100) %></td>
+				<td><%= activity.start_date %></td>
+				<td><%= activity.end_date %></td>
+				<td><%= activity.papers_count %></td>
+				<td>
+					<%= link_to "show", admin_activity_path(activity) %>
+					<%= link_to "destroy", admin_activity_path(activity), method: :delete %>
+				</td>
+			</tr>
 			<% end %>
-		<% end %>
+		</tbody>	
+		</table>
 	</div>
 <% end %>
 <div class="col-md-2">
