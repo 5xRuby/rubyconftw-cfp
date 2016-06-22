@@ -21,7 +21,6 @@ Rails.application.routes.draw do
     get '/users' => "users#index"
     get '/users/:id/designate' => "users#designate", as: 'user_designate'
     get '/users/:id/undesignate' => "users#undesignate", as: 'user_undesignate'
-    
   end
     
 end
