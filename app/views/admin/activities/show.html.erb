@@ -1,0 +1,48 @@
+<br>
+<div class="col-md-10 col-md-offset-1"> 
+<div class="panel panel-default">
+  	<table class="table">
+  	<tr>
+  	 <th>id</th>
+  	<td><%= @activity.id %></td>
+		</tr>
+		<tr>
+		<th>name</th>
+		<td><%= @activity.name %></td>
+		</tr>
+		<tr>
+		<th>logo</th>
+		<td><%= image_tag(@activity.logo, height: 100, width: 100) %></td>
+		</tr>
+		<tr>
+		<th>start date</th>
+		<td><%= @activity.start_date %></td>
+		</tr>
+		<tr>
+		<th>end date</th>
+		<td><%= @activity.end_date %></td>
+		</tr>
+		<tr>
+		<th>paper count</th>
+		<td><%= @activity.papers_count %></td>
+		</tr>
+		<tr>
+		<th>description</th>
+		<td><div class="markdown-output"><%= @activity.description %></div></td>
+		</tr>
+		<tr>
+		<th>term</th>
+		<td><div class="markdown-output"><%= @activity.term %></div></td>
+		</tr>
+		<tr>
+		<th>categories</th>
+		<td>
+		  <% @activity.categories.each do |category| %>
+      <li class="list-group-item"><%= category.name %></li>
+      <% end %>
+    </td>
+		</tr>
+		</table>
+</div>
+</div>
+

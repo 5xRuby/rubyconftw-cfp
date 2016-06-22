@@ -25,7 +25,7 @@
 <% end %>
 
 <% if !@activity.id %>
-	<%= simple_form_for @activity do |f| %>
+	<%= simple_form_for [:admin, @activity] do |f| %>
 		<h2 class="text-center">1. Fill Basic Information</h1>
 		<div class="col-md-8 col-md-offset-2">
 			<div class="form-group">
