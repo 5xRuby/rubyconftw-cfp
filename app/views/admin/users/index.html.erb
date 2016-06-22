@@ -1,0 +1,29 @@
+<h1 class="text-center">Admin Management</h1>
+<table class="table">
+<thead>
+    <tr>
+        <th>#</th>
+        <th>name</th>
+        <th>firstname</th>
+        <th>lastname</th>
+        <th>photo</th>
+        <th>managment</th>
+    </tr>
+</thead>
+<tbody>
+    <% @users.each do |user| %>
+    <tr>
+        <th><%= user.id %></th>
+        <th><%= user.name %></th>
+        <th><%= user.firstname %></th>
+        <th><%= user.lastname %></th>
+        <th><%= image_tag(user.photo.url, width: 100, height: 100) if user.photo.present? %></th>
+        <%if user.is_admin %>
+        <th><%= link_to "undesignate to be admin ", admin_user_undesignate_path(user) %></th>
+        <% else %>
+        <th><%= link_to "designate to be admin ", admin_user_designate_path(user) %></th>
+        <% end %>
+    </tr>
+    <% end %>
+</tbody>
+</table>

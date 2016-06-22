@@ -12,6 +12,7 @@
       <ul class="nav navbar-nav navbar-left">
         <% if user_signed_in? && current_user.is_admin %>
         <li><%= link_to 'activities managment', admin_activities_path%></li>
+        <li><%= link_to 'admin managment', admin_users_path %></li>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
