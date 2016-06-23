@@ -1,4 +1,4 @@
-<div class="text-center"><h1>Activities</h1></div>
+<div class="text-center"><h1>Call For Papers ：</h1></div>
 <br>
 <% if @activities.empty? %>
 	<div class="col-md-10">
@@ -17,7 +17,11 @@
 						</div>
 						<div class="col-md-4">
 							<h5 class="pull-right"><%= activity.start_date %> ~ <%= activity.end_date %></h5>
-							 
+							 <h1> <%= Time.now.strftime("%Y-%m-%d") %> vs <%= activity.end_date %> </h1>
+
+							
+								
+							 </h1>
 						</div>
 						<div class="col-md-12">
 							<span class="pull-right"><%= pluralize(activity.papers_count, 'paper') %> now</span>
