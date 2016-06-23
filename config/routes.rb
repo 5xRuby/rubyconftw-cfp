@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   end
   
   namespace :admin do
-    resources :activities
+    resources :activities do
+      resources :reviewers
+    end
     get '/users' => "users#index"
     get '/users/:id/designate' => "users#designate", as: 'user_designate'
     get '/users/:id/undesignate' => "users#undesignate", as: 'user_undesignate'

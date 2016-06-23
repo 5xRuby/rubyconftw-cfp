@@ -16,7 +16,7 @@
 							<h2><%= activity.name %></h2>
 						</div>
 						<div class="col-md-4">
-							<h5 class="pull-right"><%= activity.start_date %> ~ <%= activity.end_date %></h5>
+							<h5 class="pull-right"><%= activity.start_date %> ~ <%= time_ago_in_words(activity.end_date) %></h5>
 							 
 						</div>
 						<div class="col-md-12">
