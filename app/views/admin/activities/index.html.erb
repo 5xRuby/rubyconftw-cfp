@@ -30,6 +30,7 @@
 				<td><%= activity.papers_count %></td>
 				<td>
 					<%= link_to "show", admin_activity_path(activity) %>
+					<%= link_to "assign reviewers", admin_activity_reviewers_path(activity) %>
 					<%= link_to "destroy", admin_activity_path(activity), method: :delete %>
 				</td>
 			</tr>
