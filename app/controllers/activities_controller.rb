@@ -3,8 +3,10 @@ class ActivitiesController < ApplicationController
 	def index
 		if params[:status] == "end"
 		  @activities = Activity.where("end_date <?", Time.now)
-		else
+		elsif params[:status] == "now"
 		  @activities = Activity.where("end_date >=?", Time.now)
+		else 
+		  @activities = Activity.all
 		end 
 	end
 
