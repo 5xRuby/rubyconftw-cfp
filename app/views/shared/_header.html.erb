@@ -18,8 +18,11 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
        
-        <li><%= link_to "My Proposals", users_path %></li>
-
+       
+        <% if user_signed_in? %>
+          <li><%= link_to "My Proposals", users_path %></li>
+        <% end %>
+        
         <li><%= link_to "Activities", root_path %></li>
         <% if user_signed_in? %>
           <li class="dropdown">
