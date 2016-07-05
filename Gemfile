@@ -19,6 +19,10 @@ gem 'jquery-ui-rails'
 gem 'devise'
 gem 'ratyrate'
 gem 'cancancan', '~> 1.10'
+gem 'carrierwave'
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-twitter'
 
 
 
@@ -29,11 +33,6 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'carrierwave'
-  gem 'devise'
-  gem 'omniauth'
-  gem 'omniauth-github'
-  gem 'omniauth-twitter'
 end
 
 gem 'settingslogic'
