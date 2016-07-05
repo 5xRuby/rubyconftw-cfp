@@ -1,0 +1,18 @@
+# config/application.yml
+defaults: &defaults
+  github:
+    id: c9676d1081de1109685c
+    secret: 82eb67a40bd9d8ea5ce1ee4327900ddb94aad47d
+    scope: user:email
+  twitter:
+    id: oQjlwUpI3RUgHqCUVlPquybVm
+    secret: VnUWO0QGZHoNG5HEOzvgNQ67C36bFrgdhAyw0SPaDibuxaJ1C7
+ 
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
