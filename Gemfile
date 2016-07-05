@@ -18,7 +18,11 @@ gem 'mini_magick'
 gem 'jquery-ui-rails'
 gem 'devise'
 gem 'ratyrate'
-
+gem 'cancancan', '~> 1.10'
+gem 'carrierwave'
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-twitter'
 
 
 group :development, :test do
@@ -28,10 +32,6 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'carrierwave'
-  gem 'omniauth'
-  gem 'omniauth-github'
-  gem 'omniauth-twitter'
 end
 
 gem 'settingslogic'
