@@ -1,7 +1,12 @@
 <div class="col-md-10 col-md-offset-1">
     <div class="page-header">
-      <h1>My submits</h1>
+      <h1>My Submits</h1>
     </div>
+
+    <% @activities.each do |activities| %>
+            <table class="table">
+                <h2>會議名稱:<%=activities.name %></h2>
+            <table>
     <div class="panel panel-default">
         <table class="table">
             <thead>
@@ -14,21 +19,26 @@
                 <th>Activity</th>
                 <th></th>
               </tr>
-        </thead>
+            </thead>
             <tbody>
-                <% @submits.each do |submit|%>
-                <tr>
-                    <td><%=submit.title %></td>
-                    <td><%=submit.abstract%></td>
-                    <td><%=submit.outline%></td>
-                    <td><%=image_tag(submit.file_name,height: '100', width: '100')%></td>
-                    <td><%=submit.status%></td>
-                    <td><%= submit.activity.name%></td>
-                    <td><%= link_to 'Show', activity_paper_path(submit.activity,submit) %></td>
-                    <td><%= link_to 'Edit', edit_activity_paper_path(submit.activity, submit) %></td>
-                    <td><%= link_to 'Destroy', activity_paper_path(submit.activity,submit), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                </tr>
-                <%end%>
+                
+                <% activities.papers.where(user_id: current_user.id).each do |paper| %>
+                    <tr>
+                        <td><%=paper.title %></td>
+                        <td><%=paper.abstract%></td>
+                        <td><%=paper.outline%></td>
+                        <td><%=image_tag(paper.file_name,height: '100', width: '100')%></td>
+                        <td><%=paper.status%></td>
+                        <td><%= paper.activity.name%></td>
+                        <td><%= paper.activity.id%></td>
+
+                        <td><%= link_to 'Show', activity_paper_path(paper.activity,paper) %></td>
+                        <td><%= link_to 'Edit', edit_activity_paper_path(paper.activity, paper) %></td>
+                        <td><%= link_to 'Destroy', activity_paper_path(paper.activity,paper), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                     </tr> 
+                <%end%>       
+                      
+    <%end%>
             </tbody>
         </table>
     </div>

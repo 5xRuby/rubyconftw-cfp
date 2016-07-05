@@ -11,13 +11,19 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-left">
         <% if user_signed_in? && current_user.is_admin %>
-        <li><%= link_to 'activities managment', admin_activities_path%></li>
-        <li><%= link_to 'admin managment', admin_users_path %></li>
+          <li><%= link_to 'activities managment', admin_activities_path%></li>
+          <li><%= link_to 'admin managment', admin_users_path %></li>
+          <li><%= link_to 'Review Papers', admin_users_path %></li>
         <% end %>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Proposal Review", root_path %></li>
-
+       
+       
+        <% if user_signed_in? %>
+          <li><%= link_to "My Proposals", users_path %></li>
+        <% end %>
+        
         <li><%= link_to "Activities", root_path %></li>
         <% if user_signed_in? %>
           <li class="dropdown">
