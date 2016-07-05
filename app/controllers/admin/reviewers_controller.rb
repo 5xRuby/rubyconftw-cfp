@@ -21,6 +21,14 @@ class Admin::ReviewersController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    @relationship = UserActivityRelationship.where(activity_id: params[:activity_id], user_id: params[:id])
+    @relationship.each do |relationship| 
+      relationship.destroy
+    end
+    redirect_to admin_activity_reviewers_path 
+  end
   private
   
   def set_activity
