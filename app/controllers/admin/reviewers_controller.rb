@@ -8,13 +8,15 @@ class Admin::ReviewersController < ApplicationController
   end
   
   def new
-    @relationship = UserActivityRelationship.new 
+    @relationship = UserActivityRelationship.new
+    @users = User.all 
   end
-  def update
-    relationship_params[:activity_id] = @activity.id
+  def create
     @relationship = UserActivityRelationship.new(relationship_params)
+    @relationship.activity_id = @activity.id
     if @relationship.save
       flash[:notice] = "Add new reviewer successfully!"
+      redirect_to admin_activity_reviewers_path
     else
       render :new
     end

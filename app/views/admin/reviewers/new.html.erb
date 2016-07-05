@@ -1,3 +1,4 @@
-<%= simple_form_for @relationship do |f| %>
-    <%f.input %>
+<%= simple_form_for @relationship, url: admin_activity_reviewers_path do |f| %>
+    <%= f.input :user_id, collection: @users%>
+    <%= f.submit%>
 <% end %>
