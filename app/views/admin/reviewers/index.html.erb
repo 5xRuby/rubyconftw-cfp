@@ -1,0 +1,33 @@
+<h1 class="text-center">Reviewers</h1>
+<div class="col-md-8 col-md-offset-1">
+<table class="table">
+<thead>
+  <tr>
+    <th>#</th>
+    <th>name</th>
+    <th>firstname</th>
+    <th>lastname</th>
+    <th>photo</th>
+    <th>managment</th>
+  </tr>
+</thead>
+<tbody>
+  <% @reviewers.each do |reviewer| %>
+  <tr> 
+    <td><%= reviewer.id %></td>
+    <td><%= reviewer.name %></td>
+    <td><%= reviewer.firstname %></td>
+    <td><%= reviewer.lastname %></td>
+    <td><%= image_tag(reviewer.photo.url, width: 100, height: 100) if reviewer.photo.present? %></td>
+    <td>
+      <%= link_to 'delete', admin_activity_reviewer_path(@activity,reviewer), method: :delete %> 
+    </td>
+  </tr>
+  <% end %>
+</tbody>
+</table>
+</div>
+
+<div class="col-md-3">
+  <%= link_to 'add reviewers', new_admin_activity_reviewer_path(@activity), class: "btn btn-default" %>
+</div>

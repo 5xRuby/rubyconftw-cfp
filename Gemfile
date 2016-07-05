@@ -25,7 +25,6 @@ gem 'omniauth-github'
 gem 'omniauth-twitter'
 
 
-
 group :development, :test do
   gem 'byebug'
 end
