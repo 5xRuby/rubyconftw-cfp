@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5.1'
-gem 'sqlite3'
-gem 'bootstrap-sass', '~> 3.3.6' 
+gem 'rails', '4.2.7'
+gem 'pg'
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails'
 gem 'pagedown-bootstrap-rails'
 gem 'sass-rails', '~> 5.0'
