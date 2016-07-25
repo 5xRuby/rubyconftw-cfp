@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160622054610) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "activities", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -45,7 +48,7 @@ ActiveRecord::Schema.define(version: 20160622054610) do
     t.string   "inviting_email"
   end
 
-  add_index "papers", ["activity_id"], name: "index_papers_on_activity_id"
+  add_index "papers", ["activity_id"], name: "index_papers_on_activity_id", using: :btree
 
   create_table "user_activity_relationships", force: :cascade do |t|
     t.integer  "user_id"
@@ -81,6 +84,7 @@ ActiveRecord::Schema.define(version: 20160622054610) do
     t.boolean  "is_admin"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "papers", "activities"
 end

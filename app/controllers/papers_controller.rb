@@ -1,7 +1,7 @@
 class PapersController < ApplicationController
   before_action :set_activity, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   before_action :set_paper, only: [:show, :edit, :update, :destroy]
-  # before_action :authenticate_user!,only: [:index, :new]
+  before_action :authenticate_user!,only: [:index, :new]
   # before_action :require_current_user, only: [:show,:edit]
 
 
@@ -36,18 +36,12 @@ class PapersController < ApplicationController
     @paper = @activity.papers.new(paper_params)
     @paper.user_id = current_user.id
     @paper.users << current_user
-
-   
-
     respond_to do |format|
       if @paper.save
           PapersMailer.sent_cfp_email.deliver_now!
           format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
       else
         format.html { render :new}
-        # unless @paper.exist?(@paper.inviting_email)
-        #   flash[:notice]
-        # end
       end
     end
   end
@@ -83,7 +77,7 @@ class PapersController < ApplicationController
     end
 
     def set_activity
-      @activity = Activity.find(params[:activity_id])  
+      @activity = Activity.find(params[:activity_id])
     end
 
 
@@ -91,12 +85,6 @@ class PapersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def paper_params
       params.require(:paper).permit(:title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email)
-      
-    end
 
-
-    
-    def require_current_user
-      # redirect_to activity_papers_path(@activity) if current_user  != Paper.find(params[:id]).user
     end
 end
