@@ -10,4 +10,12 @@ class PapersMailer < ApplicationMailer
 
     mail to: "cfptestgogo@gmail.com"
   end
+
+  def send_inviting_email(paper)
+    @paper = paper
+    @user = paper.users.first
+    @activity = paper.activity
+
+    mail to: paper.inviting_email, subject: "[#{@activity.name}] #{@user.firstname} #{@user.lastname} invited you to be co-presenter on cfp"
+  end
 end
