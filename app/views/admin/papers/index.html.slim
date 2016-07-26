@@ -1,0 +1,19 @@
+.col-md-8.col-md-offset-2
+  table.table
+    thead
+      tr
+        th #
+        th title
+        th status
+        th user
+    tbody
+      - @papers.each do |paper|
+        tr
+          td
+            = paper.id
+          td
+            = paper.title
+          td
+            = paper.status
+          td
+            = paper.user.name
