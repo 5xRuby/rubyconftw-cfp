@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'aasm'
 gem 'rails', '4.2.7'
 gem 'pg'
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -27,6 +28,8 @@ gem 'omniauth-twitter'
 
 group :development, :test do
   gem 'byebug'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :development do

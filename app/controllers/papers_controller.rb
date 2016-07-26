@@ -37,11 +37,11 @@ class PapersController < ApplicationController
     @paper.user_id = current_user.id
     @paper.users << current_user
     respond_to do |format|
-      if @paper.save
-          PapersMailer.sent_cfp_email.deliver_now!
-          format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
+      if @paper.save!
+        format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
       else
-        format.html { render :new}
+        format.html {
+          render :new}
       end
     end
   end

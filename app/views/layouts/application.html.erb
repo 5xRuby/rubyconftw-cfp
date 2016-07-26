@@ -11,6 +11,9 @@
 <div class="container-body">
 	<%= flash_message %>
 	<%= yield %>
+  <%if Rails.env.development? %>
+    <%=console%>
+  <%end%>
 </div>
 </body>
 </html>
