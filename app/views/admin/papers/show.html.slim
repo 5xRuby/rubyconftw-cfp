@@ -1,22 +1,31 @@
 .col-md-8.col-md-offset-2
+  .page-header
+    h1
+      = @paper.title
   table.table
     tbody
       tr
         th title
-        td @paper.title
+        td
+          = @paper.title
       tr
         th abstract
-        td @paper.abstract
+        td
+          = @paper.abstract
       tr
         th outline
-        td @paper.oultline
+        td
+          = @paper.outline
       tr
         th file
-        td @paper.file_name
+        td
+          = link_to "file", @paper.file_name.url
       tr
         th status
-        td @paper.status
+        td
+          = @paper.status
       tr
         th user
-        td @paper.user.name
-
+        td
+          = @paper.user.name
+  = link_to "Back", admin_activity_papers_path(@activity), class: "btn btn-default"
