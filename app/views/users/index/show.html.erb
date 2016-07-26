@@ -1,6 +1,6 @@
 <div class="col-md-10 col-md-offset-1">
     <div class="page-header">
-      <h1>My Submits</h1>
+      <h1>My Proposals</h1>
     </div>
 
     <% @activities.each do |activities| %>
@@ -21,7 +21,7 @@
               </tr>
             </thead>
             <tbody>
-                
+
                 <% activities.papers.where(user_id: current_user.id).each do |paper| %>
                     <tr>
                         <td><%=paper.title %></td>
@@ -35,9 +35,9 @@
                         <td><%= link_to 'Show', activity_paper_path(paper.activity,paper) %></td>
                         <td><%= link_to 'Edit', edit_activity_paper_path(paper.activity, paper) %></td>
                         <td><%= link_to 'Destroy', activity_paper_path(paper.activity,paper), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                     </tr> 
-                <%end%>       
-                      
+                     </tr>
+                <%end%>
+
     <%end%>
             </tbody>
         </table>
