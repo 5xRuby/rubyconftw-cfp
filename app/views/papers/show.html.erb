@@ -19,7 +19,7 @@
         <td><%= @paper.title %></td>
         <td><%= @paper.abstract %></td>
         <td><%= @paper.outline %></td>
-        <td><%= image_tag(@paper.file_name) %></td>
+        <td><%= image_tag(@paper.speaker_avatar.url) %></td>
         <td><%= @paper.state %></td>
         <td><%= link_to 'Show', activity_paper_path(@activity,@paper) %></td>
         <td><%= link_to 'Edit', edit_activity_paper_path(@activity, @paper) %></td>

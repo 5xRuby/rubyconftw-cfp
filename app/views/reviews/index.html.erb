@@ -16,7 +16,7 @@
             <td><%= paper.title %></td>
             <td><%= paper.abstract %></td>
             <td><%= paper.outline %></td>
-            <td><%= link_to '檔案連結', paper.file_name.url %></td>
+            <td><%= link_to '檔案連結', paper.speaker_avatar.url %></td>
             <td><%= paper.state%></td>
             <td><%= link_to '審稿', review_path(paper), class: 'btn btn-default' %></td>
         </tr>
