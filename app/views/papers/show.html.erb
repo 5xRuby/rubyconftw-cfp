@@ -20,7 +20,7 @@
         <td><%= @paper.abstract %></td>
         <td><%= @paper.outline %></td>
         <td><%= image_tag(@paper.file_name) %></td>
-        <td><%= @paper.status %></td>
+        <td><%= @paper.state %></td>
         <td><%= link_to 'Show', activity_paper_path(@activity,@paper) %></td>
         <td><%= link_to 'Edit', edit_activity_paper_path(@activity, @paper) %></td>
         <td><%= link_to 'Destroy', activity_paper_path(@activity,@paper), method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -29,4 +29,4 @@
   </table>
 </div>
 
-<%= link_to 'Edit', edit_activity_paper_path(@activity, @paper) %> 
+<%= link_to 'Edit', edit_activity_paper_path(@activity, @paper) %>
