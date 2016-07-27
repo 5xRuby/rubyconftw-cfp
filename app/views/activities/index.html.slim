@@ -1,0 +1,16 @@
+.col-md-8.col-md-offset-2
+  - if @activities.nil?
+    h2 No Activities Now
+  - else
+    .activities
+      - @activities.each do |activity|
+        .activity
+          h2
+            = link_to activity.name, activity_path(activity)
+            small
+              = status(activity)
+          p.date
+            span.date #{activity.start_date} ~ #{activity.end_date}
+          p.count
+            = link_to pluralize(activity.papers_count, 'proposal'), activity_papers_path(activity)
+
