@@ -1,0 +1,25 @@
+.col-md-8.col-md-offset-2.activities-show
+  h1
+    = @activity.name
+    small
+      = status(@activity)
+  p.closed-time
+    | Closed on
+    strong #{@activity.end_date}
+  h2 Description
+  .markdown-output
+    = @activity.description
+  h2 Categories
+  ul
+    - @activity.categories.each do |category|
+      li
+        p
+          = category.name
+  h2 Terms</u></h2>
+  .markdown-output
+    = @activity.term
+  .btns
+    = link_to "View my proposals", activity_papers_path(@activity), class: "btn btn-default"
+    - if status(@activity) == "open"
+      = link_to "Submit a Paper", new_activity_paper_path(@activity), class: "btn btn-primary"
+
