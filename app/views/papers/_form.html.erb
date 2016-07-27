@@ -19,7 +19,7 @@
       </div>
 
       <div class="field">
-        <%= f.input :file_name %><br>
+        <%= f.input :speaker_avatar %><br>
         <br>
         <%= "Uploaded File: " if @paper.speaker_avatar.present? %>
         <%= link_to "Here", @paper.speaker_avatar.url if @paper.speaker_avatar.present? %>
