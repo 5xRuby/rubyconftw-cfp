@@ -8,7 +8,7 @@ class PapersController < ApplicationController
   # GET /papers
   # GET /papers.json
   def index
-    # @papers = @activity.papers.where(user_id: current_user.id)
+     @papers = @activity.papers.where(user_id: current_user.id)
   end
 
   # GET /papers/1
