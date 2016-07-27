@@ -36,3 +36,4 @@ end
 
 gem 'settingslogic'
 gem 'country_select'
+gem 'slim'

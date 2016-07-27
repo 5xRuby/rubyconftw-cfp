@@ -1,12 +1,12 @@
 <div class="text-center"><h1>Activities Management</h1></div>
 <br>
 <% if @activities.empty? %>
-	<div class="col-md-10">
+	<div class="col-md-9 col-md-offset-1">
 		<h2 class="text-center">No Activities Now</h2>
 	</div>
 <% else %>
-	<div class="col-md-10">
-		
+	<div class="col-md-9 col-md-offset-1">
+
 		<table class="table">
 		<thead>
 			<tr>
@@ -29,13 +29,14 @@
 				<td><%= activity.end_date %></td>
 				<td><%= activity.papers_count %></td>
 				<td>
-					<%= link_to "show", admin_activity_path(activity) %>
-					<%= link_to "assign reviewers", admin_activity_reviewers_path(activity) %>
-					<%= link_to "destroy", admin_activity_path(activity), method: :delete %>
+					<%= link_to "show", admin_activity_path(activity), class:"btn btn-default" %>
+          <%= link_to "show papers", admin_activity_papers_path(activity), class: "btn btn-default"%>
+					<%= link_to "assign reviewers", admin_activity_reviewers_path(activity), class:"btn btn-default" %>
+					<%= link_to "destroy", admin_activity_path(activity), method: :delete, class:"btn btn-default" %>
 				</td>
 			</tr>
 			<% end %>
-		</tbody>	
+		</tbody>
 		</table>
 	</div>
 <% end %>
