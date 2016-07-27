@@ -6,7 +6,10 @@
       - @activities.each do |activity|
         .activity
           h2
-            = link_to activity.name, activity_path(activity)
+            - if status(activity) == "open"
+              = link_to activity.name, activity_path(activity)
+            - else
+              = activity.name
             small
               = status(activity)
           p.date
