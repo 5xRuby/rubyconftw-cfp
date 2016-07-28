@@ -1,8 +1,12 @@
-= simple_form_for @activity, url: [:admin, @activity] do |f|
-  = f.input :name
-  = f.input :logo
-  = f.input :start_date, as: :date
-  = f.input :end_date, as: :date
-  = f.input :term
+.col-md-8.col-md-offset-2
+  = simple_form_for @activity, url: [:admin, @activity] do |f|
+    = f.input :name
+    = f.input :logo
+    = f.input :description
+    = f.input :start_date, as: :date
+    = f.input :end_date, as: :date
+    = f.input :event_start_date, as: :date
+    = f.input :event_end_date, as: :date
+    = f.input :term
 
-  = submit_tag "Save"
+    = submit_tag "Save"

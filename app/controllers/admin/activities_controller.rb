@@ -45,7 +45,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
   private
 
   def activity_params
-    params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :term)
+    params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :event_start_date, :event_end_date, :term)
   end
 
 
