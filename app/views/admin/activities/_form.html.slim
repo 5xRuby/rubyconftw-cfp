@@ -2,6 +2,7 @@
   = simple_form_for @activity, url: [:admin, @activity] do |f|
     = f.input :name
     = f.input :logo
+    = f.input :description
     = f.input :start_date, as: :date
     = f.input :end_date, as: :date
     = f.input :event_start_date, as: :date
@@ -13,4 +14,5 @@
           = cf.input :name
           = cf.input :field_type, as: :radio_buttons, collection: CustomField::ALLOWED_FIELD_TYPES_NOW
           = cf.input :description
+      = link_to_add_association "Add Fields", f, :custom_fields, class: "btn btn-default"
     = submit_tag "Save"
