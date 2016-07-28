@@ -2,7 +2,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
   def index
     @activities = Activity.all
   end
-    
+
   def show
     @activity = Activity.find(params[:id])
   end
@@ -11,7 +11,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
     @activity = Activity.new
     @category = Category.new
   end
-  
+
   def create
     @activity = Activity.new(activity_params)
     @category = Category.new
@@ -20,22 +20,22 @@ class Admin::ActivitiesController < Admin::ApplicationController
     else
       render :new
     end
-    
+
   end
-  
-  # def edit
-  #   @activity = Activity.find(params[:id])
-  # end
-  
-  # def update
-  #   @activity = Activity.find(params[:id])
-  #   if @activity.update(activity_params)
-  #     redirect_to admin_activities_path
-  #   else
-  #     render :edit
-  #   end
-  # end
-  
+
+  def edit
+    @activity = Activity.find(params[:id])
+  end
+
+  def update
+    @activity = Activity.find(params[:id])
+    if @activity.update(activity_params)
+      redirect_to admin_activities_path
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @activity = Activity.find(params[:id])
     @activity.destroy
@@ -43,10 +43,10 @@ class Admin::ActivitiesController < Admin::ApplicationController
   end
 
   private
-  
+
   def activity_params
-    params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :term) 
+    params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :term)
   end
-  
+
 
 end

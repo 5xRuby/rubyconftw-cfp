@@ -1,0 +1,8 @@
+= simple_form_for @activity, url: [:admin, @activity] do |f|
+  = f.input :name
+  = f.input :logo
+  = f.input :start_date, as: :date
+  = f.input :end_date, as: :date
+  = f.input :term
+
+  = submit_tag "Save"

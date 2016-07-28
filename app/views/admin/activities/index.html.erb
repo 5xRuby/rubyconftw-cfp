@@ -30,6 +30,7 @@
 				<td><%= activity.papers_count %></td>
 				<td>
 					<%= link_to "show", admin_activity_path(activity), class:"btn btn-default" %>
+					<%= link_to "Edit", edit_admin_activity_path(activity), class:"btn btn-default" %>
           <%= link_to "show papers", admin_activity_papers_path(activity), class: "btn btn-default"%>
 					<%= link_to "assign reviewers", admin_activity_reviewers_path(activity), class:"btn btn-default" %>
 					<%= link_to "destroy", admin_activity_path(activity), method: :delete, class:"btn btn-default" %>
