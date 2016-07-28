@@ -2,16 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.2
--- Dumped by pg_dump version 9.5.2
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
@@ -34,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: activities; Type: TABLE; Schema: public; Owner: -
+-- Name: activities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE activities (
@@ -47,7 +43,9 @@ CREATE TABLE activities (
     term text,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    papers_count integer DEFAULT 0
+    papers_count integer DEFAULT 0,
+    event_start_date date,
+    event_end_date date
 );
 
 
@@ -71,7 +69,7 @@ ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
 
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: -
+-- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE categories (
@@ -103,7 +101,7 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
--- Name: custom_fields; Type: TABLE; Schema: public; Owner: -
+-- Name: custom_fields; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE custom_fields (
@@ -139,7 +137,7 @@ ALTER SEQUENCE custom_fields_id_seq OWNED BY custom_fields.id;
 
 
 --
--- Name: papers; Type: TABLE; Schema: public; Owner: -
+-- Name: papers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE papers (
@@ -178,7 +176,7 @@ ALTER SEQUENCE papers_id_seq OWNED BY papers.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE schema_migrations (
@@ -187,7 +185,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: user_activity_relationships; Type: TABLE; Schema: public; Owner: -
+-- Name: user_activity_relationships; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE user_activity_relationships (
@@ -220,7 +218,7 @@ ALTER SEQUENCE user_activity_relationships_id_seq OWNED BY user_activity_relatio
 
 
 --
--- Name: user_paper_relationships; Type: TABLE; Schema: public; Owner: -
+-- Name: user_paper_relationships; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE user_paper_relationships (
@@ -253,7 +251,7 @@ ALTER SEQUENCE user_paper_relationships_id_seq OWNED BY user_paper_relationships
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE users (
@@ -345,7 +343,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY activities
@@ -353,7 +351,7 @@ ALTER TABLE ONLY activities
 
 
 --
--- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY categories
@@ -361,7 +359,7 @@ ALTER TABLE ONLY categories
 
 
 --
--- Name: custom_fields_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: custom_fields_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY custom_fields
@@ -369,7 +367,7 @@ ALTER TABLE ONLY custom_fields
 
 
 --
--- Name: papers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: papers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY papers
@@ -377,7 +375,7 @@ ALTER TABLE ONLY papers
 
 
 --
--- Name: user_activity_relationships_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: user_activity_relationships_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY user_activity_relationships
@@ -385,7 +383,7 @@ ALTER TABLE ONLY user_activity_relationships
 
 
 --
--- Name: user_paper_relationships_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: user_paper_relationships_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY user_paper_relationships
@@ -393,7 +391,7 @@ ALTER TABLE ONLY user_paper_relationships
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY users
@@ -401,21 +399,21 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: index_papers_on_activity_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_papers_on_activity_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_papers_on_activity_id ON papers USING btree (activity_id);
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
@@ -433,7 +431,7 @@ ALTER TABLE ONLY papers
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user", public;
+SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('20160420061757');
 
@@ -476,4 +474,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160725103142');
 INSERT INTO schema_migrations (version) VALUES ('20160727160050');
 
 INSERT INTO schema_migrations (version) VALUES ('20160727160547');
+
+INSERT INTO schema_migrations (version) VALUES ('20160728060308');
 
