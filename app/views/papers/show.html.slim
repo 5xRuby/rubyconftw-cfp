@@ -1,0 +1,58 @@
+.container.paper-show
+  .col-md-12
+    .col-md-8.title-part
+      h3
+        = link_to @activity.name, activity_path(@activity)
+        | , #{time_tag @activity.end_date}
+      h1
+        = @paper.title
+    .col-md-4.edit-part
+      = link_to edit_activity_paper_path(@activity, @paper), class:"btn btn-primary" do
+        span.fa.fa-pencil-square-o
+        | Edit
+      = link_to activity_paper_path(@activity,@paper), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning" do
+        span.fa.fa-exclamation-circle
+        | Withdraw Proposal
+      p
+        | CFP close: #{time_tag @activity.end_date}
+  .col-md-4.paper-part
+    h3 Speaker
+    .col-md-12.speaker-info
+      .speaker-pic.col-md-3
+        = image_tag @user.photo.url
+      .col-md-9
+        p
+          | #{@user.name} (#{@user.email})
+    h3 Title
+    p
+      = @paper.title
+    h3 Abstract
+    p
+      = @paper.abstract
+    h3 Outline
+    p
+      = @paper.outline
+  .col-md-4.invite-part
+    h3 Invited Speakers
+    - if @invited_user.present?
+      .col-md-12.speaker-info
+        .speaker-pic.col-md-3
+          = image_tag @invited_user.photo.url
+        .col-md-9
+          p
+            | #{@invited_user.name} (#{@invited_user.email})
+
+    - else
+      .speaker-info
+        p No invited speakers
+      h3 Invite a speaker
+      = simple_form_for [@activity, @paper],  method: :patch, html: {class: "form-inline"}  do |f|
+        = f.input :inviting_email, class: "form-control", label: false
+        = f.submit "Invite", class: "btn btn-default invite-btn"
+  .col-md-4.review-part
+    h3 Reviewer Activity
+    p
+      | n reviews
+      span.label.label-info.paper-state-label
+        = @paper.state
+

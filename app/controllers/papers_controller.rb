@@ -14,6 +14,8 @@ class PapersController < ApplicationController
   # GET /papers/1
   # GET /papers/1.json
   def show
+    @user = @paper.user
+    @invited_user = User.find_by_email(@paper.inviting_email)
   end
 
   # GET /papers/new
