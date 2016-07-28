@@ -1,0 +1,18 @@
+.paper-form
+  = simple_form_for [@activity, @paper], :html => { :multipart => true } do |f|
+    .col-md-12
+      .col-md-6
+        = f.input :title, placeholder: "Title of the talk", hint: "Please limit your title to 60 characters or less."
+        = f.input :abstract, placeholder: "What is the talk about?", hint: "Provide a concise description for the program limited to 600 characters or less.", input_html: {rows: 5 }
+        = f.input :outline, placeholder: "Explain the theme and flow of your talk. What are the intended audience takeaways?", hint: "Include any pertinent details.", input_html: { rows: 5 }
+      .col-md-6
+        h3 Custom Fields
+        = link_to edit_user_registration_path do
+          .speaker-info.col-md-12
+            .col-md-2.speaker-pic
+              = image_tag current_user.photo.url
+            .col-md-10.speaker-text
+              h4 #{current_user.name} (#{current_user.email})
+              p edit my profile
+    .col-md-12
+      = f.submit "Submit Proposal", class: "pull-right btn btn-primary"

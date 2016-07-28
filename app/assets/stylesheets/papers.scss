@@ -31,5 +31,29 @@
       margin-left: 5px;
     }
   }
-
+}
+.paper-new, .paper-edit{
+  margin-bottom: 40px;
+  h1{
+    margin-left: 30px;
+  }
+}
+.paper-form{
+  .speaker-info{
+    margin: 10px 0;
+   .speaker-pic{
+     padding: 0;
+    img{
+      width: 100%;
+    }
+   }
+   .speaker-text{
+     h4{
+       color: #000;
+     }
+     p{
+       color: #999;
+     }
+   }
+  }
 }
