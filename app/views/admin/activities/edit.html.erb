@@ -1,30 +1,5 @@
 <h1 class="text-center">Create a New Activity</h1>
 
-
-<% if @activity.id %>
-	<h2 class="text-center">2. Add Categories</h2>
-	<br>
-	<br>
-	<%= simple_form_for [@activity, @category], remote: true do |f| %>
-		<div class="col-md-6 col-md-offset-2">
-			<div class="form-group">
-				<%= f.input :name, label: false, class: "form-control" %>
-			</div>
-		</div>
-		<div class="col-md-2">
-			<div class="actions">
-		  		<%= f.button :submit, "Add A New Category" %>
-			</div>
-		</div>
-	<% end %>
-	<div class="col-md-8 col-md-offset-2">
-		<h3>Current categories:</h3>
-		<div class="current_categories"></div>
-	</div>
-	<%= link_to "Done", root_path, class: "btn btn-primary btn-done col-md-8 col-md-offset-2" %>
-<% end %>
-
-<% if !@activity.id %>
 	<%= simple_form_for [:admin, @activity] do |f| %>
 		<h2 class="text-center">1. Fill Basic Information</h1>
 		<div class="col-md-8 col-md-offset-2">
@@ -38,26 +13,33 @@
 
 			<div class="form-group">
 			  <%= f.input :end_date, class: "form-control", html5: true %>
-			</div>	
-			
+			</div>
+
+      <div class="form-group">
+        <%= f.input :event_start_date, class: "form-control", html5: true %>
+      </div>
+
+      <div class="form-group">
+         <%= f.input :event_end_date, class: "form-control", html5: true %>
+      </div>
+
 			<div class="form-group">
 				<%= f.input :logo, as: :file, class: "form-control" %>
-				
+
 			</div>
-			
+
 			<div class="form-group">
-			  <%= f.input  :description, as: :pagedown, 
+			  <%= f.input  :description, as: :pagedown,
 			  	input_html: { preview: true, rows: 10 }, class: "form-control" %>
 			</div>
 
 			<div class="form-group">
-			  <%= f.input :term, as: :pagedown, 
+			  <%= f.input :term, as: :pagedown,
 			  	input_html: { preview: true, rows: 10 },  class: "form-control" %>
-			</div>				
+			</div>
 
 			<div class="actions text-center">
 			  <%= f.button :submit, "Continue" %>
 			</div>
 		</div>
 	<% end %>
-<% end %>

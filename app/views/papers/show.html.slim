@@ -3,7 +3,7 @@
     .col-md-8.title-part
       h3
         = link_to @activity.name, activity_path(@activity)
-        | , #{time_tag @activity.end_date}
+        | , #{time_tag @activity.event_end_date}
       h1
         = @paper.title
     .col-md-4.edit-part
