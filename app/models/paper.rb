@@ -31,12 +31,12 @@ class Paper < ActiveRecord::Base
   has_many :user_paper_relationships, dependent: :destroy
   has_many :users, through: :user_paper_relationships
 
-  after_create :send_notification_to_user
+  after_create :notify_user
 
   private
 
-  def send_notification_to_user
-    PapersMailer.sent_cfp_email.deliver_now!
+  def notify_user
+    PapersMailer.notification_after_create(self.id).deliver_now!
   end
 
 end

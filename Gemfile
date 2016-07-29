@@ -24,6 +24,7 @@ gem 'carrierwave'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-twitter'
+gem 'letter_opener'
 
 
 group :development, :test do
