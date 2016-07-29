@@ -13,6 +13,6 @@
       = f.simple_fields_for :custom_fields do |cf|
         #custom-fields
           = render "custom_fields", cf: cf
-        button.btn.btn-default#add-field(data-form-content="#{render(partial: "custom_fields", locals: {cf: cf}).gsub(/\n/,'')}")
-          | Add Field
+        #field-content(data-form-content="#{render(partial: "custom_fields", locals: {cf: cf}).gsub(/\n/,'')}")
+    button.btn.btn-default#add-field Add Field
     = submit_tag "Save"
