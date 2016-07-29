@@ -11,8 +11,7 @@
     h3 Input Fields
     #input_fields_container
       = f.simple_fields_for :custom_fields do |cf|
-        #custom-fields
           = render "custom_fields", cf: cf
-        #field-content(data-form-content="#{render(partial: "custom_fields", locals: {cf: cf}).gsub(/\n/,'')}")
+          #field-content(data-form-content="#{render(partial: "custom_fields", locals: {cf: cf}).gsub(/\n/,'')}")
     button.btn.btn-default#add-field Add Field
     = submit_tag "Save"

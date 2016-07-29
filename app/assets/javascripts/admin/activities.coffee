@@ -10,6 +10,6 @@ jQuery ->
     re3 = "new_custom_field"
     form = $("#field-content").attr("data-form-content")
     form = form.split(ta1).join(re1).split(ta2).join(re2).split(ta3).join(re3)
-    $("#custom-fields").append(form)
+    $("#input_fields_container").append(form)
   $('input[type=submit]').on "click", ->
     $('.hidden').html("")
