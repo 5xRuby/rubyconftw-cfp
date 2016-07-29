@@ -7,7 +7,6 @@ class Activity < ActiveRecord::Base
   accepts_nested_attributes_for :custom_fields, allow_destroy: true
   mount_uploader :logo, LogoUploader
 
-
   def status
     self.end_date > Time.now ? "open" : "closed"
   end
