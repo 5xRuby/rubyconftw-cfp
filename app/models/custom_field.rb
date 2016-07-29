@@ -5,9 +5,11 @@ class CustomField < ActiveRecord::Base
 
   ALLOWED_FIELD_TYPES_NOW = %w{text textarea}
 
-  enum field_type: FIELD_TYPES.map(&:to_sym)
+  enum field_type: Hash[ALLOWED_FIELD_TYPES_NOW.map{|t| [t,t] }]
 
-  validates :name, :sort_order, :field_type, :required, :options, presence: true
+  validates :name, :sort_order, :field_type, presence: true
+  validates :required, :options, presence: true, allow_blank: true
+
 
 
 end

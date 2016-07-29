@@ -6,8 +6,10 @@
   = f.input :term
   #input_fields_container
     = f.simple_fields_for :custom_fields do |cf|
-      = content_tag_for :div, cf.object do
+      = div_for cf.object do
+        = cf.input :id, as: :hidden
         = cf.input :name
         = cf.input :field_type, as: :radio_buttons, collection: CustomField::ALLOWED_FIELD_TYPES_NOW
         = cf.input :description
+
   = submit_tag "Save"

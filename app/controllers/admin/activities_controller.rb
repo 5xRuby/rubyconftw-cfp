@@ -25,6 +25,9 @@ class Admin::ActivitiesController < Admin::ApplicationController
 
   def edit
     @activity = Activity.find(params[:id])
+    if @activity.custom_fields.length < 1
+      @activity.custom_fields.build id: (rand(1000000) + 1)
+    end
   end
 
   def update
@@ -45,7 +48,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
   private
 
   def activity_params
-    params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :term)
+    params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :term, custom_fields_attributes: [:name, :required, :description, :field_type])
   end
 
 
