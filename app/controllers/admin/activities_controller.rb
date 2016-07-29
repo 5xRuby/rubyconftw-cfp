@@ -25,9 +25,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
 
   def edit
     @activity = Activity.find(params[:id])
-    if @activity.custom_fields.length < 1
-      @activity.custom_fields.build id: (rand(1000000) + 1)
-    end
+    @new_custom_field = CustomField.new
   end
 
   def update

@@ -1,7 +1,6 @@
 .custom-field
   .well
     = div_for cf.object do
-      = cf.input :id, as: :hidden
       = cf.input :name
       = cf.input :field_type, as: :radio_buttons, collection: CustomField::ALLOWED_FIELD_TYPES_NOW
       = cf.input :required
