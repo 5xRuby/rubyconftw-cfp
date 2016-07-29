@@ -1,0 +1,9 @@
+.well
+  = content_tag_for :div, cf.object
+    = cf.input :name
+    = cf.input :field_type, as: :radio_buttons, collection: CustomField::ALLOWED_FIELD_TYPES_NOW
+    = cf.input :required
+    = cf.input :description
+  - if cf.object.persisted?
+    = cf.check_box :_destroy
+    = cf.label :_destroy, " Remove"

@@ -25,11 +25,12 @@ class Admin::ActivitiesController < Admin::ApplicationController
 
   def edit
     @activity = Activity.find(params[:id])
+    @activity.custom_fields.build
   end
 
   def update
     @activity = Activity.find(params[:id])
-    if @activity.update(activity_params)
+    if @activity.update!(activity_params)
       redirect_to admin_activities_path
     else
       render :edit
@@ -45,7 +46,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
   private
 
   def activity_params
-    params.require(:activity).permit(:name, :logo, :start_date, :end_date, :event_start_date, :event_end_date, :term, custom_fields_attributes: [:name, :activity_id, :field_type, :required, :options])
+    params.require(:activity).permit(:name, :logo, :start_date, :end_date, :event_start_date, :event_end_date, :term, custom_fields_attributes: [:name, :activity_id, :field_type, :description, :required])
   end
 
 
