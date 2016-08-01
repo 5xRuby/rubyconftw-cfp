@@ -70,6 +70,8 @@ GEM
       sort_alphabetical (~> 1.0)
     currencies (0.4.2)
     debug_inspector (0.0.2)
+    default_value_for (3.0.2)
+      activerecord (>= 3.2.0, < 5.1)
     devise (4.1.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -257,6 +259,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.1.0)
   country_select
+  default_value_for (>= 3.0.2)
   devise
   factory_girl_rails
   font-awesome-rails

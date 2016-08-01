@@ -1,0 +1,10 @@
+.custom-field data-id="#{cf.object.id.to_i}"
+  .well
+    = cf.hidden_field :sort_order, class: "sort-order"
+    = cf.input :name
+    = cf.input :field_type, as: :radio_buttons, collection: CustomField::ALLOWED_FIELD_TYPES_NOW
+    = cf.input :required
+    = cf.input :description
+    label
+      = cf.check_box :_destroy, class: (cf.object.new_record? ? "remove-new" : "remove-exist")
+      | Remove
