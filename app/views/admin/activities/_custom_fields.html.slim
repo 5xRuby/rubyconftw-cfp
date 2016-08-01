@@ -5,6 +5,6 @@
       = cf.input :field_type, as: :radio_buttons, collection: CustomField::ALLOWED_FIELD_TYPES_NOW
       = cf.input :required
       = cf.input :description
-    - if cf.object.persisted?
-      = cf.check_box :_destroy
-      = cf.label :_destroy, " Remove"
+      label
+        = cf.check_box :_destroy, class: (cf.object.new_record? ? "remove-new" : "remove-exist")
+        | Remove

@@ -1,15 +1,13 @@
 jQuery ->
   $("#add-field").on "click", (event) ->
     event.preventDefault()
-    ta1 =  /activity_custom_fields_attributes_\d/
-    ta2 =  /activity\[custom_fields_attributes\]\[\d/
-    ta3 = /custom_field_\d/
-    num = Math.floor(Math.random() * (1000 - 100)) + 100
-    re1 = "activity_custom_fields_attributes_" + num
-    re2 = "activity[custom_fields_attributes][" + num
-    re3 = "new_custom_field"
     form = $("#add-field").attr("data-form-content")
-    form = form.split(ta1).join(re1).split(ta2).join(re2).split(ta3).join(re3)
-    $("#input_fields_container").append(form)
+    new_num = $('.custom-field').length
+    new_form = form.replace(/\[\d+?\]/g, "[#{new_num}]" ).replace(/\_\d+?\_/g, "_#{new_num}_")
+    $("#input_fields_container").append(new_form)
+  $('#input_fields_container').on 'click', '.remove-new', ->
+    $(@).parents('.custom-field').remove()
+  $('#input_fields_container').on 'click', '.remove-exist', ->
+    $(@).parents('.custom-field').hide()
   $('input[type=submit]').on "click", ->
     $('.hidden').html("")

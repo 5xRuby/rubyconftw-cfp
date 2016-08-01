@@ -1,8 +1,2 @@
-.custom-field
-  .well
-    = f.simple_fields_for @new_custom_field do |cf|
-      = div_for cf.object do
-        = cf.input :name
-        = cf.input :field_type, as: :radio_buttons, collection: CustomField::ALLOWED_FIELD_TYPES_NOW
-        = cf.input :required
-        = cf.input :description
+= f.simple_fields_for :custom_fields, @new_custom_field do |cf|
+  = render "custom_fields", cf: cf
