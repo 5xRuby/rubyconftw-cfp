@@ -25,6 +25,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
 
   def edit
     @activity = Activity.find(params[:id])
+    @new_custom_field = CustomField.new
   end
 
   def update
@@ -45,7 +46,8 @@ class Admin::ActivitiesController < Admin::ApplicationController
   private
 
   def activity_params
-    params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :event_start_date, :event_end_date, :term)
+    params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :event_start_date, :event_end_date, :term, custom_fields_attributes: [:id, :name, :required, :description, :field_type, :_destroy, :sort_order])
+
   end
 
 
