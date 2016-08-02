@@ -9,8 +9,6 @@ class User < ActiveRecord::Base
   before_update :profile_validation
 
   def self.from_omniauth(auth)
-    logger.info auth.inspect
-    logger.info auth.info.inspect
     where(email: auth.info.email).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
