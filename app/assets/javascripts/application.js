@@ -28,11 +28,11 @@ $(document).ready(function() {
 		} else {
 			$("#btn-create-paper").addClass('disabled');
 		}
-	});	
+	});
 
 	$("#activity_start_date").attr('type','text');
 	$("#activity_end_date").attr('type','text');
-	
+
 	$("#activity_start_date").datepicker({
         numberOfMonths: 2,
         onSelect: function(selected) {
@@ -47,6 +47,6 @@ $(document).ready(function() {
            $("#activity_start_date").datepicker("option","maxDate", selected)
         },
         dateFormat: 'yy-mm-dd'
-    }); 
+    });
 
 });
