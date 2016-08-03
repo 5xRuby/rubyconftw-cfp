@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160728100228) do
+ActiveRecord::Schema.define(version: 20160802104202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,12 +55,17 @@ ActiveRecord::Schema.define(version: 20160728100228) do
     t.text     "outline"
     t.string   "speaker_avatar"
     t.string   "state"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.integer  "activity_id"
     t.integer  "user_id"
     t.string   "inviting_email"
-    t.jsonb    "answer_of_custom_fields", default: {}
+    t.jsonb    "answer_of_custom_fields",           default: {}
+    t.string   "speaker_name"
+    t.string   "speaker_company_or_org"
+    t.string   "speaker_title"
+    t.string   "speaker_country_code",    limit: 8
+    t.string   "speaker_site"
   end
 
   add_index "papers", ["activity_id"], name: "index_papers_on_activity_id", using: :btree
@@ -71,14 +76,6 @@ ActiveRecord::Schema.define(version: 20160728100228) do
     t.boolean  "is_reviewer"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "user_paper_relationships", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "paper_id"
-    t.boolean  "is_author"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

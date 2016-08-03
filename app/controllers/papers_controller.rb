@@ -1,5 +1,5 @@
 class PapersController < ApplicationController
-  before_action :set_activity, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  before_action :current_activity, if: lambda{params.has_key?(:activity_id)}
   before_action :set_paper, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!,only: [:index, :new]
   # before_action :require_current_user, only: [:show,:edit]
@@ -20,12 +20,7 @@ class PapersController < ApplicationController
 
   # GET /papers/new
   def new
-    if URI.parse(request.referrer.to_s).path != "/activities/#{@activity.id}"
-      redirect_to @activity
-
-    end
-
-    @paper = Paper.new
+    @paper = current_user.papers.new
   end
 
   # GET /papers/1/edit
@@ -36,10 +31,10 @@ class PapersController < ApplicationController
   # POST /papers.json
   def create
     @paper = @activity.papers.new(paper_params)
-    @paper.user_id = current_user.id
-    @paper.users << current_user
+    @paper.user = current_user
+    logger.info @paper.inspect
     respond_to do |format|
-      if @paper.save!
+      if @paper.save
         format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
       else
         format.html {
@@ -78,15 +73,15 @@ class PapersController < ApplicationController
       @paper = Paper.find(params[:id])
     end
 
-    def set_activity
-      @activity = Activity.find(params[:activity_id])
+    def current_activity
+      @activity ||= Activity.find(params[:activity_id])
     end
-
-
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def paper_params
-      params.require(:paper).permit(:title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email)
+      paper_params = params.require(:paper).permit(:speaker_name, :speaker_company_or_org, :speaker_title, :speaker_country_code, :speaker_site, :title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email, answer_of_custom_fields: current_activity.custom_fields.map{|x| x.id.to_s} )
+      #paper_params[:answer_of_custom_fields_attributes] = paper_params.delete(:answer_of_custom_fields)
+      paper_params.permit!
 
     end
 end

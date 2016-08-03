@@ -6,7 +6,6 @@ class Paper < ActiveRecord::Base
 	validates_presence_of :title
 	validates_presence_of :abstract
 	validates_presence_of :outline
-	#validates_presence_of :speaker_avatar
 
   enum state: Hash[ALL_STATUS.map{|x| [x,x]}]
 
@@ -24,14 +23,13 @@ class Paper < ActiveRecord::Base
     end
   end
 
-
 	belongs_to :activity, counter_cache: true
 	belongs_to :user
-
-  has_many :user_paper_relationships, dependent: :destroy
-  has_many :users, through: :user_paper_relationships
-
   after_create :notify_user
+
+  default_value_for :speaker_name do |paper|
+    paper.user.try(:name)
+  end
 
   private
 
