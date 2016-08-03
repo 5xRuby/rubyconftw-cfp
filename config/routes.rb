@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root "activities#index"
   resources :activities, only: [:index,:show] do
     resources :papers
@@ -25,5 +24,4 @@ Rails.application.routes.draw do
     get '/users/:id/designate' => "users#designate", as: 'user_designate'
     get '/users/:id/undesignate' => "users#undesignate", as: 'user_undesignate'
   end
-
 end
