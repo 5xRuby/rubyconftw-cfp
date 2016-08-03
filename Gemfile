@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'aasm'
 gem 'default_value_for', '>= 3.0.2'
-gem 'rails', '4.2.7'
+gem 'rails', '~> 5.0.0'
 gem 'pg'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails'

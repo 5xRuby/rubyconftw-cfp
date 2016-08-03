@@ -11,7 +11,9 @@
 <div class="container-body">
 	<%= flash_message %>
 	<%= yield %>
+  <%if respond_to?(:console)%>
     <%=console%>
+  <%end%>
 </div>
 </body>
 </html>
