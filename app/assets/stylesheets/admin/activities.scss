@@ -18,3 +18,11 @@ body.dragging, body.dragging * {
   z-index: 2000;
 }
 
+.radio-or-checks{
+  label{
+    margin: 0 1em 0 0;
+    input[type="radio"],input[type="checkbox"]{
+      margin: 0 4px 0 0px;
+    }
+  }
+}

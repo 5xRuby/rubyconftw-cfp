@@ -11,13 +11,11 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery-ui
 //= require bootstrap-sprockets
 //= require pagedown_bootstrap
 //= require pagedown_init
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
 
 $(document).ready(function() {

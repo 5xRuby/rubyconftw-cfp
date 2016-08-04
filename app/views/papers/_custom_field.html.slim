@@ -1,3 +1,6 @@
 li data-id="#{custom_field.id}"
-  = acf.input custom_field.id.to_s, hint: custom_field.description, required: custom_field.required, label: custom_field.name  do
+  - error_message = f.object.custom_field_errors[custom_field.id.to_s]
+  = acf.input custom_field.id.to_s, hint: custom_field.description, required: custom_field.required, label: custom_field.name, wrapper_html: {class: "#{'has-error' if error_message}"} do
     = build_custom_field_input f, custom_field
+    - if error_message
+      .help-block= error_message

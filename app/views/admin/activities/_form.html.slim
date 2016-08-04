@@ -12,5 +12,7 @@
     ul#input_fields_container
       = f.simple_fields_for :custom_fields do |cf|
           = render "custom_field", cf: cf
-    button.btn.btn-default#add-field(data-form-content="#{render(partial: "new_field", locals: {f:f, idx: rand(99999) + 1}).gsub(/\n/,"")  }") Add Field
-    = submit_tag "Save"
+    .form-group
+      a.btn.btn-default#add-field(data-form-content="#{render(partial: "new_field", locals: {f:f, idx: rand(99999) + 1}).gsub(/\n/,"")  }") Add Field
+
+    = f.submit "Save"

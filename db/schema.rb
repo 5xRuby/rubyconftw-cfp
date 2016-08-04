@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802104202) do
+ActiveRecord::Schema.define(version: 20160804073712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160802104202) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.text     "description"
+    t.string   "collection",             default: [],                 array: true
   end
 
   create_table "papers", force: :cascade do |t|
@@ -55,20 +55,23 @@ ActiveRecord::Schema.define(version: 20160802104202) do
     t.text     "outline"
     t.string   "speaker_avatar"
     t.string   "state"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.integer  "activity_id"
     t.integer  "user_id"
     t.string   "inviting_email"
-    t.jsonb    "answer_of_custom_fields",           default: {}
+    t.jsonb    "answer_of_custom_fields",            default: {}
     t.string   "speaker_name"
     t.string   "speaker_company_or_org"
     t.string   "speaker_title"
     t.string   "speaker_country_code",    limit: 8
     t.string   "speaker_site"
+    t.text     "pitch"
+    t.text     "speaker_bio"
+    t.string   "language",                limit: 32
+    t.string   "uuid",                    limit: 8
+    t.index ["activity_id"], name: "index_papers_on_activity_id", using: :btree
   end
-
-  add_index "papers", ["activity_id"], name: "index_papers_on_activity_id", using: :btree
 
   create_table "user_activity_relationships", force: :cascade do |t|
     t.integer  "user_id"
@@ -94,9 +97,8 @@ ActiveRecord::Schema.define(version: 20160802104202) do
     t.string   "provider"
     t.string   "uid"
     t.boolean  "is_admin"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "papers", "activities"
 end

@@ -1,20 +1,28 @@
 #paper-form.paper-form
   = simple_form_for [@activity, @paper], :html => { :multipart => true } do |f|
     .col-md-12
-      h3 Personal Data
-      = f.input :speaker_name
-      = f.input :speaker_company_or_org
-      = f.input :speaker_title
-      = f.input :speaker_country_code
-      = f.input :speaker_site
-      h3 Talk Details
-      = f.input :title, placeholder: "Title of the talk", hint: "Please limit your title to 60 characters or less."
-      = f.input :abstract, placeholder: "What is the talk about?", hint: "Provide a concise description for the program limited to 600 characters or less.", input_html: {rows: 5 }
-      = f.input :outline, placeholder: "Explain the theme and flow of your talk. What are the intended audience takeaways?", hint: "Include any pertinent details.", input_html: { rows: 5 }
-      h3 Custom Fields
-      ul#custom-fields
-        = f.fields_for :answer_of_custom_fields do |acf|
-          = render partial: "custom_field", collection: @activity.custom_fields, locals: {f: f, acf: acf}
-
+      .col-md-6
+        h3 Talk Details
+        = f.input :language, as: :radio_buttons, collection: Paper::ALL_LANGUAGES
+        = f.input :title
+        = f.input :abstract, input_html: {rows: 5 }
+        h3 For Review Committee
+        = f.input :outline, input_html: { rows: 5 }
+        = f.input :pitch, input_html: { rows: 5}
+      .col-md-6
+        h3 Personal Data
+        = link_to edit_user_registration_path do
+          .speaker-info.col-md-12
+            .col-md-2.speaker-pic
+              = image_tag current_user.photo.url
+            .col-md-10.speaker-text
+              h4 #{current_user.name} (#{current_user.email})
+              p edit my profile
+        = f.input :speaker_bio
+        - if @activity.custom_fields.length > 0
+          h3 Other Fields
+          ul#custom-fields
+            = f.fields_for :answer_of_custom_fields do |acf|
+              = render partial: "custom_field", collection: @activity.custom_fields, locals: {f: f, acf: acf}
     .col-md-12
       = f.submit "Submit Proposal", class: "pull-right btn btn-primary"
