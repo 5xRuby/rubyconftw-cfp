@@ -2,26 +2,42 @@
   .page-header
     h1
       = "Papers of " + @activity.name
-  table.table
-    thead
-      tr
-        th #
-        th title
-        th status
-        th user
-        th
-    tbody
-      - @papers.each do |paper|
+  = form_for :mail, url: admin_activity_mails_path(@activity) do |f|
+    table.table
+      thead
         tr
-          td
-            = paper.id
-          td
-            = paper.title
-          td
-            = paper.state
-          td
-            = paper.user.name
-          td
-            = link_to "show", admin_activity_paper_path(@activity,paper), class: "btn btn-primary"
-            = admin_reviewed_button(paper)
-  = link_to "Back", admin_activity_path(@activity), class: "btn btn-default"
+          th
+          th #
+          th title
+          th status
+          th user
+          th
+      tbody
+        - @papers.each do |paper|
+          tr
+            td
+              div.checkbox
+                label
+                  = check_box_tag "mail[ids][]", paper.user.id, false
+            td
+              = paper.id
+            td
+              = paper.title
+            td
+              = paper.state
+            td
+              = paper.user.name
+            td
+              = link_to "show", admin_activity_paper_path(@activity,paper), class: "btn btn-primary"
+              = admin_reviewed_button(paper)
+    = link_to "Back", admin_activity_path(@activity), class: "btn btn-default"
+
+    div
+      hr
+      h3 Notice Mail
+      p
+        = f.text_field :subject, class: "form-control"
+      p
+        = f.text_area :content, rows: 12, class: "form-control"
+      p
+        = f.submit "Send", class: "btn btn-default"
