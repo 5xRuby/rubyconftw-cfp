@@ -45,5 +45,5 @@
       span.label.label-info.paper-state-label
         = @paper.state
       span.label.label-warning.paper-review-count-label
-        = "#{@paper.reviews.size} Reviewed"
+        = "#{@paper.try(:reviews, []).size} Reviewed"
 
