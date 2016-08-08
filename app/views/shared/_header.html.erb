@@ -13,7 +13,7 @@
         <% if user_signed_in? && current_user.is_admin %>
           <li><%= link_to 'activities managment', admin_activities_path%></li>
           <li><%= link_to 'admin managment', admin_users_path %></li>
-          <li><%= link_to 'Review Papers', admin_users_path %></li>
+          <li><%= link_to 'Review Papers', admin_activity_papers_path(Activity.recent.first) %></li>
         <% end %>
 
       </ul>

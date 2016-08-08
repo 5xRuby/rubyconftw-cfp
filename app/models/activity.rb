@@ -7,6 +7,8 @@ class Activity < ApplicationRecord
   accepts_nested_attributes_for :custom_fields, allow_destroy: true
   mount_uploader :logo, LogoUploader
 
+  scope :recent, -> { order(created_at: :desc) }
+
   def status
     self.end_date > Time.now ? "open" : "closed"
   end
