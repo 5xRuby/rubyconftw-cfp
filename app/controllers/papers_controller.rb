@@ -1,29 +1,26 @@
 class PapersController < ApplicationController
-  before_action :set_activity, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  before_action :current_activity, if: lambda{params.has_key?(:activity_id)}
   before_action :set_paper, only: [:show, :edit, :update, :destroy]
-  # before_action :authenticate_user!,only: [:index, :new]
+  before_action :authenticate_user!,only: [:index, :new]
   # before_action :require_current_user, only: [:show,:edit]
 
 
   # GET /papers
   # GET /papers.json
   def index
-    # @papers = @activity.papers.where(user_id: current_user.id)
+     @papers = @activity.papers.where(user_id: current_user.id)
   end
 
   # GET /papers/1
   # GET /papers/1.json
   def show
+    @user = @paper.user
+    @invited_user = User.find_by_email(@paper.inviting_email)
   end
 
   # GET /papers/new
   def new
-    if URI.parse(request.referrer.to_s).path != "/activities/#{@activity.id}"
-      redirect_to @activity
-
-    end
-
-    @paper = Paper.new
+    @paper = current_user.papers.new
   end
 
   # GET /papers/1/edit
@@ -34,20 +31,14 @@ class PapersController < ApplicationController
   # POST /papers.json
   def create
     @paper = @activity.papers.new(paper_params)
-    @paper.user_id = current_user.id
-    @paper.users << current_user
-
-   
-
+    @paper.user = current_user
+    logger.info @paper.inspect
     respond_to do |format|
       if @paper.save
-          PapersMailer.sent_cfp_email.deliver_now!
-          format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
+        format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
       else
-        format.html { render :new}
-        # unless @paper.exist?(@paper.inviting_email)
-        #   flash[:notice]
-        # end
+        format.html {
+          render :new}
       end
     end
   end
@@ -69,7 +60,7 @@ class PapersController < ApplicationController
   # DELETE /papers/1
   # DELETE /papers/1.json
   def destroy
-    @paper.destroy
+    @paper.withdraw!
     respond_to do |format|
       format.html { redirect_to activity_papers_path(@activity), notice: 'Paper was successfully destroyed.' }
       format.json { head :no_content }
@@ -82,21 +73,14 @@ class PapersController < ApplicationController
       @paper = Paper.find(params[:id])
     end
 
-    def set_activity
-      @activity = Activity.find(params[:activity_id])  
+    def current_activity
+      @activity ||= Activity.find(params[:activity_id])
     end
-
-
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def paper_params
-      params.require(:paper).permit(:title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email)
-      
-    end
+      paper_params = params.require(:paper).permit(:language, :pitch, :speaker_bio, :title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email, answer_of_custom_fields: current_activity.custom_fields.map{|x| x.id.to_s} )
+      paper_params.permit!
 
-
-    
-    def require_current_user
-      # redirect_to activity_papers_path(@activity) if current_user  != Paper.find(params[:id]).user
     end
 end

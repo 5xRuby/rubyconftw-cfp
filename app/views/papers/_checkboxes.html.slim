@@ -1,0 +1,5 @@
+.radio-or-checks
+  - custom_field.collection.each do |opt|
+    label
+      = check_box_tag value_field_name, opt
+      = opt

@@ -1,0 +1,46 @@
+.container.paper-show
+  .col-md-12
+    .col-md-8.title-part
+      h3
+        = link_to @activity.name, activity_path(@activity)
+        | , #{time_tag @activity.event_end_date}
+      h1
+        = @paper.title
+    .col-md-4.edit-part
+      = link_to edit_activity_paper_path(@activity, @paper), class:"btn btn-primary" do
+        span.fa.fa-pencil-square-o
+        | Edit
+      - unless @paper.withdrawn?
+        = link_to activity_paper_path(@activity,@paper), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning" do
+          span.fa.fa-exclamation-circle
+          | Withdraw Proposal
+      p
+        | CFP close: #{time_tag @activity.end_date}
+  .col-md-6.paper-part
+    h3 Speaker
+    .col-md-12.speaker-info
+      .speaker-pic.col-md-3
+        = image_tag @user.photo.url
+      .col-md-9
+        p
+          | #{@user.name} (#{@user.email})
+    h3 Bio
+    p = @paper.speaker_bio
+    h3 Language
+    p = @paper.language
+    h3 Title
+    p
+      = @paper.title
+    h3 Abstract
+    p
+      = @paper.abstract
+    h3 Outline
+    p
+      = @paper.outline
+    h3 Pitch
+    p = @paper.pitch
+  .col-md-6.review-part
+    h3 State
+    p
+      span.label.label-info.paper-state-label
+        = @paper.state

@@ -1,0 +1,27 @@
+.col-md-8.col-md-offset-2
+  p#notice
+    = notice
+
+  h1 Listing Papers
+
+  - @papers.each do |paper|
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title
+          = paper.id
+      table.table
+        thead
+          tr
+            th Title
+            th Status
+            th Actions
+        tbody
+          tr
+            td
+              = link_to paper.title, [@activity, paper]
+            td
+              = paper.state
+            td
+              = link_to 'Edit', edit_activity_paper_path(@activity, paper), class: "btn btn-default"
+              = link_to 'Withdraw', activity_paper_path(@activity,paper), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"
+  = link_to 'New Paper', new_activity_paper_path(@activity), class: "btn btn-primary"

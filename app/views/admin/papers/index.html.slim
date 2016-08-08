@@ -1,0 +1,26 @@
+.col-md-8.col-md-offset-2
+  .page-header
+    h1
+      = "Papers of " + @activity.name
+  table.table
+    thead
+      tr
+        th #
+        th title
+        th status
+        th user
+        th
+    tbody
+      - @papers.each do |paper|
+        tr
+          td
+            = paper.id
+          td
+            = paper.title
+          td
+            = paper.state
+          td
+            = paper.user.name
+          td
+            = link_to "show", admin_activity_paper_path(@activity,paper)
+  = link_to "Back", admin_activity_path(@activity), class: "btn btn-default"

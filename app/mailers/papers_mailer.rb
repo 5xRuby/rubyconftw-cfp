@@ -1,21 +1,9 @@
 class PapersMailer < ApplicationMailer
+  default from: Settings.mailer.default_from
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.papers_mailer.sent_cfp_email.subject
-  #
-  def sent_cfp_email
-    @greeting = "Hi"
-
-    mail to: "cfptestgogo@gmail.com"
+  def notification_after_create(paper_id)
+    @paper = Paper.find(paper_id)
+    mail to: @paper.user.email, subject: "Your proposals is confirmed"
   end
-
-  def send_inviting_email(paper)
-    @paper = paper
-    @user = paper.users.first
-    @activity = paper.activity
-
-    mail to: paper.inviting_email, subject: "[#{@activity.name}] #{@user.firstname} #{@user.lastname} invited you to be co-presenter on cfp"
-  end
+  
 end

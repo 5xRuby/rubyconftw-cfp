@@ -1,3 +1,69 @@
-// Place all the styles related to the Papers controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.paper-show{
+  padding-bottom: 40px;
+  .title-part{
+    margin: 40px 0;
+  }
+  .edit-part{
+    margin: 40px 0;
+    a{
+      margin-right: 5px;
+    }
+    p{
+      margin-top: 10px;
+    }
+  }
+  .speaker-info{
+    margin: 20px 0;
+    .speaker-pic{
+      padding: 0;
+      img{
+        width: 100%;
+      }
+    }
+  }
+  .invite-part{
+    .invite-btn{
+      margin-left: 5px;
+    }
+  }
+  .review-part{
+    .paper-state-label{
+      margin-left: 5px;
+    }
+  }
+}
+.paper-new, .paper-edit{
+  margin-bottom: 40px;
+  h1{
+    margin-left: 30px;
+  }
+}
+.paper-form{
+  #custom-fields{
+    list-style: none;
+    padding-left: 0;
+  }
+  .radio_buttons{
+    .radio{
+      display: inline;
+      margin-left: 1em;
+    }
+  }
+  .speaker-info{
+    margin: 10px 0;
+   .speaker-pic{
+     padding: 0;
+    img{
+      width: 100%;
+    }
+   }
+   .speaker-text{
+     h4{
+       color: #000;
+     }
+     p{
+       color: #999;
+     }
+   }
+  }
+}

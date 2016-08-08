@@ -1,3 +1,28 @@
-// Place all the styles related to the admin/activities controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.hidden{
+  display: none;
+}
+ul#input_fields_container{
+  list-style: none;
+  padding-left: 0;
+  li.placeholder{
+    position: relative;
+    &:before{position: absolute;}
+  }
+}
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+.radio-or-checks{
+  label{
+    margin: 0 1em 0 0;
+    input[type="radio"],input[type="checkbox"]{
+      margin: 0 4px 0 0px;
+    }
+  }
+}
