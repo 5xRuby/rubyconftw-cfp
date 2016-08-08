@@ -20,6 +20,8 @@ class Paper < ApplicationRecord
 	belongs_to :activity, counter_cache: true
 	belongs_to :user
 
+  has_many :reviews
+
   aasm(column: :state) do
     state :submitted , initial: true
     state *(ALL_STATUS[1..-1].map(&:to_sym))
@@ -53,6 +55,10 @@ class Paper < ApplicationRecord
 
   def custom_field_errors
     @custom_field_errors ||= {}
+  end
+
+  def reviewed_by?(user)
+    reviews.pluck(:user_id).include?(user.id)
   end
 
   private

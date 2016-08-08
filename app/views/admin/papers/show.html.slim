@@ -29,3 +29,4 @@
         td
           = @paper.user.name
   = link_to "Back", admin_activity_papers_path(@activity), class: "btn btn-default"
+  = admin_reviewed_button(@paper)

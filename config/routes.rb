@@ -20,6 +20,9 @@ Rails.application.routes.draw do
       resources :reviewers, only: [:index,:new,:create,:destroy]
       resources :papers, only: [:index, :show]
     end
+    resources :papers, only: [] do
+      resources :reviews, only: [:create]
+    end
     get '/users' => "users#index"
     get '/users/:id/designate' => "users#designate", as: 'user_designate'
     get '/users/:id/undesignate' => "users#undesignate", as: 'user_undesignate'

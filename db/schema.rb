@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804073712) do
+ActiveRecord::Schema.define(version: 20160808041700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,18 @@ ActiveRecord::Schema.define(version: 20160804073712) do
     t.text     "speaker_bio"
     t.string   "language",                limit: 32
     t.string   "uuid",                    limit: 8
+    t.integer  "reviews_count"
     t.index ["activity_id"], name: "index_papers_on_activity_id", using: :btree
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "paper_id"
+    t.boolean  "reviewed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["paper_id"], name: "index_reviews_on_paper_id", using: :btree
+    t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end
 
   create_table "user_activity_relationships", force: :cascade do |t|
