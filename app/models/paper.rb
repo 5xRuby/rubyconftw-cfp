@@ -57,6 +57,10 @@ class Paper < ApplicationRecord
     @custom_field_errors ||= {}
   end
 
+  def reviewed_by?(user)
+    reviews.pluck(:user_id).include?(user.id)
+  end
+
   private
 
   def notify_user
