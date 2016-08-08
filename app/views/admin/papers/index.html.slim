@@ -2,7 +2,7 @@
   .page-header
     h1
       = "Papers of " + @activity.name
-  = form_for :mail, url: admin_activity_mails_path(@activity) do |f|
+  = form_for @notification, url: admin_activity_papers_path(@activity) do |f|
     table.table
       thead
         tr

@@ -18,8 +18,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :activities do
       resources :reviewers, only: [:index,:new,:create,:destroy]
-      resources :papers, only: [:index, :show]
-      resources :mails, only: [:create]
+      resources :papers, only: [:index, :show, :create]
     end
     resources :papers, only: [] do
       resources :reviews, only: [:create]
