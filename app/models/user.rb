@@ -3,6 +3,7 @@ class User < ApplicationRecord
   devise :database_authenticatable
   devise :omniauthable, :omniauth_providers => [:github,:twitter]
   has_many :papers
+  has_many :reviews
   has_many :activities, through: :user_activity_relationships
   before_update :profile_validation
 

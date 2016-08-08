@@ -20,6 +20,8 @@ class Paper < ApplicationRecord
 	belongs_to :activity, counter_cache: true
 	belongs_to :user
 
+  has_many :reviews
+
   aasm(column: :state) do
     state :submitted , initial: true
     state *(ALL_STATUS[1..-1].map(&:to_sym))
