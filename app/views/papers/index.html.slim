@@ -24,4 +24,5 @@
             td
               = link_to 'Edit', edit_activity_paper_path(@activity, paper), class: "btn btn-default"
               = link_to 'Withdraw', activity_paper_path(@activity,paper), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"
-  = link_to 'New Paper', new_activity_paper_path(@activity), class: "btn btn-primary"
+  - if @activity.open?
+    = link_to t('button.new_paper'), new_activity_paper_path(@activity), class: "btn btn-primary"

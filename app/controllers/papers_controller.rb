@@ -1,6 +1,7 @@
 class PapersController < ApplicationController
+  before_action :check_activity_valid_for_submit?, only: [:new, :create]
   before_action :current_activity, if: lambda{params.has_key?(:activity_id)}
-  before_action :set_paper, only: [:show, :edit, :update, :destroy]
+  before_action :current_paper, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!,only: [:index, :new]
   # before_action :require_current_user, only: [:show,:edit]
 
@@ -68,9 +69,17 @@ class PapersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_paper
-      @paper = Paper.find(params[:id])
+
+    def current_paper
+      @paper ||= Paper.find(params[:id])
+    end
+
+    def check_activity_valid_for_submit?
+      unless current_activity.open?
+        flash[:warning] = t('flash.cfp_not_open_yet')
+        redirect_back fallback_location: root_path
+        false
+      end
     end
 
     def current_activity
