@@ -1,6 +1,6 @@
-class Paper < ActiveRecord::Base
+class Paper < ApplicationRecord
   include AASM
-  ALL_STATUS = %w{submitted reviewed accepted rejected}
+  ALL_STATUS = %w{submitted reviewed accepted rejected withdrawn}
   ALL_LANGUAGES = %w{Chinese English}
 
   attr_writer :custom_field_errors
@@ -12,7 +12,7 @@ class Paper < ActiveRecord::Base
 	validates_presence_of :abstract
 	validates_presence_of :outline
   validate :validate_custom_fields
-  validates_presence_of :speaker_bio
+  validates_presence_of :speaker_bio, :language
 
   enum state: Hash[ALL_STATUS.map{|x| [x,x]}]
   enum language: Hash[ALL_LANGUAGES.map{|x| [x,x]}]
@@ -31,6 +31,9 @@ class Paper < ActiveRecord::Base
     end
     event :reject do
       transitions from: :reviewed, to: :rejected
+    end
+    event :withdraw do
+      transitions to: :withdrawn
     end
   end
 

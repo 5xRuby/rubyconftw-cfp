@@ -13,25 +13,15 @@
         thead
           tr
             th Title
-            th Abstract
-            th Outline
-            th Filename
             th Status
-            th
+            th Actions
         tbody
           tr
             td
-              = paper.title
-            td
-              = paper.abstract
-            td
-              = paper.outline
-            td
-              = paper.speaker_avatar
+              = link_to paper.title, [@activity, paper]
             td
               = paper.state
             td
-              = link_to 'Show Details', activity_paper_path(@activity,paper), class: "btn btn-default"
               = link_to 'Edit', edit_activity_paper_path(@activity, paper), class: "btn btn-default"
-              = link_to 'Destroy', activity_paper_path(@activity,paper), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"
+              = link_to 'Withdraw', activity_paper_path(@activity,paper), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"
   = link_to 'New Paper', new_activity_paper_path(@activity), class: "btn btn-primary"

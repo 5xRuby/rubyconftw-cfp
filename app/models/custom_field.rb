@@ -1,4 +1,4 @@
-class CustomField < ActiveRecord::Base
+class CustomField < ApplicationRecord
   belongs_to :activity
 
   FIELD_TYPES = %w{text textarea number checkboxes select radios}

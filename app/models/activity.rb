@@ -1,4 +1,4 @@
-class Activity < ActiveRecord::Base
+class Activity < ApplicationRecord
 	has_many :categories, dependent: :destroy
 	has_many :papers, dependent: :destroy
 	has_many :user_activity_relationships, dependent: :destroy

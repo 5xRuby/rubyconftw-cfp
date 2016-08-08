@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   mount_uploader :photo, PhotoUploader
   devise :database_authenticatable
   devise :omniauthable, :omniauth_providers => [:github,:twitter]

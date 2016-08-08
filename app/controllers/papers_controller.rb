@@ -60,7 +60,7 @@ class PapersController < ApplicationController
   # DELETE /papers/1
   # DELETE /papers/1.json
   def destroy
-    @paper.destroy
+    @paper.withdraw!
     respond_to do |format|
       format.html { redirect_to activity_papers_path(@activity), notice: 'Paper was successfully destroyed.' }
       format.json { head :no_content }
@@ -79,7 +79,7 @@ class PapersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def paper_params
-      paper_params = params.require(:paper).permit(:pitch, :speaker_bio, :title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email, answer_of_custom_fields: current_activity.custom_fields.map{|x| x.id.to_s} )
+      paper_params = params.require(:paper).permit(:language, :pitch, :speaker_bio, :title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email, answer_of_custom_fields: current_activity.custom_fields.map{|x| x.id.to_s} )
       paper_params.permit!
 
     end
