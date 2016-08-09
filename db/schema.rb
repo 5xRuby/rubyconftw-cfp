@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808084447) do
+ActiveRecord::Schema.define(version: 20160809085417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20160808084447) do
     t.string   "uuid",                    limit: 8
     t.integer  "reviews_count",                      default: 0
     t.index ["activity_id"], name: "index_papers_on_activity_id", using: :btree
+    t.index ["uuid"], name: "index_papers_on_uuid", using: :btree
   end
 
   create_table "reviews", force: :cascade do |t|

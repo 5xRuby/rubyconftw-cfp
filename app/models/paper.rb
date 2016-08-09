@@ -49,7 +49,7 @@ class Paper < ApplicationRecord
     SecureRandom.hex(4)
   end
 
-  def to_params
+  def to_param
     uuid
   end
 

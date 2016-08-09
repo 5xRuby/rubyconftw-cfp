@@ -73,7 +73,7 @@ class PapersController < ApplicationController
   private
 
     def current_paper
-      @paper ||= Paper.find(params[:id])
+      @paper ||= Paper.find_by(uuid: params[:id])
     end
 
     def check_activity_valid_for_submit?

@@ -27,6 +27,6 @@ class Admin::ReviewsController < Admin::ApplicationController
 
   protected
   def current_paper
-    @paper = Paper.find(params[:paper_id])
+    @paper = Paper.find_by(uuid: params[:paper_id])
   end
 end
