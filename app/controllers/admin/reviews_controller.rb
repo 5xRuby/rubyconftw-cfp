@@ -1,4 +1,4 @@
-class Admin::ReviewsController < ApplicationController
+class Admin::ReviewsController < Admin::ApplicationController
   before_action :current_paper, if: -> { params.has_key?(:paper_id) }
 
   def create
