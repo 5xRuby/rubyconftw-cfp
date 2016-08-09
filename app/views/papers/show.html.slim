@@ -3,7 +3,7 @@
     .col-md-8.title-part
       h3
         = link_to @activity.name, activity_path(@activity)
-        | , #{time_tag @activity.event_end_date}
+        | , #{time_tag @activity.end_date}
       h1
         = @paper.title
     .col-md-4.edit-part
@@ -15,7 +15,7 @@
           span.fa.fa-exclamation-circle
           | Withdraw Proposal
       p
-        | CFP close: #{time_tag @activity.end_date}
+        | CFP close: #{time_tag @activity.close_at}
   .col-md-6.paper-part
     h3 Speaker
     .col-md-12.speaker-info
@@ -44,3 +44,6 @@
     p
       span.label.label-info.paper-state-label
         = @paper.state
+      span.label.label-warning.paper-review-count-label
+        = "#{@paper.try(:reviews, []).size} Reviewed"
+

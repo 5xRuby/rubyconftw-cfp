@@ -1,5 +1,9 @@
 jQuery ->
   if $('.edit_activity,.new_activity').length > 0
+    $('.dpicker').datetimepicker
+      format: "YYYY-MM-DD"
+    $('.dtpicker').datetimepicker
+      format: "YYYY-MM-DD hh:mm"
     $("#add-field").on "click", (event) ->
       event.preventDefault()
       form = $("#add-field").attr("data-form-content")

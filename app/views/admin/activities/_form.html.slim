@@ -3,10 +3,10 @@
     = f.input :name
     = f.input :logo
     = f.input :description
-    = f.input :start_date, as: :date
-    = f.input :end_date, as: :date
-    = f.input :event_start_date, as: :date
-    = f.input :event_end_date, as: :date
+    = f.input :start_date, as: :string, input_html: {class: "dpicker"}
+    = f.input :end_date, as: :string, input_html: {class: "dpicker"}
+    = f.input :open_at, as: :string, input_html: {class: "dtpicker"}
+    = f.input :close_at, as: :string, input_html: {class: "dtpicker"}
     = f.input :term
     h3 Input Fields
     ul#input_fields_container

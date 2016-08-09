@@ -11,7 +11,7 @@
     <%= f.input :title %>
     <%= f.input :company %>
     <%= f.input :country, as: :country %>
-    <%= image_tag(resource.photo) if resource.photo.present? %>
+    <%= image_tag(resource.photo.small) if resource.photo.present? %>
     <%= f.input :photo, as: :file %>
     <%= f.button :submit%>
   <% end %>

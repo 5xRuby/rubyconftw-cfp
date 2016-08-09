@@ -20,6 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  button:
+    new_paper: "New Proposal"
+  flash:
+    cfp_not_open_yet: "The event has not opened yet or already closed!"
   simple_form:
     labels:
       paper:

@@ -1,14 +1,14 @@
 class PapersController < ApplicationController
+  before_action :check_activity_valid_for_submit?, only: [:new, :create]
   before_action :current_activity, if: lambda{params.has_key?(:activity_id)}
-  before_action :set_paper, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!,only: [:index, :new]
+  before_action :authenticate_user!
   # before_action :require_current_user, only: [:show,:edit]
-
+  load_and_authorize_resource find_by: :uuid
 
   # GET /papers
   # GET /papers.json
   def index
-     @papers = @activity.papers.where(user_id: current_user.id)
+    @papers = @activity.papers.where(user_id: current_user.id)
   end
 
   # GET /papers/1
@@ -68,19 +68,23 @@ class PapersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_paper
-      @paper = Paper.find(params[:id])
-    end
 
-    def current_activity
-      @activity ||= Activity.find(params[:activity_id])
+  def check_activity_valid_for_submit?
+    unless current_activity.open?
+      flash[:warning] = t('flash.cfp_not_open_yet')
+      redirect_back fallback_location: root_path
+      false
     end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def paper_params
-      paper_params = params.require(:paper).permit(:language, :pitch, :speaker_bio, :title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email, answer_of_custom_fields: current_activity.custom_fields.map{|x| x.id.to_s} )
-      paper_params.permit!
+  def current_activity
+    @activity ||= Activity.find(params[:activity_id])
+  end
 
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def paper_params
+    paper_params = params.require(:paper).permit(:language, :pitch, :speaker_bio, :title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email, answer_of_custom_fields: current_activity.custom_fields.map{|x| x.id.to_s} )
+    paper_params.permit!
+
+  end
 end
