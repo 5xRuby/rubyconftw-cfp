@@ -4,5 +4,5 @@ class Review < ApplicationRecord
 
   validates :paper, uniqueness: { scope: :user }
 
-  after_create -> { paper.update_attributes!(state: :reviewed) }
+  after_create -> { paper.view! }
 end
