@@ -10,8 +10,11 @@ class Admin::PapersController < ApplicationController
   end
 
   def create
-    @notification = Notification.new(mail_params)
-    redirect_to admin_activity_papers_path(@activity) if @notification.valid?
+    @notification = Notification.new(mail_params.permit(:subject, :content))
+    if @notification.valid?
+      send_mails(@notification)
+      return redirect_to admin_activity_papers_path(@activity), notice: "Mail already sent"
+    end
     @papers = @activity.papers
     render "index"
   end
@@ -30,7 +33,7 @@ class Admin::PapersController < ApplicationController
   end
 
   def receivers(ids)
-    User.find(ids.uniq).pluck(:email)
+    User.find(ids || []).pluck(:email)
   end
 
   def send_mails(notification)
