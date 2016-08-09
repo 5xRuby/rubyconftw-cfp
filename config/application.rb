@@ -25,5 +25,6 @@ module CfpSystem
     }
 
     config.active_job.queue_adapter = :sidekiq
+    config.time_zone = 'Asia/Taipei'
   end
 end
