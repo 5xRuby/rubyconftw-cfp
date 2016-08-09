@@ -22,5 +22,7 @@ module CfpSystem
       html_tag <<  %(<span class="help-block">#{error_message}</span>).html_safe
       %(<div class="form-group has-error">#{html_tag}</div>).html_safe
     }
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

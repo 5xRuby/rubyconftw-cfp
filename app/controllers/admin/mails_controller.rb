@@ -24,7 +24,7 @@ class Admin::MailsController < ApplicationController
 
   def send_mails(notification)
     receivers(mail_params[:ids]).each do |email|
-      NotificationMailer.notice(email, notification, {activity: @activity}).deliver_now
+      NotificationMailer.notice(email, notification, {activity: @activity}).deliver_later
     end
   end
 end
