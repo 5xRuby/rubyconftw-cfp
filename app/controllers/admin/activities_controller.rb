@@ -10,16 +10,14 @@ class Admin::ActivitiesController < Admin::ApplicationController
 
   def new
     @activity = Activity.new
-    @category = Category.new
   end
 
   def create
     @activity = Activity.new(activity_params)
-    @category = Category.new
     if @activity.save
-      render :new
+      redirect_to admin_activities_path, notice: "成功新增活動"
     else
-      render :new
+      render :new, alert: @activity.errors.full_messages
     end
 
   end
