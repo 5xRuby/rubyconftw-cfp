@@ -2,7 +2,7 @@ class PapersController < ApplicationController
   before_action :check_activity_valid_for_submit?, only: [:new, :create]
   before_action :current_activity, if: lambda{params.has_key?(:activity_id)}
   before_action :current_paper, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!,only: [:index, :new]
+  before_action :authenticate_user!
   # before_action :require_current_user, only: [:show,:edit]
 
 

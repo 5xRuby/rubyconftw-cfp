@@ -1,4 +1,5 @@
 class Admin::ActivitiesController < Admin::ApplicationController
+
   def index
     @activities = Activity.all
   end
