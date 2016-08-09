@@ -7,6 +7,7 @@ class Notification
   validates :content, presence: true
 
   def html_content
+    return markdown(yield content) if block_given?
     markdown(content)
   end
 
