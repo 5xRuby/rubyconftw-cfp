@@ -11,6 +11,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
   def new
     @activity = Activity.new
     @category = Category.new
+    @new_custom_field = CustomField.new
   end
 
   def create
