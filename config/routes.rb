@@ -3,9 +3,6 @@ Rails.application.routes.draw do
   resources :activities, only: [:index,:show] do
     resources :papers
     resources :categories
-    get '/reviews' => 'reviews#index', as: 'reviews'
-    get '/reviews/:id' => 'reviews#review', as: 'review'
-    get '/reviews/:id/reviewed' => 'reviews#reviewed', as: 'reviewed'
   end
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -22,6 +19,8 @@ Rails.application.routes.draw do
     end
     resources :papers, only: [] do
       resources :reviews, only: [:create]
+      post 'accept' => "reviews#accept"
+      post 'reject' => "reviews#reject"
     end
     get '/users' => "users#index"
     get '/users/:id/designate' => "users#designate", as: 'user_designate'

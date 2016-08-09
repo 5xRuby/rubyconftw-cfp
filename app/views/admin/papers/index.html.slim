@@ -22,6 +22,9 @@
           td
             = paper.user.name
           td
-            = link_to "show", admin_activity_paper_path(@activity,paper), class: "btn btn-primary"
-            = admin_reviewed_button(paper)
+            .btn-group
+              = link_to "show", admin_activity_paper_path(@activity,paper), class: "btn btn-primary"
+              = admin_review_button(paper)
+              = admin_accept_button(paper)
+              = admin_reject_button(paper)
   = link_to "Back", admin_activity_path(@activity), class: "btn btn-default"
