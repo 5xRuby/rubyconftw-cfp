@@ -5,6 +5,8 @@ class PapersController < ApplicationController
   before_action :authenticate_user!
   # before_action :require_current_user, only: [:show,:edit]
 
+  load_and_authorize_resource
+
 
   # GET /papers
   # GET /papers.json
@@ -71,7 +73,7 @@ class PapersController < ApplicationController
   private
 
     def current_paper
-      @paper ||= Paper.find(params[:id])
+      @paper ||= Paper.find_by(uuid: params[:id])
     end
 
     def check_activity_valid_for_submit?
