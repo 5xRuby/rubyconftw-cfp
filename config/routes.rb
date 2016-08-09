@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     end
     resources :papers, only: [] do
       resources :reviews, only: [:create]
+      post 'accept' => "reviews#accept"
+      post 'reject' => "reviews#reject"
     end
     get '/users' => "users#index"
     get '/users/:id/designate' => "users#designate", as: 'user_designate'
