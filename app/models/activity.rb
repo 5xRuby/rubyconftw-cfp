@@ -7,17 +7,18 @@ class Activity < ApplicationRecord
   has_many :reviews, through: :papers
   accepts_nested_attributes_for :custom_fields, allow_destroy: true
   mount_uploader :logo, LogoUploader
-
   scope :recent, -> { order(created_at: :desc) }
 
   def status
     self.end_date > Time.now ? "open" : "closed"
   end
-  def open?
-    activity.end_date > Time.now
-  end
 
   def review_by(user)
     reviews.where(user: user)
   end
+
+  def open?(t=Time.now)
+    t >= open_at && t <= close_at
+  end
+
 end

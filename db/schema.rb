@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808041700) do
+ActiveRecord::Schema.define(version: 20160808084447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,14 +19,14 @@ ActiveRecord::Schema.define(version: 20160808041700) do
     t.string   "name"
     t.string   "description"
     t.string   "logo"
-    t.date     "start_date"
-    t.date     "end_date"
     t.text     "term"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "papers_count",     default: 0
-    t.date     "event_start_date"
-    t.date     "event_end_date"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "papers_count", default: 0
+    t.datetime "open_at"
+    t.datetime "close_at"
+    t.datetime "start_at"
+    t.datetime "end_at"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20160808041700) do
     t.text     "speaker_bio"
     t.string   "language",                limit: 32
     t.string   "uuid",                    limit: 8
-    t.integer  "reviews_count"
+    t.integer  "reviews_count",                      default: 0
     t.index ["activity_id"], name: "index_papers_on_activity_id", using: :btree
   end
 
