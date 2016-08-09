@@ -1,6 +1,7 @@
 class Admin::MailsController < ApplicationController
 
   before_action -> { @activity = Activity.find(params[:activity_id]) }
+  before_action :authenticate_user!
 
   def create
     @notification = Notification.new(mail_params.permit(:subject, :content))
