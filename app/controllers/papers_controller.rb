@@ -2,8 +2,10 @@ class PapersController < ApplicationController
   before_action :check_activity_valid_for_submit?, only: [:new, :create]
   before_action :current_activity, if: lambda{params.has_key?(:activity_id)}
   before_action :current_paper, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!,only: [:index, :new]
+  before_action :authenticate_user!
   # before_action :require_current_user, only: [:show,:edit]
+
+  load_and_authorize_resource
 
 
   # GET /papers
@@ -71,7 +73,7 @@ class PapersController < ApplicationController
   private
 
     def current_paper
-      @paper ||= Paper.find(params[:id])
+      @paper ||= Paper.find_by(uuid: params[:id])
     end
 
     def check_activity_valid_for_submit?

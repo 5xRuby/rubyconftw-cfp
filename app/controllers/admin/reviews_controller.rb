@@ -1,4 +1,4 @@
-class Admin::ReviewsController < ApplicationController
+class Admin::ReviewsController < Admin::ApplicationController
   before_action :current_paper, if: -> { params.has_key?(:paper_id) }
 
   def create
@@ -27,6 +27,6 @@ class Admin::ReviewsController < ApplicationController
 
   protected
   def current_paper
-    @paper = Paper.find(params[:paper_id])
+    @paper = Paper.find_by(uuid: params[:paper_id])
   end
 end

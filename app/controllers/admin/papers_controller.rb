@@ -15,7 +15,7 @@ class Admin::PapersController < ApplicationController
   end
 
   def set_paper
-    @paper = @activity.papers.find(params[:id])
+    @paper = @activity.papers.find_by(uuid: params[:id])
   end
 
 end
