@@ -24,6 +24,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'sidekiq'
+gem 'redcarpet'
 
 
 group :development, :test do
