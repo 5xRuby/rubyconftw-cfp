@@ -258,7 +258,6 @@ GEM
       tilt (>= 1.3.3, < 2.1)
     sort_alphabetical (1.0.2)
       unicode_utils (>= 1.2.2)
-    spring (1.7.2)
     sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -328,7 +327,6 @@ DEPENDENCIES
   sidekiq
   simple_form
   slim
-  spring
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
 

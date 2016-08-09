@@ -39,7 +39,6 @@ group :development do
   gem 'capistrano', '~> 3.1'
   gem 'capistrano-rails', '~> 1.1'
   gem 'web-console', '~> 2.0'
-  gem 'spring'
   gem 'passenger'
 end
 
