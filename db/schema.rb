@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20160808084447) do
     t.text     "speaker_bio"
     t.string   "language",                limit: 32
     t.string   "uuid",                    limit: 8
-    t.integer  "reviews_count"
+    t.integer  "reviews_count",                      default: 0
     t.index ["activity_id"], name: "index_papers_on_activity_id", using: :btree
   end
 
