@@ -5,6 +5,8 @@ class PapersController < ApplicationController
   before_action :authenticate_user!
   # before_action :require_current_user, only: [:show,:edit]
 
+  load_and_authorize_resource
+
 
   # GET /papers
   # GET /papers.json
