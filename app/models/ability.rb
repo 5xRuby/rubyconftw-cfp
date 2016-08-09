@@ -6,6 +6,10 @@ class Ability
     user ||= User.new
 
     can :manage, Paper, user_id: user.id
+
+    can :read, User
+    can :edit, User, id: user.id
+
     can :read, Activity
 
     if user.is_admin?
