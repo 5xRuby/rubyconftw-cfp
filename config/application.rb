@@ -13,6 +13,7 @@ module CfpSystem
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    config.time_zone = "Asia/Taipei"
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       if instance.error_message.kind_of?(Array)
         error_message = instance.error_message.join("<br />")
