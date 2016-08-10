@@ -5,29 +5,36 @@
   table.table
     tbody
       tr
+        th language
+        td = @paper.language
+      tr
         th title
-        td
-          = @paper.title
+        td = @paper.title
       tr
         th abstract
-        td
-          = @paper.abstract
+        td = @paper.abstract
       tr
         th outline
-        td
-          = @paper.outline
+        td = @paper.outline
       tr
-        th file
-        td
-          = link_to "file", @paper.speaker_avatar.url
+        th pitch
+        td = @paper.pitch
+      - @paper.answer_of_custom_fields.each do |id, answer|
+        tr
+          th = @custom_fields.find_by(id: id).name
+          td = answer
+      tr
+        th speaker avatar
+        td = link_to "file", @paper.speaker_avatar.url
+      tr
+        th speaker bio
+        td = @paper.speaker_bio
       tr
         th status
-        td
-          = @paper.state
+        td = @paper.state
       tr
         th user
-        td
-          = @paper.user.name
+        td = @paper.user.name
   .btn-group
     = admin_review_button(@paper)
     = admin_accept_button(@paper)

@@ -7,6 +7,7 @@ class Admin::PapersController < Admin::ApplicationController
   end
 
   def show
+    @custom_fields = @activity.custom_fields
   end
 
   private
