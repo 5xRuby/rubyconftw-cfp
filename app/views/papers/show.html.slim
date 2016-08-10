@@ -39,6 +39,9 @@
       = @paper.outline
     h3 Pitch
     p = @paper.pitch
+    - @paper.answer_of_custom_fields.each do |id, answer|
+      h3 = @custom_fields.find_by(id: id).name
+      p = answer
   .col-md-6.review-part
     h3 State
     p

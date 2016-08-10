@@ -16,6 +16,7 @@ class PapersController < ApplicationController
   def show
     @user = @paper.user
     @invited_user = User.find_by_email(@paper.inviting_email)
+    @custom_fields = @activity.custom_fields
   end
 
   # GET /papers/new
