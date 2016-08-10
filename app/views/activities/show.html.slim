@@ -5,7 +5,7 @@
       = @activity.status
   p.closed-time
     | Closed on
-    strong #{@activity.end_date}
+    strong #{@activity.close_at.to_date}
   h2 Description
   .markdown-output
     = @activity.description
