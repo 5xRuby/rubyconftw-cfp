@@ -1,16 +1,16 @@
-.col-md-8.col-md-offset-2
+.col-md-12
   .page-header
     h1
       = "Papers of " + @activity.name
   = form_for @notification, url: admin_activity_mails_path(@activity) do |f|
-    table.table
+    table.table.tble-striped
       thead
         tr
           th
           th #
-          th title
-          th status
-          th user
+          th Subject
+          th Status
+          th User
           th
       tbody
         - @papers.each do |paper|

@@ -8,10 +8,25 @@ module PapersHelper
     when 'text'
       text_area_tag value_field_name, value, class: "form-control"
     when 'checkboxes'
-      render partial: "checkboxes", locals: {custom_field: custom_field, value_field_name: value_field_name}
+      render partial: "checkboxes", locals: {custom_field: custom_field, value_field_name: value_field_name, value: value}
+    when 'radios'
+      render partial: "radios", locals: {custom_field: custom_field, value_field_name: value_field_name, value: value}
     else #text
       text_field_tag value_field_name, value, class: "form-control"
     end
 
+  end
+
+  def paper_state_badge(paper)
+    style = "label label-info"
+    case paper.state
+    when "accepted"
+      style = "label label-success"
+    when "rejected"
+      style = "label label-danger"
+    when "withdrawn"
+      style = "label label-warning"
+    end
+    content_tag :span, paper.state, class: style
   end
 end

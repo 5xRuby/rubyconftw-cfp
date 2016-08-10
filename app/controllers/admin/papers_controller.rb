@@ -1,4 +1,4 @@
-class Admin::PapersController < ApplicationController
+class Admin::PapersController < Admin::ApplicationController
   before_action :set_activity
   before_action :set_paper, only: [:show]
   def index
@@ -7,6 +7,7 @@ class Admin::PapersController < ApplicationController
   end
 
   def show
+    @custom_fields = @activity.custom_fields
   end
 
   private

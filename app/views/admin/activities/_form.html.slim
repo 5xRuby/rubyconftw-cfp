@@ -2,12 +2,12 @@
   = simple_form_for @activity, url: [:admin, @activity] do |f|
     = f.input :name
     = f.input :logo
-    = f.input :description
+    = f.input :description, :input_html => {row: 10}
     = f.input :start_date
     = f.input :end_date
     = f.input :open_at
     = f.input :close_at
-    = f.input :term
+    = f.input :term, :input_html => {row: 10}
     h3 Input Fields
     ul#input_fields_container
       = f.simple_fields_for :custom_fields do |cf|
@@ -15,4 +15,4 @@
     .form-group
       a.btn.btn-default#add-field(data-form-content="#{render(partial: "new_field", locals: {f:f, idx: rand(99999) + 1}).gsub(/\n/,"")  }") Add Field
 
-    = f.submit "Save"
+    = f.submit "Save", class: "btn btn-primary"

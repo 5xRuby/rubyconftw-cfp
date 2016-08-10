@@ -1,0 +1,20 @@
+<div class="col-md-12">
+  <h1>Contributors</h1>
+
+  <% @contributors.in_groups_of(4) do |group| %>
+    <div class="col-md-12">
+      <% group.each do |contributor| %>
+        <% break if contributor.nil? %>
+        <div class="col-md-3">
+          <div class="thumbnail">
+          <%= image_tag contributor.photo.small.url, class: "contributor-avatar" %>
+          <div class="caption">
+            <h4><%= contributor.name %></h4>
+          </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+</div>

@@ -12,6 +12,7 @@ class Paper < ApplicationRecord
 	validates_presence_of :abstract
 	validates_presence_of :outline
   validate :validate_custom_fields
+  validate :validate_proposal_expires, on: :create
   validates_presence_of :speaker_bio, :language
 
   enum state: Hash[ALL_STATUS.map{|x| [x,x]}]
@@ -53,6 +54,15 @@ class Paper < ApplicationRecord
     uuid
   end
 
+  def custom_fields
+    activity.custom_fields.map do |field|
+      {
+        name: field.name,
+        value: answer_of_custom_fields[field.id.to_s] || nil
+      }
+    end
+  end
+
   def custom_field_errors
     @custom_field_errors ||= {}
   end
@@ -73,6 +83,12 @@ class Paper < ApplicationRecord
       if cf.required && val.blank?
         custom_field_errors[cf.id.to_s] = I18n.translate("errors.messages.blank")
       end
+    end
+  end
+
+  def validate_proposal_expires
+    unless activity.open?
+      errors[:base] << I18n.translate("flash.cfp_not_open_yet")
     end
   end
 

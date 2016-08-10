@@ -22,13 +22,10 @@ jQuery ->
       $('#input_fields_container').find('.sort-order').each (idx) ->
         $(@).val(idx + 1)
     $('#input_fields_container').sortable()
-    $('.well .field-types input:checked').each ->
-      if $(@).val() == 'checkboxes'
-        acfct = $(@).parents('.well:first').find('.activity_custom_fields_collection_text')
-        acfct.removeClass('hidden')
+    $('.well .field-types input:checked').trigger('click')
     $('.edit_activity, .new_activity').on 'click', '.field-types input[type="radio"]', (e) ->
       acfct = $(@).parents('.well:first').find('.activity_custom_fields_collection_text')
-      if $(@).val() == 'checkboxes'
+      if $(@).val() == 'checkboxes' || $(@).val() == 'radios'
         acfct.removeClass('hidden')
       else
         acfct.addClass('hidden')

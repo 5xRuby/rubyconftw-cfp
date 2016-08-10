@@ -1,18 +1,28 @@
 
-<div class="col-md-8 col-md-offset-2">
-  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="col-md-12">
+  <h2>My Profile</h2>
   <%= simple_form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put }) do |f| %>
     <%= devise_error_messages! %>
+    <div class="col-md-4">
     <%= f.input :email%>
     <%= f.input :name %>
     <%= f.input :firstname %>
     <%= f.input :lastname %>
     <%= f.input :phone %>
-    <%= f.input :title %>
-    <%= f.input :company %>
-    <%= f.input :country, as: :country %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :title %>
+      <%= f.input :company %>
+      <%= f.input :twitter %>
+      <%= f.input :country, as: :country %>
+    </div>
+    <div class="col-md-4">
     <%= image_tag(resource.photo.small) if resource.photo.present? %>
     <%= f.input :photo, as: :file %>
-    <%= f.button :submit%>
+    </div>
+    <div class="col-md-12 text-right">
+    <hr />
+    <%= f.button :submit, class: "btn btn-primary" %>
+    </div>
   <% end %>
 </div>

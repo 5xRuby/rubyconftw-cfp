@@ -16,6 +16,7 @@ class PapersController < ApplicationController
   def show
     @user = @paper.user
     @invited_user = User.find_by_email(@paper.inviting_email)
+    @custom_fields = @activity.custom_fields
   end
 
   # GET /papers/new
@@ -72,7 +73,7 @@ class PapersController < ApplicationController
   def check_activity_valid_for_submit?
     unless current_activity.open?
       flash[:warning] = t('flash.cfp_not_open_yet')
-      redirect_back fallback_location: root_path
+      redirect_to current_activity
       false
     end
   end
