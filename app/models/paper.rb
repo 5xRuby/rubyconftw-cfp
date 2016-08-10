@@ -53,6 +53,15 @@ class Paper < ApplicationRecord
     uuid
   end
 
+  def custom_fields
+    activity.custom_fields.map do |field|
+      {
+        name: field.name,
+        value: answer_of_custom_fields[field.id.to_s] || nil
+      }
+    end
+  end
+
   def custom_field_errors
     @custom_field_errors ||= {}
   end
