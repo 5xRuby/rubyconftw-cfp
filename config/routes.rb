@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "activities#index"
+  resources :contributes, only: [:index]
   resources :activities, only: [:index,:show] do
     resources :papers
     resources :categories, only: [:index, :show]
