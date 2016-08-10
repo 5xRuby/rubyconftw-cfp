@@ -1,7 +1,7 @@
 class Activity < ApplicationRecord
-	has_many :categories, dependent: :destroy
-	has_many :papers, dependent: :destroy
-	has_many :user_activity_relationships, dependent: :destroy
+  has_many :categories, dependent: :destroy
+  has_many :papers, dependent: :destroy
+  has_many :user_activity_relationships, dependent: :destroy
   has_many :users, through: :user_activity_relationships
   has_many :custom_fields, lambda {order("sort_order")}, dependent: :destroy
   has_many :reviews, through: :papers
@@ -50,8 +50,8 @@ class Activity < ApplicationRecord
   def validate_open_time_before_now
     return if self.open_at.blank?
     unless self.open_at >= 5.minute.ago
-       errors[:open_at] << "投稿起始時間必須晚於現在的時間"
-     end
+      errors[:open_at] << "投稿起始時間必須晚於現在的時間"
+    end
   end
 
   def validate_close_time_after_open_time
