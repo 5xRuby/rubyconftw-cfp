@@ -10,6 +10,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
 
   def new
     @activity = Activity.new
+    @new_custom_field = CustomField.new
   end
 
   def create

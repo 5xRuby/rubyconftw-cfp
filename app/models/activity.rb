@@ -29,8 +29,8 @@ class Activity < ApplicationRecord
     reviews.where(user: user)
   end
 
-  def open?(t=Time.now)
-    t >= open_at && t <= close_at
+  def open?(time = Time.now)
+    time >= open_at && time <= close_at
   end
 
   def validate_date_before_now

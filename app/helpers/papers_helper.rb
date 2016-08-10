@@ -8,7 +8,9 @@ module PapersHelper
     when 'text'
       text_area_tag value_field_name, value, class: "form-control"
     when 'checkboxes'
-      render partial: "checkboxes", locals: {custom_field: custom_field, value_field_name: value_field_name}
+      render partial: "checkboxes", locals: {custom_field: custom_field, value_field_name: value_field_name, value: value}
+    when 'radios'
+      render partial: "radios", locals: {custom_field: custom_field, value_field_name: value_field_name, value: value}
     else #text
       text_field_tag value_field_name, value, class: "form-control"
     end

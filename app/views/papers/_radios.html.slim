@@ -1,5 +1,5 @@
 .radio-or-checks
   - custom_field.collection.each do |opt|
     label
-      = check_box_tag value_field_name, opt, (value == opt)
+      = radio_button_tag value_field_name, opt, (value == opt)
       = opt

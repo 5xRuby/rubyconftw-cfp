@@ -3,7 +3,7 @@ class CustomField < ApplicationRecord
 
   FIELD_TYPES = %w{text textarea number checkboxes select radios}
 
-  ALLOWED_FIELD_TYPES_NOW = %w{text textarea checkboxes}
+  ALLOWED_FIELD_TYPES_NOW = %w{text textarea checkboxes radios}
   DELIMITER = ","
 
 
