@@ -43,6 +43,8 @@ set :default_env, { path: "$PATH:/usr/local/ruby23/bin:" }
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
+set :bundle_binstubs, -> { shared_path.join('bin') }
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
