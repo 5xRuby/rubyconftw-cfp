@@ -67,6 +67,9 @@ GEM
     capistrano-rails (1.1.7)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capistrano-sidekiq (0.5.4)
+      capistrano
+      sidekiq (>= 3.4)
     capistrano-upload-config (0.7.0)
       capistrano (>= 3.0)
     carrierwave (0.11.2)
@@ -298,6 +301,7 @@ DEPENDENCIES
   cancancan (~> 1.10)
   capistrano (~> 3.1)
   capistrano-rails (~> 1.1)
+  capistrano-sidekiq
   capistrano-upload-config
   carrierwave
   coffee-rails (~> 4.1.0)
