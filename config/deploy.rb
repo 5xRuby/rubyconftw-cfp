@@ -38,12 +38,12 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/upl
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
 # Default value for default_env is {}
-set :default_env, { path: "$PATH:/usr/local/ruby23/bin:~/.rbenv/shims:~/.rbenv/bin:" }
+set :default_env, { path: "$PATH:/usr/local/ruby23/bin:" }
 
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
-set :bundle_binstubs, -> { shared_path.join('bin') }
+set :bundle_bins, fetch(:bundle_bins, []).push('sidekiq')
 
 namespace :deploy do
   desc 'Restart application'
