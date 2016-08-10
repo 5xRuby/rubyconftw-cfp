@@ -1,40 +1,53 @@
-.col-md-8.col-md-offset-2
+.col-md-12
   .page-header
     h1
       = @paper.title
   table.table
     tbody
       tr
-        th language
+        th Language
         td = @paper.language
       tr
-        th title
-        td = @paper.title
+        th Subject
+        td
+          = @paper.title
       tr
-        th abstract
-        td = @paper.abstract
+        th Abstract
+        td
+          .markdown-output
+            = @paper.abstract
       tr
-        th outline
-        td = @paper.outline
+        th Outline
+        td
+          .markdown-output
+            = @paper.outline
       tr
-        th pitch
-        td = @paper.pitch
-      - @paper.answer_of_custom_fields.each do |id, answer|
+        th Pitch
+        td
+          .markdown-output
+            = @paper.pitch
+      - if @paper.custom_fields.size > 0
         tr
-          th = @custom_fields.find_by(id: id).name
-          td = answer
+          th Other Fields
+          td
+            - @paper.custom_fields.each do |field|
+              h4 = field[:name]
+              p = field[:value]
       tr
-        th speaker avatar
-        td = link_to "file", @paper.speaker_avatar.url
+        th Speaker Avatar
+        td
+          = image_tag @paper.user.photo.url
       tr
-        th speaker bio
+        th Speaker Bio
         td = @paper.speaker_bio
       tr
-        th status
-        td = @paper.state
+        th Status
+        td
+          = @paper.state
       tr
-        th user
-        td = @paper.user.name
+        th User
+        td
+          = @paper.user.name
   .btn-group
     = admin_review_button(@paper)
     = admin_accept_button(@paper)

@@ -33,15 +33,16 @@
       = @paper.title
     h3 Abstract
     p
-      = @paper.abstract
+      .markdown-output
+        = @paper.abstract
     h3 Outline
     p
-      = @paper.outline
+      .markdown-output
+        = @paper.outline
     h3 Pitch
-    p = @paper.pitch
-    - @paper.answer_of_custom_fields.each do |id, answer|
-      h3 = @custom_fields.find_by(id: id).name
-      p = answer
+    p
+      .markdown-output
+        = @paper.pitch
   .col-md-6.review-part
     h3 State
     p
@@ -49,4 +50,9 @@
         = @paper.state
       span.label.label-warning.paper-review-count-label
         = "#{@paper.try(:reviews, []).size} Reviewed"
-
+    - if @paper.custom_fields.size > 0
+      h3 Other Fields
+      - @paper.custom_fields.each do |field|
+        - unless field[:value].nil?
+          h4 = field[:name]
+          p = field[:value]
