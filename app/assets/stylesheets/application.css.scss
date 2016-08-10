@@ -21,6 +21,9 @@
 @import "pagedown_bootstrap";
 @import "bootstrap-datetimepicker-build";
 
+// Module
+@import "module/navigation";
+
 #console{
   display: none;
 }

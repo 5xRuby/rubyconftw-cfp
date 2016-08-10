@@ -1,4 +1,4 @@
-<nav class="navbar navbar-fixed-top navbar-default">
+<nav class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -6,13 +6,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "CFP", root_path, class: "navbar-brand", :"data-no-turbolink" => true %>
+      <%= link_to "RubyConfTW CFP", root_path, class: "navbar-brand", :"data-no-turbolink" => true %>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-left">
         <% if user_signed_in? && current_user.is_admin %>
-          <li><%= link_to 'activities managment', admin_activities_path%></li>
-          <li><%= link_to 'admin managment', admin_users_path %></li>
+          <li><%= link_to 'Activities', admin_activities_path%></li>
+          <li><%= link_to 'Users', admin_users_path %></li>
           <%= admin_review_paper_link(Activity.recent.first)  %>
         <% end %>
 
@@ -28,7 +28,7 @@
         <% if user_signed_in? %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <%= image_tag(current_user.photo.url, width: 25, height: 25, class: "img-circle") if current_user.photo.present? %>
+              <%= image_tag(current_user.photo.url, width: 24, height: 24, class: "img-circle") if current_user.photo.present? %>
               <%= current_user.name %>!
               <b class="caret"></b>
             </a>
