@@ -16,4 +16,17 @@ module PapersHelper
     end
 
   end
+
+  def paper_state_badge(paper)
+    style = "label label-info"
+    case paper.state
+    when "accepted"
+      style = "label label-success"
+    when "rejected"
+      style = "label label-danger"
+    when "withdrawn"
+      style = "label label-warning"
+    end
+    content_tag :span, paper.state, class: style
+  end
 end

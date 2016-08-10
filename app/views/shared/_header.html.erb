@@ -28,7 +28,7 @@
         <% if user_signed_in? %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <%= image_tag(current_user.photo.url, width: 24, height: 24, class: "img-circle") if current_user.photo.present? %>
+              <%= image_tag(current_user.photo.url, width: 20, height: 20, class: "img-circle") if current_user.photo.present? %>
               <%= current_user.name %>!
               <b class="caret"></b>
             </a>

@@ -14,7 +14,6 @@
             - activity.papers.where(user_id: current_user.id).each do |paper|
               h4
                 = link_to paper.title, activity_paper_path(paper.activity,paper)
-                span.label.label-info
-                  = paper.state
+                = paper_state_badge(paper)
               p
                 = truncate(paper.abstract)
