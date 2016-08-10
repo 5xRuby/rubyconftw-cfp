@@ -35,29 +35,29 @@ class Activity < ApplicationRecord
 
   def validate_date_before_now
     return if self.start_date.blank?
-    unless self.start_date >= Time.now
-      errors[:start_date] << "活動起始時間晚於現在的時間"
+    unless self.start_date > 1.day.ago
+      errors[:start_date] << "活動起始時間必須晚於現在的時間"
     end
   end
 
   def validate_end_date_after_start_date
     return if self.end_date.blank? || self.start_date.blank?
     unless self.end_date >= self.start_date
-      errors[:end_date] << "活動結束時間早於起始時間"
+      errors[:end_date] << "活動結束時間必須晚於起始時間"
     end
   end
 
   def validate_open_time_before_now
     return if self.open_at.blank?
-     unless self.open_at >= Time.now
-       errors[:open_at] << "投稿起始時間晚於現在的時間"
+    unless self.open_at >= 5.minute.ago
+       errors[:open_at] << "投稿起始時間必須晚於現在的時間"
      end
   end
 
   def validate_close_time_after_open_time
     return if self.close_at.blank? || self.open_at.blank?
     unless self.close_at >= self.open_at
-      errors[:close_at] << "投稿結束時間早於起始時間"
+      errors[:close_at] << "投稿結束時間必須起始時間"
     end
   end
 end
