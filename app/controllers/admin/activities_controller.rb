@@ -17,7 +17,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
     if @activity.save
       redirect_to admin_activities_path, notice: "成功新增活動"
     else
-      render :new, alert: @activity.errors.full_messages
+      render :new
     end
 
   end
