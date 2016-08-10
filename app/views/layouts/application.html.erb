@@ -10,7 +10,9 @@
 <%= render 'shared/header' %>
 <div class="container-body">
 	<%= flash_message %>
-	<%= yield %>
+  <div class="container">
+    <%= yield %>
+  </div>
   <%if respond_to?(:console)%>
     <%=console%>
   <%end%>
