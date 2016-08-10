@@ -1,4 +1,4 @@
-.col-md-8.col-md-offset-2.activities-show
+.col-md-12.activities-show
   h1
     = @activity.name
     small
@@ -19,7 +19,6 @@
   .markdown-output
     = @activity.term
   .btns
-    = link_to "View my proposals", activity_papers_path(@activity), class: "btn btn-default"
-    - if status(@activity) == "open"
+    - if @activity.open?
       = link_to "Submit a Paper", new_activity_paper_path(@activity), class: "btn btn-primary"
 
