@@ -2,9 +2,9 @@ module Admin::ActivitiesHelper
   def admin_review_paper_link(activity)
     if activity
       unreviewed_papers = activity.papers.size.to_i - activity.review_by(current_user).size.to_i
-      link_to "Review Papers (#{unreviewed_papers})", admin_activity_papers_path(activity)
+      content_tag :li, link_to("Review Papers (#{unreviewed_papers})", admin_activity_papers_path(activity))
     else
-      content_tag :span, "Review Papers (0)"
+      content_tag :li, link_to("Review Papers (0)", nil), class: "disabled"
     end
   end
 end
