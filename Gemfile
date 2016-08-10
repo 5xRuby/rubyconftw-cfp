@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'redis-namespace'
 gem 'aasm'
 gem 'default_value_for', '>= 3.0.2'
 gem 'rails', '~> 5.0.0'
