@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>RubyConfTW CFP</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body data-action="<%=action_name%>" data-controller="<%=controller_name%>">
-<%= render 'shared/header' %>
-<div class="container-body">
-	<%= flash_message %>
-  <div class="container">
-    <%= yield %>
-  </div>
-  <%if respond_to?(:console)%>
-    <%=console%>
-  <%end%>
-</div>
-</body>
+  <head>
+    <title>RubyConfTW CFP</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body data-action="<%=action_name%>" data-controller="<%=controller_name%>">
+    <%= render 'shared/header' %>
+    <div class="container-body">
+      <%= flash_message %>
+      <div class="container">
+        <%= yield %>
+      </div>
+      <%if respond_to?(:console)%>
+        <%=console%>
+      <%end%>
+    </div>
+    <%= render 'shared/footer' %>
+  </body>
 </html>

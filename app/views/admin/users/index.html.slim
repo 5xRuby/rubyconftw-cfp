@@ -26,3 +26,4 @@
             = image_tag(user.photo.url, width: 32, height: 32, class: "img-circle") if user.photo.present?
           td
             = toggle_admin_permission_button(user)
+            = toggle_contributor_role_button(user)
