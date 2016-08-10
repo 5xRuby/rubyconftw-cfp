@@ -27,7 +27,7 @@ set :format, :pretty
 set :log_level, :debug
 
 # Default value for :pty is false
-set :pty, true
+set :pty, false
 
 # Default value for :linked_files is []
 set :linked_files, %w{config/database.yml config/application.yml config/sidekiq.yml}
