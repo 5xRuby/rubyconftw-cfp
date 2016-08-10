@@ -43,7 +43,7 @@ set :default_env, { path: "$PATH:/usr/local/ruby23/bin:" }
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
-set :bundle_bins, fetch(:bundle_bins, []).push('sidekiq')
+set :bundle_bins, fetch(:bundle_bins, []).push('sidekiq', 'sidekiqctl')
 
 namespace :deploy do
   desc 'Restart application'
