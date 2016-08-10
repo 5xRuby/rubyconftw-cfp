@@ -22,7 +22,7 @@ class Activity < ApplicationRecord
 
 
   def status
-    self.end_date > Time.now ? "open" : "closed"
+    open? ? "open" : "closed"
   end
 
   def review_by(user)

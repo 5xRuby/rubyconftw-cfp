@@ -19,14 +19,14 @@ ActiveRecord::Schema.define(version: 20160809145444) do
     t.string   "name"
     t.text     "description"
     t.string   "logo"
-    t.text     "term"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.integer  "papers_count",               default: 0
-    t.datetime "open_at",      precision: 6
-    t.datetime "close_at",     precision: 6
     t.date     "start_date"
     t.date     "end_date"
+    t.text     "term"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "papers_count", default: 0
+    t.datetime "open_at"
+    t.datetime "close_at"
   end
 
   create_table "categories", force: :cascade do |t|

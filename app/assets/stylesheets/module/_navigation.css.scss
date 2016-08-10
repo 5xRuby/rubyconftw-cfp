@@ -1,0 +1,37 @@
+/**
+ * RubyConf CFP Navitation Bar Style
+ */
+
+$navbar-color: #730202;
+
+.navbar-inverse {
+  background-color: $navbar-color;
+  border: none;
+
+  .dropdown-menu {
+    background-color: $navbar-color;
+
+    & > li > a {
+      color: #fff;
+
+      &:hover, &:focus {
+        color: #fff;
+        background-color: #090909;
+      }
+    }
+  }
+
+  .navbar-nav > li > a {
+    color: #fff;
+
+    &:hover, &:focus {
+      background-color: #090909;
+    }
+  }
+
+  .navbar-brand {
+    color: #fff;
+  }
+}
+
+
