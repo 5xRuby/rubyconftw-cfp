@@ -1,0 +1,28 @@
+.col-md-8.col-md-offset-2
+  .page-header
+    h1
+      Admin Management
+  table.table.table-striped
+    thead
+      tr
+        th #
+        th Name
+        th First Name
+        th Last Name
+        th Photo
+        th Permission
+    tbody
+      - @users.each do |user|
+        tr
+          td
+            = user.id
+          td
+            = user.name
+          td
+            = user.firstname
+          td
+            = user.lastname
+          td
+            = image_tag(user.photo.url, width: 32, height: 32, class: "img-circle") if user.photo.present?
+          td
+            = toggle_admin_permission_button(user)
