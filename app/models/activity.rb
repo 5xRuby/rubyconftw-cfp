@@ -9,6 +9,18 @@ class Activity < ApplicationRecord
   mount_uploader :logo, LogoUploader
   scope :recent, -> { order(created_at: :desc) }
 
+  validates_presence_of :name
+  validates_presence_of :description
+  validates_presence_of :start_date
+  validates_presence_of :end_date
+  validates_presence_of :open_at
+  validates_presence_of :close_at
+  validate :validate_date_before_now
+  validate :validate_end_date_after_start_date
+  validate :validate_open_time_before_now
+  validate :validate_close_time_after_open_time
+
+
   def status
     self.end_date > Time.now ? "open" : "closed"
   end
@@ -21,4 +33,31 @@ class Activity < ApplicationRecord
     time >= open_at && time <= close_at
   end
 
+  def validate_date_before_now
+    return if self.start_date.blank?
+    unless self.start_date >= Time.now
+      errors[:start_date] << "活動起始時間晚於現在的時間"
+    end
+  end
+
+  def validate_end_date_after_start_date
+    return if self.end_date.blank? || self.start_date.blank?
+    unless self.end_date >= self.start_date
+      errors[:end_date] << "活動結束時間早於起始時間"
+    end
+  end
+
+  def validate_open_time_before_now
+    return if self.open_at.blank?
+     unless self.open_at >= Time.now
+       errors[:open_at] << "投稿起始時間晚於現在的時間"
+     end
+  end
+
+  def validate_close_time_after_open_time
+    return if self.close_at.blank? || self.open_at.blank?
+    unless self.close_at >= self.open_at
+      errors[:close_at] << "投稿結束時間早於起始時間"
+    end
+  end
 end
