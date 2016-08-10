@@ -24,8 +24,12 @@ Rails.application.routes.draw do
       post 'accept' => "reviews#accept"
       post 'reject' => "reviews#reject"
     end
-    get '/users' => "users#index"
-    get '/users/:id/designate' => "users#designate", as: 'user_designate'
-    get '/users/:id/undesignate' => "users#undesignate", as: 'user_undesignate'
+
+    resources :users, only: [:index] do
+      resource :contributor, only: [:create, :destroy]
+
+      get '/designate' => "users#designate"
+      get '/undesignate' => "users#undesignate"
+    end
   end
 end
