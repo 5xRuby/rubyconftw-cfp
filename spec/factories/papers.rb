@@ -7,5 +7,16 @@ FactoryGirl.define do
     language "Chinese"
     user { FactoryGirl.create(:user) }
     activity { FactoryGirl.create(:activity) }
+
+    factory :paper_with_review do
+      transient do
+        review_by { FactoryGirl.create(:user) }
+      end
+
+      after(:create) do |paper, evaluator|
+        create(:review, paper: paper, user: evaluator.review_by)
+      end
+    end
+
   end
 end

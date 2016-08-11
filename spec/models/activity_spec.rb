@@ -25,4 +25,27 @@ RSpec.describe Activity, type: :model do
     expect(@activity.errors.full_messages).to include("Close at 必須晚於起始時間")
   end
 
+  let(:opened_activity) { Activity.new(open_at: 1.hour.ago, close_at: 1.hour.from_now) }
+  let(:closed_activity) { Activity.new(open_at: 2.hour.ago, close_at: 1.hour.ago) }
+
+  it "should open when current time between open_at and end_at" do
+    expect(opened_activity.open?).to be true
+  end
+
+  it "should return open status when activity is opened" do
+    expect(opened_activity.status).to eq("open")
+  end
+
+  it "should return closed status when activity is closed" do
+    expect(closed_activity.status).to eq("closed")
+  end
+
+  # TODO: This test can be improved
+  it "should able to find propals review by specify user" do
+    user = FactoryGirl.create(:user)
+    activity = FactoryGirl.create(:activity)
+    reviewed_papers = FactoryGirl.create_list(:paper_with_review, 5, activity: activity, review_by: user)
+
+    expect(activity.review_by(user).size).to eq(reviewed_papers.size)
+  end
 end
