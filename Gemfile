@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'redis-namespace'
 gem 'aasm'
 gem 'default_value_for', '>= 3.0.2'
 gem 'rails', '~> 5.0.0'
@@ -38,6 +39,7 @@ group :development do
   gem 'letter_opener'
   gem 'capistrano', '~> 3.1'
   gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-sidekiq'
   gem 'web-console', '~> 2.0'
   gem 'passenger'
 end

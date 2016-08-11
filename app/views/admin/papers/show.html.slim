@@ -5,6 +5,9 @@
   table.table
     tbody
       tr
+        th Language
+        td = @paper.language
+      tr
         th Subject
         td
           = @paper.title
@@ -19,9 +22,10 @@
           .markdown-output
             = @paper.outline
       tr
-        th Speaker Avatar
+        th Pitch
         td
-          = image_tag @paper.user.photo.url
+          .markdown-output
+            = @paper.pitch
       - if @paper.custom_fields.size > 0
         tr
           th Other Fields
@@ -29,6 +33,13 @@
             - @paper.custom_fields.each do |field|
               h4 = field[:name]
               p = field[:value]
+      tr
+        th Speaker Avatar
+        td
+          = image_tag @paper.user.photo.url
+      tr
+        th Speaker Bio
+        td = @paper.speaker_bio
       tr
         th Status
         td

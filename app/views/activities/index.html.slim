@@ -13,7 +13,7 @@
             small
               = activity.status
           p.date
-            span.date #{activity.start_date} ~ #{activity.end_date}
+            span.date #{activity.open_at.to_date} ~ #{activity.close_at.to_date}
           p.count
             = link_to pluralize(activity.papers_count, 'proposal'), activity
 
