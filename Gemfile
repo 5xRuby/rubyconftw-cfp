@@ -31,6 +31,8 @@ gem 'redcarpet'
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
+  gem 'shoulda'
+  gem 'fuubar'
   gem 'factory_girl_rails'
 end
 
