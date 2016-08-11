@@ -7,8 +7,6 @@ require 'capistrano/upload-config'
 require 'capistrano/sidekiq'
 #require 'capistrano/sidekiq/monit'
 
-require 'capistrano/sidekiq'
-
 # Include tasks from other gems included in your Gemfile
 #
 # For documentation on these, see for example:
