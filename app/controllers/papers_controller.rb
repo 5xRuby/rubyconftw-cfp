@@ -62,7 +62,7 @@ class PapersController < ApplicationController
   def destroy
     @paper.withdraw!
     respond_to do |format|
-      format.html { redirect_to activity_papers_path(@activity), notice: 'Paper was successfully destroyed.' }
+      format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
