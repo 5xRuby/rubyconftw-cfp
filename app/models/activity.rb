@@ -41,7 +41,7 @@ class Activity < ApplicationRecord
   def validate_end_date_after_start_date
     return if self.end_date.blank? || self.start_date.blank?
     unless self.end_date >= self.start_date
-      errors[:end_date] << "活動結束時間必須晚於起始時間"
+      errors[:end_date] << "必須晚於起始時間"
     end
   end
 
@@ -55,7 +55,7 @@ class Activity < ApplicationRecord
   def validate_close_time_after_open_time
     return if self.close_at.blank? || self.open_at.blank?
     unless self.close_at >= self.open_at
-      errors[:close_at] << "投稿結束時間必須起始時間"
+      errors[:close_at] << "必須晚於起始時間"
     end
   end
 end
