@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :papers
   has_many :reviews
   has_many :activities, through: :user_activity_relationships
-  before_update :profile_validation
+  validates_presence_of :name
 
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_create do |user|
@@ -27,14 +27,5 @@ class User < ApplicationRecord
       end
     end
   end
-  def profile_validation
-    validates_presence_of :name
-    validates_presence_of :firstname
-    validates_presence_of :lastname
-    validates_presence_of :phone
-  end
-
-
-
 
 end
