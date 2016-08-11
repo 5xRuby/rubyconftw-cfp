@@ -31,4 +31,50 @@ RSpec.describe Paper, type: :model do
     expect(paper.activity).not_to be_nil
     expect(paper.custom_field_errors[custom_field.id.to_s]).to eq("can't be blank")
   end
+
+  context "state" do
+    it "should able to change to reviewed from submmitted" do
+      paper = Paper.new
+      expect(paper).to transition_from(:submitted).to(:reviewed).on_event(:view)
+    end
+
+    it "should able to change to accepted or rejected from reviewed" do
+      paper = Paper.new(state: :reviewed)
+      expect(paper).to transition_from(:reviewed).to(:accepted).on_event(:accept)
+      expect(paper).to transition_from(:reviewed).to(:rejected).on_event(:reject)
+      expect(paper).to_not allow_transition_to(:submitted)
+    end
+
+    it "should able to change to withdrawn at any time" do
+      paper = Paper.new
+      expect(paper).to transition_from(:submitted).to(:withdrawn).on_event(:withdraw)
+      expect(paper).to transition_from(:reviewed).to(:withdrawn).on_event(:withdraw)
+      expect(paper).to transition_from(:accepted).to(:withdrawn).on_event(:withdraw)
+      expect(paper).to transition_from(:rejected).to(:withdrawn).on_event(:withdraw)
+    end
+  end
+
+  it "should have default speaker name from user name" do
+    user = User.new(name: "Speaker")
+    paper = Paper.new(user: user)
+    expect(paper.speaker_name).to eq(user.name)
+  end
+
+  it "should generate default uuid" do
+    paper = Paper.new
+    expect(paper.uuid).not_to be_nil
+  end
+
+  it "should have param use uuid" do
+    paper = Paper.new
+    expect(paper.to_param).to eq(paper.uuid)
+  end
+
+  it "should able to check user already reviewed it or not" do
+    user = FactoryGirl.create(:user)
+    paper = FactoryGirl.create(:paper_with_review, review_by: user)
+    expect(paper.reviewed_by?(user)).to be true
+  end
+
+  it "should able to read custom field"
 end
