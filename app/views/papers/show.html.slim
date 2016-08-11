@@ -46,8 +46,7 @@
   .col-md-6.review-part
     h3 State
     p
-      span.label.label-info.paper-state-label
-        = @paper.state
+      = paper_state_badge(@paper)
       span.label.label-warning.paper-review-count-label
         = "#{@paper.try(:reviews, []).size} Reviewed"
     - if @paper.custom_fields.size > 0
