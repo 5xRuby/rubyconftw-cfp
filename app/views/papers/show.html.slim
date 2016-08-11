@@ -10,10 +10,7 @@
       = link_to edit_activity_paper_path(@activity, @paper), class:"btn btn-primary" do
         span.fa.fa-pencil-square-o
         | Edit
-      - unless @paper.withdrawn?
-        = link_to activity_paper_path(@activity,@paper), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning" do
-          span.fa.fa-exclamation-circle
-          | Withdraw Proposal
+      = withdraw_proposal_button(@activity, @paper)
       p
         | CFP close: #{time_tag @activity.close_at}
   .col-md-6.paper-part

@@ -29,4 +29,16 @@ module PapersHelper
     end
     content_tag :span, paper.state, class: style
   end
+
+  def withdraw_proposal_button(activity, paper, custom_options = {})
+    return if paper.withdrawn?
+
+    options = {method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning"}
+    options.merge!(custom_options)
+
+    link_to activity_paper_path(activity, paper), options  do
+      concat content_tag(:span, nil, class: "fa fa-exclamation-circle")
+      concat " Withdraw Proposal"
+    end
+  end
 end
