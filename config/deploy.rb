@@ -27,7 +27,7 @@ set :format, :pretty
 set :log_level, :debug
 
 # Default value for :pty is false
-set :pty, true
+set :pty, false
 
 # Default value for :linked_files is []
 set :linked_files, %w{config/database.yml config/application.yml config/sidekiq.yml}
@@ -36,6 +36,8 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/upl
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+
+set :bundle_bins, fetch(:bundle_bins, []).push('sidekiq', 'sidekiqctl')
 
 # Default value for default_env is {}
 set :default_env, { path: "$PATH:/usr/local/ruby23/bin:" }

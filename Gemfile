@@ -39,6 +39,7 @@ group :development do
   gem 'letter_opener'
   gem 'capistrano', '~> 3.1'
   gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-sidekiq'
   gem 'web-console', '~> 2.0'
   gem 'passenger'
 end
