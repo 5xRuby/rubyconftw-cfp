@@ -29,6 +29,14 @@ $navbar-color: #730202;
     }
   }
 
+  .navbar-nav > .disabled > a {
+    color: lighten($navbar-color, 25%);
+
+    &:hover, &:focus {
+      color: lighten($navbar-color, 25%);
+    }
+  }
+
   .navbar-brand {
     color: #fff;
   }
