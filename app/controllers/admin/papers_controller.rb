@@ -8,6 +8,7 @@ class Admin::PapersController < Admin::ApplicationController
 
   def show
     @custom_fields = @activity.custom_fields
+    @new_comment = Comment.new
   end
 
   private
