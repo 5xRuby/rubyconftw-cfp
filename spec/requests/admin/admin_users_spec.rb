@@ -56,4 +56,37 @@ RSpec.describe "Admin::Users", type: :request do
     end
   end
 
+  describe "POST /admin/users/:id/contributor" do
+    it "assign user as contributor" do
+      user = FactoryGirl.create(:user)
+
+      login_as admin
+      visit admin_users_url
+      within "#user_#{user.id}" do
+        click_link "Mark as contributor"
+      end
+
+      within "#user_#{user.id}" do
+        expect(page).to have_content("Unmark as contributor")
+      end
+    end
+  end
+
+  describe "DELETE /admin/users/:id/contributor" do
+    it "unassign user as contributor" do
+      user = FactoryGirl.create(:user, :contributor)
+
+      login_as admin
+      visit admin_users_url
+
+      within "#user_#{user.id}" do
+        click_link("Unmark as contributor")
+      end
+
+      within "#user_#{user.id}" do
+        expect(page).to have_content("Mark as contributor")
+      end
+    end
+  end
+
 end
