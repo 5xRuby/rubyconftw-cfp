@@ -4,7 +4,7 @@ html
     title = page_title(@activity.try(:name))
     meta name="description" content= page_description(@activity.try(:description))
     - %w{twitter og}.each do |prefix|
-      meta name="#{prefix}:title" content= page_description(@activity.try(:name))
+      meta name="#{prefix}:title" content= page_title(@activity.try(:name))
       meta name="#{prefix}:description" content= page_description(@activity.try(:description))
       meta name="#{prefix}:image" content= page_image(@activity.try(:logo))
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
