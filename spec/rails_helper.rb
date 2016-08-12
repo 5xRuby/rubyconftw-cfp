@@ -68,4 +68,9 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Capybara::DSL
+
+  config.include Warden::Test::Helpers
+  config.before :suite do
+    Warden.test_mode!
+  end
 end

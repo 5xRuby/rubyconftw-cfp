@@ -1,11 +1,15 @@
 FactoryGirl.define do
   factory :activity do
-    name "RubyConfTW"
+    sequence(:name, 2016) { |n| "RubyConfTW #{n}" }
     description "RubyConfTW is a conference of ruby in Taiwan"
     start_date { 1.day.ago }
     end_date { 30.day.from_now }
     open_at { 1.day.ago }
     close_at { 30.day.from_now }
+
+    trait :expired do
+      close_at { 1.hour.ago }
+    end
 
     factory :activity_with_custom_field do
       transient do
