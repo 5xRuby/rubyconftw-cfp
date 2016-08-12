@@ -3,16 +3,10 @@ html
   head
     title = page_title(@activity.try(:name))
     meta name="description" content= page_description(@activity.try(:description))
-    / Twitter Card data
-    meta name="twitter:title" content= page_title(@activity.try(:name))
-    meta name="twitter:description" content= page_description(@activity.try(:description))
-    / Twitter Summary card images must be at least 120x120px
-    meta name="twitter:image" content= page_image()
-
-    / Open Graph data
-    meta property="og:title" content= page_title(@activity.try(:name))
-    meta property="og:image" content= page_image()
-    meta property="og:description" content= page_description(@activity.try(:description))
+    - %w{twitter og}.each do |prefix|
+      meta name="#{prefix}:title" content= page_description(@activity.try(:name))
+      meta name="#{prefix}:description" content= page_description(@activity.try(:description))
+      meta name="#{prefix}:image" content= page_image(@activity.try(:logo))
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
