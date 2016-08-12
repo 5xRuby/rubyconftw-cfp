@@ -8,6 +8,22 @@ FactoryGirl.define do
     user { FactoryGirl.create(:user) }
     activity { FactoryGirl.create(:activity) }
 
+    trait :reviewed do
+      state :reviewed
+    end
+
+    trait :accepted do
+      state :accepted
+    end
+
+    trait :rejected do
+      state :rejected
+    end
+
+    trait :withdrawn do
+      state :withdrawn
+    end
+
     factory :paper_with_review do
       transient do
         review_by { FactoryGirl.create(:user) }

@@ -14,7 +14,7 @@
           th
       tbody
         - @papers.each do |paper|
-          tr
+          tr id=("paper_#{paper.id}")
             td
               div.checkbox
                 label
