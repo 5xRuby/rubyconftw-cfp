@@ -11,4 +11,12 @@ RSpec.describe Review, type: :model do
     expect(duplicate_review.errors.full_messages).to include("Paper has already been taken")
   end
 
+  it "should update paper status after create" do
+    paper = FactoryGirl.create(:paper)
+    expect(paper).to have_state(:submitted)
+
+    FactoryGirl.create(:review, paper: paper)
+    expect(paper).to have_state(:reviewed)
+  end
+
 end
