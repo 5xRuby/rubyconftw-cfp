@@ -46,6 +46,10 @@ group :development do
   gem 'passenger'
 end
 
+group :test do
+  gem 'simplecov', require: false
+end
+
 gem 'settingslogic'
 gem 'country_select'
 gem 'slim'
