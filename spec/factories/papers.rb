@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :paper do
-    title "Sample Paper"
+    sequence(:title) { |n| "Sample Paper #{n}" }
     abstract "Sample abstract with long content"
     outline "Sample outline with long content"
     speaker_bio "Speaker bio with long content"
