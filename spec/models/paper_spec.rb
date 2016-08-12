@@ -76,5 +76,12 @@ RSpec.describe Paper, type: :model do
     expect(paper.reviewed_by?(user)).to be true
   end
 
-  it "should able to read custom field"
+  it "should able to read custom field" do
+    activity = FactoryGirl.create(:activity_with_custom_field, field_count: 5)
+    paper = FactoryGirl.create(:paper, activity: activity)
+    expect(paper.custom_fields.size).to eq(5)
+    expect(paper.custom_fields.first).to have_key(:name)
+    expect(paper.custom_fields.first).to have_key(:value)
+    expect(paper.custom_fields.first[:name]).to eq(activity.custom_fields.first.name)
+  end
 end
