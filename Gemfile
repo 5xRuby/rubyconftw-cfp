@@ -34,6 +34,9 @@ group :development, :test do
   gem 'shoulda'
   gem 'fuubar'
   gem 'factory_girl_rails'
+
+  gem 'guard'
+  gem 'guard-rspec'
 end
 
 group :development do
