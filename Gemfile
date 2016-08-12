@@ -32,8 +32,14 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'shoulda'
+  gem 'capybara'
   gem 'fuubar'
   gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'database_rewinder'
+  gem 'spring'
 end
 
 group :development do
