@@ -10,6 +10,8 @@ class CustomField < ApplicationRecord
   enum field_type: Hash[ALLOWED_FIELD_TYPES_NOW.map{|t| [t,t] }]
 
   validates :name, :sort_order, :field_type, presence: true
+
+  # TODO: Assert why validate presence but allow blank
   validates :required, :options, presence: true, allow_blank: true
 
 

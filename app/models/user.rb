@@ -2,6 +2,7 @@ class User < ApplicationRecord
   mount_uploader :photo, PhotoUploader
   devise :database_authenticatable
   devise :omniauthable, :omniauth_providers => [:github,:twitter]
+
   has_many :papers
   has_many :reviews
   has_many :activities, through: :user_activity_relationships
@@ -27,5 +28,4 @@ class User < ApplicationRecord
       end
     end
   end
-
 end
