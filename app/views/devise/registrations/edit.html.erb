@@ -2,7 +2,6 @@
 <div class="col-md-12">
   <h2>My Profile</h2>
   <%= simple_form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put }) do |f| %>
-    <%= devise_error_messages! %>
     <div class="col-md-4">
     <%= f.input :email%>
     <%= f.input :name %>

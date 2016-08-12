@@ -37,13 +37,13 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/upl
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
-set :bundle_bins, fetch(:bundle_bins, []).push('sidekiq', 'sidekiqctl')
-
 # Default value for default_env is {}
 set :default_env, { path: "$PATH:/usr/local/ruby23/bin:" }
 
 # Default value for keep_releases is 5
 set :keep_releases, 3
+
+set :bundle_bins, fetch(:bundle_bins, []).push('sidekiq', 'sidekiqctl')
 
 namespace :deploy do
   desc 'Restart application'

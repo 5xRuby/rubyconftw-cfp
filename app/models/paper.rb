@@ -6,6 +6,7 @@ class Paper < ApplicationRecord
   attr_writer :custom_field_errors
 
 	mount_uploader :speaker_avatar, PictureUploader
+
   validates_length_of :title, in: 2..60
   validates_length_of :abstract, :speaker_bio, in: 10..600
 	validates_presence_of :title
@@ -78,6 +79,7 @@ class Paper < ApplicationRecord
   end
 
   def validate_custom_fields
+    return if activity.nil?
     self.activity.custom_fields.each do |cf|
       val = self.answer_of_custom_fields[cf.id.to_s]
       if cf.required && val.blank?
@@ -87,6 +89,7 @@ class Paper < ApplicationRecord
   end
 
   def validate_proposal_expires
+    return if activity.nil?
     unless activity.open?
       errors[:base] << I18n.translate("flash.cfp_not_open_yet")
     end
