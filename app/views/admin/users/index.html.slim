@@ -13,7 +13,7 @@
         th Permission
     tbody
       - @users.each do |user|
-        tr
+        tr id=("user_#{user.id}")
           td
             = user.id
           td

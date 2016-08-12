@@ -7,5 +7,9 @@ FactoryGirl.define do
     trait :contributor do
       is_contributor true
     end
+
+    trait :admin do
+      is_admin true
+    end
   end
 end
