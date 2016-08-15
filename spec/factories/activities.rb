@@ -22,5 +22,15 @@ FactoryGirl.define do
       end
     end
 
+    factory :activity_with_papers do
+      transient do
+        papers_count 5
+      end
+
+      after(:create) do |activity, evaluator|
+        create_list(:paper, evaluator.papers_count, activity: activity)
+      end
+    end
+
   end
 end

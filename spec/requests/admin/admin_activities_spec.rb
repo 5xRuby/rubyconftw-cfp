@@ -96,11 +96,43 @@ RSpec.describe "Admin::Activities", type: :request do
       login_as admin
       visit admin_activities_url
 
-      within "#activity-#{activity.id}" do
+      within "#activity_#{activity.id}" do
         click_link "Remove"
       end
 
       expect(page).not_to have_content(activity.name)
+    end
+  end
+
+  describe "POST /admin/activities/:id/mails" do
+    let(:activity) { FactoryGirl.create(:activity_with_papers) }
+
+    it "sends mail to selected papers owner" do
+      login_as admin
+      visit admin_activity_papers_url(activity)
+
+      within "#paper_#{activity.papers.first.id}" do
+        check "notification_ids_#{activity.papers.first.user.id}"
+      end
+
+      within ".notification" do
+        fill_in "notification[subject]", with: "Notification Mail"
+        fill_in "notification[content]", with: "Some message from CFP system"
+        click_button "Send"
+      end
+
+      expect(page).to have_content("Mail already sent")
+    end
+
+    it "didn't sends mail to selected papers owner when not fill required fields" do
+      login_as admin
+      visit admin_activity_papers_url(activity)
+
+      within ".notification" do
+        click_button "Send"
+      end
+
+      expect(page).to have_css(".has-error")
     end
   end
 
