@@ -4,6 +4,10 @@ RSpec.describe "Admin::Users", type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:user, :admin) }
 
+  before(:each) do
+    login_as admin
+  end
+
   describe "GET /admin/users" do
     it "cannot view users when user is not admin" do
       login_as user
@@ -14,7 +18,6 @@ RSpec.describe "Admin::Users", type: :request do
     it "list all signup users" do
       users = FactoryGirl.create_list(:user, 5)
 
-      login_as admin
       visit admin_users_url
       expect(page).to have_content(admin.name)
       users.each do |user|
@@ -27,7 +30,6 @@ RSpec.describe "Admin::Users", type: :request do
     it "assign user as admin" do
       normal_user = FactoryGirl.create(:user)
 
-      login_as admin
       visit admin_users_url
       within "#user_#{normal_user.id}" do
         click_link "designate to be admin"
@@ -44,7 +46,6 @@ RSpec.describe "Admin::Users", type: :request do
     it "unassign user as admin" do
       admin_user = FactoryGirl.create(:user, :admin)
 
-      login_as admin
       visit admin_users_url
       within "#user_#{admin_user.id}" do
         click_link "undesignate to be admin"
@@ -60,7 +61,6 @@ RSpec.describe "Admin::Users", type: :request do
     it "assign user as contributor" do
       user = FactoryGirl.create(:user)
 
-      login_as admin
       visit admin_users_url
       within "#user_#{user.id}" do
         click_link "Mark as contributor"
@@ -76,7 +76,6 @@ RSpec.describe "Admin::Users", type: :request do
     it "unassign user as contributor" do
       user = FactoryGirl.create(:user, :contributor)
 
-      login_as admin
       visit admin_users_url
 
       within "#user_#{user.id}" do
