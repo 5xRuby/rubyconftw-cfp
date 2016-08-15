@@ -11,8 +11,6 @@ RSpec.describe "Users::Index", type: :request do
       login_as user
       visit my_proposals_url
 
-      print page.html
-
       papers.each do |paper|
         expect(page).to have_content(paper.title)
       end
