@@ -57,6 +57,8 @@ RSpec.describe "Admin::Activities", type: :request do
 
       expect(page).to have_css(".has-error")
     end
+
+    it "adds custom field"
   end
 
   describe "PUT /admin/activities/:id" do
@@ -74,7 +76,32 @@ RSpec.describe "Admin::Activities", type: :request do
       expect(page).to have_content("RubyConfTW")
     end
 
-    it "adds custom field"
+    it "didn't update activity when not fill required fields" do
+      login_as admin
+      visit edit_admin_activity_url(activity)
+
+      within ".edit_activity" do
+        fill_in "Name", with: ""
+        click_button "Save"
+      end
+
+      expect(page).to have_css(".has-error")
+    end
+  end
+
+  describe "DELETE /admin/activities/:id" do
+    it "delete a activity" do
+      activity = FactoryGirl.create(:activity)
+
+      login_as admin
+      visit admin_activities_url
+
+      within "#activity-#{activity.id}" do
+        click_link "Remove"
+      end
+
+      expect(page).not_to have_content(activity.name)
+    end
   end
 
 end
