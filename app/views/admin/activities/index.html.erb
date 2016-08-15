@@ -20,7 +20,7 @@
         </tr>
       <% else %>
         <% @activities.each do |activity| %>
-          <tr>
+          <tr id="activity_<%= activity.id %>">
             <td><%= activity.id %></td>
             <td><%= activity.name %></td>
             <td><%= image_tag(activity.logo, height: 100, width: 100) %></td>
