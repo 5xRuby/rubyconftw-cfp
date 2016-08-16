@@ -10,6 +10,7 @@
           th #
           th Subject
           th Tags
+          th Comments
           th Status
           th User
           th
@@ -29,6 +30,8 @@
                 = " "
                 .label.label-primary
                   = tag.name
+            td
+              = paper.comments.count
             td
               = paper.state
             td

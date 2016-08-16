@@ -58,8 +58,7 @@
     = admin_reject_button(@paper)
     = link_to "Back", admin_activity_papers_path(@activity), class: "btn btn-default"
 
-h2 comments
-
+h2 comments(#{@paper.comments.count})
 - @paper.comments.each do |comment|
   h4 #{comment.user.name} says:
   .well
