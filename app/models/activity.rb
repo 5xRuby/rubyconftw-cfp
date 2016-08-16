@@ -27,6 +27,11 @@ class Activity < ApplicationRecord
     reviews.where(user: user)
   end
 
+  def unreview_by(user)
+    papers.where.not(id: review_by(user).pluck(:paper_id))
+          .state([:submitted, :reviewed])
+  end
+
   def open?(time = Time.now)
     time >= open_at && time <= close_at
   end
