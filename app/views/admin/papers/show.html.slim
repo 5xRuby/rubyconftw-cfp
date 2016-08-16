@@ -2,6 +2,10 @@
   .page-header
     h1
       = @paper.title
+      - @paper.tags.each do |tag|
+        = " "
+        .label class="label-#{tag.color}"
+          = tag.name
   table.table
     tbody
       tr
