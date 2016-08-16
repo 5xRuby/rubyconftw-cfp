@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :reviewers, only: [:index,:new,:create,:destroy]
       resources :papers, only: [:index, :show] do
         resources :comments, only: [:create, :destroy]
+        resources :tags, only: [:create, :destroy]
       end
       resources :mails, only: [:create]
     end

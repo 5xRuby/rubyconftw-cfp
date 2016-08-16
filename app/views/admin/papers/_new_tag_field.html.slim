@@ -1,0 +1,5 @@
+.add-tag-field.well
+  = simple_form_for paper.tags.new, url: admin_activity_paper_tags_path(@activity, paper), method: "POST" do |f|
+    = f.input :name
+    = f.input :color, collection: Tag::TAG_COLORS
+    = f.submit "Save", class: "btn btn-default"

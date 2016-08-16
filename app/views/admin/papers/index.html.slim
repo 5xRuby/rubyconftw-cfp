@@ -23,6 +23,11 @@
               = paper.id
             td
               = paper.title
+              - paper.tags.each do |tag|
+                = " "
+                = link_to(admin_activity_paper_tag_path(@activity,paper,tag), method: "DELETE", data: {confirm: "Are you sure to delete it?"}) do
+                  .label class="label-#{tag.color}"
+                    = tag.name
             td
               = paper.state
             td
@@ -33,6 +38,8 @@
                 = admin_review_button(paper)
                 = admin_accept_button(paper)
                 = admin_reject_button(paper)
+              = " "
+              a.btn.btn-default.add-tag-button(data-form-content="#{render(partial: "new_tag_field", locals: {paper: paper}).gsub(/\n/,"") }" ) add tag
 
     = link_to "Back", admin_activity_path(@activity), class: "btn btn-default"
 

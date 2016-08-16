@@ -1,3 +1,7 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+jQuery ->
+  $('.add-tag-button').on 'click', ->
+    form = $(this).attr('data-form-content')
+    $(this).after(form)
+
+
+

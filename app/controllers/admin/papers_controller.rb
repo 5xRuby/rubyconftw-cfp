@@ -4,6 +4,7 @@ class Admin::PapersController < Admin::ApplicationController
   def index
     @papers = @activity.papers
     @notification = Notification.new
+    @new_tag = Tag.new
   end
 
   def show
