@@ -106,6 +106,7 @@ RSpec.describe "Admin::Papers", type: :request do
     end
 
     it "render form after clicking button" do
+      print page.html
       within "#paper_#{@paper.id}" do
         click_link "edit tag"
       end
@@ -119,6 +120,15 @@ RSpec.describe "Admin::Papers", type: :request do
       #  fill_in "Tag list", with: "abc, foo"
       #  click_button "Save"
       #end
+    end
+
+    it "do not render second form while clicking button" do
+    end
+
+    it "put tab_list into values if tags already exist" do
+    end
+
+    it "remove form when clicking close button" do
     end
 
   end
