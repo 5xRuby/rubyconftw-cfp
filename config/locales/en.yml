@@ -44,3 +44,7 @@ en:
   papers:
     new:
       new-paper: New Proposal
+  meta:
+    title: "CFP site of RubyConf Taiwan"
+    description: "Contribute by members of 5xRuby.tw"
+    image: "http://rubyconf.tw/2016/img/backgrounds/1.jpg"

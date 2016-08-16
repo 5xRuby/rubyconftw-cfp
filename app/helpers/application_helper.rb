@@ -16,4 +16,16 @@ module ApplicationHelper
 
     alerts.join("\n").html_safe
   end
+
+  def page_title(title)
+    title || t('meta.title')
+  end
+
+  def page_description(desc)
+    desc || t('meta.description')
+  end
+
+  def page_image(image = nil)
+    image || t('meta.image')
+  end
 end
