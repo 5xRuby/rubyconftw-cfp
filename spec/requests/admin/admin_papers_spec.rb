@@ -93,4 +93,33 @@ RSpec.describe "Admin::Papers", type: :request do
     end
   end
 
+  describe "edit tag fields" do
+    before(:each) do
+      @paper = FactoryGirl.create(:paper, :reviewed, activity: activity)
+      login_as admin
+      visit admin_activity_papers_url(activity)
+    end
+
+    it "edit button exist" do
+      expect(page).to have_content("edit tag")
+      expect(page).to have_css("a.edit-tag-button")
+    end
+
+    it "render form after clicking button" do
+      within "#paper_#{@paper.id}" do
+        click_link "edit tag"
+      end
+      #expect(page).to have_css(".add-tag-field")
+    end
+
+    it "update tags" do
+
+      #click_link "edit tag"
+      #within ".add-tag-field" do
+      #  fill_in "Tag list", with: "abc, foo"
+      #  click_button "Save"
+      #end
+    end
+
+  end
 end
