@@ -1,10 +1,9 @@
 class Admin::PapersController < Admin::ApplicationController
   before_action :set_activity
-  before_action :set_paper, only: [:show]
+  before_action :set_paper, only: [:show, :update]
   def index
     @papers = @activity.papers
     @notification = Notification.new
-    @new_tag = Tag.new
   end
 
   def show
@@ -12,6 +11,10 @@ class Admin::PapersController < Admin::ApplicationController
     @new_comment = Comment.new
   end
 
+  def update
+    @paper.update(paper_params)
+    redirect_to admin_activity_papers_path(@activity)
+  end
   private
   def set_activity
     @activity = Activity.find(params[:activity_id])
@@ -21,4 +24,7 @@ class Admin::PapersController < Admin::ApplicationController
     @paper = @activity.papers.find_by(uuid: params[:id])
   end
 
+  def paper_params
+    params.require(:paper).permit(:tag_list)
+  end
 end

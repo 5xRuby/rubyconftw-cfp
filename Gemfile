@@ -26,6 +26,7 @@ gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'sidekiq'
 gem 'redcarpet'
+gem 'acts-as-taggable-on'
 
 
 group :development, :test do

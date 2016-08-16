@@ -17,9 +17,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :activities do
       resources :reviewers, only: [:index,:new,:create,:destroy]
-      resources :papers, only: [:index, :show] do
+      resources :papers, only: [:index, :show, :update] do
         resources :comments, only: [:create, :destroy]
-        resources :tags, only: [:create, :destroy]
       end
       resources :mails, only: [:create]
     end
