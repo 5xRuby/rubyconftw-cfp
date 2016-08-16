@@ -9,6 +9,7 @@
           th
           th #
           th Subject
+          th Tags
           th Status
           th User
           th
@@ -23,6 +24,7 @@
               = paper.id
             td
               = paper.title
+            td
               - paper.tags.each do |tag|
                 = " "
                 .label.label-primary
@@ -38,7 +40,8 @@
                 = admin_accept_button(paper)
                 = admin_reject_button(paper)
               = " "
-              a.btn.btn-default.edit-tag-button(data-form-content="#{render(partial: "tag_field", locals: {paper: paper}).gsub(/\n/,"") }" ) edit tag
+              a.btn.btn-default.edit-tag-button( data-id="#{paper.id}" data-form-content="#{render(partial: "tag_field", locals: {paper: paper}).gsub(/\n/,"") }" ) edit tag
+              .field-container(data-id="#{paper.id}")
 
     = link_to "Back", admin_activity_path(@activity), class: "btn btn-default"
 
