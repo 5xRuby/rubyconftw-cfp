@@ -106,10 +106,13 @@ RSpec.describe "Admin::Papers", type: :request do
     end
 
     it "render form after clicking button" do
-      within "#paper_#{@paper.id}" do
-        click_link "edit tag"
-      end
-      #expect(page).to have_css(".add-tag-field")
+      find("#paper_#{@paper.id} .edit-tag-button").click
+      #click_link "edit tag"
+      #within "#paper_#{@paper.id}" do
+      #  find('.add-tag-field').click
+      #  #click_link "edit tag"
+      #end
+      #expect(page).to have_css(".edit-tag-button")
     end
 
     it "update tags" do

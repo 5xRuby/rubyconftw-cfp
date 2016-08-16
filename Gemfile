@@ -34,6 +34,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda'
   gem 'capybara'
+  #gem 'selenium-webdriver'
+  #gem 'capybara-webkit'
   gem 'fuubar'
   gem 'factory_girl_rails'
 
