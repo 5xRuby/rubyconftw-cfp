@@ -97,42 +97,35 @@ RSpec.describe "Admin::Papers", type: :request do
     before(:each) do
       @paper = FactoryGirl.create(:paper, :reviewed, activity: activity)
       login_as admin
-      visit admin_activity_papers_url(activity)
+      visit admin_activity_paper_url(activity, @paper)
     end
 
     it "edit button exist" do
-      expect(page).to have_content("edit tag")
+      expect(page).to have_content("Edit tag")
       expect(page).to have_css("a.edit-tag-button")
     end
 
-    it "render form after clicking button" do
-      #find("#paper_#{@paper.id} .edit-tag-button").click
-      #find("#paper_#{@paper.id} .add-tag-field").click
-      #expect(page).to have_css(".edit-tag-button")
-    end
-
     it "update tags" do
-      #find("#paper_#{@paper.id} .edit-tag-button").click
-      #within ".add-tag-field" do
-      #  fill_in "Tag list", with: "abc, foo"
-      #  click_button "Save"
-      #end
-      #expect(page).to have_content("abc")
-      #expect(page).to have_content("foo")
-    end
-
-    it "do not render second form while clicking button" do
-      #2.times{ find("#paper_#{@paper.id} .edit-tag-button").click }
-      #...
+      within ".add-tag-field" do
+        fill_in "Tag list", with: "abc, foo"
+        click_button "Save"
+      end
+      expect(page).to have_content("abc")
+      expect(page).to have_content("foo")
     end
 
     it "put tab_list into values if tags already exist" do
-      #...
+      @paper.update(tag_list: %w(owo qwq))
+      visit admin_activity_paper_url(activity, @paper)
+      expect(page).to have_field('paper[tag_list]', with: "qwq, owo")
     end
 
-    it "remove form when clicking close button" do
-      #...
+    it "show tags on index page" do
+      @paper.update(tag_list: %w(excellent))
+      visit admin_activity_papers_url(activity)
+      expect(page).to have_content("excellent")
     end
+
   end
 
   describe "comments" do
