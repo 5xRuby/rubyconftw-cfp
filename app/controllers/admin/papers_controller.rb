@@ -13,7 +13,7 @@ class Admin::PapersController < Admin::ApplicationController
 
   def update
     @paper.update(paper_params)
-    redirect_to admin_activity_papers_path(@activity)
+    redirect_to admin_activity_paper_path(@activity, @paper)
   end
   private
   def set_activity
