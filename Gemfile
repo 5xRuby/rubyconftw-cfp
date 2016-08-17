@@ -26,6 +26,7 @@ gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'sidekiq'
 gem 'redcarpet'
+gem 'acts-as-taggable-on'
 
 
 group :development, :test do
@@ -33,6 +34,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda'
   gem 'capybara'
+  #gem 'selenium-webdriver'
+  #gem 'capybara-webkit'
   gem 'fuubar'
   gem 'factory_girl_rails'
 

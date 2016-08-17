@@ -9,6 +9,8 @@
           th
           th #
           th Subject
+          th Tags
+          th Comments
           th Status
           th User
           th
@@ -24,6 +26,13 @@
             td
               = paper.title
             td
+              - paper.tags.each do |tag|
+                = " "
+                .label.label-primary
+                  = tag.name
+            td
+              = paper.comments.count
+            td
               = paper.state
             td
               = paper.user.name
@@ -33,6 +42,7 @@
                 = admin_review_button(paper)
                 = admin_accept_button(paper)
                 = admin_reject_button(paper)
+              = " "
 
     = link_to "Back", admin_activity_path(@activity), class: "btn btn-default"
 

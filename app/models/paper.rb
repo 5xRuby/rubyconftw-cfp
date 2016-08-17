@@ -23,6 +23,9 @@ class Paper < ApplicationRecord
 	belongs_to :user
 
   has_many :reviews
+  has_many :comments
+
+  acts_as_taggable_on :tags
 
   aasm(column: :state) do
     state :submitted , initial: true

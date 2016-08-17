@@ -1,0 +1,5 @@
+.add-tag-field.well
+  = simple_form_for paper, url: admin_activity_paper_path(@activity, paper), method: "PATCH" do |f|
+    = f.input :tag_list, input_html: {value: paper.tag_list.join(', ')}
+    = f.submit "Save", class: "btn btn-primary"
+    = link_to "Close", "#", class: "btn btn-default remove-tag-field", data:{ id: paper.id}
