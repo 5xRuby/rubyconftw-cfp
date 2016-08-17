@@ -25,34 +25,37 @@ RSpec.describe "Admin::Papers", type: :request do
 
   describe "GET /admin/activity/:id/papers/:id" do
 
-    it "display paper's detail information" do
+    before do
       login_as admin
       visit admin_activity_paper_url(activity, paper)
-
-      expect(page).to have_content(paper.title)
-      expect(page).to have_content(paper.abstract)
-      expect(page).to have_content(paper.outline)
-      expect(page).to have_content(paper.pitch)
     end
+
+    %w{title abstract outline pitch}.each do |f|
+      it "displays paper's #{f}" do
+        expect(page).to have_content(paper.send(f))
+      end
+    end
+
   end
 
-  describe "POST /admin/papers/:id/reviews" do
-    it "change paper state to reviewed" do
-      paper = FactoryGirl.create(:paper, activity: activity)
+  describe "GET /admin/activities/:id/papers" do
 
+    before do
       login_as admin
-      visit admin_activity_papers_url(activity)
-
+      visit admin_activity_papers_url(paper.activity) #一次叫出 paper & activity
       within "#paper_#{paper.id}" do
         click_link "Review"
       end
+    end
 
-      within "#paper_#{paper.id}" do
-        expect(page).to have_content("Accept")
-        expect(page).to have_content("Reject")
-        expect(page).not_to have_content("Review")
+    %w{Accept Reject}.each do |f|
+      it "has #{f} link" do
+        within "#paper_#{paper.id}" do
+          expect(page).to have_content(f)
+        end
       end
     end
+
   end
 
   describe "POST /admin/papers/:id/accept" do
