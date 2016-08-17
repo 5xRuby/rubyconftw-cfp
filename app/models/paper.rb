@@ -27,6 +27,8 @@ class Paper < ApplicationRecord
 
   acts_as_taggable_on :tags
 
+  scope :state, -> (state) { where(state: state) }
+
   aasm(column: :state) do
     state :submitted , initial: true
     state *(ALL_STATUS[1..-1].map(&:to_sym))

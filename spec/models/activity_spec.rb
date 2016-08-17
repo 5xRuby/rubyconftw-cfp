@@ -40,12 +40,24 @@ RSpec.describe Activity, type: :model do
     expect(closed_activity.status).to eq("closed")
   end
 
-  # TODO: This test can be improved
-  it "should able to find propals review by specify user" do
-    user = FactoryGirl.create(:user)
-    activity = FactoryGirl.create(:activity)
-    reviewed_papers = FactoryGirl.create_list(:paper_with_review, 5, activity: activity, review_by: user)
+  context "papers review state" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:activity) { FactoryGirl.create(:activity) }
 
-    expect(activity.review_by(user).size).to eq(reviewed_papers.size)
+    before(:each) do
+        @unreview_papers = FactoryGirl.create_list(:paper, 5, activity: activity)
+        @reviewed_papers = FactoryGirl.create_list(:paper_with_review, 5, activity: activity, review_by: user)
+        @withdrawn_paper = FactoryGirl.create(:paper, :withdrawn, activity: activity)
+        @unreview_accepted_paper = FactoryGirl.create(:paper, :accepted, activity: activity)
+        @unreview_rejected_paper = FactoryGirl.create(:paper, :rejected, activity: activity)
+    end
+
+    it "should able to find propals review by specify user" do
+      expect(activity.review_by(user).size).to eq(@reviewed_papers.size)
+    end
+
+    it "should able to find unreview papers by specify user" do
+      expect(activity.unreview_by(user).size).to eq(@unreview_papers.size)
+    end
   end
 end
