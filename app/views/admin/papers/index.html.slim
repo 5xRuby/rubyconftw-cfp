@@ -7,10 +7,18 @@
       thead
         tr
           th
-          th #
-          th Subject
-          th Status
-          th User
+          th
+            | #
+            = sortable("id")
+          th
+            | Title
+            = sortable("title")
+          th
+            | State
+            = sortable("state")
+          th
+            | User
+            = sortable("user")
           th
       tbody
         - @papers.each do |paper|

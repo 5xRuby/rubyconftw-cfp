@@ -28,4 +28,11 @@ module ApplicationHelper
   def page_image(image = nil)
     image || t('meta.image')
   end
+
+  def sortable(column)
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+    css_class = column == sort_column ? "sort-amount-#{direction} current" : "sort"
+    link_to "", {sort: column, direction: direction}, class: "sort fa fa-" + css_class
+  end
+
 end
