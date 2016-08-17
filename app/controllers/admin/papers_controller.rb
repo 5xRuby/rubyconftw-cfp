@@ -3,7 +3,11 @@ class Admin::PapersController < Admin::ApplicationController
   before_action :set_activity
   before_action :set_paper, only: [:show]
   def index
-    @papers = Paper.where(activity: @activity).order(sort_column + " "+ sort_direction)
+    if params[:sort] = "user"
+      @papers = Paper.joins(:user).where(activity: @activity).order("users.name "+ sort_direction)
+    else
+      @papers = Paper.where(activity: @activity).order(sort_column + " "+ sort_direction)
+    end
     @notification = Notification.new
   end
 
@@ -21,6 +25,7 @@ class Admin::PapersController < Admin::ApplicationController
   end
 
   def sort_column
+    return "user" if params[:sort] == "user"
     Paper.column_names.include?(params[:sort]) ? params[:sort] : "id"
   end
 
