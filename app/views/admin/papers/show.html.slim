@@ -60,14 +60,14 @@
 
 h2 comments(#{@paper.comments.count})
 - @paper.comments.each do |comment|
-  h4 #{comment.user.name} says:
-  .well
-    p = comment.text
-  .text-right
-    p
-    = "created at #{comment.created_at} "
-    - if comment.user == current_user
-      = link_to "delete", admin_activity_paper_comment_path(@activity, @paper, comment), method: "DELETE"
+  div class="comment-#{comment.id}"
+    h4 #{comment.user.name} says:
+    .well
+      p = comment.text
+    p.text-right
+      = "created at #{comment.created_at} "
+      - if comment.user == current_user
+        = link_to "delete", admin_activity_paper_comment_path(@activity, @paper, comment), method: "DELETE"
   hr
 h3 add comments
 = simple_form_for @new_comment, url: admin_activity_paper_comments_path(@activity, @paper), method: "POST" do |f|
