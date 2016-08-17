@@ -43,9 +43,6 @@
                 = admin_accept_button(paper)
                 = admin_reject_button(paper)
               = " "
-              a.edit-tag-button.btn.btn-default(data-id="#{paper.id}") Edit tag
-              .field-container.hide(data-id="#{paper.id}")
-                = render(partial: "tag_field", locals: {paper: paper})
 
     = link_to "Back", admin_activity_path(@activity), class: "btn btn-default"
 

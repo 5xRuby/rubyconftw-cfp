@@ -2,12 +2,20 @@
   .page-header
     h1
       = @paper.title
-      - @paper.tags.each do |tag|
-        = " "
-        .label.label-primary
-          = tag.name
   table.table
     tbody
+      tr
+        th tags
+        td
+          - @paper.tags.each do |tag|
+            = " "
+            .label.label-primary
+              = tag.name
+          = " "
+          a.edit-tag-button.btn.btn-default(data-id="#{@paper.id}") Edit tag
+          .field-container.hide(data-id="#{@paper.id}")
+            = render(partial: "tag_field", locals: {paper: @paper})
+
       tr
         th Language
         td = @paper.language
