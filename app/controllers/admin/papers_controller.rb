@@ -24,7 +24,7 @@ class Admin::PapersController < Admin::ApplicationController
 
 
   def set_activity
-    @activity = Activity.find(params[:activity_id])
+    @activity = Activity.find(permalink: params[:activity_id])
   end
 
   def set_paper
