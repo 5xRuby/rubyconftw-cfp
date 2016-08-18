@@ -23,6 +23,11 @@ class Paper < ApplicationRecord
 	belongs_to :user
 
   has_many :reviews
+  has_many :comments
+
+  acts_as_taggable_on :tags
+
+  scope :state, -> (state) { where(state: state) }
 
   aasm(column: :state) do
     state :submitted , initial: true
