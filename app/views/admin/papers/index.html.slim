@@ -7,22 +7,40 @@
       thead
         tr
           th
-          th #
-          th Subject
-          th Status
-          th User
+          th
+            | #
+            = sortable("id")
+          th
+            | Title
+            = sortable("title")
+          th Tags
+          th
+            | Comment counts
+          th
+            | State
+            = sortable("state")
+          th
+            | User
+            = sortable("users.name")
           th
       tbody
         - @papers.each do |paper|
-          tr
+          tr id=("paper_#{paper.id}")
             td
               div.checkbox
                 label
-                  = check_box_tag "notification[ids][]", paper.user.id, false
+                  = check_box_tag "notification[ids][]", paper.user.id, false, id: "notification_ids_#{paper.user.id}"
             td
               = paper.id
             td
               = paper.title
+            td
+              - paper.tags.each do |tag|
+                = " "
+                .label.label-primary
+                  = tag.name
+            td
+              = paper.comments.count
             td
               = paper.state
             td
@@ -33,10 +51,11 @@
                 = admin_review_button(paper)
                 = admin_accept_button(paper)
                 = admin_reject_button(paper)
+              = " "
 
     = link_to "Back", admin_activity_path(@activity), class: "btn btn-default"
 
-    div
+    div.notification
       hr
       h3 Notice Mail
       p

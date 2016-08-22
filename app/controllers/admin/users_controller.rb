@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::ApplicationController
   def index
-    @users = User.all
+    @users = User.all.order(id: :asc)
   end
 
   def designate

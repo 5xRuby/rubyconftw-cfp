@@ -1,3 +1,15 @@
 // Place all the styles related to the admin/papers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sort {
+  margin-left: 5px;
+  color: #aaa;
+}
+.sort.current{
+  color: #000;
+}
+.sort:hover{
+  color: #555;
+  text-decoration: none;
+}
