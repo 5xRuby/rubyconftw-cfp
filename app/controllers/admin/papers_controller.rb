@@ -5,7 +5,6 @@ class Admin::PapersController < Admin::ApplicationController
   add_sortable_column "users.name"
 
   def index
-    Rails.logger.debug sort_column
     @papers = Paper.joins(:user).where(activity: @activity).order("#{sort_column} #{sort_direction}")
     @notification = Notification.new
   end
