@@ -1,9 +1,11 @@
 class Admin::PapersController < Admin::ApplicationController
-  helper_method :sort_column, :sort_direction
   before_action :set_activity
   before_action :set_paper, only: [:show, :update]
+
+  add_sortable_column "users.name"
+
   def index
-    @papers = Paper.joins(:user).where(activity: @activity).order(sort_sql)
+    @papers = Paper.joins(:user).where(activity: @activity).order("#{sort_column} #{sort_direction}")
     @notification = Notification.new
   end
 
@@ -18,26 +20,12 @@ class Admin::PapersController < Admin::ApplicationController
   end
   private
 
-  def sort_sql
-    "#{sort_column} #{sort_direction}"
-  end
-
-
   def set_activity
     @activity = Activity.find(params[:activity_id])
   end
 
   def set_paper
     @paper = @activity.papers.find_by(uuid: params[:id])
-  end
-
-  def sort_column
-    return "users.name" if params[:sort] == "users.name"
-    Paper.column_names.include?(params[:sort]) ? params[:sort] : "id"
-  end
-
-  def sort_direction
-    params[:direction] == "desc" ? "desc" : "asc"
   end
 
   def paper_params
