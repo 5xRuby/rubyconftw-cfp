@@ -1,3 +1,13 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+jQuery ->
+  $('.edit-tag-button').on 'click', ->
+    id = $(this).attr('data-id')
+    $('.field-container[data-id='+id+']').removeClass("hide")
+
+  $('.remove-tag-field').on 'click', (e) ->
+    e.preventDefault
+    id = $(this).attr('data-id')
+    $('.field-container[data-id='+id+']').addClass("hide")
+
+
+
+
