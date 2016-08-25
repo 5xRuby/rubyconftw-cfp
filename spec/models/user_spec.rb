@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
       OmniAuth::AuthHash.new({
         provider: 'github',
         info: {
-          email: 'github@5xruby.tw'
+          email: 'github@rubyconf.tw'
         }
       })
     }
@@ -32,10 +32,5 @@ RSpec.describe User, type: :model do
     it "should return exists user when found" do
       expect(User.from_omniauth(auth_info_exists)).to eq(exists_user)
     end
-  end
-
-  context "with default information from session" do
-    it "should copy github information"
-    it "should copy twitter information"
   end
 end

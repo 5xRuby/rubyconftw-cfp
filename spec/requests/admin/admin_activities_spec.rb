@@ -3,7 +3,14 @@ require 'rails_helper'
 RSpec.describe "Admin::Activities", type: :request do
   let(:admin) { FactoryGirl.create(:user, :admin) }
 
+  before(:each) { login_as admin }
+
   describe "GET /admin/activities" do
+    before(:each) do
+      @activities = FactoryGirl.create_list(:activity, 5)
+      visit admin_activities_url
+    end
+
     it "cannot viewed by non-admin user" do
       user = FactoryGirl.create(:user)
       login_as user
@@ -12,32 +19,29 @@ RSpec.describe "Admin::Activities", type: :request do
     end
 
     it "display all activities" do
-      activities = FactoryGirl.create_list(:activity, 5)
-
-      login_as admin
-      visit admin_activities_url
-      activities.each do |activity|
+      @activities.each do |activity|
         expect(page).to have_content(activity.name)
       end
     end
   end
 
   describe "GET /admin/acivities/:id" do
-    let(:activity) { FactoryGirl.create(:activity) }
+
+    before(:each) do
+      @activity = FactoryGirl.create(:activity)
+      visit admin_activity_url(@activity)
+    end
+
     it "shows activity details" do
-      login_as admin
-      visit admin_activity_url(activity)
-      expect(page).to have_content(activity.name)
-      expect(page).to have_content(activity.description)
+      expect(page).to have_content(@activity.name)
+      expect(page).to have_content(@activity.description)
     end
   end
 
 
   describe "POST /admin/activities" do
+    before(:each) { visit new_admin_activity_url }
     it "creates a new activity" do
-      login_as admin
-      visit new_admin_activity_url
-
       within ".new_activity" do
         fill_in "Name", with: "RubyConfTW"
         fill_in "Description", with: "RubyConfTW is a conference of ruby in Taiwan"
@@ -48,9 +52,6 @@ RSpec.describe "Admin::Activities", type: :request do
     end
 
     it "show errors when not fill required fields" do
-      login_as admin
-      visit new_admin_activity_url
-
       within ".new_activity" do
         click_button "Save"
       end
@@ -62,11 +63,12 @@ RSpec.describe "Admin::Activities", type: :request do
   end
 
   describe "PUT /admin/activities/:id" do
-    let(:activity) { FactoryGirl.create(:activity) }
-    it "update a activity" do
-      login_as admin
-      visit edit_admin_activity_url(activity)
+    before(:each) do
+      @activity = FactoryGirl.create(:activity)
+      visit edit_admin_activity_url(@activity)
+    end
 
+    it "update a activity" do
       within ".edit_activity" do
         fill_in "Name", with: "RubyConfTW"
         fill_in "Description", with: "RubyConfTW's description"
@@ -77,9 +79,6 @@ RSpec.describe "Admin::Activities", type: :request do
     end
 
     it "didn't update activity when not fill required fields" do
-      login_as admin
-      visit edit_admin_activity_url(activity)
-
       within ".edit_activity" do
         fill_in "Name", with: ""
         click_button "Save"
@@ -90,29 +89,31 @@ RSpec.describe "Admin::Activities", type: :request do
   end
 
   describe "DELETE /admin/activities/:id" do
-    it "delete a activity" do
-      activity = FactoryGirl.create(:activity)
-
-      login_as admin
+    before(:each) do
+      @activity = FactoryGirl.create(:activity)
       visit admin_activities_url
+    end
 
-      within "#activity_#{activity.id}" do
+    it "delete a activity" do
+      within "#activity_#{@activity.id}" do
         click_link "Remove"
       end
 
-      expect(page).not_to have_content(activity.name)
+      expect(page).not_to have_content(@activity.name)
     end
   end
 
   describe "POST /admin/activities/:id/mails" do
-    let(:activity) { FactoryGirl.create(:activity_with_papers) }
+    before(:each) do
+      @activity = FactoryGirl.create(:activity_with_papers)
+      @papers = @activity.papers
+
+      visit admin_activity_papers_url(@activity)
+    end
 
     it "sends mail to selected papers owner" do
-      login_as admin
-      visit admin_activity_papers_url(activity)
-
-      within "#paper_#{activity.papers.first.id}" do
-        check "notification_ids_#{activity.papers.first.user.id}"
+      within "#paper_#{@papers.first.id}" do
+        check "notification_ids_#{@papers.first.user.id}"
       end
 
       within ".notification" do
@@ -125,9 +126,6 @@ RSpec.describe "Admin::Activities", type: :request do
     end
 
     it "didn't sends mail to selected papers owner when not fill required fields" do
-      login_as admin
-      visit admin_activity_papers_url(activity)
-
       within ".notification" do
         click_button "Send"
       end
