@@ -3,14 +3,14 @@ class Admin::ReviewsController < Admin::ApplicationController
 
   def create
     @paper.reviews.create!(user: current_user, reviewed: true)
-    redirect_to admin_activity_papers_path(@paper.activity_id, @paper)
+    redirect_to admin_activity_papers_path(@paper.activity, @paper)
     rescue StandardError
-      redirect_to admin_activity_papers_path(@paper.activity_id, @paper), alert: "You already reviewed this paper"
+      redirect_to admin_activity_papers_path(@paper.activity, @paper), alert: "You already reviewed this paper"
   end
 
   def accept
     @paper.accept!
-    redirect_to admin_activity_papers_path(@paper.activity_id,@paper)
+    redirect_to admin_activity_papers_path(@paper.activity,@paper)
     rescue StandardError
       redirect_to admin_activity_papers_path(@paper.activity_id,@paper), alert: "發生錯誤"
 
@@ -18,9 +18,9 @@ class Admin::ReviewsController < Admin::ApplicationController
 
   def reject
     @paper.reject!
-    redirect_to admin_activity_papers_path(@paper.activity_id, @paper)
+    redirect_to admin_activity_papers_path(@paper.activity, @paper)
     rescue StandardError
-      redirect_to admin_activity_papers_path(@paper.activity_id, @paper), alert: "發生錯誤"
+      redirect_to admin_activity_papers_path(@paper.activity, @paper), alert: "發生錯誤"
   end
 
   protect_from_forgery

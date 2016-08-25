@@ -1,4 +1,4 @@
-require 'rails_helper'
+  require 'rails_helper'
 
 RSpec.describe "Admin::Papers", type: :request do
   let(:admin) { FactoryGirl.create(:user, :admin) }

@@ -15,9 +15,13 @@ class Activity < ApplicationRecord
   validates_presence_of :end_date
   validates_presence_of :open_at
   validates_presence_of :close_at
+  validates_presence_of :permalink
   validate :validate_end_date_after_start_date
   validate :validate_close_time_after_open_time
 
+  def to_param
+    permalink
+  end
 
   def status
     open? ? "open" : "closed"

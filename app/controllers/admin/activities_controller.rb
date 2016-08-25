@@ -5,7 +5,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
   end
 
   def show
-    @activity = Activity.find(params[:id])
+    @activity = Activity.find_by(permalink: params[:id])
   end
 
   def new
@@ -24,12 +24,12 @@ class Admin::ActivitiesController < Admin::ApplicationController
   end
 
   def edit
-    @activity = Activity.find(params[:id])
+    @activity = Activity.find_by(permalink: params[:id])
     @new_custom_field = CustomField.new
   end
 
   def update
-    @activity = Activity.find(params[:id])
+    @activity = Activity.find_by(permalink: params[:id])
     if @activity.update(activity_params)
       redirect_to admin_activities_path
     else
@@ -38,7 +38,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
   end
 
   def destroy
-    @activity = Activity.find(params[:id])
+    @activity = Activity.find_by(permalink: params[:id])
     @activity.destroy
     redirect_to admin_activities_path
   end
@@ -46,7 +46,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
   private
 
   def activity_params
-    params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :open_at, :close_at, :term, custom_fields_attributes: [:id, :name, :required, :description, :field_type, :_destroy, :sort_order, :collection_text])
+    params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :open_at, :close_at, :term, :permalink,  custom_fields_attributes: [:id, :name, :required, :description, :field_type, :_destroy, :sort_order, :collection_text])
 
   end
 

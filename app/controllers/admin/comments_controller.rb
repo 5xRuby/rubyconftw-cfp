@@ -18,7 +18,7 @@ class Admin::CommentsController < Admin::ApplicationController
 
   private
   def set_activity
-    @activity = Activity.find(params[:activity_id])
+    @activity = Activity.find_by(permalink: params[:activity_id])
   end
   def set_paper
     @paper = Paper.find_by(uuid: params[:paper_id])
