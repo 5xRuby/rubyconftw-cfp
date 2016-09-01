@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :paper do
     sequence(:title) { |n| "Sample Paper #{n}" }
-    abstract "Sample abstract with long content"
+    abstract "Sample abstract with long long long long long long content"
     outline "Sample outline with long content"
-    speaker_bio "Speaker bio with long content"
+    speaker_bio "Speaker bio with long long long long long long content"
     language "Chinese"
     user { FactoryGirl.create(:user) }
     activity { FactoryGirl.create(:activity) }
