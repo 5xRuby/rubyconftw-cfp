@@ -11,10 +11,10 @@ class ActivitiesController < ApplicationController
   protected
 
   def find_activity
-    @activity = begin
-                  Activity.find_by(permalink: params[:id])
-                rescue ActiveRecord::RecordNotFound
-                  Activity.find(params[:id])
-                end
+    @activity = Activity.find_by(permalink: params[:id])
+    if @activity.nil? && activity = Activity.find(params[:id])
+      redirect_to activity_path(activity)
+      return false
+    end
   end
 end

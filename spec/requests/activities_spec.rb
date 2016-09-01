@@ -25,6 +25,19 @@ RSpec.describe "Activities", type: :request do
 
   end
 
+  describe "GET /activities/:id but only id" do
+
+    let! :activity do
+      FactoryGirl.create(:activity)
+    end
+
+    it "should redirect if only use id in id param" do
+      get "/activities/#{activity.id}"
+      expect(response).to redirect_to(activity_url(activity))
+    end
+
+  end
+
   describe "GET /activities/:id" do
 
     let! :activity do
