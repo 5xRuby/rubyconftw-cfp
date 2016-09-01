@@ -1,9 +1,15 @@
 require 'rails_helper'
+require 'support/matchers/should_have_validate_word_length_of'
 
 RSpec.describe Paper, type: :model do
-  it { should validate_length_of(:title).is_at_least(2).is_at_most(60) }
-  it { should validate_length_of(:abstract).is_at_least(10).is_at_most(600) }
-  it { should validate_length_of(:speaker_bio).is_at_least(10).is_at_most(600) }
+  it { should validate_word_length_of(:title).is_at_least(2).is_at_most(60) }
+  it { should validate_word_length_of(:abstract).is_at_least(10).is_at_most(600) }
+  it { should validate_word_length_of(:speaker_bio).is_at_least(10).is_at_most(600) }
+
+  it { should validate_word_length_of(:title).include_unicode.is_at_least(2).is_at_most(60) }
+  it { should validate_word_length_of(:abstract).include_unicode.is_at_least(10).is_at_most(600) }
+  it { should validate_word_length_of(:speaker_bio).include_unicode.is_at_least(10).is_at_most(600) }
+
 
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:abstract) }
