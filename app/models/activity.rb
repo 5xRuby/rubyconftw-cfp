@@ -15,9 +15,13 @@ class Activity < ApplicationRecord
   validates_presence_of :end_date
   validates_presence_of :open_at
   validates_presence_of :close_at
+  validates_presence_of :permalink
   validate :validate_end_date_after_start_date
   validate :validate_close_time_after_open_time
 
+  def to_param
+    permalink
+  end
 
   def status
     open? ? "open" : "closed"
@@ -47,6 +51,12 @@ class Activity < ApplicationRecord
     return if self.close_at.blank? || self.open_at.blank?
     unless self.close_at >= self.open_at
       errors[:close_at] << "必須晚於起始時間"
+    end
+  end
+
+  def self.initialize_permalink
+    self.where("permalink IS NULL").each do |activity|
+      activity.update permalink: activity.name.downcase.gsub(" ", "-")
     end
   end
 end

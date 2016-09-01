@@ -79,7 +79,7 @@ class PapersController < ApplicationController
   end
 
   def current_activity
-    @activity ||= Activity.find(params[:activity_id])
+    @activity ||= Activity.find_by(permalink: params[:activity_id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

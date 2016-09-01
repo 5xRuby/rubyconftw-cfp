@@ -15,5 +15,5 @@
             = render "custom_field", cf: cf
       .form-group
         a.btn.btn-default#add-field(data-form-content="#{render(partial: "new_field", locals: {f:f, idx: rand(99999) + 1}).gsub(/\n/,"")  }") Add Field
-
+    = f.input :permalink
     = f.submit "Save", class: "btn btn-primary"

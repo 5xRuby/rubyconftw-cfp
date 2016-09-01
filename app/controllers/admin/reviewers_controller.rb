@@ -6,10 +6,10 @@ class Admin::ReviewersController < ApplicationController
       @reviewers << User.find(relationship.user_id)
     end
   end
-  
+
   def new
     @relationship = UserActivityRelationship.new
-    @users = User.all 
+    @users = User.all
   end
   def create
     @relationship = UserActivityRelationship.new(relationship_params)
@@ -24,15 +24,15 @@ class Admin::ReviewersController < ApplicationController
 
   def destroy
     @relationship = UserActivityRelationship.where(activity_id: params[:activity_id], user_id: params[:id])
-    @relationship.each do |relationship| 
+    @relationship.each do |relationship|
       relationship.destroy
     end
-    redirect_to admin_activity_reviewers_path 
+    redirect_to admin_activity_reviewers_path
   end
   private
-  
+
   def set_activity
-    @activity = Activity.find(params[:activity_id])
+    @activity = Activity.find_by(permalink: params[:activity_id])
   end
   def set_relationships
     @relationships = UserActivityRelationship.where(activity_id: @activity.id)

@@ -27,6 +27,7 @@ gem 'omniauth-twitter'
 gem 'sidekiq'
 gem 'redcarpet'
 gem 'acts-as-taggable-on'
+gem 'unicode_utils'
 
 
 group :development, :test do

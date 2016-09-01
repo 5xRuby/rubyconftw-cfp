@@ -5,32 +5,33 @@ RSpec.describe "Papers", type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:other_user) { FactoryGirl.create(:user) }
 
+  before(:each) { login_as user }
+
   describe "GET /papers/new" do
     let(:expired_activity) { FactoryGirl.create(:activity, :expired) }
 
     it "redirect to singin page before login" do
+      logout :user
       visit new_activity_paper_url(activity)
       expect(page).to have_current_path(new_user_session_path)
     end
 
     it "cannot submit proposal after activity closed" do
-      login_as user
       visit new_activity_paper_url(expired_activity)
       expect(page).to have_content("The event has not opened yet or already closed!")
     end
   end
 
   describe "POST /papers" do
-    it "creates new paper" do
-      login_as user
-      visit new_activity_paper_url(activity)
+    before(:each) { visit new_activity_paper_url(activity) }
 
+    it "creates new paper" do
       within ".new_paper" do
         choose "Chinese"
         fill_in "Title", with: "Proposal Subject"
-        fill_in "Abstract", with: "Some abstract for this proposal"
+        fill_in "Abstract", with: "Some abstract for this proposal" * 5
         fill_in "Outline", with: "Some outline for this proposal"
-        fill_in "Bio", with: "Some speaker bio for this proposal"
+        fill_in "Bio", with: "Some speaker bio for this proposal" * 5
         click_button "Submit Proposal"
       end
 
@@ -43,9 +44,6 @@ RSpec.describe "Papers", type: :request do
     end
 
     it "shows error when not fill all requred information" do
-      login_as user
-      visit new_activity_paper_url(activity)
-
       within "#new_paper" do
         click_button "Submit Proposal"
       end
@@ -58,7 +56,6 @@ RSpec.describe "Papers", type: :request do
     it "cannot edit other user's proposal" do
       paper = FactoryGirl.create(:paper, activity: activity, user: other_user)
 
-      login_as user
       visit edit_activity_paper_url(activity, paper)
       expect(page).to have_content("You are not authorized to access this page.")
     end
@@ -66,15 +63,14 @@ RSpec.describe "Papers", type: :request do
     it "updates the proposal" do
       paper = FactoryGirl.create(:paper, activity: activity, user: user)
 
-      login_as user
       visit edit_activity_paper_url(activity, paper)
 
       within ".edit_paper" do
         choose "English"
         fill_in "Title", with: "Proposal Subject"
-        fill_in "Abstract", with: "Some abstract for this proposal"
+        fill_in "Abstract", with: "Some abstract for this proposal" * 5
         fill_in "Outline", with: "Some outline for this proposal"
-        fill_in "Bio", with: "Some speaker bio for this proposal"
+        fill_in "Bio", with: "Some speaker bio for this proposal" * 5
         click_button "Submit Proposal"
       end
 
@@ -89,7 +85,6 @@ RSpec.describe "Papers", type: :request do
     it "shows error when not fill required fields" do
       paper = FactoryGirl.create(:paper, activity: activity, user: user)
 
-      login_as user
       visit edit_activity_paper_url(activity, paper)
 
       within ".edit_paper" do
@@ -105,7 +100,6 @@ RSpec.describe "Papers", type: :request do
     it "cannot withdraw other user's proposal" do
       paper = FactoryGirl.create(:paper, activity: activity, user: other_user)
 
-      login_as user
       visit activity_paper_url(activity, paper)
       expect(page).to have_content("You are not authorized to access this page.")
     end
@@ -113,7 +107,6 @@ RSpec.describe "Papers", type: :request do
     it "withdraws the proposal" do
       paper = FactoryGirl.create(:paper, activity: activity, user: user)
 
-      login_as user
       visit activity_paper_url(activity, paper)
       click_link "Withdraw Proposal"
       expect(page).to have_content("Paper was successfully withdrawn.")

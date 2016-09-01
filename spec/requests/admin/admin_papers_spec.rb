@@ -1,11 +1,21 @@
-require 'rails_helper'
+  require 'rails_helper'
 
 RSpec.describe "Admin::Papers", type: :request do
   let(:admin) { FactoryGirl.create(:user, :admin) }
   let(:activity) { FactoryGirl.create(:activity) }
-  let(:paper) { FactoryGirl.create(:paper, activity: activity) }
+  let(:state) { :submitted }
+
+  before(:each) do
+    @paper = FactoryGirl.create(:paper, activity: activity, state: state)
+    login_as admin
+  end
 
   describe "GET /admin/activity/:id/papers" do
+    before(:each) do
+      @papers = FactoryGirl.create_list(:paper, 5, activity: activity)
+      visit admin_activity_papers_url(activity)
+    end
+
     it "cannot viewed by non admin user" do
       user = FactoryGirl.create(:user)
       login_as user
@@ -14,10 +24,7 @@ RSpec.describe "Admin::Papers", type: :request do
     end
 
     it "display specify activity's proposal" do
-      papers = FactoryGirl.create_list(:paper, 5, activity: activity)
-      login_as admin
-      visit admin_activity_papers_url(activity)
-      papers.each do |paper|
+      @papers.each do |paper|
         expect(page).to have_content(paper.title)
       end
     end
@@ -27,12 +34,12 @@ RSpec.describe "Admin::Papers", type: :request do
 
     before do
       login_as admin
-      visit admin_activity_paper_url(activity, paper)
+      visit admin_activity_paper_url(activity, @paper)
     end
 
     %w{title abstract outline pitch}.each do |f|
       it "displays paper's #{f}" do
-        expect(page).to have_content(paper.send(f))
+        expect(page).to have_content(@paper.send(f))
       end
     end
 
@@ -42,15 +49,15 @@ RSpec.describe "Admin::Papers", type: :request do
 
     before do
       login_as admin
-      visit admin_activity_papers_url(paper.activity) #一次叫出 paper & activity
-      within "#paper_#{paper.id}" do
+      visit admin_activity_papers_url(@paper.activity) #一次叫出 paper & activity
+      within "#paper_#{@paper.id}" do
         click_link "Review"
       end
     end
 
     %w{Accept Reject}.each do |f|
       it "has #{f} link" do
-        within "#paper_#{paper.id}" do
+        within "#paper_#{@paper.id}" do
           expect(page).to have_content(f)
         end
       end
@@ -59,17 +66,15 @@ RSpec.describe "Admin::Papers", type: :request do
   end
 
   describe "POST /admin/papers/:id/accept" do
+    let(:state) { :reviewed }
+    before(:each) { visit admin_activity_papers_url(activity) }
+
     it "change paper state to accepted" do
-      paper = FactoryGirl.create(:paper, :reviewed, activity: activity)
-
-      login_as admin
-      visit admin_activity_papers_url(activity)
-
-      within "#paper_#{paper.id}" do
+      within "#paper_#{@paper.id}" do
         click_link "Accept"
       end
 
-      within "#paper_#{paper.id}" do
+      within "#paper_#{@paper.id}" do
         expect(page).not_to have_content("Accept")
         expect(page).not_to have_content("Reject")
         expect(page).not_to have_content("Review")
@@ -78,17 +83,15 @@ RSpec.describe "Admin::Papers", type: :request do
   end
 
   describe "POST /admin/papers/:id/reject" do
+    let(:state) { :reviewed }
+    before(:each) { visit admin_activity_papers_url(activity) }
+
     it "change paper state to rejected" do
-      paper = FactoryGirl.create(:paper, :reviewed, activity: activity)
-
-      login_as admin
-      visit admin_activity_papers_url(activity)
-
-      within "#paper_#{paper.id}" do
+      within "#paper_#{@paper.id}" do
         click_link "Reject"
       end
 
-      within "#paper_#{paper.id}" do
+      within "#paper_#{@paper.id}" do
         expect(page).not_to have_content("Accept")
         expect(page).not_to have_content("Reject")
         expect(page).not_to have_content("Review")
@@ -159,7 +162,7 @@ RSpec.describe "Admin::Papers", type: :request do
 
     it "cannot delete other user's comment" do
       other_admin = FactoryGirl.create(:user, :admin)
-      comment = FactoryGirl.create(:comment, paper: @paper, user: other_admin, text: "Hello Rspec!")
+      FactoryGirl.create(:comment, paper: @paper, user: other_admin, text: "Hello Rspec!")
       visit admin_activity_paper_url(activity, @paper)
       expect(page).to have_content("Hello Rspec!")
       expect(page).not_to have_content("delete")

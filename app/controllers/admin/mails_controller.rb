@@ -1,6 +1,6 @@
 class Admin::MailsController < ApplicationController
 
-  before_action -> { @activity = Activity.find(params[:activity_id]) }
+  before_action -> { @activity = Activity.find_by(permalink: params[:activity_id]) }
 
   def create
     @notification = Notification.new(mail_params.permit(:subject, :content))

@@ -1,10 +1,37 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-   rescue_from CanCan::AccessDenied do |exception|
+  helper_method :sort_column, :sort_direction
+
+  rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
+  end
+
+  def resources
+    controller_name.classify.constantize
+  end
+
+  def sort_column
+    sortable_column.include?(params[:sort]) ? params[:sort] : "id"
+  end
+
+  def sort_direction
+    params[:direction] == "desc" ? "desc" : "asc"
+  end
+
+  def sortable_column
+    @sortable_column ||= []
+    return ["id"] + @sortable_column unless resources.respond_to?(:column_names)
+    resources.column_names +  @sortable_column
+  end
+
+  def self.add_sortable_column(*args)
+    before_action do
+      @sortable_column ||= []
+      @sortable_column.push(*args)
+    end
   end
 
   protect_from_forgery with: :exception
