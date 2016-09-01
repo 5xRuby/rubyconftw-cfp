@@ -30,9 +30,9 @@ en:
         speaker_bio: Bio
     hints:
       paper:
-        speaker_bio: "Bio is limited to 500 characters."
-        title: Please limit your title to 60 characters or less.
-        abstract: Provide a concise description for the program limited to 600 characters or less.
+        speaker_bio: "(Public) Limited to 600 characters, markdown format is accepted."
+        title: (Public) Please limit your title to 100 words or less.
+        abstract: (Public) Provide a concise description for the program, limited to 600 words or less, markdown  is accepted.
         outline: "Include any pertinent details such as outlines, outcomes or intended audience."
         pitch: "Explain why this talk should be considered and what makes you qualified to speak on the topic."
     placeholders:
