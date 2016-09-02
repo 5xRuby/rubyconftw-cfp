@@ -29,9 +29,9 @@ RSpec.describe "Papers", type: :request do
       within ".new_paper" do
         choose "Chinese"
         fill_in "Title", with: "Proposal Subject"
-        fill_in "Abstract", with: "Some abstract for this proposal"
+        fill_in "Abstract", with: "Some abstract for this proposal" * 5
         fill_in "Outline", with: "Some outline for this proposal"
-        fill_in "Bio", with: "Some speaker bio for this proposal"
+        fill_in "Bio", with: "Some speaker bio for this proposal" * 5
         click_button "Submit Proposal"
       end
 
@@ -68,9 +68,9 @@ RSpec.describe "Papers", type: :request do
       within ".edit_paper" do
         choose "English"
         fill_in "Title", with: "Proposal Subject"
-        fill_in "Abstract", with: "Some abstract for this proposal"
+        fill_in "Abstract", with: "Some abstract for this proposal" * 5
         fill_in "Outline", with: "Some outline for this proposal"
-        fill_in "Bio", with: "Some speaker bio for this proposal"
+        fill_in "Bio", with: "Some speaker bio for this proposal" * 5
         click_button "Submit Proposal"
       end
 

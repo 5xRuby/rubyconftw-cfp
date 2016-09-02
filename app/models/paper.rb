@@ -7,8 +7,8 @@ class Paper < ApplicationRecord
 
 	mount_uploader :speaker_avatar, PictureUploader
 
-  validates_length_of :title, in: 2..60
-  validates_length_of :abstract, :speaker_bio, in: 10..600
+  validates :title, word: { in: 1..100}
+  validates :abstract, :speaker_bio, word: { in: 10..601 }
 	validates_presence_of :title
 	validates_presence_of :abstract
 	validates_presence_of :outline

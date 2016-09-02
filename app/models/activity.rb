@@ -53,4 +53,10 @@ class Activity < ApplicationRecord
       errors[:close_at] << "必須晚於起始時間"
     end
   end
+
+  def self.initialize_permalink
+    self.where("permalink IS NULL").each do |activity|
+      activity.update permalink: activity.name.downcase.gsub(" ", "-")
+    end
+  end
 end
