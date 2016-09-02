@@ -7,6 +7,7 @@
       thead
         tr
           th
+            = check_box_tag "notification_check_all", nil, false, id: "notification_check_all"
           th
             | #
             = sortable("id")
