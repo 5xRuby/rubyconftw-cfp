@@ -19,3 +19,4 @@ html
       - if respond_to?(:console)
         =console
     = render 'shared/footer'
+    = yield :javascript
