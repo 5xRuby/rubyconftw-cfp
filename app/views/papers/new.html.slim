@@ -1,3 +1,13 @@
 .col-md-12.paper-new
   h1 = t('.new-paper')
   = render 'form'
+  = content_for :javascript
+    javascript:
+      document.addEventListener('DOMContentLoaded', function() {
+        var draft = new Draft("#new_paper")
+        draft.register("#paper_title")
+        draft.register("#paper_abstract")
+        draft.register("#paper_outline")
+        draft.register("#paper_pitch")
+        draft.register("#paper_speaker_bio")
+      })
