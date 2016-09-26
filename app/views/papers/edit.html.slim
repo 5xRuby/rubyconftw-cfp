@@ -1,3 +1,13 @@
 .col-md-10.col-md-offset-1.paper-edit
   h1 Edit #{@paper.title} for #{@activity.name}
   = render 'form'
+  = content_for :javascript
+    javascript:
+      document.addEventListener('DOMContentLoaded', function() {
+        var draft = new Draft(".edit_paper")
+        draft.register("#paper_title")
+        draft.register("#paper_abstract")
+        draft.register("#paper_outline")
+        draft.register("#paper_pitch")
+        draft.register("#paper_speaker_bio")
+      })
