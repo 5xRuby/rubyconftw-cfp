@@ -34,7 +34,7 @@
 
     if(window.localStorage) {
       var draftData = localStorage.getItem(this.scope(selector))
-      if(draftData) {
+      if(draftData && $el.value.length <= 0) {
         $el.value = draftData
       }
     }
