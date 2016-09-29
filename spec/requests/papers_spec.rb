@@ -18,7 +18,7 @@ RSpec.describe "Papers", type: :request do
 
     it "cannot submit proposal after activity closed" do
       visit new_activity_paper_url(expired_activity)
-      expect(page).to have_content("The event has not opened yet or already closed!")
+      expect(page).to have_content("The event has not opened yet or is already closed!")
     end
   end
 
