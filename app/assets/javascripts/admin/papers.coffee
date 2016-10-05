@@ -1,6 +1,4 @@
 jQuery ->
-
-
   $('.edit-tag-button').on 'click', ->
     id = $(this).attr('data-id')
     $('.field-container[data-id='+id+']').removeClass("hide")
@@ -9,6 +7,9 @@ jQuery ->
     e.preventDefault
     id = $(this).attr('data-id')
     $('.field-container[data-id='+id+']').addClass("hide")
+  $('.papers').on 'click', '.paper-tag', (e) ->
+    tag_name = $(@).data("tag-name")
+    $(".paper-tag[data-tag-name='#{tag_name}']").parents("tr").find("input[type=checkbox]").trigger('click')
 
   # Toggle paper's checkbox
   $paper_checkboxes = $("input[name='notification[ids][]']")
