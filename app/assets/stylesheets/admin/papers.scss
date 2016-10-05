@@ -6,10 +6,13 @@
   margin-left: 5px;
   color: #aaa;
 }
-.sort.current{
+.sort.current {
   color: #000;
 }
-.sort:hover{
+.sort:hover {
   color: #555;
   text-decoration: none;
+}
+.avatar{
+  max-width: 500px;
 }
