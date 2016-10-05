@@ -15,5 +15,5 @@
           p.date
             span.date #{activity.open_at.to_date} ~ #{activity.close_at.to_date}
           p.count
-            = link_to pluralize(activity.papers_count, 'proposal'), activity
+            = link_to pluralize(activity.papers.opened.size, 'proposal'), activity
 
