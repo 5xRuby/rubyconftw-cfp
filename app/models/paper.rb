@@ -28,6 +28,7 @@ class Paper < ApplicationRecord
   acts_as_taggable_on :tags
 
   scope :state, -> (state) { where(state: state) }
+  scope :opened, -> { where.not(state: :withdrawn)}
 
   aasm(column: :state) do
     state :submitted , initial: true
