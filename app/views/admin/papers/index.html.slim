@@ -3,7 +3,7 @@
     h1
       = "Papers of " + @activity.name
   = form_for @notification, url: admin_activity_mails_path(@activity) do |f|
-    table.table.tble-striped
+    table.table.tble-striped.papers
       thead
         tr
           th
@@ -37,13 +37,14 @@
               = paper.title
             td
               - paper.tags.each do |tag|
-                = " "
-                .label.label-primary
-                  = tag.name
+                a.label.label-primary.paper-tag data-tag-name="#{tag.name}"
+                  =tag.name
+                |&nbsp;
             td
               = paper.comments.count
             td
-              = paper.state
+              a.label.paper-state data-state="#{paper.state}" class="#{Paper::StateClass[paper.state]}"
+                = paper.state
             td
               = paper.user.name
             td

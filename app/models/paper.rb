@@ -2,6 +2,13 @@ class Paper < ApplicationRecord
   include AASM
   ALL_STATUS = %w{submitted reviewed accepted rejected withdrawn}
   ALL_LANGUAGES = %w{Chinese English}
+  StateClass = {
+    "submitted" => 'label-info',
+    "reviewed" => 'label-primary',
+    "accepted" => 'label-success',
+    "rejected" => 'label-warning',
+    "withdraw" => 'label-danger'
+  }
 
   attr_writer :custom_field_errors
 
