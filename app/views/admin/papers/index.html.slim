@@ -43,7 +43,8 @@
             td
               = paper.comments.count
             td
-              = paper.state
+              a.label.paper-state data-state="#{paper.state}" class="#{Paper::StateClass[paper.state]}"
+                = paper.state
             td
               = paper.user.name
             td
