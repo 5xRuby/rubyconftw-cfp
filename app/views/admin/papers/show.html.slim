@@ -48,7 +48,7 @@
       tr
         th Speaker Avatar
         td
-          = image_tag @paper.user.photo.url
+          = image_tag @paper.user.photo.url, class: "avatar"
       tr
         th Speaker Bio
         td = @paper.speaker_bio
