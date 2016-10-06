@@ -1,14 +1,22 @@
 jQuery ->
-
-
   $('.edit-tag-button').on 'click', ->
     id = $(this).attr('data-id')
     $('.field-container[data-id='+id+']').removeClass("hide")
 
   $('.remove-tag-field').on 'click', (e) ->
-    e.preventDefault
+    e.preventDefault()
     id = $(this).attr('data-id')
     $('.field-container[data-id='+id+']').addClass("hide")
+  $('.papers').on 'click', '.paper-tag', (e) ->
+    e.preventDefault()
+    tag_name = $(@).data("tag-name")
+    $(".paper-tag[data-tag-name='#{tag_name}']").parents("tr").find("input[type=checkbox]").prop('checked', true)
+    false
+  $('.papers').on 'click', '.paper-state', (e) ->
+    e.preventDefault()
+    state = $(@).data 'state'
+    $(".paper-state[data-state='#{state}']").parents('tr').find("input[type=checkbox]").prop 'checked', true
+    false
 
   # Toggle paper's checkbox
   $paper_checkboxes = $("input[name='notification[ids][]']")

@@ -2,6 +2,13 @@ class Paper < ApplicationRecord
   include AASM
   ALL_STATUS = %w{submitted reviewed accepted rejected withdrawn}
   ALL_LANGUAGES = %w{Chinese English}
+  StateClass = {
+    "submitted" => 'label-info',
+    "reviewed" => 'label-primary',
+    "accepted" => 'label-success',
+    "rejected" => 'label-warning',
+    "withdraw" => 'label-danger'
+  }
 
   attr_writer :custom_field_errors
 
@@ -28,6 +35,7 @@ class Paper < ApplicationRecord
   acts_as_taggable_on :tags
 
   scope :state, -> (state) { where(state: state) }
+  scope :opened, -> { where.not(state: :withdrawn)}
 
   aasm(column: :state) do
     state :submitted , initial: true

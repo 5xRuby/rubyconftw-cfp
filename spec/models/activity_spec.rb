@@ -59,5 +59,16 @@ RSpec.describe Activity, type: :model do
     it "should able to find unreview papers by specify user" do
       expect(activity.unreview_by(user).size).to eq(@unreview_papers.size)
     end
+
+    context "public display" do
+      it "ignore withdraw papaer" do
+        opended_papers = @unreview_papers.size +
+                         @reviewed_papers.size +
+                         1                     + # Unreview Accepted Paper
+                         1                       # Unreview Rejected Paper
+
+        expect(activity.papers.opened.size).to eq(opended_papers)
+      end
+    end
   end
 end
