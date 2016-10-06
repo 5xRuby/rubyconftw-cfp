@@ -47,6 +47,7 @@ GEM
     arel (7.1.1)
     autoprefixer-rails (6.3.7)
       execjs
+    awesome_print (1.7.0)
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -231,6 +232,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -368,6 +371,7 @@ PLATFORMS
 DEPENDENCIES
   aasm
   acts-as-taggable-on
+  awesome_print
   bootstrap-sass (~> 3.3.6)
   byebug
   cancancan (~> 1.10)
@@ -398,6 +402,7 @@ DEPENDENCIES
   pagedown-bootstrap-rails
   passenger
   pg
+  pry-rails
   rails (~> 5.0.0)
   ratyrate
   redcarpet
