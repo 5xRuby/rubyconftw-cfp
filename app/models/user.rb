@@ -9,6 +9,12 @@ class User < ApplicationRecord
   has_many :comments
   validates_presence_of :name
 
+  def self.as_yaml(options = {})
+    result = all.map { |item| item.as_json(options) }
+    result = {"#{model_name.plural}" => result} if options[:include_root]
+    result.to_yaml
+  end
+
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_create do |user|
       user.provider = auth.provider

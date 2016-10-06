@@ -90,4 +90,28 @@ RSpec.describe Paper, type: :model do
     expect(paper.custom_fields.first).to have_key(:value)
     expect(paper.custom_fields.first[:name]).to eq(activity.custom_fields.first.name)
   end
+
+  it "generate yaml" do
+    paper = FactoryGirl.create(:paper)
+    except_yaml = %{---
+- id: #{paper.id}
+  title: #{paper.title}
+  abstract: #{paper.abstract}
+}
+
+    expect(Paper.all.as_yaml(only: [:id, :title, :abstract])).to eq(except_yaml)
+  end
+
+  it "generate yaml with root" do
+
+    paper = FactoryGirl.create(:paper)
+    except_yaml = %{---
+papers:
+- id: #{paper.id}
+  title: #{paper.title}
+  abstract: #{paper.abstract}
+}
+
+    expect(Paper.all.as_yaml(include_root: true, only: [:id, :title, :abstract])).to eq(except_yaml)
+  end
 end

@@ -57,6 +57,8 @@ group :development do
   gem 'capistrano-sidekiq'
   gem 'web-console', '~> 2.0'
   gem 'passenger'
+  gem 'pry-rails'
+  gem 'awesome_print'
 end
 
 group :test do

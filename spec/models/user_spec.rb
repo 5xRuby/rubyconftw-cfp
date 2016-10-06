@@ -33,4 +33,29 @@ RSpec.describe User, type: :model do
       expect(User.from_omniauth(auth_info_exists)).to eq(exists_user)
     end
   end
+
+  it "generate yaml" do
+    user = FactoryGirl.create(:user)
+    except_yaml = %{---
+- id: #{user.id}
+  email: #{user.email}
+  name: #{user.name}
+  phone: #{user.phone}
+}
+
+    expect(User.all.as_yaml(only: [:id, :email, :name, :phone])).to eq(except_yaml)
+  end
+
+  it "generate yaml with root" do
+    user = FactoryGirl.create(:user)
+    except_yaml = %{---
+users:
+- id: #{user.id}
+  email: #{user.email}
+  name: #{user.name}
+  phone: #{user.phone}
+}
+
+    expect(User.all.as_yaml(include_root: true, only: [:id, :email, :name, :phone])).to eq(except_yaml)
+  end
 end
