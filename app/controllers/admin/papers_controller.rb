@@ -7,6 +7,16 @@ class Admin::PapersController < Admin::ApplicationController
   def index
     @papers = Paper.joins(:user).where(activity: @activity).order("#{sort_column} #{sort_direction}")
     @notification = Notification.new
+
+    respond_to do |format|
+      # TODO: Filter necessary columns
+      format.yaml {
+        send_data @papers.as_yaml(include_root: true),
+                  type: "application/yaml",
+                  disposition: "attachment; filename=papers.yml"
+      }
+      format.html { render }
+    end
   end
 
   def show

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         resources :comments, only: [:create, :destroy]
       end
       resources :mails, only: [:create]
+      resources :speakers, only: [:index]
     end
     resources :papers, only: [] do
       resources :reviews, only: [:create]
