@@ -10,12 +10,12 @@ class Admin::PapersController < Admin::ApplicationController
 
     respond_to do |format|
       # TODO: Filter necessary columns
-      format.yaml {
+      format.yml {
         send_data @papers.as_yaml(include_root: true),
-                  type: "application/yaml",
+                  type: "application/yml",
                   disposition: "attachment; filename=papers.yml"
       }
-      format.html { render }
+      format.html
     end
   end
 

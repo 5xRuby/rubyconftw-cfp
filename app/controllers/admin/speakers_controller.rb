@@ -5,7 +5,7 @@ class Admin::SpeakersController < Admin::ApplicationController
     @speakers = @activity.speakers
 
     respond_to do |format|
-      format.yaml {
+      format.yml {
         send_data @speakers.as_yaml(include_root: true),
         type: "application/yaml",
         disposition: "attachment; filename=speakers.yml"
