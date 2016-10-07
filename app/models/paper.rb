@@ -85,6 +85,13 @@ class Paper < ApplicationRecord
     reviews.pluck(:user_id).include?(user.id)
   end
 
+  # NOTICE: to_yaml will be override
+  def self.as_yaml(options = {})
+    result = all.map { |item| item.as_json(options) }
+    result = {"#{model_name.plural}" => result} if options[:include_root]
+    result.to_yaml
+  end
+
   private
 
   def notify_user

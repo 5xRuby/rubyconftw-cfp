@@ -71,4 +71,22 @@ RSpec.describe Activity, type: :model do
       end
     end
   end
+
+  context "speakers" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:speaker) { FactoryGirl.create(:user) }
+    let(:activity) { FactoryGirl.create(:activity) }
+
+    before(:each) do
+      @papers = FactoryGirl.create_list(:paper, 5, activity: activity)
+      @accepted_paper = FactoryGirl.create(:paper, :accepted, user: speaker, activity: activity)
+    end
+
+    it "find accepted papers user as speaker" do
+      expect(activity.speakers).to include(speaker)
+      expect(activity.speakers.size).to eq(1)
+
+      expect(activity.speakers).not_to include(user)
+    end
+  end
 end
