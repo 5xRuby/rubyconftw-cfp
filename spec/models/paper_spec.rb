@@ -23,7 +23,7 @@ RSpec.describe Paper, type: :model do
     paper = activity.papers.build
     paper.valid?
 
-    expect(paper.errors.full_messages).to include("The event has not opened yet or already closed!")
+    expect(paper.errors.full_messages).to include("The event has not opened yet or is already closed!")
   end
 
   it "should validate custom fields" do
