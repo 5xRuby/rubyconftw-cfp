@@ -24,6 +24,9 @@
             | User
             = sortable("users.name")
           th
+            | Github
+            = sortable("users.github_username")
+          th
       tbody
         - @papers.each do |paper|
           tr id=("paper_#{paper.id}")
@@ -47,6 +50,8 @@
                 = paper.state
             td
               = paper.user.name
+            td
+              = link_to paper.user.github_link_text, "https://github.com/#{paper.user.github_username}"
             td
               .btn-group
                 = link_to "show", admin_activity_paper_path(@activity,paper), class: "btn btn-primary"
