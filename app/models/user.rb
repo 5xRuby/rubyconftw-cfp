@@ -22,6 +22,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       user.email = auth.info.email
       user.name = auth.info.name   # assuming the user model has a name
+      user.github_username = auth.info.nickname if user.provider == "github" # for github
       user.photo = auth.info.image
     end
   end
@@ -35,4 +36,21 @@ class User < ApplicationRecord
       end
     end
   end
+
+  def self.update_github_username
+    User.where(provider: "github", github_username: nil).each {|user| user.update_github_username}
+  end
+
+  def update_github_username
+    url = "https://api.github.com/user/#{self.uid}"
+    user_data = JSON.parse(open(url).read)
+    update(github_username: user_data["login"])
+  rescue
+    logger.error "Cannot update github username for uid = #{self.id}"
+  end
+
+  def github_link_text
+    self.github_username.nil? ? "(Not yet updated)" : self.github_username
+  end
+
 end
