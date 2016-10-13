@@ -25,8 +25,22 @@ jQuery ->
   $check_all_checkbox.on 'click', (e) ->
     check_status = $check_all_checkbox.prop('checked')
     $paper_checkboxes.prop('checked', check_status) # Toggle it
+  # For tags
+  window.CreateTagsInput = (url) ->
+    source = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: url,
+    })
+    source.initialize()
+    $(".paper_tag_list > input").tagsinput({
+      freeInput: true,
+      typeaheadjs: {
+        source: source.ttAdapter()
+        hint: true,
+        highlight: true,
+        minLength: 0
 
-
-
-
+      }
+    })
 

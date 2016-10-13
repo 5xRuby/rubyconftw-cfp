@@ -16,6 +16,8 @@
 //= require bootstrap-sprockets
 //= require pagedown_bootstrap
 //= require pagedown_init
+//= require bootstrap-tagsinput
+//= require typeahead.bundle
 //= require bootstrap-datetimepicker.min
 //= require jquery_ujs
 //= require_tree .

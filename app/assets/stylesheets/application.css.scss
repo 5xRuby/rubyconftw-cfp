@@ -21,6 +21,8 @@
 @import "pagedown_bootstrap";
 @import "bootstrap-datetimepicker-build";
 
+@import "bootstrap-tagsinput";
+
 // Module
 @import "module/navigation";
 @import "module/contributor";
@@ -46,4 +48,8 @@
 
   li { display: inline-block; }
   li + li { margin-left: 15px; }
+}
+
+.bootstrap-tagsinput {
+  width: 100%;
 }
