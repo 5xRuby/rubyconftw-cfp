@@ -66,19 +66,13 @@
     = admin_reject_button(@paper)
     = link_to "Back", admin_activity_papers_path(@activity), class: "btn btn-default"
 
-h2 comments(#{@paper.comments.count})
-- @paper.comments.each do |comment|
-  div class="comment-#{comment.id}"
-    h4 #{comment.user.name} says:
-    .well
-      p == markdown(comment.text)
-    p.text-right
-      = "created at #{comment.created_at} "
-      - if comment.user == current_user
-        = link_to "delete", admin_activity_paper_comment_path(@activity, @paper, comment), method: "DELETE"
-  hr
+h2 comments
+div#comment-group
+  - @paper.comments.each do |comment|
+    = render partial: "comment", locals: { comment: comment }
+
 h3 add comments
-= simple_form_for @new_comment, url: admin_activity_paper_comments_path(@activity, @paper), method: "POST" do |f|
+= simple_form_for @new_comment, url: admin_activity_paper_comments_path(@activity, @paper), method: "POST", remote: true do |f|
   = f.input :text, label: false
   = f.submit "Submit", class: "btn btn-primary"
 
