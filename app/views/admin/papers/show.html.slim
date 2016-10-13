@@ -71,7 +71,7 @@ h2 comments(#{@paper.comments.count})
   div class="comment-#{comment.id}"
     h4 #{comment.user.name} says:
     .well
-      p = comment.text
+      p == markdown(comment.text)
     p.text-right
       = "created at #{comment.created_at} "
       - if comment.user == current_user
