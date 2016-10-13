@@ -1,4 +1,11 @@
 module ApplicationHelper
+  def markdown(content)
+    @markdown_renderer ||= Redcarpet::Render::HTML.new(filter_html: true)
+    @markdown ||= Redcarpet::Markdown.new(@markdown_renderer, autolink: true)
+
+    @markdown.render(content)
+  end
+
   def flash_message
     alert_types = { notice: :success, alert: :danger }
 
