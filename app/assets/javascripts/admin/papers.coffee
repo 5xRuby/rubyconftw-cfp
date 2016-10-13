@@ -30,13 +30,17 @@ jQuery ->
     source = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
-        prefetch: url,
+        prefetch: {
+          url: url,
+          cache: false,
+        }
     })
     source.initialize()
     $(".paper_tag_list > input").tagsinput({
       freeInput: true,
       typeaheadjs: {
         source: source.ttAdapter()
+        displayKey: 'name',
         hint: true,
         highlight: true,
         minLength: 0
