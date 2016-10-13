@@ -1,0 +1,2 @@
+class CustomFieldAnswer < ApplicationRecord
+end
