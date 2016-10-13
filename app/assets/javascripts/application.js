@@ -20,6 +20,7 @@
 //= require typeahead.bundle
 //= require bootstrap-datetimepicker.min
 //= require jquery_ujs
+//= require charist
 //= require_tree .
 
 $(document).ready(function() {

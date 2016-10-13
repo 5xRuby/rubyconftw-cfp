@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Stats</h2>
+  </div>
+  <div class="row">
+    <% @custom_fields.each do |field| %>
+      <%= render_custom_field_stats(field, @custom_field_answers, @total_papers) %>
+    <% end %>
+  </div>
+</div>

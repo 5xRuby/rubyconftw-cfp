@@ -6,6 +6,7 @@ class Activity < ApplicationRecord
   has_many :custom_fields, lambda {order("sort_order")}, dependent: :destroy
   has_many :reviews, through: :papers
   has_many :speakers, -> { where(papers: { state: :accepted }).uniq }, through: :papers, source: :user
+  has_many :custom_field_answers
   accepts_nested_attributes_for :custom_fields, allow_destroy: true
   mount_uploader :logo, LogoUploader
   scope :recent, -> { order(created_at: :desc) }
