@@ -72,6 +72,7 @@ div#comment-group
     = render partial: "comment", locals: { comment: comment }
 
 h3 add comments
+p#comment_error
 = simple_form_for @new_comment, url: admin_activity_paper_comments_path(@activity, @paper), method: "POST", remote: true do |f|
   = f.input :text, label: false
   = f.submit "Submit", class: "btn btn-primary"

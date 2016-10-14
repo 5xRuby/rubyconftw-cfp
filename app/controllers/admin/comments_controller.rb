@@ -7,7 +7,7 @@ class Admin::CommentsController < Admin::ApplicationController
     if @comment.save
       render layout: false, partial: "admin/papers/comment", locals: { comment: @comment }
     else
-      render nothing: true
+      render json: {reason: "Error when save comment."}, status: 422
     end
   end
 

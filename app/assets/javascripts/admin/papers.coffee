@@ -21,6 +21,9 @@ jQuery ->
   $("#new_comment").on 'ajax:success', (e, data, status, xhr) ->
     $("#comment-group").append(data)
     $("#new_comment #comment_text").val('')
+    $("#comment_error").html("")
+  $("#new_comment").on 'ajax:error', (e, data, status, xhr) ->
+    $("#comment_error").html(data.responseJSON.reason)
 
   # Toggle paper's checkbox
   $paper_checkboxes = $("input[name='notification[ids][]']")
