@@ -1,9 +1,9 @@
 module ApplicationHelper
   def markdown(content)
-    @markdown_renderer ||= Redcarpet::Render::HTML.new(filter_html: true)
-    @markdown ||= Redcarpet::Markdown.new(@markdown_renderer, autolink: true)
+    @markdown_renderer ||= ::RougeHTML.new(filter_html: true)
+    @markdown ||= Redcarpet::Markdown.new(@markdown_renderer, autolink: true, fenced_code_blocks: true)
 
-    @markdown.render(content)
+    @markdown.render(content || "")
   end
 
   def flash_message

@@ -1,5 +1,5 @@
 <br>
-<div class="col-md-10 col-md-offset-1"> 
+<div class="col-md-10 col-md-offset-1">
 <div class="panel panel-default">
   	<table class="table">
   	<tr>
@@ -28,11 +28,11 @@
 		</tr>
 		<tr>
 		<th>description</th>
-		<td><div class="markdown-output"><%= @activity.description %></div></td>
+		<td><%== markdown(@activity.description) %></td>
 		</tr>
 		<tr>
 		<th>term</th>
-		<td><div class="markdown-output"><%= @activity.term %></div></td>
+		<td><%== markdown(@activity.term) %></td>
 		</tr>
 		<tr>
 		<th>categories</th>
