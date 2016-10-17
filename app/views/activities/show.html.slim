@@ -7,11 +7,11 @@
     | Closed on
     strong #{@activity.close_at.to_date}
   h2 Description
-  .markdown-output
-    = @activity.description
+  div
+    == markdown(@activity.description)
   h2 Terms
-  .markdown-output
-    = @activity.term
+  div
+    == markdown(@activity.term)
   .btns
     - if @activity.open?
       = link_to "Submit a Paper", new_activity_paper_path(@activity), class: "btn btn-primary"

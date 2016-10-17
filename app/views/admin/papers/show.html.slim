@@ -26,18 +26,15 @@
       tr
         th Abstract
         td
-          .markdown-output
-            = @paper.abstract
+          == markdown(@paper.abstract)
       tr
         th Outline
         td
-          .markdown-output
-            = @paper.outline
+          == markdown(@paper.outline)
       tr
         th Pitch
         td
-          .markdown-output
-            = @paper.pitch
+          == markdown(@paper.pitch)
       - if @paper.custom_fields.size > 0
         tr
           th Other Fields
