@@ -17,6 +17,13 @@ jQuery ->
     state = $(@).data 'state'
     $(".paper-state[data-state='#{state}']").parents('tr').find("input[type=checkbox]").prop 'checked', true
     false
+  # For ajax comment 
+  $("#new_comment").on 'ajax:success', (e, data, status, xhr) ->
+    $("#comment-group").append(data)
+    $("#new_comment #comment_text").val('')
+    $("#comment_error").html("")
+  $("#new_comment").on 'ajax:error', (e, data, status, xhr) ->
+    $("#comment_error").html(data.responseJSON.reason)
 
   # Toggle paper's checkbox
   $paper_checkboxes = $("input[name='notification[ids][]']")
