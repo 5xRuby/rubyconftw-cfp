@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       post 'reject' => "reviews#reject"
     end
 
+    resources :tags, only: [:index]
+
     resources :users, only: [:index] do
       resource :contributor, only: [:create, :destroy]
 
