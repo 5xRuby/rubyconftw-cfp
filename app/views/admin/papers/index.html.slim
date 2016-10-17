@@ -2,6 +2,7 @@
   .page-header
     h1
       = "Papers of " + @activity.name
+    = link_to "Stats", admin_activity_stats_path(@activity), class: "btn btn-success"
   = form_for @notification, url: admin_activity_mails_path(@activity) do |f|
     table.table.tble-striped.papers
       thead
