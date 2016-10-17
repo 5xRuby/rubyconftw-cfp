@@ -1,10 +1,13 @@
 <div class="row">
   <div class="col-md-12">
-    <h2>Stats</h2>
+    <h2><%= link_to @activity.name, admin_activity_papers_path(@activity) %>'s Stats</h2>
+    <%= toggle_speaker_stats_button %>
   </div>
+</div>
+<% @custom_fields.in_groups_of(3, false) do |rows| %>
   <div class="row">
-    <% @custom_fields.each do |field| %>
+    <% rows.each do |field| %>
       <%= render_custom_field_stats(field, @custom_field_answers, @total_papers) %>
     <% end %>
   </div>
-</div>
+<% end %>

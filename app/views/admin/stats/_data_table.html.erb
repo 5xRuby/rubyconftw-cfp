@@ -6,11 +6,13 @@
       <th>Value</th>
     </thead>
     <tbody>
-      <% datas.each do |data| %>
+      <% if datas.each do |data| %>
       <tr>
         <td><%= data.user.name %></td>
         <td><%= data.answer %></td>
       </tr>
+      <% end.empty? %>
+      <tr><td colspan="2">No data available</td></tr>
       <% end %>
     </tbody>
   </table>
