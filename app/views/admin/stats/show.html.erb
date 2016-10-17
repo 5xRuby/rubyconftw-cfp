@@ -11,3 +11,22 @@
     <% end %>
   </div>
 <% end %>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Taggings Count</h3>
+    <table class="table" id="taggings_count">
+      <thead>
+        <th>Tag</th>
+        <th>Count</th>
+      </thead>
+      <tbody>
+        <% @tags.each do |tag| %>
+          <tr>
+            <td><%= tag.name %></td>
+            <td><%= tag.taggings_count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

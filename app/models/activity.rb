@@ -7,6 +7,8 @@ class Activity < ApplicationRecord
   has_many :reviews, through: :papers
   has_many :speakers, -> { where(papers: { state: :accepted }).uniq }, through: :papers, source: :user
   has_many :custom_field_answers
+  has_many :tags, -> { uniq }, through: :papers
+  has_many :accepted_paper_tags, -> { where(papers: {state: :accepted}).uniq }, through: :papers, source: :tags
   accepts_nested_attributes_for :custom_fields, allow_destroy: true
   mount_uploader :logo, LogoUploader
   scope :recent, -> { order(created_at: :desc) }

@@ -4,8 +4,8 @@ RSpec.describe "Admin::Stats", type: :request do
   let(:admin) { FactoryGirl.create(:user, :admin) }
   let!(:activity) { FactoryGirl.create(:activity) }
   let!(:custom_fields) { FactoryGirl.create_list(:custom_field, 5, activity: activity) }
-  let!(:papers) { FactoryGirl.create_list(:paper, 5, activity: activity, answer_of_custom_fields: answer_of_custom_fields) }
-  let!(:accepted_papers) { FactoryGirl.create_list(:paper, 5, :accepted, activity: activity, answer_of_custom_fields: answer_of_custom_fields) }
+  let!(:papers) { FactoryGirl.create_list(:paper, 5, activity: activity, tag_list: "papers", answer_of_custom_fields: answer_of_custom_fields) }
+  let!(:accepted_papers) { FactoryGirl.create_list(:paper, 5, :accepted, tag_list: "accepted", activity: activity, answer_of_custom_fields: answer_of_custom_fields) }
 
   let(:answer_of_custom_fields) do
     answer = {}
@@ -35,9 +35,20 @@ RSpec.describe "Admin::Stats", type: :request do
       end
     end
 
-    it "display only accepted papers stats" do
-      visit admin_activity_stats_url(activity, {speaker_only: true})
+    it "display taggings count only this activity" do
+      FactoryGirl.create_list(:paper, 5, tag_list: "papers")
 
+      expect(page).to have_content("papers")
+      expect(page).to have_selector('#taggings_count tbody tr td', text: papers.count)
+    end
+  end
+
+  describe "/admin/activities/:id/stats?speaker_only" do
+    before(:each) do
+      visit admin_activity_stats_url(activity, {speaker_only: true})
+    end
+
+    it "display only accepted papers stats" do
       papers.each do |paper|
         expect(page).not_to have_content(paper.user.name)
       end
@@ -46,6 +57,11 @@ RSpec.describe "Admin::Stats", type: :request do
         expect(page).to have_content(paper.user.name)
         expect(page).to have_content("Example answer")
       end
+    end
+
+    it "display only accepted papers tags" do
+      expect(page).to have_content("accepted")
+      expect(page).not_to have_content("papers")
     end
 
   end

@@ -5,6 +5,7 @@ class Admin::StatsController < Admin::ApplicationController
     @total_papers = papers.size
     @custom_fields = @activity.custom_fields
     @custom_field_answers = custom_field_answers
+    @tags = tags.order(taggings_count: :desc, name: :asc)
   end
 
   def papers
@@ -15,6 +16,11 @@ class Admin::StatsController < Admin::ApplicationController
   def custom_field_answers
     return @activity.custom_field_answers.where(user_id: speakers) if speaker_only?
     @activity.custom_field_answers
+  end
+
+  def tags
+    return @activity.accepted_paper_tags if speaker_only?
+    @activity.tags
   end
 
   def speakers
