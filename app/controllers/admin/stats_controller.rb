@@ -1,4 +1,4 @@
-class Admin::StatsController < ApplicationController
+class Admin::StatsController < Admin::ApplicationController
   before_action -> { @activity = Activity.find_by(permalink: params[:activity_id]) }
 
   def show
