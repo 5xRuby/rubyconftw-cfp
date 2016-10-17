@@ -1,6 +1,12 @@
 module ApplicationHelper
-  
   SELECTED_PARAMS = %i(search_field search_type search_key commit)
+
+  def markdown(content)
+    @markdown_renderer ||= ::RougeHTML.new(filter_html: true)
+    @markdown ||= Redcarpet::Markdown.new(@markdown_renderer, autolink: true, fenced_code_blocks: true)
+
+    @markdown.render(content || "")
+  end
 
   def flash_message
     alert_types = { notice: :success, alert: :danger }

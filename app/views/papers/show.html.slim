@@ -30,16 +30,13 @@
         = @paper.title
       h3 Abstract
       p
-        .markdown-output
-          = @paper.abstract
+        == markdown(@paper.abstract)
       h3 Outline
       p
-        .markdown-output
-          = @paper.outline
+        == markdown(@paper.outline)
       h3 Pitch
       p
-        .markdown-output
-          = @paper.pitch
+        == markdown(@paper.pitch)
     .col-md-6.review-part
       .row
         .col-md-12

@@ -5,9 +5,9 @@ class Admin::CommentsController < Admin::ApplicationController
     @comment = current_user.comments.new(comment_params)
     @comment.paper = @paper
     if @comment.save
-      redirect_to admin_activity_paper_path(@activity, @paper), notice: "comment is created successfully"
+      render layout: false, partial: "admin/papers/comment", locals: { comment: @comment }
     else
-      redirect_to admin_activity_paper_path(@activity, @paper), alert: "Error occurs!"
+      render json: {reason: "Error when save comment."}, status: 422
     end
   end
 

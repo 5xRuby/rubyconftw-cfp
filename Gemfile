@@ -26,6 +26,7 @@ gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'sidekiq'
 gem 'redcarpet'
+gem 'rouge', '~> 2.0.6'
 gem 'acts-as-taggable-on'
 gem 'unicode_utils'
 

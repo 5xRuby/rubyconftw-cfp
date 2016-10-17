@@ -17,6 +17,13 @@ jQuery ->
     state = $(@).data 'state'
     $(".paper-state[data-state='#{state}']").parents('tr').find("input[type=checkbox]").prop 'checked', true
     false
+  # For ajax comment 
+  $("#new_comment").on 'ajax:success', (e, data, status, xhr) ->
+    $("#comment-group").append(data)
+    $("#new_comment #comment_text").val('')
+    $("#comment_error").html("")
+  $("#new_comment").on 'ajax:error', (e, data, status, xhr) ->
+    $("#comment_error").html(data.responseJSON.reason)
 
   # Toggle paper's checkbox
   $paper_checkboxes = $("input[name='notification[ids][]']")
@@ -25,8 +32,26 @@ jQuery ->
   $check_all_checkbox.on 'click', (e) ->
     check_status = $check_all_checkbox.prop('checked')
     $paper_checkboxes.prop('checked', check_status) # Toggle it
+  # For tags
+  window.CreateTagsInput = (url) ->
+    source = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: {
+          url: url,
+          cache: false,
+        }
+    })
+    source.initialize()
+    $(".paper_tag_list > input").tagsinput({
+      freeInput: true,
+      typeaheadjs: {
+        source: source.ttAdapter()
+        displayKey: 'name',
+        hint: true,
+        highlight: true,
+        minLength: 0
 
-
-
-
+      }
+    })
 
