@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2><%= link_to @activity.name, admin_activity_papers_path(@activity) %>'s Stats</h2>
+    <%= toggle_speaker_stats_button %>
+  </div>
+</div>
+<% @custom_fields.in_groups_of(3, false) do |rows| %>
+  <div class="row">
+    <% rows.each do |field| %>
+      <%= render_custom_field_stats(field, @custom_field_answers, @total_papers) %>
+    <% end %>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Taggings Count</h3>
+    <table class="table" id="taggings_count">
+      <thead>
+        <th>Tag</th>
+        <th>Count</th>
+      </thead>
+      <tbody>
+        <% @tags.each do |tag| %>
+          <tr>
+            <td><%= tag.name %></td>
+            <td><%= tag.taggings_count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

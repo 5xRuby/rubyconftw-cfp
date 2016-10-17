@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       end
       resources :mails, only: [:create]
       resources :speakers, only: [:index]
+      resource :stats, only: [:show]
     end
     resources :papers, only: [] do
       resources :reviews, only: [:create]

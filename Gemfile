@@ -29,6 +29,7 @@ gem 'redcarpet'
 gem 'rouge', '~> 2.0.6'
 gem 'acts-as-taggable-on'
 gem 'unicode_utils'
+gem 'scenic'
 
 
 group :development, :test do

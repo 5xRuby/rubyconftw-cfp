@@ -1,0 +1,19 @@
+<div class="col-md-4">
+  <h3><%= field.name %></h3>
+  <table class="table">
+    <thead>
+      <th>User</th>
+      <th>Value</th>
+    </thead>
+    <tbody>
+      <% if datas.each do |data| %>
+      <tr>
+        <td><%= data.user.name %></td>
+        <td><%= data.answer %></td>
+      </tr>
+      <% end.empty? %>
+      <tr><td colspan="2">No data available</td></tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
