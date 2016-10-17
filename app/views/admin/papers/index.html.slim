@@ -18,7 +18,8 @@
         = submit_tag("Search", class: "btn btn-primary")
         = " | "
         = submit_tag("Clear Search", class: "btn btn-info")
-  = link_to "Stats", admin_activity_stats_path(@activity), class: "btn btn-success"
+        = " | "
+        = link_to "Stats", admin_activity_stats_path(@activity), class: "btn btn-success"
   = form_for @notification, url: admin_activity_mails_path(@activity) do |f|
     table.table.tble-striped.papers
       thead

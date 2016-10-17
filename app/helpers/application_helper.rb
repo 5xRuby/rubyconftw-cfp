@@ -53,6 +53,6 @@ module ApplicationHelper
   end
   
   def fixed_search_fields
-    %w(state country speaker_bio)
+    %w(state country speaker_bio tag)
   end
 end
