@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013073416) do
+ActiveRecord::Schema.define(version: 20161018031957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,19 @@ ActiveRecord::Schema.define(version: 20161013073416) do
     t.datetime "updated_at",                             null: false
     t.text     "description"
     t.string   "collection",             default: [],                 array: true
+  end
+
+  create_table "notifiers", force: :cascade do |t|
+    t.integer  "activity_id"
+    t.string   "name"
+    t.boolean  "enabled",                 default: true
+    t.boolean  "on_new_comment",          default: false
+    t.boolean  "on_new_paper",            default: false
+    t.boolean  "on_paper_status_changed", default: false
+    t.string   "service_name",            default: ""
+    t.jsonb    "service_info",            default: {}
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   create_table "papers", force: :cascade do |t|

@@ -1,0 +1,3 @@
+div.service-info.hidden data-service-name="email"
+  = sif.input :recipient, required: true, hint: "Recipient address", input_html: { value: notifier_service_info_value(nf, "recipient") }
+  = sif.input :subject, required: true, hint: "Mail subject", input_html: { value: notifier_service_info_value(nf, "subject") }

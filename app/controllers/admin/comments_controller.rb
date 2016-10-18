@@ -5,6 +5,7 @@ class Admin::CommentsController < Admin::ApplicationController
     @comment = current_user.comments.new(comment_params)
     @comment.paper = @paper
     if @comment.save
+      @activity.notify("new_comment", @comment)
       render layout: false, partial: "admin/papers/comment", locals: { comment: @comment }
     else
       render json: {reason: "Error when save comment."}, status: 422

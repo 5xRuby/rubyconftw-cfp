@@ -1,0 +1,20 @@
+li.notifier data-id="#{nf.object.id.to_i}"
+  .well
+    = nf.input :name, hint: "The name is for display only"
+    = nf.input :enabled, hint: "All notifications will be sent only when enabled"
+    = nf.input :on_new_comment, hint: "Whether to send notification when there is a new comment"
+    = nf.input :on_new_paper, hint: "Whether to send notification when there is a new paper"
+    = nf.input :on_paper_status_changed, hint: "Whether to send notification when a paper's status is changed"
+    = nf.input :service_name
+      .service-name-container
+        - Notifier::VALID_SERVICE_NAMES.each do |sn|
+          label
+            = nf.radio_button :service_name, sn
+            = sn
+    .service-info-container
+      = nf.simple_fields_for :service_info do |sif| 
+        = render partial: "service_info_slack", locals: {nf: nf, sif: sif}
+        = render partial: "service_info_email", locals: {nf: nf, sif: sif}
+    label
+      = nf.check_box :_destroy, class: (nf.object.new_record? ? "remove-new" : "remove-exist")
+      | Remove

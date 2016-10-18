@@ -8,4 +8,9 @@ module Admin::ActivitiesHelper
       content_tag :li, link_to("Review Papers (0)", nil), class: "disabled"
     end
   end
+
+  def notifier_service_info_value(form_builder, key)  
+    notifier = form_builder.object
+    notifier.service_info[key]
+  end
 end

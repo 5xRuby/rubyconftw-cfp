@@ -36,6 +36,7 @@ class PapersController < ApplicationController
     logger.info @paper.inspect
     respond_to do |format|
       if @paper.save
+        @activity.notify("new_paper", @paper)
         format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
       else
         format.html {
