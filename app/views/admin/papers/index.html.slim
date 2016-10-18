@@ -2,6 +2,24 @@
   .page-header
     h1
       = "Papers of " + @activity.name
+  div.seach_bar
+    = form_tag admin_activity_papers_path(@activity), method: :get
+      span.search_field
+        = " Search by:"
+        = select_tag "search_field", options_for_select(fixed_search_fields + get_all_custom_field_strings, params[:search_field]), include_blank: true 
+      span.search_type
+        = " Search type:"
+        = select_tag "search_type", options_for_select(["like","equal"], params[:search_type])
+      span.search_key
+        = " Keyword:"
+        = text_field_tag "search_key", params[:search_key]
+      span.search_submit
+        = " | "
+        = submit_tag("Search", class: "btn btn-primary")
+        = " | "
+        = submit_tag("Clear Search", class: "btn btn-info")
+        = " | "
+        = link_to "Stats", admin_activity_stats_path(@activity), class: "btn btn-success"
   = form_for @notification, url: admin_activity_mails_path(@activity) do |f|
     table.table.tble-striped.papers
       thead

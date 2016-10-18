@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818075918) do
+ActiveRecord::Schema.define(version: 20161013073416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,12 @@ ActiveRecord::Schema.define(version: 20160818075918) do
     t.datetime "open_at"
     t.datetime "close_at"
     t.string   "permalink"
+  end
+
+  create_table "ar_internal_metadata", primary_key: "key", id: :string, force: :cascade do |t|
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -145,9 +151,27 @@ ActiveRecord::Schema.define(version: 20160818075918) do
     t.boolean  "is_admin"
     t.boolean  "is_contributor",     default: false
     t.string   "twitter"
+    t.string   "github_username"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["is_contributor"], name: "index_users_on_is_contributor", using: :btree
   end
 
   add_foreign_key "papers", "activities"
+
+  create_view :custom_field_answers,  sql_definition: <<-SQL
+      SELECT p.id,
+      c.id AS custom_field_id,
+      c.name,
+      c.required,
+      c.activity_id,
+      p.user_id,
+      jsonb_extract_path(p.ans, VARIADIC ARRAY[p.key]) AS answer
+     FROM (custom_fields c
+       JOIN ( SELECT papers.id,
+              papers.user_id,
+              jsonb_object_keys(papers.answer_of_custom_fields) AS key,
+              papers.answer_of_custom_fields AS ans
+             FROM papers) p ON ((c.id = (p.key)::integer)));
+  SQL
+
 end

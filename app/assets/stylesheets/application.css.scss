@@ -20,6 +20,10 @@
 @import "font-awesome";
 @import "pagedown_bootstrap";
 @import "bootstrap-datetimepicker-build";
+@import "rouge_github";
+@import "charist";
+
+@import "bootstrap-tagsinput";
 
 // Module
 @import "module/navigation";
@@ -46,4 +50,12 @@
 
   li { display: inline-block; }
   li + li { margin-left: 15px; }
+}
+
+.bootstrap-tagsinput {
+  width: 100%;
+}
+
+.ct-label {
+  font-size: 1.5rem;
 }

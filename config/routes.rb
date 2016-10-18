@@ -22,12 +22,15 @@ Rails.application.routes.draw do
       end
       resources :mails, only: [:create]
       resources :speakers, only: [:index]
+      resource :stats, only: [:show]
     end
     resources :papers, only: [] do
       resources :reviews, only: [:create]
       post 'accept' => "reviews#accept"
       post 'reject' => "reviews#reject"
     end
+
+    resources :tags, only: [:index]
 
     resources :users, only: [:index] do
       resource :contributor, only: [:create, :destroy]

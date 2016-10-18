@@ -26,8 +26,10 @@ gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'sidekiq'
 gem 'redcarpet'
+gem 'rouge', '~> 2.0.6'
 gem 'acts-as-taggable-on'
 gem 'unicode_utils'
+gem 'scenic'
 
 
 group :development, :test do
@@ -42,6 +44,8 @@ group :development, :test do
 
   gem 'guard'
   gem 'guard-rspec'
+  gem 'rails-controller-testing'
+  gem 'faker'
 end
 
 group :test do
