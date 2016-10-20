@@ -33,7 +33,7 @@ jQuery ->
     check_status = $check_all_checkbox.prop('checked')
     $paper_checkboxes.prop('checked', check_status) # Toggle it
   # For tags
-  window.CreateTagsInput = (url) ->
+  window.CreateTagsInput = (element, url) ->
     source = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -43,7 +43,7 @@ jQuery ->
         }
     })
     source.initialize()
-    $(".paper_tag_list > input").tagsinput({
+    $(element).tagsinput({
       freeInput: true,
       typeaheadjs: {
         source: source.ttAdapter()
@@ -54,4 +54,20 @@ jQuery ->
 
       }
     })
+  # tags in search bar
+  $(".search_field select").on "change", ->
+    if $(@).val() == "tag"
+      # use tag-input
+      show_div = $(".search_key .tag-input")
+      hide_div = $(".search_key .normal-input")
+    else
+      # use normal-input
+      show_div = $(".search_key .normal-input")
+      hide_div = $(".search_key .tag-input")
+    show_div.children(".input-field").attr("name", "search_key")
+    show_div.removeClass("hidden")
+    hide_div.children(".input-field").attr("name", "")
+    hide_div.addClass("hidden")
+  $(".search_field select").trigger "change"
+
 
