@@ -2,7 +2,7 @@
   .page-header
     h1
       = "Papers of " + @activity.name
-  div.seach_bar
+  div.search_bar
     = form_tag admin_activity_papers_path(@activity), method: :get
       span.search_field
         = " Search by:"
@@ -12,7 +12,10 @@
         = select_tag "search_type", options_for_select(["like","equal"], params[:search_type])
       span.search_key
         = " Keyword:"
-        = text_field_tag "search_key", params[:search_key]
+        span.tag-input
+          = text_field_tag "", params[:search_key], class: "input-field"
+        span.normal-input
+          = text_field_tag "", params[:search_key], class: "input-field"
       span.search_submit
         = " | "
         = submit_tag("Search", class: "btn btn-primary")
@@ -20,6 +23,7 @@
         = submit_tag("Clear Search", class: "btn btn-info")
         = " | "
         = link_to "Stats", admin_activity_stats_path(@activity), class: "btn btn-success"
+    = "<script>$(document).ready(function(){window.CreateTagsInput('.search_bar .search_key .tag-input .input-field','#{admin_tags_path}');});</script>".html_safe
   = form_for @notification, url: admin_activity_mails_path(@activity) do |f|
     p
       = "Total: #{@papers.size} papers"
