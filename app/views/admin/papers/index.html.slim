@@ -21,6 +21,8 @@
         = " | "
         = link_to "Stats", admin_activity_stats_path(@activity), class: "btn btn-success"
   = form_for @notification, url: admin_activity_mails_path(@activity) do |f|
+    p
+      = "Total: #{@papers.size} papers"
     table.table.tble-striped.papers
       thead
         tr
