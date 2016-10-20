@@ -47,7 +47,12 @@ class Admin::PapersController < Admin::ApplicationController
     if params[:commit] == "Search"
       # search by tag
       if params[:search_field] == "tag"
-        query.tagged_with(params[:search_key].split(","), any: true, wild: params[:search_type] != "equal")
+        wild = params[:search_type] != "equal"
+        final_q = query
+        params[:search_key].split(",").each do |tag|
+          final_q = final_q.tagged_with(tag, any: true, wild: wild)
+        end
+        final_q
       else # search by column
         if fixed_search_fields.include? params[:search_field]
           column = "lower(#{params[:search_field]})" # search_field should be safe
