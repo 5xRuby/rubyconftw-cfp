@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+  - 2.3
+services:
+  - postgresql
+  - redis-server
+bundler_args: --without production
+before_script:
+  - cp config/application.yml.example config/application.yml
+
