@@ -6,7 +6,7 @@
     = form_tag admin_activity_papers_path(@activity), method: :get
       span.search_field
         = " Search by:"
-        = select_tag "search_field", options_for_select(fixed_search_fields + get_all_custom_field_strings, params[:search_field]), include_blank: true 
+        = select_tag "search_field", options_for_select(fixed_search_fields + get_all_custom_field_strings, params[:search_field]), include_blank: true
       span.search_type
         = " Search type:"
         = select_tag "search_type", options_for_select(["like","equal"], params[:search_type])
@@ -50,6 +50,9 @@
           th
             | Github
             = sortable("users.github_username")
+          - @activity.custom_fields.each do |field|
+            th class="cf-#{field.id}"
+              = field.name
           th
       tbody
         - @papers.each do |paper|
@@ -76,6 +79,8 @@
               = paper.user.name
             td
               = link_to paper.user.github_link_text, "https://github.com/#{paper.user.github_username}"
+            - @activity.custom_fields.each do |field|
+              td = paper.answer_of_custom_fields[field.id.to_s]
             td
               .btn-group
                 = link_to "show", admin_activity_paper_path(@activity,paper), class: "btn btn-primary"
