@@ -9,6 +9,8 @@ defaults: &defaults
     secret: VnUWO0QGZHoNG5HEOzvgNQ67C36bFrgdhAyw0SPaDibuxaJ1C7
   mailer:
     default_from: "noreply@rubyconf.dev"
+    bcc_email:
+      - cnotact@rubyconf.dev
 
 development:
   <<: *defaults
