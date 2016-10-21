@@ -4,6 +4,7 @@ rvm:
 services:
   - postgresql
   - redis-server
+cache: bundler
 bundler_args: --without production
 before_script:
   - cp config/application.yml.example config/application.yml
