@@ -32,7 +32,7 @@ class Admin::PapersController < Admin::ApplicationController
   private
 
   def set_activity
-    @activity = Activity.find_by(permalink: params[:activity_id])
+    @activity = Activity.preload(:custom_fields).find_by(permalink: params[:activity_id])
   end
 
   def set_paper
