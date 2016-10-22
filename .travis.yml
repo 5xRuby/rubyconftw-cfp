@@ -8,4 +8,5 @@ cache: bundler
 bundler_args: --without production
 before_script:
   - cp config/application.yml.example config/application.yml
+  - bundle exec rake db:test:prepare
 
