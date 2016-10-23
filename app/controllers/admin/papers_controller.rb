@@ -12,7 +12,7 @@ class Admin::PapersController < Admin::ApplicationController
     respond_to do |format|
       # TODO: Filter necessary columns
       format.yml {
-        send_data @papers.as_yaml(include_root: true),
+        send_data @papers.as_yaml(include_root: true, hostname: request.host_with_port),
                   type: "application/yml",
                   disposition: "attachment; filename=papers.yml"
       }
