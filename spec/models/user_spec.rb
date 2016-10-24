@@ -39,7 +39,7 @@ RSpec.describe User, type: :model do
     except_yaml = %{---
 - name: #{user.name}
   avatar: "#{user.full_avatar_url("")}"
-  title: #{user.title}
+  title: #{user.title_with_company}
   urlGithub: #{user.github_url}
   urltwitter: #{user.twitter_url}
 }
@@ -53,7 +53,7 @@ RSpec.describe User, type: :model do
 users:
 - name: #{user.name}
   avatar: "#{user.full_avatar_url("")}"
-  title: #{user.title}
+  title: #{user.title_with_company}
   urlGithub: #{user.github_url}
   urltwitter: #{user.twitter_url}
 }
