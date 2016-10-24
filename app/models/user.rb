@@ -69,12 +69,16 @@ class User < ApplicationRecord
     end
   end
 
+  def title_with_company
+    @title_with_company ||= [self.title, self.company].select{|x| x.present?}.join(", ")
+  end
+
   def as_json(options = {})
     hostname = options[:hostname]
     result_hash = {
       name: name,
       avatar: full_avatar_url(hostname),
-      title: title,
+      title: title_with_company,
       urlGithub: github_url,
       urltwitter: twitter_url,
     }

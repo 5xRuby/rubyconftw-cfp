@@ -6,6 +6,9 @@ FactoryGirl.define do
     sequence(:twitter) { |n| "@user#{n}"}
     password "12341234"
 
+    title "title"
+    company "company"
+
     trait :contributor do
       is_contributor true
     end
