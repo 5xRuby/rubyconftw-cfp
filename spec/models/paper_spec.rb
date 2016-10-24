@@ -100,9 +100,9 @@ RSpec.describe Paper, type: :model do
   title: #{user.title}
   urlGithub: #{user.github_url}
   urltwitter: #{user.twitter_url}
-  bio: #{paper.speaker_bio}
+  bio: "#{Paper.markdown(paper.speaker_bio).gsub(/(\s*)\n(\s*)/,"\n").gsub(/[\n\r]*\z/,"")}"
   subject: #{paper.title}
-  summary: #{paper.abstract}
+  summary: "#{Paper.markdown(paper.abstract).gsub(/(\s*)\n(\s*)/,"\n").gsub(/[\n\r]*\z/,"")}"
   language: #{paper.language}
 }
 
@@ -119,9 +119,9 @@ papers:
   title: #{user.title}
   urlGithub: #{user.github_url}
   urltwitter: #{user.twitter_url}
-  bio: #{paper.speaker_bio}
+  bio: "#{Paper.markdown(paper.speaker_bio).gsub(/(\s*)\n(\s*)/,"\n").gsub(/[\n\r]*\z/,"")}"
   subject: #{paper.title}
-  summary: #{paper.abstract}
+  summary: "#{Paper.markdown(paper.abstract).gsub(/(\s*)\n(\s*)/,"\n").gsub(/[\n\r]*\z/,"")}"
   language: #{paper.language}
 }
 

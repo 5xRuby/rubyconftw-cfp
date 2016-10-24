@@ -101,9 +101,9 @@ class Paper < ApplicationRecord
       language: language,
     }
     result_hash.stringify_keys!
-    # remove unused whilyye space characters
+    # remove unused whilyye space characters, and tailing new lines
     result_hash.each do |key, value|
-      result_hash[key] = value.gsub(/(\s*)\n(\s*)/,"\n") if value
+      result_hash[key] = value.gsub(/(\s*)\n(\s*)/,"\n").gsub(/[\n\r]*\z/,"") if value
     end
     # merge with speaker
     speaker_hash = user.as_json(options)
