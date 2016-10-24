@@ -85,7 +85,11 @@ class User < ApplicationRecord
     end
   end
 
-  def full_avatar_url(hostname)
-    "//#{hostname}#{photo.url}"
+  def full_avatar_url(hostname = "")
+    if photo.present?
+      "//#{hostname}#{photo.url}"
+    else
+      "//avatars.githubusercontent.com/u/#{uid}?v=3"
+    end
   end
 end
