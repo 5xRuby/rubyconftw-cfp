@@ -86,6 +86,6 @@ class User < ApplicationRecord
   end
 
   def full_avatar_url(hostname)
-    "//#{hostname}#{photo.to_s}"
+    "//#{hostname}#{photo.url}"
   end
 end

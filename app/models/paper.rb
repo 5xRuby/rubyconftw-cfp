@@ -95,9 +95,9 @@ class Paper < ApplicationRecord
   def as_json(options = {})
     hostname = options[:hostname]
     result_hash = {
-      bio: speaker_bio,
+      bio: self.class.markdown(speaker_bio),
       subject: title,
-      summary: abstract, 
+      summary: self.class.markdown(abstract), 
       language: language,
     }
     result_hash.stringify_keys!
@@ -107,7 +107,7 @@ class Paper < ApplicationRecord
     end
     # merge with speaker
     speaker_hash = user.as_json(options)
-    result_hash.merge(speaker_hash)
+    speaker_hash.merge(result_hash)
   end
 
   private
