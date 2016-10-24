@@ -91,8 +91,27 @@ class Paper < ApplicationRecord
     result = {"#{model_name.plural}" => result} if options[:include_root]
     result.to_yaml
   end
+  
+  def as_json(options = {})
+    hostname = options[:hostname]
+    result_hash = {
+      bio: self.class.markdown(speaker_bio),
+      subject: title,
+      summary: self.class.markdown(abstract), 
+      language: language,
+    }
+    result_hash.stringify_keys!
+    # remove unused whilyye space characters, and tailing new lines
+    result_hash.each do |key, value|
+      result_hash[key] = value.gsub(/(\s*)\n(\s*)/,"\n").gsub(/[\n\r]*\z/,"") if value
+    end
+    # merge with speaker
+    speaker_hash = user.as_json(options)
+    speaker_hash.merge(result_hash)
+  end
 
   private
+
 
   def notify_user
     PapersMailer.notification_after_create(self.id).deliver_now!
