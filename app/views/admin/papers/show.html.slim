@@ -7,11 +7,8 @@
       tr
         th tags
         td
-          - @paper.tags.each do |tag|
-            = " "
-            .label.label-primary
-              = tag.name
-          = " "
+          span.display_tags
+            = render(partial: "display_tags", locals: {tags: @paper.tags})
           a.edit-tag-button.btn.btn-default(data-id="#{@paper.id}") Edit tag
           .field-container.hide(data-id="#{@paper.id}")
             = render(partial: "tag_field", locals: {paper: @paper})

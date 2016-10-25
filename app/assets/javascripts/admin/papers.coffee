@@ -25,6 +25,19 @@ jQuery ->
   $("#new_comment").on 'ajax:error', (e, data, status, xhr) ->
     $("#comment_error").html(data.responseJSON.reason)
 
+  # For ajax tag saving
+  $(".field-container").on 'ajax:success', (e, data, status, xhr) ->
+    # Replace display tags
+    $(".display_tags").html(data.display_tags_html)
+    # Remove all Bootstrap tags
+    $('.paper_tag_list > input').tagsinput('removeAll')
+    # For each tag
+    $.each data.tags, (index, tag)->
+      # Bootstrap: add tags
+      $('.paper_tag_list > input').tagsinput('add', tag)
+    # close edit block
+    $(".remove-tag-field").trigger 'click'
+
   # Toggle paper's checkbox
   $paper_checkboxes = $("input[name='notification[ids][]']")
   $check_all_checkbox = $('#notification_check_all')
@@ -32,7 +45,7 @@ jQuery ->
   $check_all_checkbox.on 'click', (e) ->
     check_status = $check_all_checkbox.prop('checked')
     $paper_checkboxes.prop('checked', check_status) # Toggle it
-  # For tags
+  # For tags input
   window.CreateTagsInput = (element, url) ->
     source = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
