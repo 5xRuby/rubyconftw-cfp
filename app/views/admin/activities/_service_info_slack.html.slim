@@ -1,4 +1,0 @@
-div.service-info.hidden data-service-name="slack"
-  = sif.input :webhook_url, required: true, hint: "Slack Web Hook URL", input_html: { value: notifier_service_info_value(nf, "webhook_url") }
-  = sif.input :channel, required: true, hint: "Can be some_channel or @someone", input_html: { value: notifier_service_info_value(nf, "channel") }
-  = sif.input :username, required: false, hint: "Bot name for slack. Left blank for default value: #{Settings.notifier.slack.default_username}", input_html: { value: notifier_service_info_value(nf, "username") }

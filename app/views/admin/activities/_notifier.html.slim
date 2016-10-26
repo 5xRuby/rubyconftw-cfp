@@ -13,8 +13,12 @@ li.notifier data-id="#{nf.object.id.to_i}"
             = sn
     .service-info-container
       = nf.simple_fields_for :service_info do |sif| 
-        = render partial: "service_info_slack", locals: {nf: nf, sif: sif}
-        = render partial: "service_info_email", locals: {nf: nf, sif: sif}
+        div.service-info.hidden data-service-name="slack"
+          - ["webhook_url", "channel", "username"].each do |field_key|
+            = render partial: "service_info", locals: {nf: nf, sif: sif, field_key: field_key}
+        div.service-info.hidden data-service-name="email"
+          - ["recipient", "subject"].each do |field_key|
+            = render partial: "service_info", locals: {nf: nf, sif: sif, field_key: field_key}
     label
       = nf.check_box :_destroy, class: (nf.object.new_record? ? "remove-new" : "remove-exist")
       | Remove
