@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 2.3.1
+services:
+  - postgresql
+  - redis-server
+cache: bundler
+bundler_args: --without production
+before_script:
+  - cp config/application.yml.example config/application.yml
+  - bundle exec rake db:test:prepare
+addons:
+  postgresql: "9.4"

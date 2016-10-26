@@ -2,7 +2,12 @@ FactoryGirl.define do
   factory :user do
     sequence(:name) { |n| "Tester #{n}" }
     sequence(:email) { |n| "user#{n}@rubyconf.tw"}
+    sequence(:github_username) { |n| "github_#{n}" }
+    sequence(:twitter) { |n| "@user#{n}"}
     password "12341234"
+
+    title "title"
+    company "company"
 
     trait :contributor do
       is_contributor true

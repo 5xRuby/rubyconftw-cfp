@@ -12,7 +12,7 @@ class Admin::PapersController < Admin::ApplicationController
     respond_to do |format|
       # TODO: Filter necessary columns
       format.yml {
-        send_data @papers.as_yaml(include_root: true),
+        send_data @papers.as_yaml(include_root: true, hostname: request.host_with_port),
                   type: "application/yml",
                   disposition: "attachment; filename=papers.yml"
       }
@@ -32,7 +32,7 @@ class Admin::PapersController < Admin::ApplicationController
   private
 
   def set_activity
-    @activity = Activity.find_by(permalink: params[:activity_id])
+    @activity = Activity.preload(:custom_fields).find_by(permalink: params[:activity_id])
   end
 
   def set_paper
@@ -47,7 +47,12 @@ class Admin::PapersController < Admin::ApplicationController
     if params[:commit] == "Search"
       # search by tag
       if params[:search_field] == "tag"
-        query.tagged_with(params[:search_key].split(","), any: true, wild: params[:search_type] != "equal")
+        wild = params[:search_type] != "equal"
+        final_q = query
+        params[:search_key].split(",").each do |tag|
+          final_q = final_q.tagged_with(tag, any: true, wild: wild)
+        end
+        final_q
       else # search by column
         if fixed_search_fields.include? params[:search_field]
           column = "lower(#{params[:search_field]})" # search_field should be safe

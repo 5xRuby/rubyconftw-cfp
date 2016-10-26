@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.5.0'
+lock '3.6.1'
 
 set :application, 'spottly-web'
 set :repo_url, 'git@git.5xruby.tw:cfp/cfp.system.git'

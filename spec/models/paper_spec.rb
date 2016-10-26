@@ -93,25 +93,38 @@ RSpec.describe Paper, type: :model do
 
   it "generate yaml" do
     paper = FactoryGirl.create(:paper)
+    user = paper.user
     except_yaml = %{---
-- id: #{paper.id}
-  title: #{paper.title}
-  abstract: #{paper.abstract}
+- name: #{user.name}
+  avatar: "#{user.full_avatar_url("")}"
+  title: #{user.title_with_company}
+  urlGithub: #{user.github_url}
+  urltwitter: #{user.twitter_url}
+  bio: "#{Paper.markdown(paper.speaker_bio).gsub(/(\s*)\n(\s*)/,"\n").gsub(/[\n\r]*\z/,"")}"
+  subject: #{paper.title}
+  summary: "#{Paper.markdown(paper.abstract).gsub(/(\s*)\n(\s*)/,"\n").gsub(/[\n\r]*\z/,"")}"
+  language: #{paper.language}
 }
 
-    expect(Paper.all.as_yaml(only: [:id, :title, :abstract])).to eq(except_yaml)
+    expect(Paper.all.as_yaml).to eq(except_yaml)
   end
 
   it "generate yaml with root" do
-
     paper = FactoryGirl.create(:paper)
+    user = paper.user
     except_yaml = %{---
 papers:
-- id: #{paper.id}
-  title: #{paper.title}
-  abstract: #{paper.abstract}
+- name: #{user.name}
+  avatar: "#{user.full_avatar_url("")}"
+  title: #{user.title_with_company}
+  urlGithub: #{user.github_url}
+  urltwitter: #{user.twitter_url}
+  bio: "#{Paper.markdown(paper.speaker_bio).gsub(/(\s*)\n(\s*)/,"\n").gsub(/[\n\r]*\z/,"")}"
+  subject: #{paper.title}
+  summary: "#{Paper.markdown(paper.abstract).gsub(/(\s*)\n(\s*)/,"\n").gsub(/[\n\r]*\z/,"")}"
+  language: #{paper.language}
 }
 
-    expect(Paper.all.as_yaml(include_root: true, only: [:id, :title, :abstract])).to eq(except_yaml)
+    expect(Paper.all.as_yaml(include_root: true)).to eq(except_yaml)
   end
 end

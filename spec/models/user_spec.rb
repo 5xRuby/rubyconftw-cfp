@@ -37,25 +37,27 @@ RSpec.describe User, type: :model do
   it "generate yaml" do
     user = FactoryGirl.create(:user)
     except_yaml = %{---
-- id: #{user.id}
-  email: #{user.email}
-  name: #{user.name}
-  phone: #{user.phone}
+- name: #{user.name}
+  avatar: "#{user.full_avatar_url("")}"
+  title: #{user.title_with_company}
+  urlGithub: #{user.github_url}
+  urltwitter: #{user.twitter_url}
 }
 
-    expect(User.all.as_yaml(only: [:id, :email, :name, :phone])).to eq(except_yaml)
+    expect(User.all.as_yaml).to eq(except_yaml)
   end
 
   it "generate yaml with root" do
     user = FactoryGirl.create(:user)
     except_yaml = %{---
 users:
-- id: #{user.id}
-  email: #{user.email}
-  name: #{user.name}
-  phone: #{user.phone}
+- name: #{user.name}
+  avatar: "#{user.full_avatar_url("")}"
+  title: #{user.title_with_company}
+  urlGithub: #{user.github_url}
+  urltwitter: #{user.twitter_url}
 }
 
-    expect(User.all.as_yaml(include_root: true, only: [:id, :email, :name, :phone])).to eq(except_yaml)
+    expect(User.all.as_yaml(include_root: true)).to eq(except_yaml)
   end
 end

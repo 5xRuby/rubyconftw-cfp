@@ -53,4 +53,47 @@ class User < ApplicationRecord
     self.github_username.nil? ? "(Not yet updated)" : self.github_username
   end
 
+  def github_url
+    self.github_username.present? ? "https://github.com/#{self.github_username}" : ""
+  end
+
+  def twitter_url
+    if twitter.present?
+      if twitter =~ /https?:\/\/twitter\.com/i
+        twitter
+      else
+        "https://twitter.com/#{twitter.gsub("@","")}"
+      end
+    else
+      ""
+    end
+  end
+
+  def title_with_company
+    @title_with_company ||= [self.title, self.company].select{|x| x.present?}.join(", ")
+  end
+
+  def as_json(options = {})
+    hostname = options[:hostname]
+    result_hash = {
+      name: name,
+      avatar: full_avatar_url(hostname),
+      title: title_with_company,
+      urlGithub: github_url,
+      urltwitter: twitter_url,
+    }
+    result_hash.stringify_keys!
+    # remove unused while space characters
+    result_hash.each do |key, value|
+      result_hash[key] = value.gsub(/(\s*)\n(\s*)/,"\n") if value
+    end
+  end
+
+  def full_avatar_url(hostname = "")
+    if photo.present?
+      "//#{hostname}#{photo.url}"
+    else
+      "//avatars.githubusercontent.com/u/#{uid}?v=3"
+    end
+  end
 end
