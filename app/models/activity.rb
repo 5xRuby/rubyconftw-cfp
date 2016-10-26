@@ -69,4 +69,12 @@ class Activity < ApplicationRecord
   def notify(event, subject)
     notifiers.where(enabled: true).each {|n| n.handle_event(event,subject)}
   end
+
+  def full_logo_url(hostname)
+    if self.logo.present?
+      "http://#{hostname}#{self.logo.url}"
+    else
+      ""
+    end
+  end
 end

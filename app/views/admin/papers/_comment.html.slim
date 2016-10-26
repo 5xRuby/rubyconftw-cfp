@@ -1,4 +1,4 @@
-div class="comment-#{comment.id}"
+div class="comment-#{comment.id}" id="comment-#{comment.id}"
   h4 #{comment.user.name} says:
   .well
     p == markdown(comment.text)

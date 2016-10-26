@@ -63,6 +63,7 @@ class PapersController < ApplicationController
   # DELETE /papers/1.json
   def destroy
     @paper.withdraw!
+    @paper.activity.notify("paper_status_changed", @paper)
     respond_to do |format|
       format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully withdrawn.' }
       format.json { head :no_content }

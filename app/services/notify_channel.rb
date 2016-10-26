@@ -1,5 +1,11 @@
 class NotifyChannel < ActiveJob::Base
+  include Rails.application.routes.url_helpers
+  
+  default_url_options[:host] = Settings.hostname["host"] || "localhost"
+  default_url_options[:port] = Settings.hostname["port"] || 3000
+
   queue_as :default
+
 
   def self.default(key, value)
     @@defaults ||= {} 
@@ -51,6 +57,22 @@ class NotifyChannel < ActiveJob::Base
       if @service_info[key].blank?
         @service_info[key] = field
       end
+    end
+  end
+
+  def host
+    default_url_options[:host]
+  end
+
+  def port
+    default_url_options[:port]
+  end
+
+  def full_hostname
+    if port.present?
+      "#{host}:#{port}"
+    else
+      host
     end
   end
 
