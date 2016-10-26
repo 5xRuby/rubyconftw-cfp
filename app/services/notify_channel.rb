@@ -2,7 +2,7 @@ class NotifyChannel < ActiveJob::Base
   include Rails.application.routes.url_helpers
   
   default_url_options[:host] = Settings.hostname["host"] || "localhost"
-  default_url_options[:port] = Settings.hostname["port"] || 3000
+  default_url_options[:port] = Settings.hostname["port"]
 
   queue_as :default
 
