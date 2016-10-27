@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
     resources :tags, only: [:index]
 
-    resources :users, only: [:index] do
+    resources :users, only: [:index, :edit, :update] do
       resource :contributor, only: [:create, :destroy]
 
       get '/designate' => "users#designate"
