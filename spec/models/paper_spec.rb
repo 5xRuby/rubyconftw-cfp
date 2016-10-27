@@ -97,7 +97,7 @@ RSpec.describe Paper, type: :model do
     except_yaml = %{---
 - name: #{user.name}
   avatar: "#{user.full_avatar_url("")}"
-  title: #{user.title}
+  title: #{user.title_with_company}
   urlGithub: #{user.github_url}
   urltwitter: #{user.twitter_url}
   bio: "#{Paper.markdown(paper.speaker_bio).gsub(/(\s*)\n(\s*)/,"\n").gsub(/[\n\r]*\z/,"")}"
@@ -116,7 +116,7 @@ RSpec.describe Paper, type: :model do
 papers:
 - name: #{user.name}
   avatar: "#{user.full_avatar_url("")}"
-  title: #{user.title}
+  title: #{user.title_with_company}
   urlGithub: #{user.github_url}
   urltwitter: #{user.twitter_url}
   bio: "#{Paper.markdown(paper.speaker_bio).gsub(/(\s*)\n(\s*)/,"\n").gsub(/[\n\r]*\z/,"")}"
