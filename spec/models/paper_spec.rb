@@ -95,7 +95,7 @@ RSpec.describe Paper, type: :model do
     paper = FactoryGirl.create(:paper)
     user = paper.user
     except_yaml = %{---
-- name: #{user.name}
+- name: #{user.full_name}
   avatar: "#{user.full_avatar_url("")}"
   title: #{user.title_with_company}
   urlGithub: #{user.github_url}
@@ -114,7 +114,7 @@ RSpec.describe Paper, type: :model do
     user = paper.user
     except_yaml = %{---
 papers:
-- name: #{user.name}
+- name: #{user.full_name}
   avatar: "#{user.full_avatar_url("")}"
   title: #{user.title_with_company}
   urlGithub: #{user.github_url}
