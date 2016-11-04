@@ -57,6 +57,14 @@ class User < ApplicationRecord
     self.github_username.present? ? "https://github.com/#{self.github_username}" : ""
   end
 
+  def full_name
+    if firstname && lastname
+      "#{firstname} #{lastname}"
+    else
+      name
+    end
+  end
+
   def twitter_url
     if twitter.present?
       if twitter =~ /https?:\/\/twitter\.com/i
@@ -76,7 +84,7 @@ class User < ApplicationRecord
   def as_json(options = {})
     hostname = options[:hostname]
     result_hash = {
-      name: name,
+      name: full_name,
       avatar: full_avatar_url(hostname),
       title: title_with_company,
       urlGithub: github_url,
