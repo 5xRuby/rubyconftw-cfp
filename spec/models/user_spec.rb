@@ -37,7 +37,7 @@ RSpec.describe User, type: :model do
   it "generate yaml" do
     user = FactoryGirl.create(:user)
     except_yaml = %{---
-- name: #{user.name}
+- name: #{user.full_name}
   avatar: "#{user.full_avatar_url("")}"
   title: #{user.title_with_company}
   urlGithub: #{user.github_url}
@@ -51,7 +51,7 @@ RSpec.describe User, type: :model do
     user = FactoryGirl.create(:user)
     except_yaml = %{---
 users:
-- name: #{user.name}
+- name: #{user.full_name}
   avatar: "#{user.full_avatar_url("")}"
   title: #{user.title_with_company}
   urlGithub: #{user.github_url}

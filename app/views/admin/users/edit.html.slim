@@ -1,0 +1,14 @@
+= simple_form_for @user, url: admin_user_path(@user) do |f|
+  = f.input :name
+  = f.input :firstname
+  = f.input :lastname
+  = f.input :email
+  = f.input :phone
+  = f.input :title
+  = f.input :company
+  = f.input :country
+  = f.input :twitter
+  = f.input :github_username
+  = f.submit class: "btn btn-primary"
+  = " "
+  = link_to "Back", admin_users_path, class: "btn btn-danger"
