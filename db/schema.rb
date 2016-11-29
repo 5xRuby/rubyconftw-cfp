@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129072940) do
+ActiveRecord::Schema.define(version: 20161129075535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,13 @@ ActiveRecord::Schema.define(version: 20161129072940) do
     t.date     "start_date"
     t.date     "end_date"
     t.text     "term"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "papers_count", default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "papers_count",       default: 0
     t.datetime "open_at"
     t.datetime "close_at"
     t.string   "permalink"
+    t.boolean  "accept_attachement"
   end
 
   create_table "ar_internal_metadata", primary_key: "key", id: :string, force: :cascade do |t|
