@@ -11,6 +11,20 @@ defaults: &defaults
     default_from: "noreply@rubyconf.dev"
     bcc_email:
       - contact@rubyconf.dev
+  paper:
+    title:
+      limit_word: true
+      min: 1
+      max: 100
+    abstract:
+      limit_word: true
+      min: 10
+      max: 601
+    bio:
+      limit_word: true
+      min: 10
+      max: 601
+
 
 development:
   <<: *defaults

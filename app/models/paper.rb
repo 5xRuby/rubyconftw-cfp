@@ -15,8 +15,9 @@ class Paper < ApplicationRecord
 	mount_uploader :speaker_avatar, PictureUploader
   mount_uploader :attachement, AttachementUploader
 
-  validates :title, word: { in: 1..100}
-  validates :abstract, :speaker_bio, word: { in: 10..601 }
+  validates :title, word: { in: Settings.paper.title.min..Settings.paper.title.max} if Settings.paper.title.limit_word
+  validates :abstract, word: { in: Settings.paper.abstract.min..Settings.paper.abstract.max } if Settings.paper.abstract.limit_word
+  validates  :speaker_bio, word: { in: Settings.paper.bio.min..Settings.paper.bio.max } if Settings.paper.bio.limit_word
 	validates_presence_of :title
 	validates_presence_of :abstract
 	validates_presence_of :outline
