@@ -54,6 +54,11 @@
         th User
         td
           = @paper.user.name
+      tr
+        th Attachement
+        td
+          - if @paper.attachement.present?
+            = link_to @paper.attachement.identifier, @paper.attachement.url
   .btn-group
     = admin_review_button(@paper)
     = admin_accept_button(@paper)
