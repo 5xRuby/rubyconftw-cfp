@@ -13,6 +13,7 @@ class Paper < ApplicationRecord
   attr_writer :custom_field_errors
 
 	mount_uploader :speaker_avatar, PictureUploader
+  mount_uploader :attachement, AttachementUploader
 
   validates :title, word: { in: 1..100}
   validates :abstract, :speaker_bio, word: { in: 10..601 }
@@ -91,13 +92,13 @@ class Paper < ApplicationRecord
     result = {"#{model_name.plural}" => result} if options[:include_root]
     result.to_yaml
   end
-  
+
   def as_json(options = {})
     hostname = options[:hostname]
     result_hash = {
       bio: self.class.markdown(speaker_bio),
       subject: title,
-      summary: self.class.markdown(abstract), 
+      summary: self.class.markdown(abstract),
       language: language,
     }
     result_hash.stringify_keys!
