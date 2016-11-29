@@ -1,18 +1,11 @@
 default: &default
-  adapter: postgresql
-
-development:
-  <<: *default
-  database: cfp-dev
+  url: postgres://5xruby:password@db/5xruby
 
 test:
   <<: *default
-  database: cfp-test
 
-staging:
+development:
   <<: *default
-  database: cfp-staging
 
 production:
   <<: *default
-  database: cfp-production

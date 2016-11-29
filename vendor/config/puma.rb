@@ -5,7 +5,7 @@ max_threads = ENV.fetch('PUMA_MAX_THREADS', 16).to_i
 min_threads = ENV.fetch('PUMA_MIN_THREADS', max_threads).to_i
 threads min_threads, max_threads
 
-bind 'tcp://0.0.0.0:3000'
+#bind 'tcp://0.0.0.0:3000'
 preload_app!
 
 # Don't wait for workers to finish their work. We might have long-running HTTP requests.
