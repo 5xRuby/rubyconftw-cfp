@@ -6,7 +6,7 @@ class Notifier < ApplicationRecord
 
   VALID_SERVICE_NAMES = %w(slack email)
 
-  REQUIRED_SERVICE_INFO = %w(webhook_url channel recipient subject)
+  REQUIRED_SERVICE_INFO = %w(webhook_url channel recipient)
   SERVICE_INFO_HINT = {
     "webhook_url" => "Slack Web Hook URL",
     "channel" => "Should be some_channel or @someon",
@@ -44,7 +44,7 @@ class Notifier < ApplicationRecord
     fields_to_check = []
     case service_name
     when "email"
-      fields_to_check = ["subject", "recipient"]
+      fields_to_check = ["recipient"]
     when "slack"
       fields_to_check = ["webhook_url", "channel"]
     else
