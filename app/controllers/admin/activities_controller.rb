@@ -47,9 +47,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
   private
 
   def activity_params
-    params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :open_at, :close_at, :term, :permalink,  custom_fields_attributes: [:id, :name, :required, :description, :field_type, :_destroy, :sort_order, :collection_text], notifiers_attributes: [:id, :name, :enabled, :on_new_comment, :on_new_paper, :on_paper_status_changed, :service_name, :_destroy ,service_info: [:webhook_url, :channel, :username, :recipient, :subject] ])
-    
-
+    params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :open_at, :close_at, :term, :permalink, :accept_attachement, custom_fields_attributes: [:id, :name, :required, :description, :field_type, :_destroy, :sort_order, :collection_text], notifiers_attributes: [:id, :name, :enabled, :on_new_comment, :on_new_paper, :on_paper_status_changed, :service_name, :_destroy ,service_info: [:webhook_url, :channel, :username, :recipient, :subject] ])
   end
 
 

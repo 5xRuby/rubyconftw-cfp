@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018031957) do
+ActiveRecord::Schema.define(version: 20161129075535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,13 @@ ActiveRecord::Schema.define(version: 20161018031957) do
     t.date     "start_date"
     t.date     "end_date"
     t.text     "term"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "papers_count", default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "papers_count",       default: 0
     t.datetime "open_at"
     t.datetime "close_at"
     t.string   "permalink"
+    t.boolean  "accept_attachement"
   end
 
   create_table "ar_internal_metadata", primary_key: "key", id: :string, force: :cascade do |t|
@@ -99,6 +100,7 @@ ActiveRecord::Schema.define(version: 20161018031957) do
     t.string   "language",                limit: 32
     t.string   "uuid",                    limit: 8
     t.integer  "reviews_count",                      default: 0
+    t.string   "attachement"
     t.index ["activity_id"], name: "index_papers_on_activity_id", using: :btree
     t.index ["uuid"], name: "index_papers_on_uuid", using: :btree
   end
