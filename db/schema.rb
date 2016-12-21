@@ -65,6 +65,19 @@ ActiveRecord::Schema.define(version: 20161129075535) do
     t.string   "collection",             default: [],                 array: true
   end
 
+  create_table "notifiers", force: :cascade do |t|
+    t.integer  "activity_id"
+    t.string   "name"
+    t.boolean  "enabled",                 default: true
+    t.boolean  "on_new_comment",          default: false
+    t.boolean  "on_new_paper",            default: false
+    t.boolean  "on_paper_status_changed", default: false
+    t.string   "service_name",            default: ""
+    t.jsonb    "service_info",            default: {}
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
   create_table "papers", force: :cascade do |t|
     t.string   "title"
     t.text     "abstract"

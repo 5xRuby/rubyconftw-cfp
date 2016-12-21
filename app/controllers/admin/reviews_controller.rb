@@ -3,6 +3,7 @@ class Admin::ReviewsController < Admin::ApplicationController
 
   def create
     @paper.reviews.create!(user: current_user, reviewed: true)
+    @paper.activity.notify("paper_status_changed", @paper)
     redirect_to admin_activity_papers_path(@paper.activity)
     rescue StandardError
       redirect_to admin_activity_papers_path(@paper.activity), alert: "You already reviewed this paper"
@@ -10,6 +11,7 @@ class Admin::ReviewsController < Admin::ApplicationController
 
   def accept
     @paper.accept!
+    @paper.activity.notify("paper_status_changed", @paper)
     redirect_to admin_activity_papers_path(@paper.activity)
     rescue StandardError
       redirect_to admin_activity_papers_path(@paper.activity_id), alert: "發生錯誤"
@@ -18,6 +20,7 @@ class Admin::ReviewsController < Admin::ApplicationController
 
   def reject
     @paper.reject!
+    @paper.activity.notify("paper_status_changed", @paper)
     redirect_to admin_activity_papers_path(@paper.activity)
     rescue StandardError
       redirect_to admin_activity_papers_path(@paper.activity), alert: "發生錯誤"

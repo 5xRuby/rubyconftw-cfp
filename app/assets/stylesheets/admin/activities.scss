@@ -26,3 +26,20 @@ body.dragging, body.dragging * {
     }
   }
 }
+
+ul#notifiers_container{
+  list-style: none;
+  padding-left: 0;
+  li.placeholder{
+    position: relative;
+    &:before{position: absolute;}
+  }
+}
+.service-name-container{
+  label{
+    margin: 0 1em 0 0;
+    input[type="radio"]{
+      margin: 0 4px 0 0px;
+    }
+  }
+}

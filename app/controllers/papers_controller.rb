@@ -36,6 +36,7 @@ class PapersController < ApplicationController
     logger.info @paper.inspect
     respond_to do |format|
       if @paper.save
+        @activity.notify("new_paper", @paper)
         format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
       else
         format.html {
@@ -62,6 +63,7 @@ class PapersController < ApplicationController
   # DELETE /papers/1.json
   def destroy
     @paper.withdraw!
+    @paper.activity.notify("paper_status_changed", @paper)
     respond_to do |format|
       format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully withdrawn.' }
       format.json { head :no_content }

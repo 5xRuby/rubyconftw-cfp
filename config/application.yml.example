@@ -24,6 +24,14 @@ defaults: &defaults
       limit_word: true
       min: 10
       max: 601
+  notifier:
+    email:
+      default_subject: "CFP-notification"
+    slack:
+      default_username: "CFP-notification"
+  hostname:
+    host: "rubyconf.dev"
+    port: "80"
 
 
 development:
