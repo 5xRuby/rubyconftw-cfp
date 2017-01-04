@@ -1,0 +1,27 @@
+image: ruby:2.3-alpine
+
+variables:
+  CAP_USER: "deployer"
+  BUNDLE_CACHE: "vendor/bundle/"
+  RAILS_ENV: "test"
+  CI: "true"
+
+cache:
+  untracked: true
+  key: "$CI_BUILD_NAME"
+  paths:
+    - vendor/bundle/
+
+services:
+  - postgres:9.5
+
+before_script:
+  - ./gitlab-ci/setup.sh
+
+stages:
+  - test
+
+rspec:
+  stage: test
+  script:
+    - rspec
