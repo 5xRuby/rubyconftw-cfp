@@ -1,5 +1,11 @@
 # config/application.yml
 defaults: &defaults
+  notifier:
+    email:
+      default_subject: "SUBJECTTT"
+    slack:
+      default_username: "BOT"
+      default_subject: "SUBJECTTTTT"
   github:
     id: c9676d1081de1109685c
     secret: 82eb67a40bd9d8ea5ce1ee4327900ddb94aad47d
