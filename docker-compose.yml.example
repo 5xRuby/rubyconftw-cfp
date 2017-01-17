@@ -11,6 +11,16 @@ services:
       - db
       - redis
     environment:
+
+      - GITHUB_ID=YOUR_GITHUB_ID
+      - GITHUB_SECRET=YOUR_GITHUB_SECRET
+
+      - HOSTNAME_HOST=localhost
+      - HOSTNAME_PORT=3000
+
+      - TWITTER_ID=YOUR_TWITTER_ID
+      - TWITTER_SECRET=YOUR_TWITTER_SECRECT
+
       - DB_HOST=db
       - DB_USER=5xruby
       - DB_PASS=password
