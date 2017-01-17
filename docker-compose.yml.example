@@ -9,18 +9,34 @@ services:
       - ./vendor/bundle:/usr/shared/bundle
     depends_on:
       - db
+      - redis
     environment:
+
+      - GITHUB_ID=YOUR_GITHUB_ID
+      - GITHUB_SECRET=YOUR_GITHUB_SECRET
+
+      - HOSTNAME_HOST=localhost
+      - HOSTNAME_PORT=3000
+
+      - TWITTER_ID=YOUR_TWITTER_ID
+      - TWITTER_SECRET=YOUR_TWITTER_SECRECT
+
       - DB_HOST=db
       - DB_USER=5xruby
       - DB_PASS=password
       - DB_NAME=5xruby
+
+      - REDIS_URL=redis://redis:6379/0
+
       - MAIL_HOST=5xruby.tw
+
       - SMTP_HOST=localhost
       - SMTP_PORT=587
       - SMTP_USER=5xruby
       - SMTP_PASS=password
       - SMTP_AUTHENTICATION=plain
       - SMTP_STARTSSL=true
+
       - SECRET_KEY_BASE=YOUR_RAILS_SECRET
       - RAILS_SERVE_STATIC_FILES=true
   db:
@@ -31,4 +47,8 @@ services:
       - POSTGRES_DB=5xruby
     volumes:
       - ./postgres:/var/lib/postgresql/data
+      - /usr/share/zoneinfo:/usr/share/zoneinfo
+  redis:
+    image: redis:3.2-alpine
+    volumes:
       - /usr/share/zoneinfo:/usr/share/zoneinfo

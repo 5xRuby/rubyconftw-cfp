@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129075535) do
+ActiveRecord::Schema.define(version: 20170117064728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,8 +167,10 @@ ActiveRecord::Schema.define(version: 20161129075535) do
     t.boolean  "is_contributor",     default: false
     t.string   "twitter"
     t.string   "github_username"
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["is_contributor"], name: "index_users_on_is_contributor", using: :btree
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", using: :btree
+    t.index ["uid"], name: "index_users_on_uid", using: :btree
   end
 
   add_foreign_key "papers", "activities"
