@@ -4,10 +4,11 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of(:name) }
 
   context "sign in with omniauth" do
-    let(:exists_user) { FactoryGirl.create(:user) }
+    let!(:exists_user) { FactoryGirl.create(:user) }
     let(:auth_info) {
       OmniAuth::AuthHash.new({
         provider: 'github',
+        uid: 9999,
         info: {
           email: 'github@rubyconf.tw'
         }
@@ -17,6 +18,7 @@ RSpec.describe User, type: :model do
     let(:auth_info_exists) {
       OmniAuth::AuthHash.new({
         provider: 'github',
+        uid: exists_user.uid, 
         info: {
           email: exists_user.email
         }
