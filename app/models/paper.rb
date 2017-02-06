@@ -94,12 +94,29 @@ class Paper < ApplicationRecord
     result.to_yaml
   end
 
+  XLS_TITLES = %w{Title Tags State Name Github Duration}
+
+  def as_xls_row_arr
+    [self.title, self.tag_list.join(","), self.state, self.state, self.user.github_username, self.answer_of_custom_fields["1"]]
+  end
+
+  def self.as_axlsx
+    pkg = Axlsx::Package.new
+    pkg.workbook.add_worksheet(:name => self.first.activity.name ) do |sheet|
+      sheet.add_row XLS_TITLES
+      all.each do |paper|
+        sheet.add_row paper.as_xls_row_arr
+      end
+    end
+    pkg
+  end
+
   def self.as_xls
     wbk = Spreadsheet::Workbook.new
-    wsh = wbk.create_worksheet name: self.name
-    wsh.insert_row(0, %w{Title Tags State Name Github Duration})
+    wsh = wbk.create_worksheet name: self.first.activity.name
+    wsh.insert_row(0, XLS_TITLES)
     all.each_with_index do |paper, idx|
-      wsh.insert_row(idx + 1, [paper.title, paper.tag_list.join(","), paper.state, paper.state, paper.user.github_username, paper.answer_of_custom_fields["1"]])
+      wsh.insert_row(idx + 1, paper.as_xls_row_arr)
     end
     wbk
   end
