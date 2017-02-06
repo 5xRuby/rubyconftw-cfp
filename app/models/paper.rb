@@ -94,6 +94,16 @@ class Paper < ApplicationRecord
     result.to_yaml
   end
 
+  def self.as_xls
+    wbk = Spreadsheet::Workbook.new
+    wsh = wbk.create_worksheet name: self.name
+    wsh.insert_row(0, %w{Title Tags State Name Github Duration})
+    all.each_with_index do |paper, idx|
+      wsh.insert_row(idx + 1, [paper.title, paper.tag_list.join(","), paper.state, paper.state, paper.user.github_username, paper.answer_of_custom_fields["1"]])
+    end
+    wbk
+  end
+
   def as_json(options = {})
     hostname = options[:hostname]
     result_hash = {
