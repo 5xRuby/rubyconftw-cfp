@@ -17,6 +17,60 @@ RSpec.describe Paper, type: :model do
   it { should validate_presence_of(:speaker_bio) }
   it { should validate_presence_of(:language) }
 
+  describe "Spreadsheet output ability" do
+
+    let :papers do
+      10.times.map do
+        FactoryGirl.create :paper
+      end
+    end
+
+    it "should has enough papers" do
+      papers
+      expect(Paper.count).to eq(10)
+    end
+
+    before do
+      papers #Generate papers
+    end
+
+    let :sheet_array do
+      papers.map(&:as_xls_row_arr).unshift(Paper::XLS_TITLES)
+    end
+
+    describe "XLS Workbook" do
+
+      let :wbk_filepath do
+        "#{SecureRandom.hex(10)}.xls"
+      end
+
+      let :xls_wbk do
+        Paper.all.as_xls
+      end
+
+      let :xls_reader do
+        Roo::Spreadsheet.open wbk_filepath
+      end
+
+      let :reader_arr do
+        xls_reader.to_a
+      end
+
+      before do
+        xls_wbk.write wbk_filepath
+      end
+
+      it "should has same size with sheet array" do
+        expect(reader_arr.size).to be(sheet_array.size)
+      end
+
+      after do
+        FileUtils.rm wbk_filepath
+      end
+    end
+
+  end
+
   it "should validate activity is open on create" do
     activity = Activity.new
     allow(activity).to receive(:open?).and_return(false)
