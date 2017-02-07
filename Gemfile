@@ -17,6 +17,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'simple_form'
 gem 'mini_magick'
 gem 'jquery-ui-rails'
+gem 'spreadsheet'
 gem 'axlsx'
 gem 'roo'
 gem 'roo-xls'
