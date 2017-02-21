@@ -7,7 +7,6 @@ development:
 
 test:
   <<: *default
-  host: postgres
   database: cfp-test
 
 staging:
