@@ -36,6 +36,7 @@ RSpec.describe Paper, type: :model do
 
     expect(paper.activity).not_to be_nil
     expect(paper.custom_field_errors[custom_field.id.to_s]).to eq("can't be blank")
+    expect(paper.errors[:custom_field_errors]).to include("can't be blank")
   end
 
   context "state" do

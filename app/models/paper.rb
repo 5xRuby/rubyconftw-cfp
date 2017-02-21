@@ -125,6 +125,7 @@ class Paper < ApplicationRecord
       val = self.answer_of_custom_fields[cf.id.to_s]
       if cf.required && val.blank?
         custom_field_errors[cf.id.to_s] = I18n.translate("errors.messages.blank")
+        self.errors.add :custom_field_errors, I18n.translate("errors.messages.blank")
       end
     end
   end
