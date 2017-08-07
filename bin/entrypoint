@@ -28,6 +28,7 @@ case ${1} in
     migrate
     prepare_assets
 
+    sidekiq -d -L log/sidekiq.log
     puma -C /etc/puma.rb 2>&1
     ;;
   rake)
