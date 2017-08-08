@@ -24,3 +24,6 @@ config/application.yml
 
 # Ignore coverage repoer
 coverage/
+
+# Ignore cache file
+.DS_Store
