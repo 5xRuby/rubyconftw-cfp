@@ -13,7 +13,18 @@
       ul#input_fields_container
         = f.simple_fields_for :custom_fields do |cf|
             = render "custom_field", cf: cf
-      .form-group
+      .form-grop
         a.btn.btn-default#add-field(data-form-content="#{render(partial: "new_field", locals: {f:f, idx: rand(99999) + 1}).gsub(/\n/,"")  }") Add Field
+    strong Attachement
+    p
+      = f.input :accept_attachement
     = f.input :permalink
+    .notifiers
+      h3 Notifiers
+      ul#notifiers_container
+        = f.simple_fields_for :notifiers do |nf|
+          = render "notifier", nf: nf
+      .form-group
+        a.btn.btn-default#add-notifier(data-form-content="#{render(partial: "new_notifier", locals: {f: f}).gsub(/\n/,"")}") Add Notifier
+
     = f.submit "Save", class: "btn btn-primary"

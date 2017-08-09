@@ -13,9 +13,11 @@ class Paper < ApplicationRecord
   attr_writer :custom_field_errors
 
 	mount_uploader :speaker_avatar, PictureUploader
+  mount_uploader :attachement, AttachementUploader
 
-  validates :title, word: { in: 1..100}
-  validates :abstract, :speaker_bio, word: { in: 10..601 }
+  validates :title, word: { in: Settings.paper.title.min..Settings.paper.title.max} if Settings.paper.title.limit_word
+  validates :abstract, word: { in: Settings.paper.abstract.min..Settings.paper.abstract.max } if Settings.paper.abstract.limit_word
+  validates  :speaker_bio, word: { in: Settings.paper.bio.min..Settings.paper.bio.max } if Settings.paper.bio.limit_word
 	validates_presence_of :title
 	validates_presence_of :abstract
 	validates_presence_of :outline
@@ -91,13 +93,13 @@ class Paper < ApplicationRecord
     result = {"#{model_name.plural}" => result} if options[:include_root]
     result.to_yaml
   end
-  
+
   def as_json(options = {})
     hostname = options[:hostname]
     result_hash = {
       bio: self.class.markdown(speaker_bio),
       subject: title,
-      summary: self.class.markdown(abstract), 
+      summary: self.class.markdown(abstract),
       language: language,
     }
     result_hash.stringify_keys!
@@ -123,6 +125,7 @@ class Paper < ApplicationRecord
       val = self.answer_of_custom_fields[cf.id.to_s]
       if cf.required && val.blank?
         custom_field_errors[cf.id.to_s] = I18n.translate("errors.messages.blank")
+        self.errors.add :custom_field_errors, I18n.translate("errors.messages.blank")
       end
     end
   end

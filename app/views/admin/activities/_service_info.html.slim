@@ -1,0 +1,4 @@
+- field_data = notifier_service_info_field_data(nf, field_key) 
+= sif.input field_key, required: field_data[:required], hint: field_data[:hint], wrapper_html: { class: "#{'has-error' if field_data[:error_message]}" } do
+  = text_field_tag "#{nf.object_name}[service_info][#{field_key}]", field_data[:value], class: "form-control"
+  .help-block= field_data[:error_message]
