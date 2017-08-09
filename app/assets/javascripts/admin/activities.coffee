@@ -25,7 +25,7 @@ jQuery ->
     $('.well .field-types input:checked').trigger('click')
     $('.edit_activity, .new_activity').on 'click', '.field-types input[type="radio"]', (e) ->
       acfct = $(@).parents('.well:first').find('.activity_custom_fields_collection_text')
-      if $(@).val() == 'checkboxes' || $(@).val() == 'radios'
+      if $(@).val() == 'checkboxes' || $(@).val() == 'radios' || $(@).val() == 'selects'
         acfct.removeClass('hidden')
       else
         acfct.addClass('hidden')

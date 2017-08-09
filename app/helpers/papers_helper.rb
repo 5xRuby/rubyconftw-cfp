@@ -11,6 +11,8 @@ module PapersHelper
       render partial: "checkboxes", locals: {custom_field: custom_field, value_field_name: value_field_name, value: value}
     when 'radios'
       render partial: "radios", locals: {custom_field: custom_field, value_field_name: value_field_name, value: value}
+    when 'selects'
+      render partial: "selects", locals: {custom_field: custom_field, value_field_name: value_field_name, value: value}  
     else #text
       text_field_tag value_field_name, value, class: "form-control"
     end
