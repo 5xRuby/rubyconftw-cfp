@@ -12,6 +12,10 @@
         h3 For Review Committee
         = f.input :outline, input_html: { rows: 5 }
         = f.input :pitch, input_html: { rows: 5}
+        - if @activity.accept_attachement?
+          = f.input :attachement, as: :file
+          - if @paper.attachement.present?
+            = f.input :remove_attachement, as: :boolean
       .col-md-6
         h3 Personal Data
         = link_to edit_user_registration_path do

@@ -27,7 +27,13 @@ class Admin::PapersController < Admin::ApplicationController
 
   def update
     @paper.update(paper_params)
-    redirect_to admin_activity_paper_path(@activity, @paper)
+    respond_to do |format|
+      format.html { redirect_to admin_activity_paper_path(@activity, @paper) }
+      format.json { 
+        html = render_to_string(partial: "display_tags", formats: [:html], locals: {tags: @paper.tags})
+        render json: {paper: @paper, tags: @paper.tags.collect{|t| t.name}, display_tags_html: html}
+      }
+    end
   end
   private
 

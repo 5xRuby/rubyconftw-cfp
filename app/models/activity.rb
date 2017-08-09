@@ -9,7 +9,9 @@ class Activity < ApplicationRecord
   has_many :custom_field_answers
   has_many :tags, -> { uniq }, through: :papers
   has_many :accepted_paper_tags, -> { where(papers: {state: :accepted}).uniq }, through: :papers, source: :tags
+  has_many :notifiers,lambda {order("id")}, dependent: :destroy
   accepts_nested_attributes_for :custom_fields, allow_destroy: true
+  accepts_nested_attributes_for :notifiers, allow_destroy: true
   mount_uploader :logo, LogoUploader
   scope :recent, -> { order(created_at: :desc) }
 
@@ -61,6 +63,18 @@ class Activity < ApplicationRecord
   def self.initialize_permalink
     self.where("permalink IS NULL").each do |activity|
       activity.update permalink: activity.name.downcase.gsub(" ", "-")
+    end
+  end
+
+  def notify(event, subject)
+    notifiers.where(enabled: true).each {|n| n.handle_event(event,subject)}
+  end
+
+  def full_logo_url(hostname)
+    if self.logo.present?
+      "http://#{hostname}#{self.logo.url}"
+    else
+      ""
     end
   end
 end
