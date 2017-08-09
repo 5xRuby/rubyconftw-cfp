@@ -37,6 +37,11 @@
       h3 Pitch
       p
         == markdown(@paper.pitch)
+      h3 Attachement
+      p
+        - if @paper.attachement.present?
+          = link_to @paper.attachement.identifier, @paper.attachement.url
+
     .col-md-6.review-part
       .row
         .col-md-12

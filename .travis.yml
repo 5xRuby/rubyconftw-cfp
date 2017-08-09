@@ -7,6 +7,7 @@ services:
 cache: bundler
 bundler_args: --without production
 before_script:
+  - cp database.travis.yml config/database.yml
   - cp config/application.yml.example config/application.yml
   - bundle exec rake db:test:prepare
 addons:

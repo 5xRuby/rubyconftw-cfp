@@ -2,13 +2,13 @@ require 'rails_helper'
 require 'support/matchers/should_have_validate_word_length_of'
 
 RSpec.describe Paper, type: :model do
-  it { should validate_word_length_of(:title).is_at_least(1).is_at_most(100) }
-  it { should validate_word_length_of(:abstract).is_at_least(10).is_at_most(601) }
-  it { should validate_word_length_of(:speaker_bio).is_at_least(10).is_at_most(601) }
+  it { should validate_word_length_of(:title).is_at_least(Settings.paper.title.min).is_at_most(Settings.paper.title.max) }
+  it { should validate_word_length_of(:abstract).is_at_least(Settings.paper.abstract.min).is_at_most(Settings.paper.abstract.max) }
+  it { should validate_word_length_of(:speaker_bio).is_at_least(Settings.paper.bio.min).is_at_most(Settings.paper.bio.max) }
 
-  it { should validate_word_length_of(:title).include_unicode.is_at_least(1).is_at_most(100) }
-  it { should validate_word_length_of(:abstract).include_unicode.is_at_least(10).is_at_most(601) }
-  it { should validate_word_length_of(:speaker_bio).include_unicode.is_at_least(10).is_at_most(601) }
+  it { should validate_word_length_of(:title).include_unicode.is_at_least(Settings.paper.title.min).is_at_most(Settings.paper.title.max) }
+  it { should validate_word_length_of(:abstract).include_unicode.is_at_least(Settings.paper.abstract.min).is_at_most(Settings.paper.abstract.max) }
+  it { should validate_word_length_of(:speaker_bio).include_unicode.is_at_least(Settings.paper.bio.min).is_at_most(Settings.paper.bio.max) }
 
 
   it { should validate_presence_of(:title) }
@@ -36,6 +36,7 @@ RSpec.describe Paper, type: :model do
 
     expect(paper.activity).not_to be_nil
     expect(paper.custom_field_errors[custom_field.id.to_s]).to eq("can't be blank")
+    expect(paper.errors[:custom_field_errors]).to include("can't be blank")
   end
 
   context "state" do
