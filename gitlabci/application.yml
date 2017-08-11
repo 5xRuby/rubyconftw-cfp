@@ -1,0 +1,47 @@
+defaults: &defaults
+  notifier:
+    email:
+      default_subject: "SUBJECTTT"
+    slack:
+      default_username: "BOT"
+      default_subject: "SUBJECTTTTT"
+  paper:
+    title:
+      limit_word: true
+      min: 1
+      max: 100
+    abstract:
+      limit_word: true
+      min: 10
+      max: 601
+    bio:
+      limit_word: true
+      min: 10
+      max: 601
+  sidekiq:
+    url: "redis://localhost:6379/0"
+    namespace: "rubyconftw-cfp-dev"
+  mailer:
+    default_from: "noreply@rubyconf.dev"
+    host: smtp.mailgun.org
+    domain: rubyconf.tw
+    username: postmaster@rubyconf.tw
+    password: 39f9d978429a3731ae1dde72bdf0e312
+    port: 587
+    bcc_email:
+      - "contact@rubyconf.dev"
+  github:
+    id: dfb842376669d5a12b19
+    secret: 9ef8a60fec10a03ce46970e4c8e5cce4d973a043
+    scope: 'user:email'
+  twitter:
+    id: mpss4WBNA6TPfsJSprO3IgUc7
+    secret: jcKc0g7eki9HRSDUivVMAOu7Hyz48ysPPX1yESO96thgBXisBr
+development:
+  <<: *defaults
+test:
+  <<: *defaults
+staging:
+  <<: *defaults
+production:
+  <<: *defaults

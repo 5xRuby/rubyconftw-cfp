@@ -7,11 +7,8 @@
       tr
         th tags
         td
-          - @paper.tags.each do |tag|
-            = " "
-            .label.label-primary
-              = tag.name
-          = " "
+          span.display_tags
+            = render(partial: "display_tags", locals: {tags: @paper.tags})
           a.edit-tag-button.btn.btn-default(data-id="#{@paper.id}") Edit tag
           .field-container.hide(data-id="#{@paper.id}")
             = render(partial: "tag_field", locals: {paper: @paper})
@@ -57,6 +54,11 @@
         th User
         td
           = @paper.user.name
+      tr
+        th Attachement
+        td
+          - if @paper.attachement.present?
+            = link_to @paper.attachement.identifier, @paper.attachement.url
   .btn-group
     = admin_review_button(@paper)
     = admin_accept_button(@paper)

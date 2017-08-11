@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+
+development:
+  <<: *default
+  database: cfp-dev
+
+test:
+  <<: *default
+  database: cfp-test
+
+staging:
+  <<: *default
+  database: cfp-staging
+
+production:
+  <<: *default
+  database: cfp-production

@@ -36,6 +36,7 @@ class PapersController < ApplicationController
     logger.info @paper.inspect
     respond_to do |format|
       if @paper.save
+        @activity.notify("new_paper", @paper)
         format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully created.' }
       else
         format.html {
@@ -62,6 +63,7 @@ class PapersController < ApplicationController
   # DELETE /papers/1.json
   def destroy
     @paper.withdraw!
+    @paper.activity.notify("paper_status_changed", @paper)
     respond_to do |format|
       format.html { redirect_to activity_paper_path(@activity, @paper), notice: 'Paper was successfully withdrawn.' }
       format.json { head :no_content }
@@ -84,7 +86,7 @@ class PapersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def paper_params
-    paper_params = params.require(:paper).permit(:language, :pitch, :speaker_bio, :title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email, answer_of_custom_fields: current_activity.custom_fields.map{|x| x.id.to_s} )
+    paper_params = params.require(:paper).permit(:language, :pitch, :speaker_bio, :title, :abstract, :outline, :file_name, :status, :activity_id,:inviting_email, :attachement, :remove_attachement, answer_of_custom_fields: current_activity.custom_fields.map{|x| x.id.to_s} )
     paper_params.permit!
 
   end

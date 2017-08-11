@@ -30,4 +30,26 @@ jQuery ->
         acfct.removeClass('hidden')
       else
         acfct.addClass('hidden')
-
+    # show field that match the data-service-name
+    $('#notifiers_container').on 'click', ".notifier .service-name-container input[type='radio']", ->
+      notifier = $(@).parents(".notifier:first")
+      service_name = notifier.find(".service-name-container input[type='radio']:checked").val()
+      notifier.find(".service-info").each (idx) ->
+        if !!service_name and $(@).data("service-name") == service_name
+          $(@).removeClass('hidden')
+        else
+          $(@).addClass('hidden')
+    $('.notifier .service-name-container input[type="radio"]:checked').trigger 'click'
+    # add new notifier
+    $("#add-notifier").on "click", (event) ->
+      event.preventDefault()
+      form = $("#add-notifier").attr("data-form-content")
+      new_num = $('.notifier').length
+      new_form = form.replace(/\[\d+?\]/g, "[#{new_num}]" ).replace(/\_\d+?\_/g, "_#{new_num}_")
+      $("#notifiers_container").append new_form
+    $('#notifiers_container').on 'click', '.remove-new', ->
+      $(@).parents('.notifier').fadeOut 600, ->
+        $(@).remove()
+    $('#notifiers_container').on 'click', '.remove-exist', ->
+      $(@).parents('.notifier').fadeOut 600, ->
+        $(@).hide()

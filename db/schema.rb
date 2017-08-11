@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013073416) do
+ActiveRecord::Schema.define(version: 20170117064728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,13 @@ ActiveRecord::Schema.define(version: 20161013073416) do
     t.date     "start_date"
     t.date     "end_date"
     t.text     "term"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "papers_count", default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "papers_count",       default: 0
     t.datetime "open_at"
     t.datetime "close_at"
     t.string   "permalink"
+    t.boolean  "accept_attachement"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -58,6 +59,19 @@ ActiveRecord::Schema.define(version: 20161013073416) do
     t.string   "collection",             default: [],                 array: true
   end
 
+  create_table "notifiers", force: :cascade do |t|
+    t.integer  "activity_id"
+    t.string   "name"
+    t.boolean  "enabled",                 default: true
+    t.boolean  "on_new_comment",          default: false
+    t.boolean  "on_new_paper",            default: false
+    t.boolean  "on_paper_status_changed", default: false
+    t.string   "service_name",            default: ""
+    t.jsonb    "service_info",            default: {}
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
   create_table "papers", force: :cascade do |t|
     t.string   "title"
     t.text     "abstract"
@@ -80,6 +94,7 @@ ActiveRecord::Schema.define(version: 20161013073416) do
     t.string   "language",                limit: 32
     t.string   "uuid",                    limit: 8
     t.integer  "reviews_count",                      default: 0
+    t.string   "attachement"
     t.index ["activity_id"], name: "index_papers_on_activity_id", using: :btree
     t.index ["uuid"], name: "index_papers_on_uuid", using: :btree
   end
@@ -146,8 +161,10 @@ ActiveRecord::Schema.define(version: 20161013073416) do
     t.boolean  "is_contributor",     default: false
     t.string   "twitter"
     t.string   "github_username"
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["is_contributor"], name: "index_users_on_is_contributor", using: :btree
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", using: :btree
+    t.index ["uid"], name: "index_users_on_uid", using: :btree
   end
 
   add_foreign_key "papers", "activities"

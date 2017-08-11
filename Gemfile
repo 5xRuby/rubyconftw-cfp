@@ -30,6 +30,7 @@ gem 'rouge', '~> 2.0.6'
 gem 'acts-as-taggable-on'
 gem 'unicode_utils'
 gem 'scenic'
+gem 'slack-notifier'
 
 
 group :development, :test do
@@ -72,3 +73,4 @@ end
 gem 'settingslogic'
 gem 'country_select'
 gem 'slim'
+gem 'nokogiri', '>= 1.7.2'
