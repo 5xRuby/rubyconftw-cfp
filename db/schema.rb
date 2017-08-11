@@ -31,12 +31,6 @@ ActiveRecord::Schema.define(version: 20170117064728) do
     t.boolean  "accept_attachement"
   end
 
-  create_table "ar_internal_metadata", primary_key: "key", id: :string, force: :cascade do |t|
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.integer  "activity_id"
@@ -175,7 +169,7 @@ ActiveRecord::Schema.define(version: 20170117064728) do
 
   add_foreign_key "papers", "activities"
 
-  create_view :custom_field_answers,  sql_definition: <<-SQL
+  create_view "custom_field_answers",  sql_definition: <<-SQL
       SELECT p.id,
       c.id AS custom_field_id,
       c.name,

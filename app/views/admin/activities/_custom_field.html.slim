@@ -9,7 +9,7 @@ li.custom-field data-id="#{cf.object.id.to_i}"
           label
             = cf.radio_button :field_type, ft
             = ft
-    = cf.input :collection_text, wrapper_html: {class: "hidden"}, hint: "options split by comma!"
+    = cf.input :collection_text, wrapper_html: {class: 'hidden'}, hint: "options split by comma!"
     = cf.input :description
     label
       = cf.check_box :_destroy, class: (cf.object.new_record? ? "remove-new" : "remove-exist")
