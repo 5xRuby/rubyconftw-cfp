@@ -23,6 +23,7 @@ jQuery ->
         $(@).val(idx + 1)
     $('#input_fields_container').sortable()
     $('.well .field-types input:checked').trigger('click')
+    $('.well').find('.activity_custom_fields_collection_text').removeClass('hidden')   
     $('.edit_activity, .new_activity').on 'click', '.field-types input[type="radio"]', (e) ->
       acfct = $(@).parents('.well:first').find('.activity_custom_fields_collection_text')
       if $(@).val() == 'checkboxes' || $(@).val() == 'radios' || $(@).val() == 'selects'
