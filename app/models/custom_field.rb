@@ -1,9 +1,9 @@
 class CustomField < ApplicationRecord
   belongs_to :activity
 
-  FIELD_TYPES = %w{text textarea number checkboxes select radios}
+  FIELD_TYPES = %w{text textarea number checkboxes selects radios}
 
-  ALLOWED_FIELD_TYPES_NOW = %w{text textarea checkboxes radios}
+  ALLOWED_FIELD_TYPES_NOW = %w{text textarea checkboxes selects radios}
   DELIMITER = ","
 
 
