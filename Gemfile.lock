@@ -193,7 +193,7 @@ GEM
     nenv (0.3.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (4.1.0)
+    net-ssh (4.2.0)
     nio4r (2.1.0)
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
@@ -225,9 +225,6 @@ GEM
     orm_adapter (0.5.0)
     pagedown-bootstrap-rails (2.1.4)
       railties (> 3.1)
-    passenger (5.1.8)
-      rack
-      rake (>= 0.8.1)
     pg (0.21.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -401,7 +398,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   byebug
   cancancan (~> 1.10)
-  capistrano (~> 3.1)
+  capistrano (~> 3.9.0)
   capistrano-rails (~> 1.1)
   capistrano-sidekiq
   capistrano-upload-config
@@ -428,7 +425,6 @@ DEPENDENCIES
   omniauth-github
   omniauth-twitter
   pagedown-bootstrap-rails
-  passenger
   pg
   pry-rails
   puma
@@ -454,6 +450,5 @@ DEPENDENCIES
   unicode_utils
   web-console (~> 2.0)
 
-
 BUNDLED WITH
-   1.15.3
+   1.15.4
