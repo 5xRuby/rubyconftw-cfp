@@ -6,7 +6,9 @@ FactoryGirl.define do
     end_date { 30.day.from_now }
     open_at { 1.day.ago }
     close_at { 30.day.from_now }
-    permalink "rubyconf2016"
+    sequence :permalink do |n|
+      "conf-#{n}"
+    end
 
     trait :expired do
       close_at { 1.hour.ago }

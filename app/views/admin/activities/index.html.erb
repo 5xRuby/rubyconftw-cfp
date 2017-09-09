@@ -28,11 +28,25 @@
             <td><%= activity.start_date %> ~ <%= activity.end_date %></td>
             <td><%= activity.papers_count %></td>
             <td>
-              <%= link_to "Detail", admin_activity_path(activity), class:"btn btn-default" %>
-              <%= link_to "Edit", edit_admin_activity_path(activity), class:"btn btn-default" %>
-              <%= link_to "Review Paper", admin_activity_papers_path(activity), class: "btn btn-primary"%>
-              <%= link_to "Stats", admin_activity_stats_path(activity), class: "btn btn-default" %>
-              <%= link_to "Remove", admin_activity_path(activity), method: :delete, class:"btn btn-danger" %>
+              <%= link_to admin_activity_path(activity), title: "Show" do%>
+                <i class="glyphicon glyphicon-zoom-in"></i>
+              <%end%>
+              <%= link_to edit_admin_activity_path(activity), title: "Edit" do%>
+                <i class="glyphicon glyphicon-pencil"></i>
+              <%end%>
+              <%= link_to admin_activity_papers_path(activity), title: "Papers" do %>
+                <i class="glyphicon glyphicon-check"></i>
+              <%end%>
+              <%= link_to admin_activity_stats_path(activity), title: "Stats" do %>
+                <i class="glyphicon glyphicon-menu-hamburger"></i>
+              <%end%>
+              <%= link_to admin_activity_path(activity), method: :delete, title: "Remove", data: {confirm: "Are you sure?"} do %>
+                <i class="glyphicon glyphicon-remove"></i>
+              <%end%>
+              <%= link_to dup_admin_activity_path(activity), method: :put, title: "Duplicate" do %>
+                <i class="glyphicon glyphicon-duplicate"></i>
+              <%end%>
+
             </td>
             <td>
               <%= link_to "Speakers", admin_activity_speakers_path(activity, format: "yml"), class: "btn btn-default" %>
