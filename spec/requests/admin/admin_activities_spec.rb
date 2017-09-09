@@ -38,7 +38,6 @@ RSpec.describe "Admin::Activities", type: :request do
     end
   end
 
-
   describe "POST /admin/activities" do
     before(:each) { visit new_admin_activity_url }
     it "creates a new activity" do
@@ -96,9 +95,8 @@ RSpec.describe "Admin::Activities", type: :request do
 
     it "delete a activity" do
       within "#activity_#{@activity.id}" do
-        click_link "Remove"
+        find(:css, "a[title='Remove']").click
       end
-
       expect(page).not_to have_content(@activity.name)
     end
   end

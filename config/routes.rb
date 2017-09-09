@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :activities do
+      member do
+        put :dup
+      end
       resources :reviewers, only: [:index,:new,:create,:destroy]
       resources :papers, only: [:index, :show, :update] do
         resources :comments, only: [:create, :destroy]

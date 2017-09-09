@@ -22,8 +22,26 @@ class Activity < ApplicationRecord
   validates_presence_of :open_at
   validates_presence_of :close_at
   validates_presence_of :permalink
+  validates_uniqueness_of :permalink
   validate :validate_end_date_after_start_date
   validate :validate_close_time_after_open_time
+
+
+  def duplicate
+    new_rec = self.dup
+    suffix = "_dup_#{SecureRandom.hex(3)}"
+    new_rec.name = new_rec.name + suffix
+    new_rec.permalink = self.permalink + suffix
+    self.custom_fields.each do |cf|
+      xf = cf.dup
+      new_rec.custom_fields << xf
+    end
+    new_rec
+  end
+
+  def duplicate!
+    duplicate.save!
+  end
 
   def to_param
     permalink

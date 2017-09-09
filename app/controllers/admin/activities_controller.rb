@@ -44,6 +44,11 @@ class Admin::ActivitiesController < Admin::ApplicationController
     redirect_to admin_activities_path
   end
 
+  def dup
+    @activity = Activity.find_by(permalink: params[:id]).duplicate
+    render action: :edit
+  end
+
   private
 
   def activity_params
