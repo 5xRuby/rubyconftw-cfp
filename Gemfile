@@ -58,11 +58,10 @@ end
 group :development do
   gem 'capistrano-upload-config'
   gem 'letter_opener'
-  gem 'capistrano', '~> 3.1'
+  gem 'capistrano', '~> 3.9.0'
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-sidekiq'
   gem 'web-console', '~> 2.0'
-  gem 'passenger'
   gem 'pry-rails'
   gem 'awesome_print'
 end

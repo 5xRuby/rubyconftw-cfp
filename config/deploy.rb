@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
-lock '3.6.1'
+lock '3.9.0'
 
-set :application, 'spottly-web'
-set :repo_url, 'git@git.5xruby.tw:cfp/cfp.system.git'
+set :application, 'cfp'
+set :repo_url, 'https://github.com/5xRuby/rubyconftw-cfp.git'
 
 # Default branch is :master
 #
@@ -38,7 +38,7 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/upl
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
 # Default value for default_env is {}
-set :default_env, { path: "$PATH:/usr/local/ruby23/bin:" }
+
 
 # Default value for keep_releases is 5
 set :keep_releases, 3
