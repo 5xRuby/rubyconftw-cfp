@@ -26,6 +26,7 @@ class Admin::ActivitiesController < Admin::ApplicationController
 
   def edit
     @activity = Activity.find_by(permalink: params[:id])
+    @new_custom_field = CustomField.new
     @new_notifier = Notifier.new
   end
 
