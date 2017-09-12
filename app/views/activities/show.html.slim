@@ -7,10 +7,10 @@
     = show_activity_open_and_close_date @activity
   h2 Description
   div
-    == markdown(@activity.description)
+    == markdown(@activity.description, true)
   h2 Terms
   div
-    == markdown(@activity.term)
+    == markdown(@activity.term, true)
   .btns
     - if @activity.open?
       = link_to "Submit a Paper", new_activity_paper_path(@activity), class: "btn btn-primary"
