@@ -48,3 +48,8 @@ en:
     title: "CFP site of RubyConf Taiwan"
     description: "Contributed by members of 5xRuby.tw"
     image: "http://rubyconf.tw/2016/img/backgrounds/1.jpg"
+  activity:
+    status:
+      not_yet_opened: "not yet opened"
+      opened: "opened"
+      closed: "closed"

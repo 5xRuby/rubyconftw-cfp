@@ -1,4 +1,5 @@
 class Admin::ActivitiesController < Admin::ApplicationController
+  before_action :prepare_null_field_for_add, only: [:new, :edit, :dup]
 
   def index
     @activities = Activity.all
@@ -10,7 +11,6 @@ class Admin::ActivitiesController < Admin::ApplicationController
 
   def new
     @activity = Activity.new
-    @new_custom_field = CustomField.new
     @new_notifier = Notifier.new
   end
 
@@ -26,7 +26,6 @@ class Admin::ActivitiesController < Admin::ApplicationController
 
   def edit
     @activity = Activity.find_by(permalink: params[:id])
-    @new_custom_field = CustomField.new
     @new_notifier = Notifier.new
   end
 
@@ -51,6 +50,10 @@ class Admin::ActivitiesController < Admin::ApplicationController
   end
 
   private
+
+  def prepare_null_field_for_add
+    @new_custom_field = CustomField.new
+  end
 
   def activity_params
     params.require(:activity).permit(:name, :description, :logo, :start_date, :end_date, :open_at, :close_at, :term, :permalink, :accept_attachement, custom_fields_attributes: [:id, :name, :required, :description, :field_type, :_destroy, :sort_order, :collection_text], notifiers_attributes: [:id, :name, :enabled, :on_new_comment, :on_new_paper, :on_paper_status_changed, :service_name, :_destroy ,service_info: [:webhook_url, :channel, :username, :recipient, :subject] ])

@@ -48,7 +48,13 @@ class Activity < ApplicationRecord
   end
 
   def status
-    open? ? "open" : "closed"
+    if open_at > Time.now
+      :not_yet_opened
+    elsif Time.now > close_at
+      :closed
+    else
+      :opened
+    end
   end
 
   def review_by(user)
