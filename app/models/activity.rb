@@ -48,7 +48,19 @@ class Activity < ApplicationRecord
   end
 
   def status
-    open? ? "open" : "closed"
+    if open_at > Time.now
+      :not_yet_opened
+    elsif Time.now > close_at
+      :closed
+    else
+      :opened
+    end
+  end
+
+  %w{description term}.each do |col|
+    define_method "rendered_#{col}" do
+      ERB.new(attributes[col]).result binding
+    end
   end
 
   def review_by(user)

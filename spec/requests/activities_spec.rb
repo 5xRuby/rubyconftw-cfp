@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Activities", type: :request do
+
   describe "GET /activities" do
 
     let! :activities do
@@ -43,7 +44,6 @@ RSpec.describe "Activities", type: :request do
     let! :activity do
       FactoryGirl.create(:activity)
     end
-
 
     it "displays activities details" do
       visit activity_url(activity)

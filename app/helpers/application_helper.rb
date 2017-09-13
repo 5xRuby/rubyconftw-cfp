@@ -4,8 +4,7 @@ module ApplicationHelper
   def markdown(content)
     @markdown_renderer ||= ::RougeHTML.new(filter_html: true)
     @markdown ||= Redcarpet::Markdown.new(@markdown_renderer, autolink: true, fenced_code_blocks: true)
-
-    @markdown.render(content || "")
+    @markdown.render(content|| "")
   end
 
   def flash_message
@@ -51,7 +50,7 @@ module ApplicationHelper
   def get_all_custom_field_strings
     @activity.custom_fields.collect{|f| f.name}
   end
-  
+
   def fixed_search_fields
     %w(state country speaker_bio tag)
   end

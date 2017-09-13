@@ -11,7 +11,7 @@
             - else
               = activity.name
             small
-              = activity.status
+              = show_activity_open_state activity
           p.date
             span.date #{activity.open_at.to_date} ~ #{activity.close_at.to_date}
           p.count

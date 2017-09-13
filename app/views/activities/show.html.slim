@@ -2,16 +2,15 @@
   h1
     = @activity.name
     small
-      = @activity.status
+      = show_activity_open_state @activity
   p.closed-time
-    | Closed on
-    strong #{@activity.close_at.to_date}
+    = show_activity_open_and_close_date @activity
   h2 Description
   div
-    == markdown(@activity.description)
+    == markdown(@activity.rendered_description)
   h2 Terms
   div
-    == markdown(@activity.term)
+    == markdown(@activity.rendered_term)
   .btns
     - if @activity.open?
       = link_to "Submit a Paper", new_activity_paper_path(@activity), class: "btn btn-primary"
