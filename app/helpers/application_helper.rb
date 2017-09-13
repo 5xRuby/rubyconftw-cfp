@@ -1,12 +1,10 @@
 module ApplicationHelper
   SELECTED_PARAMS = %i(search_field search_type search_key commit)
 
-  def markdown(content, renderable = false)
+  def markdown(content)
     @markdown_renderer ||= ::RougeHTML.new(filter_html: true)
     @markdown ||= Redcarpet::Markdown.new(@markdown_renderer, autolink: true, fenced_code_blocks: true)
-
-    rendered_content = renderable ? render(inline: content) : content
-    @markdown.render(rendered_content|| "")
+    @markdown.render(content|| "")
   end
 
   def flash_message

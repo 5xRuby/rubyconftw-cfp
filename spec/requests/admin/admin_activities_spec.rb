@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe "Admin::Activities", type: :request do
   let(:admin) { FactoryGirl.create(:user, :admin) }
 
-  before(:each) { login_as admin }
+  before(:each) do
+    login_as admin
+  end
+
 
   describe "GET /admin/activities" do
     before(:each) do

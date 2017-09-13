@@ -57,6 +57,12 @@ class Activity < ApplicationRecord
     end
   end
 
+  %w{description term}.each do |col|
+    define_method "rendered_#{col}" do
+      ERB.new(attributes[col]).result binding
+    end
+  end
+
   def review_by(user)
     reviews.where(user: user)
   end

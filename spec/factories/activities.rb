@@ -6,6 +6,9 @@ FactoryGirl.define do
     end_date { 30.day.from_now }
     open_at { 1.day.ago }
     close_at { 30.day.from_now }
+    term do
+      Faker::Lorem.paragraph
+    end
     sequence :permalink do |n|
       "conf-#{n}"
     end

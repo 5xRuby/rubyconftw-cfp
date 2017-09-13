@@ -33,11 +33,11 @@ RSpec.describe Activity, type: :model do
   end
 
   it "should return open status when activity is opened" do
-    expect(opened_activity.status).to eq("open")
+    expect(opened_activity.status).to eq(:opened)
   end
 
   it "should return closed status when activity is closed" do
-    expect(closed_activity.status).to eq("closed")
+    expect(closed_activity.status).to eq(:closed)
   end
 
   context "papers review state" do
