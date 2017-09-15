@@ -48,6 +48,8 @@
             | User
             = sortable("users.name")
           th
+            | Approve/Disapprove
+          th
             | Github
             = sortable("users.github_username")
           - @activity.custom_fields.each do |field|
@@ -77,6 +79,10 @@
                 = paper.state
             td
               = paper.user.name
+            td 
+              | approve: #{paper.total_approve}
+              br
+              | disapprove: #{paper.total_disapprove}
             td
               = link_to paper.user.github_link_text, "https://github.com/#{paper.user.github_username}"
             - @activity.custom_fields.each do |field|

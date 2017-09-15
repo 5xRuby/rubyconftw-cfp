@@ -112,6 +112,13 @@ class Paper < ApplicationRecord
     speaker_hash.merge(result_hash)
   end
 
+  def total_approve
+    reviews.select { |review| review.reviewed == "approve" }.count
+  end
+
+  def total_disapprove
+    reviews.select { |review| review.reviewed == "disapprove" }.count
+  end
   private
 
 

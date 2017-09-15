@@ -11,7 +11,7 @@ module Admin::PapersHelper
 
   def admin_disapprove_button(paper)
     return if !paper.may_view?
-    link_to "Dispprove", admin_paper_disapprove_path(paper), method: "POST", class: "btn btn-danger"
+    link_to "Disapprove", admin_paper_disapprove_path(paper), method: "POST", class: "btn btn-danger"
   end
 
   def admin_accept_button(paper)
