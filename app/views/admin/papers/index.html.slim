@@ -85,6 +85,8 @@
               .btn-group
                 = link_to "show", admin_activity_paper_path(@activity,paper), class: "btn btn-primary"
                 = admin_review_button(paper)
+                = admin_approve_button(paper)
+                = admin_disapprove_button(paper)
                 = admin_accept_button(paper)
                 = admin_reject_button(paper)
               = " "
