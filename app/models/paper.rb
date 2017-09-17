@@ -1,6 +1,6 @@
 class Paper < ApplicationRecord
   include AASM
-  ALL_STATUS = %w{submitted reviewed accepted rejected withdrawn}
+  ALL_STATUS = %w{submitted reviewing reviewed accepted rejected withdrawn}
   ALL_LANGUAGES = %w{Chinese English}
   StateClass = {
     "submitted" => 'label-info',
@@ -43,7 +43,10 @@ class Paper < ApplicationRecord
     state :submitted , initial: true
     state *(ALL_STATUS[1..-1].map(&:to_sym))
     event :view do
-      transitions from: :submitted , to: :reviewed
+      transitions from: :submitted , to: :reviewing
+    end
+    event :all_viewed do
+      transitions from: :reviewing, to: :reviewed
     end
     event :accept do
       transitions from: :reviewed, to: :accepted
