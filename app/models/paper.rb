@@ -4,6 +4,7 @@ class Paper < ApplicationRecord
   ALL_LANGUAGES = %w{Chinese English}
   StateClass = {
     "submitted" => 'label-info',
+    "reviewing" => 'label-default',
     "reviewed" => 'label-primary',
     "accepted" => 'label-success',
     "rejected" => 'label-warning',
