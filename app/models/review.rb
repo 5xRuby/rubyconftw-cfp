@@ -8,7 +8,7 @@ class Review < ApplicationRecord
   validates :paper, uniqueness: { scope: :user }
   validates :reviewed, inclusion: { in: %w(pending approve disapprove) }
 
-  before_create -> { paper.view! if paper.may_view? } 
+  before_create -> { paper.view! } 
 
   aasm(column: :state) do
     state :pending , initial: true

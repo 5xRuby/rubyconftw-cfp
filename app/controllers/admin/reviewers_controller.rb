@@ -1,5 +1,7 @@
 class Admin::ReviewersController < ApplicationController
   before_action :set_activity, :set_relationships
+  authorize_resource :user_activity_relationship
+
   def index
     @reviewers = []
     @relationships.each do |relationship|
@@ -11,6 +13,7 @@ class Admin::ReviewersController < ApplicationController
     @relationship = UserActivityRelationship.new
     @users = User.all
   end
+
   def create
     @relationship = UserActivityRelationship.new(relationship_params)
     @relationship.activity_id = @activity.id

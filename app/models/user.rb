@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   has_many :papers
   has_many :reviews
+  has_many :user_activity_relationships
   has_many :activities, through: :user_activity_relationships
   has_many :comments
   validates_presence_of :name
