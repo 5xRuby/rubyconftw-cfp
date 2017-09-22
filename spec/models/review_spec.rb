@@ -16,7 +16,7 @@ RSpec.describe Review, type: :model do
     expect(paper).to have_state(:submitted)
 
     FactoryGirl.create(:review, paper: paper)
-    expect(paper).to have_state(:reviewing)
+    expect(paper).to have_state(:reviewed)
   end
 
   it "should set default paper review as pending" do

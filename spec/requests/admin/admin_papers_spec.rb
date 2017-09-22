@@ -51,7 +51,9 @@ RSpec.describe "Admin::Papers", type: :request do
       login_as admin
       visit admin_activity_papers_url(@paper.activity) #一次叫出 paper & activity
       within "#paper_#{@paper.id}" do
-        click_link "Review"
+        %w{Disapprove Approve}.each do |f|
+          click_link f
+        end
       end
     end
 
