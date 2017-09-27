@@ -31,7 +31,6 @@ RSpec.describe "Admin::Papers", type: :request do
   end
 
   describe "GET /admin/activity/:id/papers/:id" do
-
     before do
       login_as admin
       visit admin_activity_paper_url(activity, @paper)
@@ -46,25 +45,69 @@ RSpec.describe "Admin::Papers", type: :request do
   end
 
   describe "GET /admin/activities/:id/papers" do
-
     before do
       login_as admin
       visit admin_activity_papers_url(@paper.activity) #一次叫出 paper & activity
+    end
+
+    it "displays show and Approve/Disapprove before vote" do
       within "#paper_#{@paper.id}" do
-        %w{Disapprove Approve}.each do |f|
-          click_link f
-        end
+        expect(page).to have_content("show")
+        expect(page).to have_content("Approve")
+        expect(page).to have_content("Disapprove")
+      end
+    end
+  end
+
+
+  describe "POST /admin/papers/:id/approve" do
+    before(:each) { visit admin_activity_papers_url(activity) }
+
+    it "changes state to reviewed" do
+      within "#paper_#{@paper.id}" do
+        click_link("Approve")
+      end
+
+      within "#paper_#{@paper.id} .btn-group" do
+        expect(page).not_to have_content("Approve")
+        expect(page).not_to have_content("Disapprove")
       end
     end
 
-    %w{Accept Reject}.each do |f|
-      it "has #{f} link" do
-        within "#paper_#{@paper.id}" do
-          expect(page).to have_content(f)
-        end
+    it "adds 1 vote on approve" do
+      within "#paper_#{@paper.id}" do
+        click_link("Approve")
+      end
+
+      within "#paper_#{@paper.id} .approve-vote-count" do
+        expect(page).to have_content("1")
+      end
+    end
+  end
+
+  describe "POST /admin/papers/:id/disapprove" do
+    before(:each) { visit admin_activity_papers_url(activity) }
+
+    it "changes state to reviewed" do
+      within "#paper_#{@paper.id}" do
+        click_link("Disapprove")
+      end
+
+      within "#paper_#{@paper.id} .btn-group" do
+        expect(page).not_to have_content("Approve")
+        expect(page).not_to have_content("Disapprove")
       end
     end
 
+    it "adds 1 vote on approve" do
+      within "#paper_#{@paper.id}" do
+        click_link("Disapprove")
+      end
+
+      within "#paper_#{@paper.id} .disapprove-vote-count" do
+        expect(page).to have_content("1")
+      end
+    end
   end
 
   describe "POST /admin/papers/:id/accept" do

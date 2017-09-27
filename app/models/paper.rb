@@ -113,11 +113,11 @@ class Paper < ApplicationRecord
   end
 
   def total_approve
-    reviews.select { |review| review.reviewed == "approve" }.count
+    reviews.where(reviewed: "approve").count
   end
 
   def total_disapprove
-    reviews.select { |review| review.reviewed == "disapprove" }.count
+    reviews.where(reviewed: "disapprove").count
   end
   private
 

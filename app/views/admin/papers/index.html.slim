@@ -79,10 +79,12 @@
                 = paper.state
             td
               = paper.user.name
-            td 
-              | approve: #{paper.total_approve}
+            td
+              | approve: 
+              span.approve-vote-count #{paper.total_approve}
               br
-              | disapprove: #{paper.total_disapprove}
+              | disapprove:
+              span.disapprove-vote-count #{paper.total_disapprove}
             td
               = link_to paper.user.github_link_text, "https://github.com/#{paper.user.github_username}"
             - @activity.custom_fields.each do |field|
