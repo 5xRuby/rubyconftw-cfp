@@ -16,5 +16,8 @@ class Ability
       can :read, Paper
     end
 
+    if user.is_superadmin?
+      can :manage, UserActivityRelationship
+    end
   end
 end

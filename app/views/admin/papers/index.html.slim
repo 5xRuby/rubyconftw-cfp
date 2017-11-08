@@ -48,6 +48,8 @@
             | User
             = sortable("users.name")
           th
+            | Approve/Disapprove
+          th
             | Github
             = sortable("users.github_username")
           - @activity.custom_fields.each do |field|
@@ -78,13 +80,20 @@
             td
               = paper.user.name
             td
+              | approve: 
+              span.approve-vote-count #{paper.total_approve}
+              br
+              | disapprove:
+              span.disapprove-vote-count #{paper.total_disapprove}
+            td
               = link_to paper.user.github_link_text, "https://github.com/#{paper.user.github_username}"
             - @activity.custom_fields.each do |field|
               td = paper.answer_of_custom_fields[field.id.to_s]
             td
               .btn-group
                 = link_to "show", admin_activity_paper_path(@activity,paper), class: "btn btn-primary"
-                = admin_review_button(paper)
+                = admin_approve_button(paper, current_user)
+                = admin_disapprove_button(paper, current_user)
                 = admin_accept_button(paper)
                 = admin_reject_button(paper)
               = " "

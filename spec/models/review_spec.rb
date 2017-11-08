@@ -19,4 +19,13 @@ RSpec.describe Review, type: :model do
     expect(paper).to have_state(:reviewed)
   end
 
+  it "should set default paper review as pending" do
+    review = FactoryGirl.create(:review)
+    expect(review.reviewed).to eq "pending"
+  end
+
+  it "should only save review when vote apporve or disapprove" do
+    should validate_inclusion_of(:reviewed).
+      in_array(%w(pending approve disapprove))
+  end
 end

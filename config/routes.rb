@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     end
     resources :papers, only: [] do
       resources :reviews, only: [:create]
+      post 'approve' => "reviews#approve"
+      post 'disapprove' => "reviews#disapprove"
       post 'accept' => "reviews#accept"
       post 'reject' => "reviews#reject"
     end

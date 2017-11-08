@@ -1,8 +1,18 @@
 class Admin::ReviewsController < Admin::ApplicationController
   before_action :current_paper, if: -> { params.has_key?(:paper_id) }
 
-  def create
-    @paper.reviews.create!(user: current_user, reviewed: true)
+  def approve
+    review = @paper.reviews.create(user: current_user, reviewed: "approve")
+    review.approve!
+    @paper.activity.notify("paper_status_changed", @paper)
+    redirect_to admin_activity_papers_path(@paper.activity)
+    rescue StandardError
+      redirect_to admin_activity_papers_path(@paper.activity), alert: "You already reviewed this paper"
+  end
+
+  def disapprove
+    review = @paper.reviews.create(user: current_user, reviewed: "disapprove")
+    review.disapprove!
     @paper.activity.notify("paper_status_changed", @paper)
     redirect_to admin_activity_papers_path(@paper.activity)
     rescue StandardError

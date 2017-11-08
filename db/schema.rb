@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170117064728) do
+ActiveRecord::Schema.define(version: 20170919082821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,9 +102,10 @@ ActiveRecord::Schema.define(version: 20170117064728) do
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "paper_id"
-    t.boolean  "reviewed"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "reviewed",   default: "pending"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "state"
     t.index ["paper_id"], name: "index_reviews_on_paper_id", using: :btree
     t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end
@@ -161,6 +162,7 @@ ActiveRecord::Schema.define(version: 20170117064728) do
     t.boolean  "is_contributor",     default: false
     t.string   "twitter"
     t.string   "github_username"
+    t.boolean  "is_superadmin",      default: false
     t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["is_contributor"], name: "index_users_on_is_contributor", using: :btree
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", using: :btree

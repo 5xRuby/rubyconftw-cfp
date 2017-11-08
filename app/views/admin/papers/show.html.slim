@@ -60,7 +60,8 @@
           - if @paper.attachement.present?
             = link_to @paper.attachement.identifier, @paper.attachement.url
   .btn-group
-    = admin_review_button(@paper)
+    = admin_approve_button(@paper, current_user)
+    = admin_disapprove_button(@paper, current_user)
     = admin_accept_button(@paper)
     = admin_reject_button(@paper)
     = link_to "Back", admin_activity_papers_path(@activity), class: "btn btn-default"
