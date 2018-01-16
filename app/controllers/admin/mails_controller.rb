@@ -15,16 +15,17 @@ class Admin::MailsController < ApplicationController
 
   private
   def mail_params
-    params.require(:notification).permit(:content, :subject, :ids => [])
+    params.require(:notification).permit(:content, :subject, ids: [])
   end
 
-  def receivers(ids)
-    User.find(ids || []).pluck(:email)
+  def papers(ids)
+    Paper.preload(:user).find(ids || [])
   end
 
   def send_mails(notification)
-    receivers(mail_params[:ids]).each do |email|
-      NotificationMailer.notice(email, notification, {activity: @activity}).deliver_later
+    papers(mail_params[:ids]).each do |paper|
+      user = paper.user
+      NotificationMailer.notice(user.email, notification, {user: user, paper:paper, activity: @activity}).deliver_now
     end
   end
 end
