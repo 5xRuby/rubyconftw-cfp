@@ -20,7 +20,7 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
 
     it "renders the sender email" do
-      expect(mail.from).to eq(["noreply@rubyconf.dev"])
+      expect(mail.from).to eq(["noreply@rubyconf.test"])
     end
 
     it "renders the bcc email" do
