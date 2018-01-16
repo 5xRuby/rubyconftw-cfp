@@ -14,6 +14,7 @@ defaults: &defaults
     id: oQjlwUpI3RUgHqCUVlPquybVm
     secret: VnUWO0QGZHoNG5HEOzvgNQ67C36bFrgdhAyw0SPaDibuxaJ1C7
   mailer:
+    default_reply_to: contact@rubyconf.tw
     default_from: "noreply@rubyconf.dev"
     bcc_email:
       - contact@rubyconf.dev
