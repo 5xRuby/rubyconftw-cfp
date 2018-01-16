@@ -62,7 +62,7 @@
             td
               div.checkbox
                 label
-                  = check_box_tag "notification[ids][]", paper.user.id, false, id: "notification_ids_#{paper.user.id}"
+                  = check_box_tag "notification[ids][]", paper.id, false, id: "notification_ids_#{paper.id}"
             td
               = paper.id
             td
