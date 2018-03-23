@@ -1,5 +1,4 @@
 class NotificationMailer < ApplicationMailer
-  default from: Settings.mailer.default_from, bcc: Settings.mailer.try(:bcc_email) || []
 
   def notice(email, notification, locals = {})
     @content = notification.html_content do |content|

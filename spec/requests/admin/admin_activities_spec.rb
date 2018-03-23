@@ -114,7 +114,7 @@ RSpec.describe "Admin::Activities", type: :request do
 
     it "sends mail to selected papers owner" do
       within "#paper_#{@papers.first.id}" do
-        check "notification_ids_#{@papers.first.user.id}"
+        check "notification_ids_#{@papers.first.id}"
       end
 
       within ".notification" do
