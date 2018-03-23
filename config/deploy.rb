@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.9.0'
+lock '~> 3.9.0'
 
 set :application, 'cfp'
 set :repo_url, 'https://github.com/5xRuby/rubyconftw-cfp.git'
@@ -30,7 +30,7 @@ set :log_level, :debug
 set :pty, false
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml config/application.yml config/sidekiq.yml}
+set :linked_files, %w{config/database.yml config/application.yml config/sidekiq.yml config/secrets.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads}
 
 
