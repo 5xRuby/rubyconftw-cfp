@@ -73,4 +73,4 @@ end
 gem 'settingslogic'
 gem 'country_select'
 gem 'slim'
-gem 'nokogiri', '>= 1.7.2'
+gem 'nokogiri', '~> 1.8.2'

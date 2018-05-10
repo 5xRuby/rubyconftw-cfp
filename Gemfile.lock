@@ -104,7 +104,7 @@ GEM
     country_select (3.1.1)
       countries (~> 2.0)
       sort_alphabetical (~> 1.0)
-    crass (1.0.3)
+    crass (1.0.4)
     database_rewinder (0.8.2)
     debug_inspector (0.0.3)
     default_value_for (3.0.3)
@@ -174,7 +174,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.1.1)
+    loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.12)
@@ -198,7 +198,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
     nio4r (2.2.0)
-    nokogiri (1.8.1)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -260,8 +260,8 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.3)
-      loofah (~> 2.0)
+    rails-html-sanitizer (1.0.4)
+      loofah (~> 2.2, >= 2.2.2)
     railties (5.0.6)
       actionpack (= 5.0.6)
       activesupport (= 5.0.6)
@@ -421,7 +421,7 @@ DEPENDENCIES
   jquery-ui-rails
   letter_opener
   mini_magick
-  nokogiri (>= 1.7.2)
+  nokogiri (~> 1.8.2)
   omniauth
   omniauth-github
   omniauth-twitter
@@ -451,6 +451,5 @@ DEPENDENCIES
   unicode_utils
   web-console (~> 2.0)
 
-
 BUNDLED WITH
-   1.15.4
+   1.16.1
