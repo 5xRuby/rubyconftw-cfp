@@ -1,6 +1,6 @@
 == README
 
-This is CFP App for [Ruby X Elixir Conf Taiwan](http://rubyconf.tw) contributed by [members](https://github.com/5xRuby/rubyconftw-cfp/graphs/contributors) of [5xRuby](http://5xruby.tw).
+This is CFP App for [Ruby Conf Taiwan](http://rubyconf.tw).
 
 ###Necessary Program
 
