@@ -5,10 +5,10 @@ class Activity < ApplicationRecord
   has_many :users, through: :user_activity_relationships
   has_many :custom_fields, lambda {order("sort_order")}, dependent: :destroy
   has_many :reviews, through: :papers
-  has_many :speakers, -> { where(papers: { state: :accepted }).uniq }, through: :papers, source: :user
+  has_many :speakers, -> { where(papers: { state: :accepted }).distinct }, through: :papers, source: :user
   has_many :custom_field_answers
-  has_many :tags, -> { uniq }, through: :papers
-  has_many :accepted_paper_tags, -> { where(papers: {state: :accepted}).uniq }, through: :papers, source: :tags
+  has_many :tags, -> { distinct }, through: :papers
+  has_many :accepted_paper_tags, -> { where(papers: {state: :accepted}).distinct }, through: :papers, source: :tags
   has_many :notifiers,lambda {order("id")}, dependent: :destroy
   accepts_nested_attributes_for :custom_fields, allow_destroy: true
   accepts_nested_attributes_for :notifiers, allow_destroy: true

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users::Registrations", type: :request do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   describe "PUT /users/edit" do
     it "updates user profile" do

@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "Papers", type: :request do
-  let(:activity) { FactoryGirl.create(:activity) }
-  let(:user) { FactoryGirl.create(:user) }
-  let(:other_user) { FactoryGirl.create(:user) }
+  let(:activity) { FactoryBot.create(:activity) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:other_user) { FactoryBot.create(:user) }
 
   before(:each) { login_as user }
 
   describe "GET /papers/new" do
-    let(:expired_activity) { FactoryGirl.create(:activity, :expired) }
+    let(:expired_activity) { FactoryBot.create(:activity, :expired) }
 
     it "redirect to singin page before login" do
       logout :user
@@ -54,14 +54,14 @@ RSpec.describe "Papers", type: :request do
 
   describe "PUT /papers/:id" do
     it "cannot edit other user's proposal" do
-      paper = FactoryGirl.create(:paper, activity: activity, user: other_user)
+      paper = FactoryBot.create(:paper, activity: activity, user: other_user)
 
       visit edit_activity_paper_url(activity, paper)
       expect(page).to have_content("You are not authorized to access this page.")
     end
 
     it "updates the proposal" do
-      paper = FactoryGirl.create(:paper, activity: activity, user: user)
+      paper = FactoryBot.create(:paper, activity: activity, user: user)
 
       visit edit_activity_paper_url(activity, paper)
 
@@ -83,7 +83,7 @@ RSpec.describe "Papers", type: :request do
     end
 
     it "shows error when not fill required fields" do
-      paper = FactoryGirl.create(:paper, activity: activity, user: user)
+      paper = FactoryBot.create(:paper, activity: activity, user: user)
 
       visit edit_activity_paper_url(activity, paper)
 
@@ -98,14 +98,14 @@ RSpec.describe "Papers", type: :request do
 
   describe "DELETE /papers/:id" do
     it "cannot withdraw other user's proposal" do
-      paper = FactoryGirl.create(:paper, activity: activity, user: other_user)
+      paper = FactoryBot.create(:paper, activity: activity, user: other_user)
 
       visit activity_paper_url(activity, paper)
       expect(page).to have_content("You are not authorized to access this page.")
     end
 
     it "withdraws the proposal" do
-      paper = FactoryGirl.create(:paper, activity: activity, user: user)
+      paper = FactoryBot.create(:paper, activity: activity, user: user)
 
       visit activity_paper_url(activity, paper)
       click_link "Withdraw Proposal"

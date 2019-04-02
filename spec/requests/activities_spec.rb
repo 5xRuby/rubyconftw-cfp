@@ -5,7 +5,7 @@ RSpec.describe "Activities", type: :request do
   describe "GET /activities" do
 
     let! :activities do
-      FactoryGirl.create_list(:activity, 2)
+      FactoryBot.create_list(:activity, 2)
     end
 
     before do
@@ -29,7 +29,7 @@ RSpec.describe "Activities", type: :request do
   describe "GET /activities/:id but only id" do
 
     let! :activity do
-      FactoryGirl.create(:activity)
+      FactoryBot.create(:activity)
     end
 
     it "should redirect if only use id in id param" do
@@ -42,7 +42,7 @@ RSpec.describe "Activities", type: :request do
   describe "GET /activities/:id" do
 
     let! :activity do
-      FactoryGirl.create(:activity)
+      FactoryBot.create(:activity)
     end
 
     it "displays activities details" do

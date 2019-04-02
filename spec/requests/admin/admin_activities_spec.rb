@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Admin::Activities", type: :request do
-  let(:admin) { FactoryGirl.create(:user, :admin) }
+  let(:admin) { FactoryBot.create(:user, :admin) }
 
   before(:each) do
     login_as admin
@@ -10,12 +10,12 @@ RSpec.describe "Admin::Activities", type: :request do
 
   describe "GET /admin/activities" do
     before(:each) do
-      @activities = FactoryGirl.create_list(:activity, 5)
+      @activities = FactoryBot.create_list(:activity, 5)
       visit admin_activities_url
     end
 
     it "cannot viewed by non-admin user" do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       login_as user
       visit admin_activities_url
       expect(page).to have_content("Permission Denied")
@@ -31,7 +31,7 @@ RSpec.describe "Admin::Activities", type: :request do
   describe "GET /admin/acivities/:id" do
 
     before(:each) do
-      @activity = FactoryGirl.create(:activity)
+      @activity = FactoryBot.create(:activity)
       visit admin_activity_url(@activity)
     end
 
@@ -66,7 +66,7 @@ RSpec.describe "Admin::Activities", type: :request do
 
   describe "PUT /admin/activities/:id" do
     before(:each) do
-      @activity = FactoryGirl.create(:activity)
+      @activity = FactoryBot.create(:activity)
       visit edit_admin_activity_url(@activity)
     end
 
@@ -92,7 +92,7 @@ RSpec.describe "Admin::Activities", type: :request do
 
   describe "DELETE /admin/activities/:id" do
     before(:each) do
-      @activity = FactoryGirl.create(:activity)
+      @activity = FactoryBot.create(:activity)
       visit admin_activities_url
     end
 
@@ -106,7 +106,7 @@ RSpec.describe "Admin::Activities", type: :request do
 
   describe "POST /admin/activities/:id/mails" do
     before(:each) do
-      @activity = FactoryGirl.create(:activity_with_papers)
+      @activity = FactoryBot.create(:activity_with_papers)
       @papers = @activity.papers
 
       visit admin_activity_papers_url(@activity)

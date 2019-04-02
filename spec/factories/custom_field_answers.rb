@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :custom_field_answer do
     
   end

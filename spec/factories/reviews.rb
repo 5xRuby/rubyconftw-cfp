@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :review do
-    user { FactoryGirl.create(:user) }
-    paper { FactoryGirl.create(:paper) }
+    user { FactoryBot.create(:user) }
+    paper { FactoryBot.create(:paper) }
   end
 end

@@ -4,7 +4,7 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of(:name) }
 
   context "sign in with omniauth" do
-    let!(:exists_user) { FactoryGirl.create(:user) }
+    let!(:exists_user) { FactoryBot.create(:user) }
     let(:auth_info) {
       OmniAuth::AuthHash.new({
         provider: 'github',
@@ -37,7 +37,7 @@ RSpec.describe User, type: :model do
   end
 
   it "generate yaml" do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     except_yaml = %{---
 - name: #{user.full_name}
   avatar: "#{user.full_avatar_url("")}"
@@ -50,7 +50,7 @@ RSpec.describe User, type: :model do
   end
 
   it "generate yaml with root" do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     except_yaml = %{---
 users:
 - name: #{user.full_name}
