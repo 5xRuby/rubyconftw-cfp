@@ -42,7 +42,7 @@ group :development, :test do
   #gem 'selenium-webdriver'
   #gem 'capybara-webkit'
   gem 'fuubar'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
 
   gem 'guard'
   gem 'guard-rspec'

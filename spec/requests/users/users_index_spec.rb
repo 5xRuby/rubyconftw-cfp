@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe "Users::Index", type: :request do
   describe "GET /my_propsoals" do
 
-    let(:user) { FactoryGirl.create(:user) }
-    let(:activity) { FactoryGirl.create(:activity) }
+    let(:user) { FactoryBot.create(:user) }
+    let(:activity) { FactoryBot.create(:activity) }
 
     it "display user submmited propoals" do
-      papers = FactoryGirl.create_list(:paper, 5, user: user)
+      papers = FactoryBot.create_list(:paper, 5, user: user)
       login_as user
       visit my_proposals_url
 

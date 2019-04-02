@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Admin::Users", type: :request do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:user, :admin) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:admin) { FactoryBot.create(:user, :admin) }
 
   before(:each) do
     login_as admin
@@ -16,7 +16,7 @@ RSpec.describe "Admin::Users", type: :request do
     end
 
     it "list all signup users" do
-      users = FactoryGirl.create_list(:user, 5)
+      users = FactoryBot.create_list(:user, 5)
 
       visit admin_users_url
       expect(page).to have_content(admin.name)
@@ -28,7 +28,7 @@ RSpec.describe "Admin::Users", type: :request do
 
   describe "GET /admin/users/:id/designate" do
     it "assign user as admin" do
-      normal_user = FactoryGirl.create(:user)
+      normal_user = FactoryBot.create(:user)
 
       visit admin_users_url
       within "#user_#{normal_user.id}" do
@@ -44,7 +44,7 @@ RSpec.describe "Admin::Users", type: :request do
 
   describe "GET /admin/users/:id/undesignate" do
     it "unassign user as admin" do
-      admin_user = FactoryGirl.create(:user, :admin)
+      admin_user = FactoryBot.create(:user, :admin)
 
       visit admin_users_url
       within "#user_#{admin_user.id}" do
@@ -59,7 +59,7 @@ RSpec.describe "Admin::Users", type: :request do
 
   describe "POST /admin/users/:id/contributor" do
     it "assign user as contributor" do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
 
       visit admin_users_url
       within "#user_#{user.id}" do
@@ -74,7 +74,7 @@ RSpec.describe "Admin::Users", type: :request do
 
   describe "DELETE /admin/users/:id/contributor" do
     it "unassign user as contributor" do
-      user = FactoryGirl.create(:user, :contributor)
+      user = FactoryBot.create(:user, :contributor)
 
       visit admin_users_url
 

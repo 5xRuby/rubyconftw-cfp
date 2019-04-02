@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "Admin::Stats", type: :request do
-  let(:admin) { FactoryGirl.create(:user, :admin) }
-  let!(:activity) { FactoryGirl.create(:activity) }
-  let!(:custom_fields) { FactoryGirl.create_list(:custom_field, 5, activity: activity) }
-  let!(:papers) { FactoryGirl.create_list(:paper, 5, activity: activity, tag_list: "papers", answer_of_custom_fields: answer_of_custom_fields) }
-  let!(:accepted_papers) { FactoryGirl.create_list(:paper, 5, :accepted, tag_list: "accepted", activity: activity, answer_of_custom_fields: answer_of_custom_fields) }
+  let(:admin) { FactoryBot.create(:user, :admin) }
+  let!(:activity) { FactoryBot.create(:activity) }
+  let!(:custom_fields) { FactoryBot.create_list(:custom_field, 5, activity: activity) }
+  let!(:papers) { FactoryBot.create_list(:paper, 5, activity: activity, tag_list: "papers", answer_of_custom_fields: answer_of_custom_fields) }
+  let!(:accepted_papers) { FactoryBot.create_list(:paper, 5, :accepted, tag_list: "accepted", activity: activity, answer_of_custom_fields: answer_of_custom_fields) }
 
   let(:answer_of_custom_fields) do
     answer = {}
@@ -23,7 +23,7 @@ RSpec.describe "Admin::Stats", type: :request do
     end
 
     it "cannot viewed by non-admin user" do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       login_as user
       visit admin_activity_stats_url(activity)
       expect(page).to have_content("Permission Denied")
@@ -36,7 +36,7 @@ RSpec.describe "Admin::Stats", type: :request do
     end
 
     it "display taggings count only this activity" do
-      FactoryGirl.create_list(:paper, 5, tag_list: "papers")
+      FactoryBot.create_list(:paper, 5, tag_list: "papers")
 
       expect(page).to have_content("papers")
       expect(page).to have_selector('#taggings_count tbody tr td', text: papers.count)

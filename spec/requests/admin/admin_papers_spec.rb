@@ -1,23 +1,23 @@
   require 'rails_helper'
 
 RSpec.describe "Admin::Papers", type: :request do
-  let(:admin) { FactoryGirl.create(:user, :admin) }
-  let(:activity) { FactoryGirl.create(:activity) }
+  let(:admin) { FactoryBot.create(:user, :admin) }
+  let(:activity) { FactoryBot.create(:activity) }
   let(:state) { :submitted }
 
   before(:each) do
-    @paper = FactoryGirl.create(:paper, activity: activity, state: state)
+    @paper = FactoryBot.create(:paper, activity: activity, state: state)
     login_as admin
   end
 
   describe "GET /admin/activity/:id/papers" do
     before(:each) do
-      @papers = FactoryGirl.create_list(:paper, 5, activity: activity)
+      @papers = FactoryBot.create_list(:paper, 5, activity: activity)
       visit admin_activity_papers_url(activity)
     end
 
     it "cannot viewed by non admin user" do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       login_as user
       visit admin_activity_papers_url(activity)
       expect(page).to have_content("Permission Denied")
@@ -146,7 +146,7 @@ RSpec.describe "Admin::Papers", type: :request do
 
   describe "edit tag fields" do
     before(:each) do
-      @paper = FactoryGirl.create(:paper, :reviewed, activity: activity)
+      @paper = FactoryBot.create(:paper, :reviewed, activity: activity)
       login_as admin
       visit admin_activity_paper_url(activity, @paper)
     end
@@ -181,7 +181,7 @@ RSpec.describe "Admin::Papers", type: :request do
 
   describe "comments" do
     before(:each) do
-      @paper = FactoryGirl.create(:paper, :reviewed, activity: activity)
+      @paper = FactoryBot.create(:paper, :reviewed, activity: activity)
       login_as admin
       visit admin_activity_paper_url(activity, @paper)
     end
@@ -197,7 +197,7 @@ RSpec.describe "Admin::Papers", type: :request do
     end
 
     it "delete user's comments" do
-      comment = FactoryGirl.create(:comment, paper: @paper, user:admin, text: "Hello rails!")
+      comment = FactoryBot.create(:comment, paper: @paper, user:admin, text: "Hello rails!")
       visit admin_activity_paper_url(activity, @paper)
       within ".comment-#{comment.id}" do
         click_on "delete"
@@ -206,8 +206,8 @@ RSpec.describe "Admin::Papers", type: :request do
     end
 
     it "cannot delete other user's comment" do
-      other_admin = FactoryGirl.create(:user, :admin)
-      FactoryGirl.create(:comment, paper: @paper, user: other_admin, text: "Hello Rspec!")
+      other_admin = FactoryBot.create(:user, :admin)
+      FactoryBot.create(:comment, paper: @paper, user: other_admin, text: "Hello Rspec!")
       visit admin_activity_paper_url(activity, @paper)
       expect(page).to have_content("Hello Rspec!")
       expect(page).not_to have_content("delete")

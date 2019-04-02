@@ -78,14 +78,14 @@ RSpec.describe Paper, type: :model do
   end
 
   it "should able to check user already reviewed it or not" do
-    user = FactoryGirl.create(:user)
-    paper = FactoryGirl.create(:paper_with_review, review_by: user)
+    user = FactoryBot.create(:user)
+    paper = FactoryBot.create(:paper_with_review, review_by: user)
     expect(paper.reviewed_by?(user)).to be true
   end
 
   it "should able to read custom field" do
-    activity = FactoryGirl.create(:activity_with_custom_field, field_count: 5)
-    paper = FactoryGirl.create(:paper, activity: activity)
+    activity = FactoryBot.create(:activity_with_custom_field, field_count: 5)
+    paper = FactoryBot.create(:paper, activity: activity)
     expect(paper.custom_fields.size).to eq(5)
     expect(paper.custom_fields.first).to have_key(:name)
     expect(paper.custom_fields.first).to have_key(:value)
@@ -93,7 +93,7 @@ RSpec.describe Paper, type: :model do
   end
 
   it "generate yaml" do
-    paper = FactoryGirl.create(:paper)
+    paper = FactoryBot.create(:paper)
     user = paper.user
     except_yaml = %{---
 - name: #{user.full_name}
@@ -111,7 +111,7 @@ RSpec.describe Paper, type: :model do
   end
 
   it "generate yaml with root" do
-    paper = FactoryGirl.create(:paper)
+    paper = FactoryBot.create(:paper)
     user = paper.user
     except_yaml = %{---
 papers:

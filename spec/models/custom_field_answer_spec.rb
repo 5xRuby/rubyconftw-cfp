@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe CustomFieldAnswer, type: :model do
-  let!(:activity) { FactoryGirl.create(:activity) }
-  let!(:custom_fields) { FactoryGirl.create_list(:custom_field, 5, :checkboxes, activity: activity) }
-  let!(:papers) { FactoryGirl.create_list(:paper, 5, activity: activity, answer_of_custom_fields: answer_of_custom_fields) }
+  let!(:activity) { FactoryBot.create(:activity) }
+  let!(:custom_fields) { FactoryBot.create_list(:custom_field, 5, :checkboxes, activity: activity) }
+  let!(:papers) { FactoryBot.create_list(:paper, 5, activity: activity, answer_of_custom_fields: answer_of_custom_fields) }
 
   let(:answer_of_custom_fields) do
     answer = {}

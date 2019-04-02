@@ -12,8 +12,8 @@ RSpec.describe Admin::PapersController, type: :controller do
   
   describe "search ability in #index" do
   
-    let(:admin) { FactoryGirl.create(:user, :admin) }
-    let(:activity) { FactoryGirl.create(:activity_with_custom_field) }
+    let(:admin) { FactoryBot.create(:user, :admin) }
+    let(:activity) { FactoryBot.create(:activity_with_custom_field) }
     let(:params) {
       {
         activity_id: activity.permalink,
@@ -27,9 +27,9 @@ RSpec.describe Admin::PapersController, type: :controller do
     let(:search_type) { }
     let(:search_key) { }
 
-    let!(:paper1) { FactoryGirl.create(:paper, activity: activity) }
-    let!(:paper2) { FactoryGirl.create(:paper, activity: activity) }
-    let!(:paper3) { FactoryGirl.create(:paper, activity: activity) }
+    let!(:paper1) { FactoryBot.create(:paper, activity: activity) }
+    let!(:paper2) { FactoryBot.create(:paper, activity: activity) }
+    let!(:paper3) { FactoryBot.create(:paper, activity: activity) }
 
     before do
        sign_in admin
@@ -53,9 +53,9 @@ RSpec.describe Admin::PapersController, type: :controller do
         context "when search on fixed fields" do
           let(:bio_1) { Faker::Lorem.sentence(11) }
           let(:bio_2) { bio_1 + "__DIFFERENT__" }
-          let!(:paper1) { FactoryGirl.create(:paper, activity: activity, speaker_bio: bio_1) }
-          let!(:paper2) { FactoryGirl.create(:paper, activity: activity, speaker_bio: bio_1) }
-          let!(:paper3) { FactoryGirl.create(:paper, activity: activity, speaker_bio: bio_2) }
+          let!(:paper1) { FactoryBot.create(:paper, activity: activity, speaker_bio: bio_1) }
+          let!(:paper2) { FactoryBot.create(:paper, activity: activity, speaker_bio: bio_1) }
+          let!(:paper3) { FactoryBot.create(:paper, activity: activity, speaker_bio: bio_2) }
           let(:search_field) { "speaker_bio" }
           let(:search_key) { bio_1 }
           
@@ -69,9 +69,9 @@ RSpec.describe Admin::PapersController, type: :controller do
         context "when search on custom fields" do
           let(:custom_1) { {"#{activity.custom_fields[0].id}"=>"Talk(30 mins)"} }
           let(:custom_2) { {"#{activity.custom_fields[0].id}"=>"Session(55 mins)"} }
-          let!(:paper1) { FactoryGirl.create(:paper, activity: activity, answer_of_custom_fields: custom_1) }
-          let!(:paper2) { FactoryGirl.create(:paper, activity: activity, answer_of_custom_fields: custom_1) }
-          let!(:paper3) { FactoryGirl.create(:paper, activity: activity, answer_of_custom_fields: custom_2) }
+          let!(:paper1) { FactoryBot.create(:paper, activity: activity, answer_of_custom_fields: custom_1) }
+          let!(:paper2) { FactoryBot.create(:paper, activity: activity, answer_of_custom_fields: custom_1) }
+          let!(:paper3) { FactoryBot.create(:paper, activity: activity, answer_of_custom_fields: custom_2) }
           let(:search_field) { activity.custom_fields[0].name }
           let(:search_key) { "Talk(30 mins)" }
 
@@ -88,9 +88,9 @@ RSpec.describe Admin::PapersController, type: :controller do
         context "when search on fixed fields" do
           let(:bio_1) { "#{Faker::Lorem.sentence(10)} UNIQUE_SEARCH_KEY #{Faker::Lorem.sentence(10)}" }
           let(:bio_2) { "#{Faker::Lorem.sentence(10)} OTEHR #{Faker::Lorem.sentence(10)}" }
-          let!(:paper1) { FactoryGirl.create(:paper, activity: activity, speaker_bio: bio_1) }
-          let!(:paper2) { FactoryGirl.create(:paper, activity: activity, speaker_bio: bio_1) }
-          let!(:paper3) { FactoryGirl.create(:paper, activity: activity, speaker_bio: bio_2) }
+          let!(:paper1) { FactoryBot.create(:paper, activity: activity, speaker_bio: bio_1) }
+          let!(:paper2) { FactoryBot.create(:paper, activity: activity, speaker_bio: bio_1) }
+          let!(:paper3) { FactoryBot.create(:paper, activity: activity, speaker_bio: bio_2) }
           let(:search_field) { "speaker_bio" }
           let(:search_key) { "UNIQUE_SEARCH_KEY" }
           
@@ -104,9 +104,9 @@ RSpec.describe Admin::PapersController, type: :controller do
         context "when search on custom fields" do
           let(:custom_1) { {"#{activity.custom_fields[0].id}"=>"#{Faker::Lorem.sentence(10)} UNIQUE_SEARCH_KEY #{Faker::Lorem.sentence(10)}"} }
           let(:custom_2) { {"#{activity.custom_fields[0].id}"=>"#{Faker::Lorem.sentence(10)} OTEHR #{Faker::Lorem.sentence(10)}"} }
-          let!(:paper1) { FactoryGirl.create(:paper, activity: activity, answer_of_custom_fields: custom_1) }
-          let!(:paper2) { FactoryGirl.create(:paper, activity: activity, answer_of_custom_fields: custom_1) }
-          let!(:paper3) { FactoryGirl.create(:paper, activity: activity, answer_of_custom_fields: custom_2) }
+          let!(:paper1) { FactoryBot.create(:paper, activity: activity, answer_of_custom_fields: custom_1) }
+          let!(:paper2) { FactoryBot.create(:paper, activity: activity, answer_of_custom_fields: custom_1) }
+          let!(:paper3) { FactoryBot.create(:paper, activity: activity, answer_of_custom_fields: custom_2) }
           let(:search_field) { activity.custom_fields[0].name }
           let(:search_key) { "UNIQUE_SEARCH_KEY" }
 

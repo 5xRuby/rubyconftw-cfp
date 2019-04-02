@@ -41,15 +41,15 @@ RSpec.describe Activity, type: :model do
   end
 
   context "papers review state" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:activity) { FactoryGirl.create(:activity) }
+    let(:user) { FactoryBot.create(:user) }
+    let(:activity) { FactoryBot.create(:activity) }
 
     before(:each) do
-        @unreview_papers = FactoryGirl.create_list(:paper, 5, activity: activity)
-        @reviewed_papers = FactoryGirl.create_list(:paper_with_review, 5, activity: activity, review_by: user)
-        @withdrawn_paper = FactoryGirl.create(:paper, :withdrawn, activity: activity)
-        @unreview_accepted_paper = FactoryGirl.create(:paper, :accepted, activity: activity)
-        @unreview_rejected_paper = FactoryGirl.create(:paper, :rejected, activity: activity)
+        @unreview_papers = FactoryBot.create_list(:paper, 5, activity: activity)
+        @reviewed_papers = FactoryBot.create_list(:paper_with_review, 5, activity: activity, review_by: user)
+        @withdrawn_paper = FactoryBot.create(:paper, :withdrawn, activity: activity)
+        @unreview_accepted_paper = FactoryBot.create(:paper, :accepted, activity: activity)
+        @unreview_rejected_paper = FactoryBot.create(:paper, :rejected, activity: activity)
     end
 
     it "should able to find propals review by specify user" do
@@ -73,13 +73,13 @@ RSpec.describe Activity, type: :model do
   end
 
   context "speakers" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:speaker) { FactoryGirl.create(:user) }
-    let(:activity) { FactoryGirl.create(:activity) }
+    let(:user) { FactoryBot.create(:user) }
+    let(:speaker) { FactoryBot.create(:user) }
+    let(:activity) { FactoryBot.create(:activity) }
 
     before(:each) do
-      @papers = FactoryGirl.create_list(:paper, 5, activity: activity)
-      @accepted_paper = FactoryGirl.create(:paper, :accepted, user: speaker, activity: activity)
+      @papers = FactoryBot.create_list(:paper, 5, activity: activity)
+      @accepted_paper = FactoryBot.create(:paper, :accepted, user: speaker, activity: activity)
     end
 
     it "find accepted papers user as speaker" do
