@@ -47,7 +47,7 @@
         .col-md-12
           h3 Review State
           div
-            = "#{@paper.try(:reviews, []).size} Reviews"
+            = "#{@paper.reviews.reload.size} Reviews"
           div
             = paper_state_badge(@paper)
       - if @paper.custom_fields.size > 0
