@@ -20,6 +20,19 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  exporter:
+    papers:
+      id: ID
+      activity_name: Link
+      language: Lang
+      title: Subject
+      abstract: Abstract
+      outline: Outline
+      pitch: Pitch
+      user_github_url: GitHub
+      speaker_bio: BIO
+      speaker_name: Speaker
+
   button:
     new_paper: "New Proposal"
   flash:
