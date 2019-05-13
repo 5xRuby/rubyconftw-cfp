@@ -6,16 +6,19 @@ class Admin::PapersController < Admin::ApplicationController
   add_sortable_column "users.name"
 
   def index
-    @papers = apply_search_filter(Paper.joins(:user).where(activity: @activity).order("#{sort_column} #{sort_direction}"))
+    @papers = apply_search_filter(Paper.joins(:user, :activity, :reviews, :comments).where(activity: @activity).order("#{sort_column} #{sort_direction}"))
     @notification = Notification.new
 
     respond_to do |format|
       # TODO: Filter necessary columns
-      format.yml {
+      format.yml do
         send_data @papers.as_yaml(include_root: true, hostname: request.host_with_port),
                   type: "application/yml",
                   disposition: "attachment; filename=papers.yml"
-      }
+      end
+      format.xlsx do
+        send_file PapersXLSXExporter.new(@papers).perform
+      end
       format.html
     end
   end
@@ -29,7 +32,7 @@ class Admin::PapersController < Admin::ApplicationController
     @paper.update(paper_params)
     respond_to do |format|
       format.html { redirect_to admin_activity_paper_path(@activity, @paper) }
-      format.json { 
+      format.json {
         html = render_to_string(partial: "display_tags", formats: [:html], locals: {tags: @paper.tags})
         render json: {paper: @paper, tags: @paper.tags.collect{|t| t.name}, display_tags_html: html}
       }
