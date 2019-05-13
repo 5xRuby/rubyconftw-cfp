@@ -36,6 +36,10 @@ class Paper < ApplicationRecord
 
   acts_as_taggable_on :tags
 
+  delegate :github_url, to: :user, prefix: true
+  delegate :name, to: :activity, prefix: true
+  delegate :name, to: :user, prefix: :speaker
+
   scope :state, -> (state) { where(state: state) }
   scope :opened, -> { where.not(state: :withdrawn)}
 
