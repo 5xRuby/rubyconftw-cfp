@@ -13,9 +13,7 @@ module CfpSystem
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.autoload_paths += [
-      Rails.root.join('app', 'services')
-    ]
+
     config.time_zone = "Asia/Taipei"
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       if instance.error_message.kind_of?(Array)
