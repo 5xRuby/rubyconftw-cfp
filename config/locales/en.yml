@@ -32,6 +32,7 @@ en:
       user_github_url: GitHub
       speaker_bio: BIO
       speaker_name: Speaker
+      speaker_email: E-Mail
 
   button:
     new_paper: "New Proposal"

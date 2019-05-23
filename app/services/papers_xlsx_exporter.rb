@@ -3,7 +3,7 @@
 class PapersXLSXExporter
   include Rails.application.routes.url_helpers
   attr_accessor :collection, :dir_path, :file_name, :wbk, :current_wsh
-  FIELDS = %w[id activity_name speaker_name language title abstract outline pitch user_github_url speaker_bio ].freeze
+  FIELDS = %w[id activity_name speaker_name speaker_email language title abstract outline pitch user_github_url speaker_bio ].freeze
   I18N_NAMESPACE = 'exporter.papers'
 
   class << self
@@ -11,7 +11,7 @@ class PapersXLSXExporter
 
     def default_url_options
       @default_url_options ||= {
-        host: (Settings&.app_host rescue 'example.com')
+        host: (Settings&.app_host rescue 'cfp.rubyconf.tw')
       }
     end
   end
@@ -22,7 +22,7 @@ class PapersXLSXExporter
 
   def initialize(collection, dir_path = '/tmp', file_name = "#{SecureRandom.hex(4)}.xlsx")
     @collection, @dir_path, @file_name = collection, dir_path, file_name
-    @wbk = WriteXLSX.new(file_path)
+    @wbk = WriteXLSX.new(file_path, strings_to_urls: false)
     @current_wsh = @wbk.add_worksheet
   end
 
@@ -30,7 +30,7 @@ class PapersXLSXExporter
     @collection_as_json ||= collection.map do |obj|
       values = FIELDS.map {|f| obj.send(f) }
       row = Hash[FIELDS.zip(values)]
-      row[:activity_name] = admin_activity_paper_url(obj.activity, obj)
+      row["activity_name"] = admin_activity_paper_url(obj.activity, obj)
       row
     end
   end

@@ -38,7 +38,7 @@ class Paper < ApplicationRecord
 
   delegate :github_url, to: :user, prefix: true
   delegate :name, to: :activity, prefix: true
-  delegate :name, to: :user, prefix: :speaker
+  delegate :email, :name, to: :user, prefix: :speaker
 
   scope :state, -> (state) { where(state: state) }
   scope :opened, -> { where.not(state: :withdrawn)}
