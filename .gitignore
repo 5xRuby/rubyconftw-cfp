@@ -8,6 +8,7 @@
 /.bundle
 /vendor/bundle/*
 /docker-compose.yml
+.env
 
 tmp/*
 # Ignore the default SQLite database.
