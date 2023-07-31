@@ -2,7 +2,7 @@ class ActivitiesController < ApplicationController
   before_action :find_activity, only: [:show]
 
 	def index
-	  @activities = Activity.all
+    @activities = Activity.order(created_at: :DESC)
 	end
 
 	def show
