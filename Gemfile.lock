@@ -177,9 +177,9 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.21.1)
+    loofah (2.21.3)
       crass (~> 1.0.2)
-      nokogiri (>= 1.5.9)
+      nokogiri (>= 1.12.0)
     lumberjack (1.0.12)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
@@ -189,7 +189,7 @@ GEM
     mime-types-data (3.2023.0218.1)
     mini_magick (4.9.4)
     mini_mime (1.0.1)
-    mini_portile2 (2.4.0)
+    mini_portile2 (2.8.4)
     minitest (5.19.0)
     money (6.10.1)
       i18n (>= 0.6.4, < 1.0)
@@ -200,8 +200,9 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
     nio4r (2.3.1)
-    nokogiri (1.10.10)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.14.5)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -244,6 +245,7 @@ GEM
       pry (>= 0.10.4)
     public_suffix (3.0.1)
     puma (3.11.0)
+    racc (1.7.1)
     rack (2.2.8)
     rack-protection (3.0.6)
       rack
@@ -436,7 +438,7 @@ DEPENDENCIES
   jquery-ui-rails
   letter_opener
   mini_magick
-  nokogiri (~> 1.10.8)
+  nokogiri (~> 1.14.3)
   omniauth
   omniauth-github
   omniauth-twitter (~> 1.4)
