@@ -73,7 +73,7 @@ end
 gem 'settingslogic'
 gem 'country_select'
 gem 'slim'
-gem 'nokogiri', '~> 1.10.8'
+gem 'nokogiri', '~> 1.15.4'
 gem "ffi", ">= 1.9.24"
 gem 'write_xlsx'
 
