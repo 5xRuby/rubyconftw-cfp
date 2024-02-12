@@ -4,7 +4,7 @@ gem 'bigdecimal', '~> 1.4'
 gem 'redis-namespace'
 gem 'aasm', '~> 5'
 gem 'default_value_for', '~> 3.4.0'
-gem 'rails', '5.1.7'
+gem 'rails', '5.2.8.1'
 gem 'pg', '~> 1.0'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'font-awesome-rails'
@@ -17,7 +17,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'simple_form', '~> 4.1.0'
 gem 'mini_magick'
 gem 'jquery-ui-rails'
-gem 'devise'
+gem 'devise','~> 4.7.0'
 gem 'ratyrate'
 gem 'cancancan', '~> 1.10'
 gem 'carrierwave', '~> 1'
@@ -25,7 +25,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'redcarpet'
 gem 'rouge', '~> 2.0.6'
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on', '6.5.0'
 gem 'unicode_utils'
 gem 'scenic'
 gem 'slack-notifier'
@@ -35,7 +35,7 @@ gem 'puma'
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
-  gem 'shoulda'
+  gem 'shoulda-matchers', '~> 2.8.0'
   gem 'capybara'
   gem 'fuubar'
   gem 'factory_bot_rails'
@@ -69,3 +69,9 @@ gem "ffi", ">= 1.9.24"
 gem 'write_xlsx'
 
 gem "omniauth-twitter", "~> 1.4"
+
+gem "bootsnap", "~> 1.18"
+
+gem "postal-rails", "~> 1.0"
+
+gem "dotenv-rails", "~> 2.8"

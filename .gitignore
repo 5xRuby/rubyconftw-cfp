@@ -30,3 +30,6 @@ coverage/
 
 # Ignore cache file
 .DS_Store
+.env
+.env.*
+node_modules

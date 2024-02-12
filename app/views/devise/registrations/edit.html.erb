@@ -16,7 +16,7 @@
       <%= f.input :country, as: :country %>
     </div>
     <div class="col-md-4">
-    <%= image_tag(resource.photo.small) if resource.photo.present? %>
+    <%= image_tag(resource.photo.small.url) if resource.photo.present? %>
     <%= f.input :photo, as: :file %>
     </div>
     <div class="col-md-12 text-right">
