@@ -9,9 +9,9 @@ RSpec.describe Admin::PapersController, type: :controller do
       expect(assigns(:papers)).to match_array papers
     end
   end
-  
+
   describe "search ability in #index" do
-  
+
     let(:admin) { FactoryBot.create(:user, :admin) }
     let(:activity) { FactoryBot.create(:activity_with_custom_field) }
     let(:params) {
@@ -32,7 +32,7 @@ RSpec.describe Admin::PapersController, type: :controller do
     let!(:paper3) { FactoryBot.create(:paper, activity: activity) }
 
     before do
-       sign_in admin
+       sign_in admin, scope: :user
     end
 
     context "Commit is not 'Search'" do
@@ -47,7 +47,7 @@ RSpec.describe Admin::PapersController, type: :controller do
         let(:search_field) { "__NOT_EXIST__" }
         it_behaves_like "do not search"
       end
-      
+
       context "with 'equal'" do
         let(:search_type) { "equal" }
         context "when search on fixed fields" do
@@ -58,7 +58,7 @@ RSpec.describe Admin::PapersController, type: :controller do
           let!(:paper3) { FactoryBot.create(:paper, activity: activity, speaker_bio: bio_2) }
           let(:search_field) { "speaker_bio" }
           let(:search_key) { bio_1 }
-          
+
           it "returns matched results" do
             valid_papers = [paper1, paper2]
             get :index, params: params
@@ -93,7 +93,7 @@ RSpec.describe Admin::PapersController, type: :controller do
           let!(:paper3) { FactoryBot.create(:paper, activity: activity, speaker_bio: bio_2) }
           let(:search_field) { "speaker_bio" }
           let(:search_key) { "UNIQUE_SEARCH_KEY" }
-          
+
           it "returns matched results" do
             valid_papers = [paper1, paper2]
             get :index, params: params

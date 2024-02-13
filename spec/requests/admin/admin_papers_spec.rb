@@ -168,7 +168,7 @@ RSpec.describe "Admin::Papers", type: :request do
     it "put tab_list into values if tags already exist" do
       @paper.update(tag_list: %w(owo qwq))
       visit admin_activity_paper_url(activity, @paper)
-      expect(page).to have_field('paper[tag_list]', with: "qwq, owo")
+      expect(page).to have_field('paper[tag_list]', with: "owo, qwq")
     end
 
     it "show tags on index page" do
