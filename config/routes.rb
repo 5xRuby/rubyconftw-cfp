@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root "activities#index"
+  mount Liveness::Status => '/status'
+  mount GoodJob::Engine => 'good_job'
 
   resource :contributors, only: [:show]
   resources :activities, only: [:index,:show] do

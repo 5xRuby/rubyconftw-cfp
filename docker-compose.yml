@@ -1,0 +1,81 @@
+version: '3.8'
+
+secrets:
+  settings:
+    file: ./config/application.yml
+services:
+  postgres:
+    image: postgres:13.1
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    deploy:
+      replicas: 1
+      labels:
+        - deploy.wait=true
+      placement:
+        constraints:
+          - node.labels.role == database
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - net
+  application:
+    image: "${IMAGE_NAME}:${IMAGE_TAG}"
+    secrets:
+      - source: settings
+        target: /src/app/config/settings.local.yml
+    environment:
+      - AUTO_MIGRATION=yes
+      - DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres/$POSTGRES_DB
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - S3_BUCKET
+      - S3_ENDPOINT
+      - AWS_REGION=us-east-1
+      - SECRET_KEY_BASE
+      - RAILS_MASTER_KEY
+      - SETTINGS__MAILER__DELIVERY_METHOD
+      - SETTINGS__ACTIVE_STORAGE__SERVICE
+      - SETTINGS__ACTIVE_STORAGE__VARIANT_PROCESSOR
+      - SETTINGS__ACTIVE_STORAGE__S3_CDN_HOST
+      - POSTAL_HOST
+      - POSTAL_KEY
+      - WEB_CONCURRENCY
+      - PORT
+      - RAILS_MAX_THREADS
+    volumes:
+      - uploads:/src/app/public/uploads
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      replicas: ${WEB_REPLICAS:-2}
+      labels:
+        - deploy.wait=true
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.${DEPLOY_NAME}-http.rule=Host(`${DEPLOY_DOMAIN}`)
+        - traefik.http.routers.${DEPLOY_NAME}-http.entrypoints=http
+        - traefik.http.routers.${DEPLOY_NAME}-http.middlewares=https-redirect
+        - traefik.http.routers.${DEPLOY_NAME}-https.rule=Host(`${DEPLOY_DOMAIN}`)
+        - traefik.http.routers.${DEPLOY_NAME}-https.entrypoints=https
+        - traefik.http.routers.${DEPLOY_NAME}-https.tls=true
+        - traefik.http.routers.${DEPLOY_NAME}-https.tls.certresolver=le
+        - traefik.http.services.${DEPLOY_NAME}.loadbalancer.server.port=3000
+    networks:
+      - net
+      - traefik-public
+    depends_on:
+      - postgres
+volumes:
+  postgres_data:
+  uploads:
+networks:
+  net:
+    driver: overlay
+    attachable: true
+  traefik-public:
+    external: true

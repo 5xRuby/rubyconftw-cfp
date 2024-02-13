@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'airbrake', '~> 13.0'
 gem 'bigdecimal', '~> 1.4'
 gem 'redis-namespace'
 gem 'aasm', '~> 5'
@@ -55,13 +56,17 @@ group :development do
   gem 'letter_opener'
   gem 'web-console', '~> 3.0'
   gem 'awesome_print'
+  gem 'boxing'
 end
 
 group :test do
   gem 'simplecov', require: false
 end
 
-gem 'settingslogic'
+gem 'openbox'
+gem 'liveness'
+
+gem 'config'
 gem 'country_select'
 gem 'slim'
 gem 'nokogiri', '~> 1'
@@ -75,3 +80,5 @@ gem "bootsnap", "~> 1.18"
 gem "postal-rails", "~> 1.0"
 
 gem "dotenv-rails", "~> 2.8"
+
+gem "good_job", "~> 2.99"

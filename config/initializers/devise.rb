@@ -12,6 +12,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
+
   config.mailer_sender = Settings.mailer.default_from
 
   # Configure the class responsible to send e-mails.
@@ -244,7 +245,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
   config.omniauth :github, Settings.github.id, Settings.github.secret, scope: Settings.github.scope
-  config.omniauth :twitter, Settings.twitter.id, Settings.twitter.secret
+  #config.omniauth :twitter, Settings.twitter.id, Settings.twitter.secret
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

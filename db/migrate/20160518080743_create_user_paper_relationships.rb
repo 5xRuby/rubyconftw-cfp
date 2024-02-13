@@ -1,4 +1,4 @@
-class CreateUserPaperRelationships < ActiveRecord::Migration
+class CreateUserPaperRelationships < ActiveRecord::Migration[5.2]
   def change
     create_table :user_paper_relationships do |t|
       t.integer :user_id
