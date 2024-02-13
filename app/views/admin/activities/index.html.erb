@@ -24,7 +24,7 @@
           <tr id="activity_<%= activity.id %>">
             <td><%= activity.id %></td>
             <td><%= activity.name %></td>
-            <td><%= image_tag(activity.logo, height: 100, width: 100) %></td>
+            <td><%= image_tag(activity.logo.url, height: 100, width: 100) %></td>
             <td><%= activity.start_date %> ~ <%= activity.end_date %></td>
             <td><%= activity.papers_count %></td>
             <td>

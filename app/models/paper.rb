@@ -15,9 +15,14 @@ class Paper < ApplicationRecord
 	mount_uploader :speaker_avatar, PictureUploader
   mount_uploader :attachement, AttachementUploader
 
-  validates :title, word: { in: Settings.paper.title.min..Settings.paper.title.max} if Settings.paper.title.limit_word
-  validates :abstract, word: { in: Settings.paper.abstract.min..Settings.paper.abstract.max } if Settings.paper.abstract.limit_word
-  validates  :speaker_bio, word: { in: Settings.paper.bio.min..Settings.paper.bio.max } if Settings.paper.bio.limit_word
+  %i[abstract speaker_bio title].each do |attr|
+    define_method([attr, 'words'].join('_')) { send(attr).to_s.scan(/\w+/) }
+  end
+
+  validates :title_words, length: { in: Settings.paper.title.min..Settings.paper.title.max }
+  validates :abstract_words, length: { in: Settings.paper.abstract.min..Settings.paper.abstract.max }
+  validates :speaker_bio_words, length: { in: Settings.paper.bio.min..Settings.paper.bio.max }
+
 	validates_presence_of :title
 	validates_presence_of :abstract
 	validates_presence_of :outline
@@ -25,7 +30,7 @@ class Paper < ApplicationRecord
   validate :validate_proposal_expires, on: :create
   validates_presence_of :speaker_bio, :language
 
-  enum state: Hash[ALL_STATUS.map{|x| [x,x]}]
+  # enum state: Hash[ALL_STATUS.map{|x| [x,x]}]
   enum language: Hash[ALL_LANGUAGES.map{|x| [x,x]}]
 
 	belongs_to :activity, counter_cache: true
@@ -59,6 +64,10 @@ class Paper < ApplicationRecord
       transitions to: :withdrawn
     end
   end
+
+  #def self.states
+  #  aasm.states.map(&:name)
+  #end
 
   after_create :notify_user
 
@@ -123,8 +132,8 @@ class Paper < ApplicationRecord
   def total_disapprove
     reviews.where(reviewed: "disapprove").count
   end
-  private
 
+  private
 
   def notify_user
     PapersMailer.notification_after_create(self.id).deliver_now!
