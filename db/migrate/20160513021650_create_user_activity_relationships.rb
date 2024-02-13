@@ -1,4 +1,4 @@
-class CreateUserActivityRelationships < ActiveRecord::Migration
+class CreateUserActivityRelationships < ActiveRecord::Migration[5.2]
   def change
     create_table :user_activity_relationships do |t|
       t.integer :user_id

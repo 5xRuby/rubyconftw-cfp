@@ -7,7 +7,6 @@
 # Ignore bundler config.
 /.bundle
 /vendor/bundle/*
-/docker-compose.yml
 .env
 
 tmp/*
@@ -15,8 +14,10 @@ tmp/*
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
-config/*.yml
-config/*/*.yml
+
+/config/*.local.yml
+/config/**/*.local.yml
+
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -33,3 +34,7 @@ coverage/
 .env
 .env.*
 node_modules
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml

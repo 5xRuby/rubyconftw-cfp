@@ -1,4 +1,4 @@
-class RemoveUserPaperRelationships < ActiveRecord::Migration
+class RemoveUserPaperRelationships < ActiveRecord::Migration[5.2]
   def up
     drop_table :user_paper_relationships
   end

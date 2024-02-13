@@ -1,4 +1,4 @@
-class RenamePapersColumeName < ActiveRecord::Migration
+class RenamePapersColumeName < ActiveRecord::Migration[5.2]
   def change
   	rename_column :papers,:Title,:title
   	rename_column :papers,:Abstract,:abstract
