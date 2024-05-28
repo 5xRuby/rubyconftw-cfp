@@ -1,4 +1,4 @@
-class ChangeActivitiesEventDataToTime < ActiveRecord::Migration[5.0]
+class ChangeActivitiesEventDataToTime < ActiveRecord::Migration[5.2][5.0]
   def up
     change_table :activities do |t|
       t.rename :event_start_date, :open_at

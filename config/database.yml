@@ -3,18 +3,12 @@ default: &default
 
 development:
   <<: *default
-  database: cfp-dev
+  database: cfp-development
 
 test:
   <<: *default
-  username: postgres
-  password: mysecretpassword
   host: postgres
   database: cfp-test
-
-staging:
-  <<: *default
-  database: cfp-staging
 
 production:
   <<: *default

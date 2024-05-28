@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :activity do
+    logo { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/logo.jpg')) }
     sequence(:name, 2016) { |n| "RubyConfTW #{n}" }
     description { "RubyConfTW is a conference of ruby in Taiwan" }
     start_date { 1.day.ago }

@@ -1,4 +1,4 @@
-class ChangeActivitiesDescriptionToText < ActiveRecord::Migration[5.0]
+class ChangeActivitiesDescriptionToText < ActiveRecord::Migration[5.2][5.0]
   def up
     change_column :activities, :description, :text
   end

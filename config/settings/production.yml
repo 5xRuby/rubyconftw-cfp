@@ -1,0 +1,5 @@
+mailer:
+  delivery_method: postal
+errbit:
+  host: https://errbit.5xruby.dev
+  environment: production

@@ -1,27 +1,101 @@
-image: ryudoawaru/ruby23a
+include:
+  - remote: https://github.com/elct9620/ruby-gitlab-ci/raw/main/rails.yml
+  - remote: https://github.com/elct9620/ruby-gitlab-ci/raw/main/swarm.yml
 
 variables:
-  CAP_USER: "deployer"
-  BUNDLE_CACHE: "vendor/bundle/"
-  RAILS_ENV: "test"
-  CI: "true"
+  RUBY_VERSION: 2.7.8
+  ASSETS_PRECOMPILE: 'yes'
+  NODE_PACKAGE_REQUIRED: 'yes'
+  BUNDLER_VERSION: 2.2.33
+  UPLOAD_TO_S3: 'no'
+  INSTALL_CHROME: 'no'
+  DOCKER_VERSION: '23.0.6'
+  DOCKER_BUILDX_VERSION: '0.11.2'
+  POSTGRES_VERSION: 15-alpine
+  POSTGRES_USER: cfp
+  POSTGRES_DB: cfp
+  POSTGRES_PASSWORD: cfpcfp123
+  TZ: 'Asia/Taipei'
 
-cache:
-  untracked: true
-  key: "$CI_BUILD_NAME"
-  paths:
-    - vendor/bundle/
+node_modules:
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $NODE_PACKAGE_REQUIRED == "yes"'
+    - if: '$CI_MERGE_REQUEST_ID && $NODE_PACKAGE_REQUIRED == "yes"'
 
-services:
-  - postgres:9.5
+bundler-audit:
+  when: manual
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
 
-before_script:
-  - ./gitlabci/setup.sh
+bundler-leak:
+  when: manual
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
 
-stages:
-  - test
+yarn-audit:
+  when: manual
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+
+rubygems:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_MERGE_REQUEST_ID
 
 rspec:
-  stage: test
+  when: manual
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_MERGE_REQUEST_ID
+
+rubocop:
+  when: manual
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+
+brakeman:
+  when: manual
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+
+assets:precompile:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      # - if: $CI_MERGE_REQUEST_ID
   script:
-    - ./bin/rake spec
+    - bundle exec rails assets:precompile
+
+docker:
+  needs:
+    - job: assets:precompile
+      artifacts: true
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      variables:
+        LATEST_IMAGE: 'yes'
+          # - if: $CI_MERGE_REQUEST_ID
+
+trivy:
+  when: manual
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+production:deploy:
+  when: manual
+  extends: .deploy
+  variables:
+    DEPLOY_NAME: cfp-production
+    DEPLOY_DOMAIN: cfp.rubyconf.tw
+  stage: deploy
+  before_script:
+    - cat $SETTINGS_FILE > config/application.yml
+    - !reference [.deploy, before_script]
+  environment:
+    name: production
+  needs:
+    - docker
+  tags: # Ensure Run on Docker Swarm
+    - sosi-site-prod
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      # - if: $CI_MERGE_REQUEST_ID

@@ -1,4 +1,4 @@
-class ChangePaperColumn < ActiveRecord::Migration
+class ChangePaperColumn < ActiveRecord::Migration[5.2]
   def up
   	change_column(:papers,:abstract,:text)
   	change_column(:papers,:outline,:text)

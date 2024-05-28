@@ -1,4 +1,4 @@
-class AddSpeakerInfosToPapers < ActiveRecord::Migration
+class AddSpeakerInfosToPapers < ActiveRecord::Migration[5.2]
   def change
     change_table :papers do |t|
       t.string :speaker_name
