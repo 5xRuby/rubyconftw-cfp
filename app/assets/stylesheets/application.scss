@@ -10,6 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require font-awesome
  *= require jquery-ui
  *= require_tree .
  *= require_self
@@ -17,7 +18,7 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "font-awesome";
+//@import "font-awesome";
 @import "pagedown_bootstrap";
 @import "bootstrap-datetimepicker-build";
 @import "rouge_github";

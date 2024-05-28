@@ -22,10 +22,9 @@ class Notification
   end
 
   protected
-  def markdown(content)
-    renderer = Redcarpet::Render::HTML.new(filter_html: true)
-    markdown = Redcarpet::Markdown.new(renderer, autolink: true)
 
-    markdown.render(content)
+  def markdown(content)
+    return '' if content.blank?
+    Kramdown::Document.new(content, input: 'markdown', auto_ids: false).to_html
   end
 end

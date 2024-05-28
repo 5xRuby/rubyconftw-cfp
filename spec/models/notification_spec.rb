@@ -31,14 +31,14 @@ RSpec.describe Notification, type: :model do
 
   context "generate html content" do
     it "should able to convert markdown into html" do
-      notification = Notification.new(content: "#heading")
+      notification = Notification.new(content: "# heading")
       # TODO: Using capybara matcher
       expect(notification.html_content).to match(/<h1>heading<\/h1>/)
     end
 
     it "should able to modify content before convert to html" do
       notification = Notification.new
-      expect(notification.html_content { "#heading" }).to match(/<h1>heading<\/h1>/)
+      expect(notification.html_content { "# heading" }).to match(/<h1>heading<\/h1>/)
     end
   end
 
