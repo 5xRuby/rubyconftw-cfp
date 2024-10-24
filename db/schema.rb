@@ -203,7 +203,7 @@ ActiveRecord::Schema.define(version: 2024_02_13_043547) do
 
   add_foreign_key "papers", "activities"
 
-  create_view "custom_field_answers",  sql_definition: <<-SQL
+  create_view "custom_field_answers", sql_definition: <<-SQL
       SELECT p.id,
       c.id AS custom_field_id,
       c.name,
@@ -218,5 +218,4 @@ ActiveRecord::Schema.define(version: 2024_02_13_043547) do
               papers.answer_of_custom_fields AS ans
              FROM papers) p ON ((c.id = (p.key)::integer)));
   SQL
-
 end

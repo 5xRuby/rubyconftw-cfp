@@ -1,16 +1,18 @@
 source 'https://rubygems.org'
 
-gem 'airbrake', '~> 13.0'
-gem 'bigdecimal', '~> 1.4'
+gem 'bigdecimal'
+# gem 'sassc-embedded'
+gem 'bootstrap-sass', '3.4.1'
+gem 'airbrake-ruby','6.2.2', github: 'airbrake/airbrake-ruby'
+gem 'airbrake'
 gem 'redis-namespace'
 gem 'aasm', '~> 5'
 gem 'default_value_for', '~> 3.4.0'
 gem 'rails', '5.2.8.1'
-gem 'pg', '~> 1.0'
-gem 'bootstrap-sass', '~> 3.4.1'
-gem 'font-awesome-rails'
+gem 'jdbc-postgres', '~> 42.6'
+gem 'activerecord-jdbcpostgresql-adapter'
+gem 'font-awesome-rails', '4.7.0.8'
 gem 'pagedown-bootstrap-rails'
-gem 'sassc-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 gem 'jquery-rails'
@@ -22,28 +24,26 @@ gem 'devise','~> 4.7.0'
 gem 'ratyrate'
 gem 'cancancan', '~> 1.10'
 gem 'carrierwave', '~> 1'
-gem 'omniauth'
+gem 'omniauth', '< 2.0'
 gem 'omniauth-github'
-gem 'redcarpet'
+gem 'kramdown'
 gem 'rouge', '~> 2.0.6'
 gem 'acts-as-taggable-on', '6.5.0'
 gem 'unicode_utils'
 gem 'scenic'
 gem 'slack-notifier'
 gem 'puma'
-# gem 'json', '2.6.3'
 
 group :development, :test do
-  gem 'byebug'
+  gem 'ruby-debug'
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 2.8.0'
   gem 'capybara'
   gem 'fuubar'
-  gem 'factory_bot_rails'
-  gem 'guard'
-  gem 'guard-rspec'
+  gem 'factory_bot_rails', '~> 5'
   gem 'rails-controller-testing'
-  gem 'faker'
+  gem 'faker', '~> 1.8.0'
+  gem 'listen'
 end
 
 group :test do
@@ -52,11 +52,13 @@ group :test do
 end
 
 group :development do
-  gem 'next_rails', '1.0.5'
   gem 'letter_opener'
   gem 'web-console', '~> 3.0'
   gem 'awesome_print'
   gem 'boxing'
+  gem 'rubocop-rails'
+  gem 'rubocop-capybara'
+  gem 'rubocop-rspec'
 end
 
 group :test do
@@ -68,9 +70,7 @@ gem 'liveness'
 
 gem 'config'
 gem 'country_select'
-gem 'slim'
-gem 'nokogiri', '~> 1'
-gem "ffi", ">= 1.9.24"
+gem 'slim', '~> 3.0'
 gem 'write_xlsx'
 
 gem "omniauth-twitter", "~> 1.4"
@@ -82,3 +82,5 @@ gem "postal-rails", "~> 1.0"
 gem "dotenv-rails", "~> 2.8"
 
 gem "good_job", "~> 2.99"
+
+gem "kramdown-parser-gfm", "~> 1.1"

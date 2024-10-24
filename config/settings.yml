@@ -19,8 +19,7 @@ mailer:
   delivery_method:
   default_reply_to: contact@rubyconf.test
   default_from: "noreply@rubyconf.test"
-  bcc_email:
-    - contact@rubyconf.test
+  bcc_emails: contact@rubyconf.test
 paper:
   title:
     limit_word: true

@@ -24,7 +24,7 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
 
     it "renders the bcc email" do
-      expect(mail.bcc).to eq(["contact@rubyconf.dev"])
+      expect(mail.bcc).to eq(["contact@rubyconf.test"])
     end
 
     it "assigns @activity.name" do
